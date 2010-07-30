@@ -1,0 +1,12 @@
+/Users/Pickett/Code/Bowdoin Code/DiningTableViewTest/RootViewController.m|109|warning: unused variable ‘startRange’
+/Users/Pickett/Code/Bowdoin Code/DiningTableViewTest/RootViewController.m|391|warning: unused variable ‘hallTitle’
+/Users/Pickett/Code/Bowdoin Code/DiningTableViewTest/RootViewController.m|390|warning: unused variable ‘mealTitle’
+/Users/Pickett/Code/Bowdoin Code/DiningTableViewTest/RootViewController.m|389|warning: unused variable ‘itemTitle’
+/Users/Pickett/Code/Bowdoin Code/DiningTableViewTest/RootViewController.m|512|warning: property ‘selectedIndexPath’ requires method '-selectedIndexPath' to be defined - use @synthesize, @dynamic or provide a method implementation
+/Users/Pickett/Code/Bowdoin Code/DiningTableViewTest/RootViewController.m|512|warning: property ‘selectedIndexPath’ requires the method 'setSelectedIndexPath:' to be defined - use @synthesize, @dynamic or provide a method implementation
+/Users/Pickett/Code/Bowdoin Code/DiningTableViewTest/RootViewController.m|109|warning: unused variable ‘startRange’
+/Users/Pickett/Code/Bowdoin Code/DiningTableViewTest/RootViewController.m|391|warning: unused variable ‘hallTitle’
+/Users/Pickett/Code/Bowdoin Code/DiningTableViewTest/RootViewController.m|390|warning: unused variable ‘mealTitle’
+/Users/Pickett/Code/Bowdoin Code/DiningTableViewTest/RootViewController.m|389|warning: unused variable ‘itemTitle’
+/Users/Pickett/Code/Bowdoin Code/DiningTableViewTest/RootViewController.m|512|warning: property ‘selectedIndexPath’ requires method '-selectedIndexPath' to be defined - use @synthesize, @dynamic or provide a method implementation
+/Users/Pickett/Code/Bowdoin Code/DiningTableViewTest/RootViewController.m|512|warning: property ‘selectedIndexPath’ requires the method 'setSelectedIndexPath:' to be defined - use @synthesize, @dynamic or provide a method implementation

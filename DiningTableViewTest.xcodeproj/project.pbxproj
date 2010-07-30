@@ -1,0 +1,371 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
+		A111E11711EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */; };
+		A111E13F11EBADF500AFFD64 /* SettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A111E13D11EBADF500AFFD64 /* SettingsController.xib */; };
+		A112CA3A11F9EE1900922ABD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A112CA3911F9EE1900922ABD /* MessageUI.framework */; };
+		A13D0AE511ECC11100616B3F /* PolarPoints.xib in Resources */ = {isa = PBXBuildFile; fileRef = A13D0AE311ECC11100616B3F /* PolarPoints.xib */; };
+		A14E4FCD11FF27F7001A4804 /* MealDecider.m in Sources */ = {isa = PBXBuildFile; fileRef = A14E4FCC11FF27F7001A4804 /* MealDecider.m */; };
+		A19855F811F61D0F001DFF4F /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A19855F711F61D0F001DFF4F /* CustomTableViewCell.m */; };
+		A198560711F61E12001DFF4F /* UICustomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A198560611F61E12001DFF4F /* UICustomTableView.m */; };
+		A1A4078411F4CA4400608B9C /* DiningParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4077C11F4CA4400608B9C /* DiningParser.m */; };
+		A1A4078511F4CA4400608B9C /* DiningTableViewTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4077E11F4CA4400608B9C /* DiningTableViewTestAppDelegate.m */; };
+		A1A4078611F4CA4400608B9C /* mealHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4078011F4CA4400608B9C /* mealHandler.m */; };
+		A1A4078711F4CA4400608B9C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4078211F4CA4400608B9C /* RootViewController.m */; };
+		A1A4079011F4CA7500608B9C /* PolarPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4078D11F4CA7500608B9C /* PolarPoints.m */; };
+		A1A4079111F4CA7500608B9C /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4078F11F4CA7500608B9C /* SettingsController.m */; };
+		A1A407F111F4D29300608B9C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A407EF11F4D29300608B9C /* LogInViewController.m */; };
+		A1A407F211F4D29300608B9C /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1A407F011F4D29300608B9C /* LogInViewController.xib */; };
+		A1B36AB7120099AD00D27351 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B36AB6120099AD00D27351 /* DownloadManager.m */; };
+		A1B6FB2B11FDE33800C472EB /* bearIcon-black.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */; };
+		A1B6FB4811FDE4DF00C472EB /* fakeXMLDoc.xml in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */; };
+		A1E0D3C211E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = A1E0D3C111E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D6058910D05DD3D006BFB54 /* DiningTableViewTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiningTableViewTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28A0AAE50D9B0CCF005BE974 /* DiningTableViewTest_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiningTableViewTest_Prefix.pch; sourceTree = "<group>"; };
+		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* DiningTableViewTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DiningTableViewTest-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen shot 2010-07-12 at 2.23.27 PM.png"; sourceTree = "<group>"; };
+		A111E13D11EBADF500AFFD64 /* SettingsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsController.xib; sourceTree = "<group>"; };
+		A112CA3911F9EE1900922ABD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		A13D0AE311ECC11100616B3F /* PolarPoints.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarPoints.xib; sourceTree = "<group>"; };
+		A14E4FCB11FF27F7001A4804 /* MealDecider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MealDecider.h; path = "Data Storage/MealDecider.h"; sourceTree = "<group>"; };
+		A14E4FCC11FF27F7001A4804 /* MealDecider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MealDecider.m; path = "Data Storage/MealDecider.m"; sourceTree = "<group>"; };
+		A19855F611F61D0F001DFF4F /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
+		A19855F711F61D0F001DFF4F /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		A198560511F61E12001DFF4F /* UICustomTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomTableView.h; sourceTree = "<group>"; };
+		A198560611F61E12001DFF4F /* UICustomTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomTableView.m; sourceTree = "<group>"; };
+		A1A4077B11F4CA4400608B9C /* DiningParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiningParser.h; sourceTree = "<group>"; };
+		A1A4077C11F4CA4400608B9C /* DiningParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiningParser.m; sourceTree = "<group>"; };
+		A1A4077D11F4CA4400608B9C /* DiningTableViewTestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiningTableViewTestAppDelegate.h; sourceTree = "<group>"; };
+		A1A4077E11F4CA4400608B9C /* DiningTableViewTestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiningTableViewTestAppDelegate.m; sourceTree = "<group>"; };
+		A1A4077F11F4CA4400608B9C /* mealHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mealHandler.h; sourceTree = "<group>"; };
+		A1A4078011F4CA4400608B9C /* mealHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mealHandler.m; sourceTree = "<group>"; };
+		A1A4078111F4CA4400608B9C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		A1A4078211F4CA4400608B9C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		A1A4078C11F4CA7500608B9C /* PolarPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolarPoints.h; sourceTree = "<group>"; };
+		A1A4078D11F4CA7500608B9C /* PolarPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolarPoints.m; sourceTree = "<group>"; };
+		A1A4078E11F4CA7500608B9C /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
+		A1A4078F11F4CA7500608B9C /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
+		A1A407EE11F4D29300608B9C /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
+		A1A407EF11F4D29300608B9C /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
+		A1A407F011F4D29300608B9C /* LogInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
+		A1B36AB5120099AD00D27351 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
+		A1B36AB6120099AD00D27351 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
+		A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bearIcon-black.png"; sourceTree = "<group>"; };
+		A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fakeXMLDoc.xml; sourceTree = "<group>"; };
+		A1D1944811FFE75F00339484 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		A1E0D3C111E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen shot 2010-07-08 at 10.59.02 AM.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				A112CA3A11F9EE1900922ABD /* MessageUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* DiningTableViewTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				A1D1944811FFE75F00339484 /* Constants.h */,
+				A1A4077211F4CA2700608B9C /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				A112CA3911F9EE1900922ABD /* MessageUI.framework */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				28A0AAE50D9B0CCF005BE974 /* DiningTableViewTest_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */,
+				A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */,
+				A1A407F011F4D29300608B9C /* LogInViewController.xib */,
+				A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */,
+				A1E0D3C111E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png */,
+				28F335F01007B36200424DE2 /* RootViewController.xib */,
+				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
+				8D1107310486CEB800E47090 /* DiningTableViewTest-Info.plist */,
+				A111E13D11EBADF500AFFD64 /* SettingsController.xib */,
+				A13D0AE311ECC11100616B3F /* PolarPoints.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A1A4077211F4CA2700608B9C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A1B36AC71200A46E00D27351 /* Data Management */,
+				A1A4079211F4CA8000608B9C /* Table View */,
+				A1A4079311F4CA9F00608B9C /* Settings */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		A1A4079211F4CA8000608B9C /* Table View */ = {
+			isa = PBXGroup;
+			children = (
+				A1A407EE11F4D29300608B9C /* LogInViewController.h */,
+				A1A407EF11F4D29300608B9C /* LogInViewController.m */,
+				A1A4078111F4CA4400608B9C /* RootViewController.h */,
+				A1A4078211F4CA4400608B9C /* RootViewController.m */,
+				A1A4077D11F4CA4400608B9C /* DiningTableViewTestAppDelegate.h */,
+				A1A4077E11F4CA4400608B9C /* DiningTableViewTestAppDelegate.m */,
+				A19855F611F61D0F001DFF4F /* CustomTableViewCell.h */,
+				A19855F711F61D0F001DFF4F /* CustomTableViewCell.m */,
+				A198560511F61E12001DFF4F /* UICustomTableView.h */,
+				A198560611F61E12001DFF4F /* UICustomTableView.m */,
+			);
+			name = "Table View";
+			sourceTree = "<group>";
+		};
+		A1A4079311F4CA9F00608B9C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A1A4078C11F4CA7500608B9C /* PolarPoints.h */,
+				A1A4078D11F4CA7500608B9C /* PolarPoints.m */,
+				A1A4078E11F4CA7500608B9C /* SettingsController.h */,
+				A1A4078F11F4CA7500608B9C /* SettingsController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		A1B36AC71200A46E00D27351 /* Data Management */ = {
+			isa = PBXGroup;
+			children = (
+				A14E4FCB11FF27F7001A4804 /* MealDecider.h */,
+				A14E4FCC11FF27F7001A4804 /* MealDecider.m */,
+				A1B36AB5120099AD00D27351 /* DownloadManager.h */,
+				A1B36AB6120099AD00D27351 /* DownloadManager.m */,
+				A1A4077B11F4CA4400608B9C /* DiningParser.h */,
+				A1A4077C11F4CA4400608B9C /* DiningParser.m */,
+				A1A4077F11F4CA4400608B9C /* mealHandler.h */,
+				A1A4078011F4CA4400608B9C /* mealHandler.m */,
+			);
+			name = "Data Management";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* DiningTableViewTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "DiningTableViewTest" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DiningTableViewTest;
+			productName = DiningTableViewTest;
+			productReference = 1D6058910D05DD3D006BFB54 /* DiningTableViewTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "DiningTableViewTest" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* DiningTableViewTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
+				28F335F11007B36200424DE2 /* RootViewController.xib in Resources */,
+				A1E0D3C211E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png in Resources */,
+				A111E11711EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png in Resources */,
+				A111E13F11EBADF500AFFD64 /* SettingsController.xib in Resources */,
+				A13D0AE511ECC11100616B3F /* PolarPoints.xib in Resources */,
+				A1A407F211F4D29300608B9C /* LogInViewController.xib in Resources */,
+				A1B6FB2B11FDE33800C472EB /* bearIcon-black.png in Resources */,
+				A1B6FB4811FDE4DF00C472EB /* fakeXMLDoc.xml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				A1A4078411F4CA4400608B9C /* DiningParser.m in Sources */,
+				A1A4078511F4CA4400608B9C /* DiningTableViewTestAppDelegate.m in Sources */,
+				A1A4078611F4CA4400608B9C /* mealHandler.m in Sources */,
+				A1A4078711F4CA4400608B9C /* RootViewController.m in Sources */,
+				A1A4079011F4CA7500608B9C /* PolarPoints.m in Sources */,
+				A1A4079111F4CA7500608B9C /* SettingsController.m in Sources */,
+				A1A407F111F4D29300608B9C /* LogInViewController.m in Sources */,
+				A19855F811F61D0F001DFF4F /* CustomTableViewCell.m in Sources */,
+				A198560711F61E12001DFF4F /* UICustomTableView.m in Sources */,
+				A14E4FCD11FF27F7001A4804 /* MealDecider.m in Sources */,
+				A1B36AB7120099AD00D27351 /* DownloadManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DiningTableViewTest_Prefix.pch;
+				INFOPLIST_FILE = "DiningTableViewTest-Info.plist";
+				PRODUCT_NAME = DiningTableViewTest;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DiningTableViewTest_Prefix.pch;
+				INFOPLIST_FILE = "DiningTableViewTest-Info.plist";
+				PRODUCT_NAME = DiningTableViewTest;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.0;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "DiningTableViewTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "DiningTableViewTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
