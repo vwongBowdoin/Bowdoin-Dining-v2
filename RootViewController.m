@@ -13,8 +13,8 @@
 #import "CustomTableViewCell.h"
 #import "UICustomTableView.h"
 #import "DiningParser.h"
-#import "MealDecider.h"
 #import "DownloadManager.h"
+#import "WristWatch.h"
 #import "mealHandler.h"
 #import "ScheduleDecider.h"
 #import "HoursViewController.h"
@@ -49,8 +49,8 @@
 	/* Create Local Helpers */
 	
     // Meal Decider decides what meal to display
-    MealDecider *mealDecider = [[MealDecider alloc]init];
-	localMealDecider = mealDecider;
+    WristWatch *localWatch = [[WristWatch alloc]init];
+	localMealDecider = localWatch;
 	//[mealDecider release];
 	
 	
@@ -152,7 +152,7 @@
 	[todaysMealHandler processArrays];
                 
 	
-    [self setNavigationBarsWithArray:nil]; //[scheduler returnArrayForDiningHalls]];
+    [self setNavigationBarsWithArray:[scheduler returnNavBarArray]]; //[scheduler returnArrayForDiningHalls]];
 	
 	NSLog(@"Reloading Data for Hall:%d, Meal:%d,", currentHallPage, currentMealPage);
     [customTableView reloadData];

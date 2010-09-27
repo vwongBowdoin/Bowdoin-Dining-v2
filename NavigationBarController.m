@@ -26,27 +26,27 @@
     float barWidth = 320;
     float barHeight = 44;
     
-    int length; //[scheduleArray count];
+    int length = [scheduleArray count];
     
     UIView *theMasterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, barWidth * [scheduleArray count], barHeight)];
 
     
-    for (int i = 0; i < 8; i++){
+    for (int i = 0; i < length; i++){
         
-        
-        NSString *mealTitle = [[scheduleArray objectAtIndex:i] objectForKey:@"Shortname"];
+        // Returns the NSString at each index of the array
+        NSString *mealTitle = [scheduleArray objectAtIndex:i];
         NSString *leftTitle;
         NSString *rightTitle;
         
         // Makes sure no out of bounds errors will occur
         if (i != 0){
-            leftTitle = [[scheduleArray objectAtIndex:i-1] objectForKey:@"Shortname"];
+            leftTitle = [scheduleArray objectAtIndex:i-1];
         } else {
             leftTitle = NULL;
         }
         
         if (i != length-1){
-            rightTitle = [[scheduleArray objectAtIndex:i+1] objectForKey:@"Shortname"];
+            rightTitle = [scheduleArray objectAtIndex:i+1];
         } else {
             rightTitle = NULL;
         }

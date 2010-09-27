@@ -244,7 +244,7 @@
 
 -(NSString *)returnDescription{
 	
-	return [NSString stringWithFormat:@"Today's %@", shortName];
+	return shortName;
 	
 }
 

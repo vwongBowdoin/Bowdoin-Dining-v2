@@ -10,7 +10,7 @@
 #import <MessageUI/MessageUI.h>
 
 @class mealHandler;
-@class MealDecider;
+@class WristWatch;
 @class UICustomTableView;
 
 @interface RootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
@@ -36,7 +36,7 @@
 	
 	// Data Controllers
 	mealHandler *todaysMealHandler;
-	MealDecider *localMealDecider;
+	WristWatch *localMealDecider;
 	NSIndexPath *selectedIndexPath;
 	NSMutableArray *currentArray;
     

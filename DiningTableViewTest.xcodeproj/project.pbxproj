@@ -19,7 +19,6 @@
 		A13D0AE511ECC11100616B3F /* PolarPoints.xib in Resources */ = {isa = PBXBuildFile; fileRef = A13D0AE311ECC11100616B3F /* PolarPoints.xib */; };
 		A14BBBDF120C5231006AD070 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14BBBDE120C5231006AD070 /* CFNetwork.framework */; };
 		A14BBBE3120C5238006AD070 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14BBBE2120C5238006AD070 /* MessageUI.framework */; };
-		A14E4FCD11FF27F7001A4804 /* MealDecider.m in Sources */ = {isa = PBXBuildFile; fileRef = A14E4FCC11FF27F7001A4804 /* MealDecider.m */; };
 		A159E968120B0EA100FE7BD5 /* HoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A159E966120B0EA100FE7BD5 /* HoursViewController.m */; };
 		A159E969120B0EA100FE7BD5 /* HoursViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A159E967120B0EA100FE7BD5 /* HoursViewController.xib */; };
 		A16B6A48124C3C6C00774456 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16B6A47124C3C6C00774456 /* MobileCoreServices.framework */; };
@@ -69,8 +68,6 @@
 		A13D0AE311ECC11100616B3F /* PolarPoints.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarPoints.xib; sourceTree = "<group>"; };
 		A14BBBDE120C5231006AD070 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A14BBBE2120C5238006AD070 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		A14E4FCB11FF27F7001A4804 /* MealDecider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MealDecider.h; path = "Data Storage/MealDecider.h"; sourceTree = "<group>"; };
-		A14E4FCC11FF27F7001A4804 /* MealDecider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MealDecider.m; path = "Data Storage/MealDecider.m"; sourceTree = "<group>"; };
 		A159E965120B0EA100FE7BD5 /* HoursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoursViewController.h; sourceTree = "<group>"; };
 		A159E966120B0EA100FE7BD5 /* HoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoursViewController.m; sourceTree = "<group>"; };
 		A159E967120B0EA100FE7BD5 /* HoursViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HoursViewController.xib; sourceTree = "<group>"; };
@@ -310,8 +307,6 @@
 		A1B36AC71200A46E00D27351 /* Data Management */ = {
 			isa = PBXGroup;
 			children = (
-				A14E4FCB11FF27F7001A4804 /* MealDecider.h */,
-				A14E4FCC11FF27F7001A4804 /* MealDecider.m */,
 				A1B36AB5120099AD00D27351 /* DownloadManager.h */,
 				A1B36AB6120099AD00D27351 /* DownloadManager.m */,
 				A1032234120355C0008C3D30 /* Favorites.xcdatamodeld */,
@@ -417,7 +412,6 @@
 				A1A407F111F4D29300608B9C /* LogInViewController.m in Sources */,
 				A19855F811F61D0F001DFF4F /* CustomTableViewCell.m in Sources */,
 				A198560711F61E12001DFF4F /* UICustomTableView.m in Sources */,
-				A14E4FCD11FF27F7001A4804 /* MealDecider.m in Sources */,
 				A1B36AB7120099AD00D27351 /* DownloadManager.m in Sources */,
 				A1032236120355C0008C3D30 /* Favorites.xcdatamodeld in Sources */,
 				A1FC340A12089D8200B5635E /* MealSchedule.m in Sources */,

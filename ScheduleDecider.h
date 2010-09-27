@@ -108,6 +108,7 @@
 -(NSMutableArray *)returnArrayForDiningHalls;
 -(NSMutableArray *)returnMoultonArray;
 -(NSMutableArray *)returnThorneArray;
+-(NSMutableArray *)returnNavBarArray;
 
 
 @end

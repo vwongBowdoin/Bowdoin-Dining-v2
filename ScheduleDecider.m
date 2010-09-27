@@ -848,7 +848,11 @@
 	return moultonArray;	
 }
 
-
+-(NSMutableArray *)returnNavBarArray{
+	
+	return navBarArray;
+	
+}
 
 
 -(int)returnCurrentWeekDay{
