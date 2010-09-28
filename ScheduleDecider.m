@@ -43,7 +43,7 @@
                                                         [NSNumber numberWithInt:noMealForDay],       // Sun
                                                         nil];
     
-    NSArray *close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mExpressDinnerStop], // Mon
+    NSArray *close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mExpressLunchStop], // Mon
                      [NSNumber numberWithInt:mExpressLunchStop], // Tue
                      [NSNumber numberWithInt:mExpressLunchStop], // Wed
                      [NSNumber numberWithInt:mExpressLunchStop], // Thu
@@ -57,7 +57,7 @@
     expressLunch.openTimes = open;
     expressLunch.closeTimes = close;
     expressLunch.mealName = @"Express Lunch";
-	expressLunch.shortName = @"Express Dinner";
+	expressLunch.shortName = @"Express Lunch";
 	expressLunch.location = @"Moulton";
 
     
@@ -738,7 +738,7 @@
         [element setCurrentDay:currentDay];
 		
 		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
-        if ([element isOpen] || [element willOpen]){
+        if ([element isOpen] /*|| [element willOpen]*/){
             
 			if (element.location != nil) {
 				[dictionary setObject:element.location forKey:@"location"];

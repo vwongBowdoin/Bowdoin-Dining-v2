@@ -112,8 +112,7 @@
    // cell.textLabel.text = @"Test";
         
     cell.textLabel.text = [[openNowArray objectAtIndex:indexPath.row] objectForKey:@"meal"];
-    cell.detailTextLabel.text = [[openNowArray objectAtIndex:indexPath.row] objectForKey:@"hours"];
-    
+    cell.detailTextLabel.text = [[openNowArray objectAtIndex:indexPath.row] objectForKey:@"hours"];		
     // Configure the cell...
     
     return cell;

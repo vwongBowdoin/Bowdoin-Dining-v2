@@ -10,7 +10,7 @@
 
 
 @implementation NavigationBarController
-
+@synthesize scheduleArray;
 
 -(id)initWithScheduleArray:(NSMutableArray *)theScheduleArray{
     
@@ -21,17 +21,26 @@
     
 }
 
+
+-(UIScrollView*)returnTopScrollBar{
+	
+	
+	UIScrollView *theScroller = [[UIScrollView alloc] init];
+
+	return theScroller;
+	
+}
+
+
 -(UIView*)returnMealNavigationBar{
     
     float barWidth = 320;
     float barHeight = 44;
-    
-    int length = [scheduleArray count];
-    
+        
     UIView *theMasterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, barWidth * [scheduleArray count], barHeight)];
-
+	[theMasterView setBackgroundColor:[UIColor clearColor]];
     
-    for (int i = 0; i < length; i++){
+    for (int i = 0; i < [scheduleArray count]; i++){
         
         // Returns the NSString at each index of the array
         NSString *mealTitle = [scheduleArray objectAtIndex:i];
@@ -45,7 +54,7 @@
             leftTitle = NULL;
         }
         
-        if (i != length-1){
+        if (i != [scheduleArray count]-1){
             rightTitle = [scheduleArray objectAtIndex:i+1];
         } else {
             rightTitle = NULL;
@@ -70,43 +79,48 @@
 
     
     UIView *theView = [[UIView alloc] initWithFrame:CGRectMake(0+ index*barWidth, 0, barWidth, barHeight)];
-    UILabel *mealDescription = [[UILabel alloc]initWithFrame:CGRectMake(0 + index*barWidth, 0, barWidth, barHeight)];
-    UILabel *leftIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset+ index*barWidth, 0, barWidth - 2*indicatorOffset, barHeight)];
-    UILabel *rightIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset+ index*barWidth, 0, barWidth - 2*indicatorOffset, barHeight)];
-
-
+	[theView setBackgroundColor:[UIColor clearColor]];
+	
+	UILabel *mealDescription = [[UILabel alloc]initWithFrame:CGRectMake(0 + index*barWidth, 0, barWidth, barHeight)];
     mealDescription.text = [NSString stringWithFormat:@"Today's %@", mealName];
     mealDescription.textColor = [UIColor whiteColor];
-    mealDescription.backgroundColor = [UIColor clearColor];
+	mealDescription.backgroundColor = [UIColor clearColor];
     mealDescription.textAlignment = UITextAlignmentCenter;
-    [mealDescription setFont:[UIFont boldSystemFontOfSize:18.0]];
+	
+	[mealDescription setFont:[UIFont boldSystemFontOfSize:18.0]];
 
    
     if (leftTitle != NULL){
         
-        leftIndicator.text = [NSString stringWithFormat:@"< %@", leftTitle];
+		UILabel *leftIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset+ index*barWidth, 0, barWidth - 2*indicatorOffset, barHeight)];
+        
+		leftIndicator.text = [NSString stringWithFormat:@"< %@", leftTitle];
         leftIndicator.textColor = [UIColor whiteColor];
-        leftIndicator.backgroundColor = [UIColor clearColor];
+		leftIndicator.backgroundColor = [UIColor clearColor];
         leftIndicator.textAlignment = UITextAlignmentLeft;
         [leftIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
-        
+		
+		[theView addSubview:leftIndicator];
+
     }
     
     
     if (rightTitle != NULL){
+		UILabel *rightIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset+ index*barWidth, 0, barWidth - 2*indicatorOffset, barHeight)];
         
-        rightIndicator.text = [NSString stringWithFormat:@"%@ >", rightTitle];
+		rightIndicator.text = [NSString stringWithFormat:@"%@ >", rightTitle];
         rightIndicator.textColor = [UIColor whiteColor];
-        rightIndicator.backgroundColor = [UIColor clearColor];
+		rightIndicator.backgroundColor = [UIColor clearColor];
         rightIndicator.textAlignment = UITextAlignmentRight;
         [rightIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
+		
+		[theView addSubview:rightIndicator];
+
         
     }
     
     
     [theView addSubview:mealDescription];
-    [theView addSubview:rightIndicator];
-    [theView addSubview:leftIndicator];
 
     return theView;
     

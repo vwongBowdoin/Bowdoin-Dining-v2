@@ -107,16 +107,15 @@
     
     // Establishes the navigation bars at the top of the page
 	// Top Scroll Bar for Meals
-	[mealScrollView setContentSize:CGSizeMake(1280, 44)];
+	[mealScrollView setContentSize:CGSizeMake(320 * [navBarController.scheduleArray count], 44)];
 	[mealScrollView setBackgroundColor:[UIColor clearColor]];
-	[mealScrollView setPagingEnabled:YES];
-	[mealScrollView setShowsHorizontalScrollIndicator:NO];
+
 	[mealScrollView setTag:mealScroller];
 	[mealScrollView setDelegate:self];
+	[mealScrollView addSubview:[navBarController returnMealNavigationBar]];
+
     
-    
-    
-    [mealScrollView addSubview:[navBarController returnMealNavigationBar]];
+   // [mealScrollView addSubview:[navBarController returnMealNavigationBar]];
 	//[mealScrollView addSubview:mealHeaderView];
     
     
@@ -155,7 +154,7 @@
 	[todaysMealHandler processArrays];
                 
 	
-    [self setNavigationBarsWithArray:[scheduler returnNavBarArray]]; //[scheduler returnArrayForDiningHalls]];
+    [self setNavigationBarsWithArray:[scheduler returnNavBarArray]]; 
 	
 	NSLog(@"Reloading Data for Hall:%d, Meal:%d,", currentHallPage, currentMealPage);
     [customTableView reloadData];

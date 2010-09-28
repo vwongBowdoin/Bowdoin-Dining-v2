@@ -21,6 +21,8 @@
     
 }
 
+@property (nonatomic, retain) NSMutableArray *scheduleArray;
+
 -(id)initWithScheduleArray:(NSMutableArray *)theScheduleArray;
 -(UIView*)createMealHeader:(NSString *)mealName atIndex:(int)index leftTitle:(NSString *)leftTitle rightTitle:(NSString *)rightTitle;
 -(UIView*)returnMealNavigationBar;
