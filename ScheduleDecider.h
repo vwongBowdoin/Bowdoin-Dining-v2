@@ -19,6 +19,9 @@
 	NSMutableArray *thorneArray;
 	NSMutableArray *moultonArray;
 	NSMutableArray *navBarArray;
+	
+	NSMutableArray *openArray;
+	NSMutableArray *allHoursArray;
 
 
     // Meal Handler

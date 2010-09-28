@@ -198,7 +198,7 @@
     
     if ([self isOpen]){
         
-        NSString *stringToReturn = [NSString stringWithFormat:@"Open Until %@", closingTime];
+        NSString *stringToReturn = [NSString stringWithFormat:@"Closes at %@", closingTime];
        
         NSLog(@"%@ returning %@",mealName, stringToReturn);
         return stringToReturn;

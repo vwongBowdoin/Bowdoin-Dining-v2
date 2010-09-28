@@ -56,8 +56,8 @@
 		
     expressLunch.openTimes = open;
     expressLunch.closeTimes = close;
-    expressLunch.mealName = @"Express Lunch";
-	expressLunch.shortName = @"Express Lunch";
+    expressLunch.mealName = @"Express";
+	expressLunch.shortName = @"Express";
 	expressLunch.location = @"Moulton";
 
     
@@ -90,8 +90,8 @@
     
     expressDinner.openTimes = open;
     expressDinner.closeTimes = close;
-    expressDinner.mealName = @"Express Dinner";
-	expressDinner.shortName = @"Express Dinner";
+    expressDinner.mealName = @"Express";
+	expressDinner.shortName = @"Express";
 	expressDinner.location = @"Moulton";
 
     //
@@ -726,11 +726,72 @@
     return self;
 }
 
--(NSMutableArray *)returnArrayOfOpenMeals{
+// This does not need to be repeat code of ProcessArrayOfOpenMeals
+-(void)processArrayOfAllMeals{
+	
+	
+    //Assumes we want an array of today's meals.
+    allHoursArray = [[NSMutableArray alloc] init];
+    NSMutableArray *array1 = [[NSMutableArray alloc]init];
+	NSMutableArray *array2 = [[NSMutableArray alloc]init];
+    NSMutableArray *array3 = [[NSMutableArray alloc]init];
+	
+    int currentDay = (int)[self returnCurrentWeekDay];
+    
+	
+    for(MealSchedule *element in mealArray){
+        [element setCurrentDay:currentDay];
+		
+		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
+        if ([element isOpen] || [element willOpen]){
+            
+			
+			if (element.mealName != nil) {
+				[dictionary setObject:element.mealName forKey:@"meal"];
+			}
+			else {
+				[dictionary setObject:@"NONAME" forKey:@"meal"];
+				
+			}
+			
+			
+			[dictionary setObject:[element dateText] forKey:@"hours"];
+			[dictionary setObject:[element fullHoursText] forKey:@"fullhours"];
+			
+			
+			// This is the place for user defaults
+			if (element.location == @"Thorne") {
+				[array1 addObject:dictionary];
+			} else if (element.location == @"Moulton") {
+				[array2 addObject:dictionary];
+			} else {
+				[array3 addObject:dictionary];
+			}
+			
+			
+			
+			
+			
+        }
+		
+    }
+	
+	[allHoursArray addObject:array1];
+	[allHoursArray addObject:array2];
+	[allHoursArray addObject:array3];
+	
+	
+	
+}
+
+-(void)processArrayOfOpenMeals{
     
     //Assumes we want an array of today's meals.
-    
-    NSMutableArray *array = [[NSMutableArray alloc]init];
+    openArray = [[NSMutableArray alloc] init];
+    NSMutableArray *array1 = [[NSMutableArray alloc]init];
+	NSMutableArray *array2 = [[NSMutableArray alloc]init];
+    NSMutableArray *array3 = [[NSMutableArray alloc]init];
+
     int currentDay = (int)[self returnCurrentWeekDay];
     
 
@@ -738,16 +799,11 @@
         [element setCurrentDay:currentDay];
 		
 		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
-        if ([element isOpen] /*|| [element willOpen]*/){
+        if ([element isOpen]){
             
-			if (element.location != nil) {
-				[dictionary setObject:element.location forKey:@"location"];
-			} else {
-				[dictionary setObject:@"NOLOC" forKey:@"location"];	
-			}
-
-			if (element.shortName != nil) {
-				[dictionary setObject:element.shortName forKey:@"meal"];
+		
+			if (element.mealName != nil) {
+				[dictionary setObject:element.mealName forKey:@"meal"];
 			}
 			else {
 				[dictionary setObject:@"NONAME" forKey:@"meal"];
@@ -757,17 +813,28 @@
 			
 			[dictionary setObject:[element dateText] forKey:@"hours"];
 			[dictionary setObject:[element fullHoursText] forKey:@"fullhours"];
-			         
-			[array addObject:dictionary];
+			    
+
+			// This is the place for user defaults
+			if (element.location == @"Thorne") {
+				[array1 addObject:dictionary];
+			} else if (element.location == @"Moulton") {
+				[array2 addObject:dictionary];
+			} else {
+				[array3 addObject:dictionary];
+			}
+
+				
+
+				
 
         }
-		
-
-        
+   
     }
-    
-    return array;
-    
+	
+	[openArray addObject:array1];
+	[openArray addObject:array2];
+	[openArray addObject:array3];
 }
 
 -(void)processMealArrays{
@@ -914,6 +981,68 @@
     
     return [NSNumber numberWithInt:intToReturn];
     
+}
+
+
+/// Table View Code
+
+-(NSInteger)returnNumberOfSectionsInOH {
+	
+	
+	return [openArray count];
+	
+	
+}
+
+- (NSInteger)returnNumberOfRowsInOH:(NSInteger)section {
+	
+	return [[openArray objectAtIndex:section] count];
+	
+}
+
+- (NSInteger)returnNumberOfRowsInAH:(NSInteger)section {
+	
+	return [[allHoursArray objectAtIndex:section] count];
+	
+}
+
+
+- (NSDictionary *)returnOHDictionaryAtIndex:(NSIndexPath *)indexPath{
+	
+	return [[openArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	
+	
+}
+
+- (NSDictionary *)returnAHDictionaryAtIndex:(NSIndexPath *)indexPath{
+	
+	return [[allHoursArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	
+	
+}
+
+- (NSString *)returnOHSectionTitleForSection:(NSInteger)section{
+	
+	
+	switch (section) {
+		case 0:
+			return @"Thorne Hall";
+			break;
+		
+		case 1:
+			return @"Moulton Union";
+			break;
+
+		case 2:
+			return @"Smith Union";
+			break;
+
+
+		default:
+			break;
+	}
+	
+	
 }
 
 @end

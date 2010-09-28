@@ -90,7 +90,6 @@ BOOL isProcessingListMove;
 - (void)tableView: (UICustomTableView*)tableView willDisplayCell:(UICustomTableView *)cellforRowAtIndexPath: (NSIndexPath*)indexPath
 {
 	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-	NSLog(@"Trying to Set Background Color");
 	
 	cell.backgroundColor = [UIColor grayColor];
 	cell.textLabel.backgroundColor = [UIColor clearColor];

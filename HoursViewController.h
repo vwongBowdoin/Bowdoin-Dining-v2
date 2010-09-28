@@ -8,15 +8,17 @@
 
 #import <UIKit/UIKit.h>
 @class ScheduleDecider;
+@class UICustomTableView;
 
 @interface HoursViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
  
     ScheduleDecider *localScheduler;
     NSMutableArray *openNowArray;
     
-    IBOutlet UITableView *theTableView;
+    IBOutlet UICustomTableView *theTableView;
 }
 
+@property (nonatomic, retain) IBOutlet UICustomTableView *theTableView;
 @property (nonatomic, retain) ScheduleDecider *hoursScheduler;
 @property (nonatomic, retain) NSMutableArray *openNowArray;
 

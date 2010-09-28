@@ -79,6 +79,8 @@
 
     
     UIView *theView = [[UIView alloc] initWithFrame:CGRectMake(0+ index*barWidth, 0, barWidth, barHeight)];
+	
+	NSLog(@"Coordinates = X_START: %f \n Y_START: 0 \n X_WIDTH: %f \n Y_HEIGHT: %f", index*barWidth, barWidth, barHeight);
 	[theView setBackgroundColor:[UIColor clearColor]];
 	
 	UILabel *mealDescription = [[UILabel alloc]initWithFrame:CGRectMake(0 + index*barWidth, 0, barWidth, barHeight)];
