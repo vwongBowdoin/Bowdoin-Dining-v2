@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-@class MealDecider;
+@class WristWatch;
 
 @interface DownloadManager : NSObject {
 
-	MealDecider *localDecider;
+	WristWatch *localWatch;
 	
 }
 

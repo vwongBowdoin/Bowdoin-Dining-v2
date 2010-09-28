@@ -7,7 +7,7 @@
 //
 
 #import "DownloadManager.h"
-#import "MealDecider.h"
+#import "WristWatch.h"
 #import "Constants.h"
 #import "DiningParser.h"
 
@@ -16,11 +16,11 @@
 
 -(void)initializeDownloads {
    
-    MealDecider *theDecider = [[MealDecider alloc] init];
-    localDecider = theDecider;
+	WristWatch *aTimer = [[WristWatch alloc] init];
+	localWatch = aTimer;
 	
     // Checks to see if Menus aren't Current
-	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] != [localDecider getWeekofYear]){
+	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] != [localWatch getWeekofYear]){
         
         // Download New Menus
         [NSThread detachNewThreadSelector:@selector(downloadMenus) toTarget:self withObject:nil];
@@ -28,7 +28,7 @@
     }
     
     // Menus are current -- check for rest of week downloads
-    else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] == [localDecider getWeekofYear]) {
+    else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] == [localWatch getWeekofYear]) {
         
         // Check current day of week
         // initialize for loop at day of week and check user defaults to see if downloaded
@@ -51,12 +51,12 @@
     
 	
 	// Establishes Server Paths for Parsing Correct Files
-    NSString *serverPath = [localDecider atreusSeverPath];
-    NSString *sundayString = [localDecider sundayDateString];
+    NSString *serverPath = [localWatch atreusSeverPath];
+    NSString *sundayString = [localWatch sundayDateString];
     
 	// Initializes Dining Parser
 	DiningParser *todaysParser = [[DiningParser alloc]init];
-    for (int i = [localDecider getWeekDay]; i < 8; i++){
+    for (int i = [localWatch getWeekDay]; i < 8; i++){
         
         
         NSString *dayString = [NSString stringWithFormat:@"%d.xml", i];
@@ -79,7 +79,7 @@
     }
     
     // once downloaded and no error - set download confirm for day to YES
-    [[NSUserDefaults standardUserDefaults] setInteger:[localDecider getWeekofYear] forKey:@"lastUpdatedWeek"];
+    [[NSUserDefaults standardUserDefaults] setInteger:[localWatch getWeekofYear] forKey:@"lastUpdatedWeek"];
     
 	// alert that menus are parsed and ready
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
@@ -100,7 +100,7 @@
     
     // Parse XML from downloaded Data
     DiningParser *todaysParser = [[DiningParser alloc]init];
-    [todaysParser parseXMLData:xmlFile forDay:[localDecider getWeekDay]];
+    [todaysParser parseXMLData:xmlFile forDay:[localWatch getWeekDay]];
     
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
@@ -110,6 +110,11 @@
     
 }
 
+// returns the atreus server path
+-(NSString *)atreusSeverPath {
+    
+    return @"http://www.bowdoin.edu/atreus/lib/xml/";
+}
 
 
 -(void)errorOccurred{
@@ -120,7 +125,7 @@
 
 -(void)dealloc{
 	[super dealloc];
-	[localDecider release];
+	[localWatch release];
 	
 	
 	

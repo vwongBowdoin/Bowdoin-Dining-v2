@@ -13,19 +13,4 @@
 
 }
 
-- (int)getYear;
-- (int)getMonth;
-- (int)getDay;
-- (int)getHour;
-- (int)getMinute;
-- (int)getWeekDay;
-- (int)getWeekofYear;
--(NSString*)getCurrentDayTitle;
--(NSString*)getNextDayTitle;
--(NSString*)getDateString;
--(NSString *)sundayDateString;
--(NSString *)documentsDirectory;
--(NSString *)atreusSeverPath;
--(void)errorOccurred;
-
 @end

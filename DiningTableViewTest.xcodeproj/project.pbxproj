@@ -15,7 +15,6 @@
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		A1032236120355C0008C3D30 /* Favorites.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1032234120355C0008C3D30 /* Favorites.xcdatamodeld */; };
 		A111E11711EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */; };
-		A111E13F11EBADF500AFFD64 /* SettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A111E13D11EBADF500AFFD64 /* SettingsController.xib */; };
 		A11AE51C1212F3C900007801 /* NavigationBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AE51B1212F3C900007801 /* NavigationBarController.m */; };
 		A13D0AE511ECC11100616B3F /* PolarPoints.xib in Resources */ = {isa = PBXBuildFile; fileRef = A13D0AE311ECC11100616B3F /* PolarPoints.xib */; };
 		A14BBBDF120C5231006AD070 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14BBBDE120C5231006AD070 /* CFNetwork.framework */; };
@@ -35,6 +34,7 @@
 		A16B6A6A124C3CB400774456 /* ASINSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A16B6A5F124C3CB400774456 /* ASINSStringAdditions.m */; };
 		A16B6AF2124C581400774456 /* CSGoldController.m in Sources */ = {isa = PBXBuildFile; fileRef = A16B6AF1124C581400774456 /* CSGoldController.m */; };
 		A16B6B03124C5AFB00774456 /* CSGoldParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A16B6B02124C5AFB00774456 /* CSGoldParser.m */; };
+		A185E9741251977C00812356 /* WristWatch.m in Sources */ = {isa = PBXBuildFile; fileRef = A185E9731251977C00812356 /* WristWatch.m */; };
 		A19855F811F61D0F001DFF4F /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A19855F711F61D0F001DFF4F /* CustomTableViewCell.m */; };
 		A198560711F61E12001DFF4F /* UICustomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A198560611F61E12001DFF4F /* UICustomTableView.m */; };
 		A1A4078411F4CA4400608B9C /* DiningParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4077C11F4CA4400608B9C /* DiningParser.m */; };
@@ -42,7 +42,6 @@
 		A1A4078611F4CA4400608B9C /* mealHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4078011F4CA4400608B9C /* mealHandler.m */; };
 		A1A4078711F4CA4400608B9C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4078211F4CA4400608B9C /* RootViewController.m */; };
 		A1A4079011F4CA7500608B9C /* PolarPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4078D11F4CA7500608B9C /* PolarPoints.m */; };
-		A1A4079111F4CA7500608B9C /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4078F11F4CA7500608B9C /* SettingsController.m */; };
 		A1A407F111F4D29300608B9C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A407EF11F4D29300608B9C /* LogInViewController.m */; };
 		A1A407F211F4D29300608B9C /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1A407F011F4D29300608B9C /* LogInViewController.xib */; };
 		A1B36AB7120099AD00D27351 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B36AB6120099AD00D27351 /* DownloadManager.m */; };
@@ -65,7 +64,6 @@
 		8D1107310486CEB800E47090 /* DiningTableViewTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DiningTableViewTest-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		A1032235120355C0008C3D30 /* Favorites.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Favorites.xcdatamodel; sourceTree = "<group>"; };
 		A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen shot 2010-07-12 at 2.23.27 PM.png"; sourceTree = "<group>"; };
-		A111E13D11EBADF500AFFD64 /* SettingsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsController.xib; sourceTree = "<group>"; };
 		A11AE51A1212F3C900007801 /* NavigationBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarController.h; sourceTree = "<group>"; };
 		A11AE51B1212F3C900007801 /* NavigationBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarController.m; sourceTree = "<group>"; };
 		A13D0AE311ECC11100616B3F /* PolarPoints.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarPoints.xib; sourceTree = "<group>"; };
@@ -98,6 +96,8 @@
 		A16B6AF1124C581400774456 /* CSGoldController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGoldController.m; sourceTree = "<group>"; };
 		A16B6B01124C5AFB00774456 /* CSGoldParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGoldParser.h; sourceTree = "<group>"; };
 		A16B6B02124C5AFB00774456 /* CSGoldParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGoldParser.m; sourceTree = "<group>"; };
+		A185E9721251977C00812356 /* WristWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WristWatch.h; sourceTree = "<group>"; };
+		A185E9731251977C00812356 /* WristWatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WristWatch.m; sourceTree = "<group>"; };
 		A19855F611F61D0F001DFF4F /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		A19855F711F61D0F001DFF4F /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		A198560511F61E12001DFF4F /* UICustomTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomTableView.h; sourceTree = "<group>"; };
@@ -112,8 +112,6 @@
 		A1A4078211F4CA4400608B9C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		A1A4078C11F4CA7500608B9C /* PolarPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolarPoints.h; sourceTree = "<group>"; };
 		A1A4078D11F4CA7500608B9C /* PolarPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolarPoints.m; sourceTree = "<group>"; };
-		A1A4078E11F4CA7500608B9C /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
-		A1A4078F11F4CA7500608B9C /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		A1A407EE11F4D29300608B9C /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		A1A407EF11F4D29300608B9C /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		A1A407F011F4D29300608B9C /* LogInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
@@ -191,7 +189,6 @@
 				28F335F01007B36200424DE2 /* RootViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* DiningTableViewTest-Info.plist */,
-				A111E13D11EBADF500AFFD64 /* SettingsController.xib */,
 				A13D0AE311ECC11100616B3F /* PolarPoints.xib */,
 			);
 			name = Resources;
@@ -306,8 +303,6 @@
 		A1A4079311F4CA9F00608B9C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				A1A4078E11F4CA7500608B9C /* SettingsController.h */,
-				A1A4078F11F4CA7500608B9C /* SettingsController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -324,6 +319,8 @@
 				A1A4077C11F4CA4400608B9C /* DiningParser.m */,
 				A1A4077F11F4CA4400608B9C /* mealHandler.h */,
 				A1A4078011F4CA4400608B9C /* mealHandler.m */,
+				A185E9721251977C00812356 /* WristWatch.h */,
+				A185E9731251977C00812356 /* WristWatch.m */,
 			);
 			name = "Data Management";
 			sourceTree = "<group>";
@@ -396,7 +393,6 @@
 				28F335F11007B36200424DE2 /* RootViewController.xib in Resources */,
 				A1E0D3C211E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png in Resources */,
 				A111E11711EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png in Resources */,
-				A111E13F11EBADF500AFFD64 /* SettingsController.xib in Resources */,
 				A13D0AE511ECC11100616B3F /* PolarPoints.xib in Resources */,
 				A1A407F211F4D29300608B9C /* LogInViewController.xib in Resources */,
 				A1B6FB2B11FDE33800C472EB /* bearIcon-black.png in Resources */,
@@ -418,7 +414,6 @@
 				A1A4078611F4CA4400608B9C /* mealHandler.m in Sources */,
 				A1A4078711F4CA4400608B9C /* RootViewController.m in Sources */,
 				A1A4079011F4CA7500608B9C /* PolarPoints.m in Sources */,
-				A1A4079111F4CA7500608B9C /* SettingsController.m in Sources */,
 				A1A407F111F4D29300608B9C /* LogInViewController.m in Sources */,
 				A19855F811F61D0F001DFF4F /* CustomTableViewCell.m in Sources */,
 				A198560711F61E12001DFF4F /* UICustomTableView.m in Sources */,
@@ -438,6 +433,7 @@
 				A16B6A6A124C3CB400774456 /* ASINSStringAdditions.m in Sources */,
 				A16B6AF2124C581400774456 /* CSGoldController.m in Sources */,
 				A16B6B03124C5AFB00774456 /* CSGoldParser.m in Sources */,
+				A185E9741251977C00812356 /* WristWatch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

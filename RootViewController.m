@@ -10,7 +10,6 @@
 #import "RootViewController.h"
 #import "LogInViewController.h"
 #import "PolarPoints.h"
-#import "SettingsController.h"
 #import "CustomTableViewCell.h"
 #import "UICustomTableView.h"
 #import "DiningParser.h"
@@ -47,9 +46,6 @@
 	customTableView.dataSource = self;
 	customTableView.separatorColor = [UIColor clearColor];
 	
-
-	
-    
 	/* Create Local Helpers */
 	
     // Meal Decider decides what meal to display
@@ -66,10 +62,15 @@
 
 }
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+	[self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+
 // Handles Downloading or Processing of Already Downloaded Menus
 -(void)setupMealData{
-	
-	
 	
 	// Register for Notifications regarding Downloading
     [self registerNotifications];
@@ -136,14 +137,18 @@
 -(void)downloadCompleted{
     NSLog(@"Download Completed");
     
-    // Initializes the Meal Decider which determines the current meal
+    // Initializes the Schedule Decider which determines the array of meals
+	// that will be displayed
     
 	ScheduleDecider *scheduler = [[ScheduleDecider alloc] init];
 	[scheduler processMealArrays];
 	
 	// Creates a Meal Handler to Populate Dining Menu Data
+	// and initializes with Moulton and Thorne Arrays
     mealHandler *handler = [[mealHandler alloc] initWithMoultonArray:[scheduler returnMoultonArray] thorneArray:[scheduler returnThorneArray]];
 	todaysMealHandler = handler;
+	
+	// Creates Arrays
 	[todaysMealHandler processArrays];
                 
 	
@@ -154,21 +159,19 @@
     
 }
 
-    #define thorne		1
-    #define moulton		2
-    #define breakfast	0
-    #define lunch		1
-    #define dinner		2
-    #define brunch		3
+    #define thorne		0
+    #define moulton		1
 
 // Logic for deciding the current Menu to display
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
-	// Filters out UITableView which inherits from UIScrollView
+	// Filters out UITableView Scroll Events which inherits from UIScrollView
 	if ([scrollView isKindOfClass:[UITableView class]]) {
 	
 		return;
 	}
+	
+	
 	
 	// Decides the current page of the Hall scroller.	
 	CGFloat hallPageWidth = hallScrollView.frame.size.width;
@@ -178,13 +181,13 @@
 	CGFloat mealPageWidth = hallScrollView.frame.size.width;
 	int mealPage = floor((mealScrollView.contentOffset.x - mealPageWidth / 2) / mealPageWidth) + 1;
 	
-	NSLog(@"HALL = %d MEAL = %d", hallPage, mealPage);
 
+	
+	
     // Decides how to animate and when to animate by comparing the currentPage to the page
     // that should come into view.
 	
 	if ((currentHallPage != hallPage || currentMealPage != mealPage) && hallPage != 2) {
-		NSLog(@"Reloading Data while hall page = %d and meal page = %d", hallPage, mealPage);
 		
         if (navigationBarsAnimatedOut){
             
@@ -229,21 +232,18 @@
     [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:YES];
     [UIView setAnimationDelegate:self]; 
    
-    
+    // Constants for Navigation Bar Animation
     CGFloat mealScrollWidth = mealScrollView.frame.size.width;
     CGFloat mealScrollHeight = mealScrollView.frame.size.height;
-    //CGFloat mealScrollOriginX = mealScrollView.frame.origin.x;
     CGFloat mealScrollOriginY = mealScrollView.frame.origin.y;
 
     
     CGFloat hallScrollWidth = hallScrollView.frame.size.width;
     CGFloat hallScrollHeight = hallScrollView.frame.size.height;
-    //CGFloat hallScrollOriginX = hallScrollView.frame.origin.x;
-    //CGFloat hallScrollOriginY = hallScrollView.frame.origin.y;
+
 
     CGFloat fillerBarWidth = topFillerBar.frame.size.width;
     CGFloat fillerBarHeight = topFillerBar.frame.size.height;
-    //CGFloat fillerBarOriginX = topFillerBar.frame.origin.x;
     CGFloat fillerBarOriginY = topFillerBar.frame.origin.y;
     
     CGFloat altScrollerHeight = alternateScroller.frame.size.height;
@@ -290,6 +290,7 @@
 
 }
 
+// Method Triggerd at the Stop of an Animation
 - (void)navigationAnimationOut{
     
     [customTableView removeFromSuperview];
@@ -300,6 +301,7 @@
     
 }
 
+// Method Triggerd at the Stop of an Animation
 -(void)navigationAnimationIn{
     
     [self.view addSubview:customTableView];
@@ -308,6 +310,7 @@
     
 }
 		 
+
 - (void)tableViewAnimationDone:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
 			 
 	// reloads the table view		
@@ -325,10 +328,6 @@
 			 
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-	[self.navigationController setNavigationBarHidden:YES animated:YES];
-}
 
 #pragma mark -
 #pragma mark Table view data source
@@ -417,7 +416,7 @@
 
 #pragma mark -
 #pragma mark Table view delegate
-
+// Displays actions for items
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	CustomTableViewCell *cell = (CustomTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
 	
@@ -427,6 +426,9 @@
 	NSString *favoriteThisItem = @"Favorite This Item";
 	NSString *shareThisItem = @"Share This Item";
 	
+	
+	// Need to add in support for not selecting the first item of any section
+	// so that "Main Course" can't be selected
 	
 	if (cell.isFavorited) {
 
@@ -486,6 +488,7 @@
 	
 }
 
+// Method for Sending Email with Item
 - (void)composeEmail{
 	
 	NSString *itemTitle = @"Pancakes"; //cell.textLabel.text;
@@ -504,18 +507,7 @@
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
-	//[self becomeFirstResponder];
 	[self dismissModalViewControllerAnimated:YES];
-}
-
--(IBAction)settingsPage {
-	
-	SettingsController *settingsPage = [[SettingsController alloc] init];
-	[self.navigationController pushViewController:settingsPage animated:YES];
-	[settingsPage release];
-	
-	
-	
 }
 
 -(IBAction)navigateRight {
