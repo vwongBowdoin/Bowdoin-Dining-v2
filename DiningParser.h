@@ -48,12 +48,7 @@
 -(NSString*)documentsDirectory;
 
 // Methods that return TableView Data
--(NSString *)returnItem:(NSString *)theHall atIndex:(NSIndexPath *)indexPath inArray:(NSMutableArray *)theCurrentArray;
 
--(NSInteger)numberOfSectionsForArray:(NSMutableArray *)theCurrentArray;
--(NSInteger)sizeOfSection:(NSInteger)section inArray:(NSMutableArray *)theCurrentArray;
-
--(CGFloat)returnHeightForCellatIndex:(NSIndexPath *)indexPath inArray:(NSMutableArray*)theCurrentArray;
 
 
 @property (nonatomic, retain) mealHandler *todaysMealHandler;

@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface PolarPoints : UIViewController {
+
+	IBOutlet UILabel *mealsRemaining;
+	IBOutlet UILabel *polarPoints;
+	
+	// Login Information
+	NSString *userName;
+	NSString *password;
 
 }
 
 -(IBAction)dismissPage;
+- (void)loadCSGoldDataWithUserName:(NSString *)login password:(NSString*)password;
 
 @end

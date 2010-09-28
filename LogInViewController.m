@@ -10,12 +10,38 @@
 #import "PolarPoints.h"
 
 @implementation LogInViewController
+@synthesize delegate;
 
 -(IBAction)launchPolarPoints{
 	
 	[self dismissModalViewControllerAnimated:YES];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"Authorization Cleared" object:nil];
+	NSString *login = userNameField.text;
+	NSString *pass = passwordField.text;
+	
+	
+	if ([saveSwitch isOn]){
+		
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"LoginStored"];
+		[[NSUserDefaults standardUserDefaults] setValue:login forKey:@"Login"];
+		[[NSUserDefaults standardUserDefaults] setValue:pass forKey:@"Password"];
+		
+		[delegate loadCSGoldDataWithUserName:login password:pass];
+		
+	} else {
+		
+		// Destroy Previous Saved Login and set LoginStored to NO
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"LoginStored"];
+		[[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Login"];
+		[[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Password"];
+		
+		NSLog(@"Updating with Non Stored Login");
+
+		[delegate loadCSGoldDataWithUserName:login password:pass];
+		
+	}
+
+	
 
 	
 }

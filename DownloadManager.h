@@ -11,7 +11,8 @@
 
 @interface DownloadManager : NSObject {
 
-        
+	MealDecider *localDecider;
+	
 }
 
 -(void)initializeDownloads;

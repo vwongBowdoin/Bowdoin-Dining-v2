@@ -16,7 +16,6 @@
 	
 }
 
-- (void)sendEvent:(UIEvent *)event;
 - (void)moveToNextItem;
 - (void)moveToPreviousItem;
 

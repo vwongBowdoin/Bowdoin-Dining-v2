@@ -7,13 +7,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "Data Storage/MealDecider.m"
-         timestampString = "302109230.731054"
+         filePath = "NavigationBarController.m"
+         timestampString = "303245166.50687"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "21"
-         endingLineNumber = "21"
-         landmarkName = "-downloadMenus"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
+         landmarkName = "-returnMealNavigationBar"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -21,55 +21,69 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "Data Storage/MealDecider.m"
-         timestampString = "302109230.731054"
+         filePath = "NavigationBarController.m"
+         timestampString = "303245190.815617"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "21"
-         endingLineNumber = "21"
-         landmarkName = "-downloadMenus"
+         startingLineNumber = "26"
+         endingLineNumber = "26"
+         landmarkName = "-returnMealNavigationBar"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "DiningParser.h"
-         timestampString = "302032503.98518"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "25"
-         endingLineNumber = "25"
-         landmarkName = "@interface DiningParser"
-         landmarkType = "2">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "mealHandler.m"
-         timestampString = "302110668.895777"
+         filePath = "NavigationBarController.m"
+         timestampString = "303245242.77147"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "20"
-         endingLineNumber = "20"
-         landmarkName = "-initArraysFromWeekday:"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
+         landmarkName = "-createMealHeader:atIndex:leftTitle:rightTitle:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "RootViewController.m"
-         timestampString = "302195925.988663"
+         timestampString = "303256219.155863"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "29"
-         endingLineNumber = "29"
-         landmarkName = "-init"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
+         landmarkName = "-setNavigationBarsWithArray:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "ScheduleDecider.m"
+         timestampString = "303256239.11371"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "735"
+         endingLineNumber = "735"
+         landmarkName = "-returnArrayForDiningHalls"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "MealSchedule.m"
+         timestampString = "303256502.508515"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "34"
+         endingLineNumber = "34"
+         landmarkName = "-currentClosing"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

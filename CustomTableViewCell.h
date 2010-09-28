@@ -43,7 +43,6 @@
 
 @property (assign) BOOL isFavorited;
 
-- (void)sendEvent:(UIEvent *)event;
 - (void)moveToNextItem;
 - (void)moveToPreviousItem;
 

@@ -7,15 +7,71 @@
 //
 
 #import "PolarPoints.h"
-
+#import "CSGoldController.h"
+#import "LogInViewController.h"
 
 @implementation PolarPoints
 
+
+- (void)loadCSGoldDataWithUserName:(NSString *)login password:(NSString*)pass{
+	
+	// Should detach a thread
+	
+	CSGoldController *theController = [[CSGoldController alloc]init];	
+	[theController getCSGoldDataWithUserName:login password:pass];
+	[theController release];
+
+}
+
 - (void)viewDidLoad{
 	
-	//self.title = @"Polar Points";
+	NSLog(@"Points View Did Load");
+	
+	self.title = @"Polar Points";
+	[self registerForNotifications];
 	
 	
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"LoginStored"]) {
+		
+		NSString *login = [[NSUserDefaults standardUserDefaults] valueForKey:@"Login"];
+		NSString *pass = [[NSUserDefaults standardUserDefaults] valueForKey:@"Password"];
+		
+		NSLog(@"Updating with Stored Login:%@ and Password:*****", login);
+		[self loadCSGoldDataWithUserName:login password:pass];
+		
+	
+	} else {
+		
+		LogInViewController *loginController = [[LogInViewController alloc] init];
+		[self.navigationController presentModalViewController:loginController animated:YES];
+		loginController.delegate = self;
+		[loginController release];	
+		
+	}
+
+
+
+	
+}
+
+- (void)registerForNotifications{
+	
+	NSLog(@"Registering For Notification");
+	
+	// Polar Point Authorization
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVisibleInformation)
+												 name:@"CSGold DownloadCompleted" object:nil];
+	
+	
+}
+
+- (void)updateVisibleInformation{
+	
+	NSLog(@"Updating Visible Information");
+	
+	mealsRemaining.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"MealsRemaining"];
+	polarPoints.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"PolarPointBalance"];
 	
 	
 }
@@ -28,8 +84,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-
-	//[self.navigationController setNavigationBarHidden:NO animated: YES];
 	
 	
 }

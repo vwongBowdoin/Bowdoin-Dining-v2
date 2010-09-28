@@ -1,6 +1,6 @@
 //
 //  RootViewController.m
-//  The RootViewController directs the entirety of the application. It is 
+//  The RootViewController directs the entirety of the application. It is the orchestrator of the application
 //  DiningTableViewTest
 //
 //  Created by Ben Johnson on 7/8/10.
@@ -17,119 +17,160 @@
 #import "MealDecider.h"
 #import "DownloadManager.h"
 #import "mealHandler.h"
+#import "ScheduleDecider.h"
+#import "HoursViewController.h"
+#import "NavigationBarController.h"
+#import "CSGoldController.h"
+
 
 @implementation RootViewController
 
-@synthesize customTableView, hallScrollView, mealScrollView;
+@synthesize customTableView, hallScrollView, mealScrollView, alternateScroller, selectedIndexPath, dayDeciderBar;
 
 #pragma mark -
 #pragma mark View lifecycle
 
-// Defining Tags
+// Defining Tags used in Implementation
 #define hallScroller 1
 #define mealScroller 2
 
+// Responsible for setting up the look of Bowdoin Dining
 - (void)viewDidLoad {
-    [super viewDidLoad];
+    
+	
+	[super viewDidLoad];
 	[self.navigationController setNavigationBarHidden:YES animated: NO];
 	self.title = @"Main";
-    
-	// Table View Initiliazation
+     
+	// Table View Initiliazation - sets data source and delegate
 	customTableView.delegate = self;
 	customTableView.dataSource = self;
 	customTableView.separatorColor = [UIColor clearColor];
 	
-	// Establishes the navigation bars at the top of the page
-	[hallScrollView setContentSize:CGSizeMake(640, 44)];
-	[hallScrollView setBackgroundColor:[UIColor clearColor]];
-	[hallScrollView setPagingEnabled:YES];
-	[hallScrollView setShowsHorizontalScrollIndicator:NO];
-	[hallScrollView setTag:hallScroller];
-	[hallScrollView setDelegate:self];
 
 	
-	[mealScrollView setContentSize:CGSizeMake(1280, 44)];
-	[mealScrollView setBackgroundColor:[UIColor clearColor]];
-	[mealScrollView setPagingEnabled:YES];
-	[mealScrollView setShowsHorizontalScrollIndicator:NO];
-	[mealScrollView setTag:mealScroller];
-	[mealScrollView setDelegate:self];
+    
+	/* Create Local Helpers */
+	
+    // Meal Decider decides what meal to display
+    MealDecider *mealDecider = [[MealDecider alloc]init];
+	localMealDecider = mealDecider;
+	//[mealDecider release];
+	
+	
+	[self setupMealData];
+       
+    // Grill View
+    [alternateScroller addSubview:grillView];
+    [alternateScroller setContentSize:CGSizeMake(320, 600)];
 
-	// Call to Set up hallheaderView
-	[hallScrollView addSubview:hallHeaderView];
+}
+
+// Handles Downloading or Processing of Already Downloaded Menus
+-(void)setupMealData{
 	
-	[mealScrollView addSubview:mealHeaderView];
 	
-	// Initializes the Parser with the Correct Feed
 	
+	// Register for Notifications regarding Downloading
+    [self registerNotifications];
+	
+	// Initializes the Download Manager to Deal with Meal Data
 	DownloadManager *manager = [[DownloadManager alloc] init];
-    
     [manager initializeDownloads];
-    
-    	
-	NSLog(@"initialized parser");
-
-		
-	// Initializes pointers to Today's Meal Handler Arrays
-	// current
-	//NSMutableArray *currentArray;
 	
-	//Registering Notification for Table View Swipe
+
+	
+}
+
+//Registering Notifications
+-(void)registerNotifications{
+    
+    
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swipeRight)
 												 name:@"TableViewSwipeRight" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(swipeLeft)
 												 name:@"TableViewSwipeLeft" object:nil];
 	
-	//Registering Notification for Polar Point Authorization
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(launchPolarPoints)
-												 name:@"Authorization Cleared" object:nil];
-	
-    //Registering Notification for Download Completion
+    // Menu Download Completion
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadCompleted)
 												 name:@"Download Completed" object:nil];
-
 	
     
-	
 }
 
+-(void)setNavigationBarsWithArray:(NSMutableArray*)scheduleArray{
+    
+    NavigationBarController *navBarController = [[NavigationBarController alloc] initWithScheduleArray:scheduleArray];
+
+    
+    // Establishes the navigation bars at the top of the page
+	// Top Scroll Bar for Meals
+	[mealScrollView setContentSize:CGSizeMake(1280, 44)];
+	[mealScrollView setBackgroundColor:[UIColor clearColor]];
+	[mealScrollView setPagingEnabled:YES];
+	[mealScrollView setShowsHorizontalScrollIndicator:NO];
+	[mealScrollView setTag:mealScroller];
+	[mealScrollView setDelegate:self];
+    
+    
+    
+    [mealScrollView addSubview:[navBarController returnMealNavigationBar]];
+	//[mealScrollView addSubview:mealHeaderView];
+    
+    
+    // Second Scroll Bar for Meals
+    [hallScrollView setContentSize:CGSizeMake(960, 44)];
+	[hallScrollView setBackgroundColor:[UIColor clearColor]];
+	[hallScrollView setPagingEnabled:YES];
+	[hallScrollView setShowsHorizontalScrollIndicator:NO];
+	[hallScrollView setTag:hallScroller];
+	[hallScrollView setDelegate:self];
+	[hallScrollView addSubview:hallHeaderView];
+
+    
+    
+}
+
+// Activated when Menus have Downloaded
 -(void)downloadCompleted{
     NSLog(@"Download Completed");
     
-    MealDecider *mealDecider = [[MealDecider alloc]init];
+    // Initializes the Meal Decider which determines the current meal
     
-    mealHandler *MealHandler = [[mealHandler alloc]initArraysFromWeekday:[mealDecider getWeekDay]];
-    
-    todaysMealHandler = MealHandler;
-    
-    //[MealHandler release];
-    
-	currentArray = todaysMealHandler.thorneBreakfast;
-
+	ScheduleDecider *scheduler = [[ScheduleDecider alloc] init];
+	[scheduler processMealArrays];
+	
+	// Creates a Meal Handler to Populate Dining Menu Data
+    mealHandler *handler = [[mealHandler alloc] initWithMoultonArray:[scheduler returnMoultonArray] thorneArray:[scheduler returnThorneArray]];
+	todaysMealHandler = handler;
+	[todaysMealHandler processArrays];
+                
+	
+    [self setNavigationBarsWithArray:nil]; //[scheduler returnArrayForDiningHalls]];
+	
+	NSLog(@"Reloading Data for Hall:%d, Meal:%d,", currentHallPage, currentMealPage);
     [customTableView reloadData];
-    
-    
     
 }
 
-#define thorne		1
-#define moulton		2
-#define breakfast	0
-#define lunch		1
-#define dinner		2
-#define brunch		3
+    #define thorne		1
+    #define moulton		2
+    #define breakfast	0
+    #define lunch		1
+    #define dinner		2
+    #define brunch		3
 
-// Logic for deciding the current menu to display
+// Logic for deciding the current Menu to display
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
-	
+	// Filters out UITableView which inherits from UIScrollView
 	if ([scrollView isKindOfClass:[UITableView class]]) {
 	
 		return;
 	}
 	
-		
+	// Decides the current page of the Hall scroller.	
 	CGFloat hallPageWidth = hallScrollView.frame.size.width;
 	int hallPage = floor((hallScrollView.contentOffset.x - hallPageWidth / 2) / hallPageWidth) + 1;
 
@@ -139,80 +180,24 @@
 	
 	NSLog(@"HALL = %d MEAL = %d", hallPage, mealPage);
 
+    // Decides how to animate and when to animate by comparing the currentPage to the page
+    // that should come into view.
 	
-	// setting currentArray
-	if (hallPage == 0){
-		switch (mealPage) {
-			case breakfast:
-				currentArray = todaysMealHandler.thorneBreakfast;
-				NSLog(@"Current Array is ThorneBreakfast");
-				break;
-			case lunch:
-				currentArray = todaysMealHandler.thorneLunch;
-				NSLog(@"Current Array is Thorne Lunch");
-				break;
-			case dinner:
-				currentArray = todaysMealHandler.thorneDinner;
-				NSLog(@"Current Array is Thorne Dinner");
-
-				break;
-			case brunch:
-				currentArray = todaysMealHandler.thorneBrunch;
-				NSLog(@"Current Array is Thorne Brunch");
-
-				break;
-			case 5:
-				break;
-			case 6:
-				break;
-			case 7:
-				break;
-			case 8:
-				break;
-			default:
-				break;
-		}
-		
-		
-		
-	}
-	
-	else {
-		switch (mealPage) {
-			case breakfast:
-				currentArray = todaysMealHandler.moultonBreakfast;
-				NSLog(@"Current Array is Moulton Breakfast");
-				break;
-			case lunch:
-				currentArray = todaysMealHandler.moultonLunch;
-				NSLog(@"Current Array is Moulton Lunch");
-				break;
-			case dinner:
-				currentArray = todaysMealHandler.moultonDinner;
-				NSLog(@"Current Array is Moulton Dinner");
-				break;
-			case brunch:
-				currentArray = todaysMealHandler.moultonBrunch;
-				NSLog(@"Current Array is Moulton Brunch");
-				break;
-			case 5:
-				break;
-			case 6:
-				break;
-			case 7:
-				break;
-			case 8:
-				break;
-			default:
-				break;
-		}
-		
-	}
-
-	
-	if (currentHallPage != hallPage || currentMealPage != mealPage) {
+	if ((currentHallPage != hallPage || currentMealPage != mealPage) && hallPage != 2) {
 		NSLog(@"Reloading Data while hall page = %d and meal page = %d", hallPage, mealPage);
 		
+        if (navigationBarsAnimatedOut){
+            
+            [self animateNavigationBars];
+            NSLog(@"Reloading Data for Hall:%d, Meal:%d,", currentHallPage, currentMealPage);
+			[customTableView reloadData];
+            
+            currentHallPage = hallPage;
+            currentMealPage = mealPage;
+            return;
+            
+        }
+        
 		 [UIView beginAnimations:nil context:nil];
 		 [UIView setAnimationDuration:0.2];
 		 [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:YES];
@@ -222,12 +207,105 @@
 		 [UIView commitAnimations];
 		 
 		 
-		//[customTableView reloadData];
 		currentHallPage = hallPage;
 		currentMealPage = mealPage;
-	}
-		
+        
+        
+	} else if (currentHallPage != hallPage && hallPage == 2){
+        
+        
+        [self animateNavigationBars];
+     
+        currentHallPage = hallPage;
+
+    }		
 	
+}
+
+- (void)animateNavigationBars{
+        
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:YES];
+    [UIView setAnimationDelegate:self]; 
+   
+    
+    CGFloat mealScrollWidth = mealScrollView.frame.size.width;
+    CGFloat mealScrollHeight = mealScrollView.frame.size.height;
+    //CGFloat mealScrollOriginX = mealScrollView.frame.origin.x;
+    CGFloat mealScrollOriginY = mealScrollView.frame.origin.y;
+
+    
+    CGFloat hallScrollWidth = hallScrollView.frame.size.width;
+    CGFloat hallScrollHeight = hallScrollView.frame.size.height;
+    //CGFloat hallScrollOriginX = hallScrollView.frame.origin.x;
+    //CGFloat hallScrollOriginY = hallScrollView.frame.origin.y;
+
+    CGFloat fillerBarWidth = topFillerBar.frame.size.width;
+    CGFloat fillerBarHeight = topFillerBar.frame.size.height;
+    //CGFloat fillerBarOriginX = topFillerBar.frame.origin.x;
+    CGFloat fillerBarOriginY = topFillerBar.frame.origin.y;
+    
+    CGFloat altScrollerHeight = alternateScroller.frame.size.height;
+    CGFloat altScrollerWidth = alternateScroller.frame.size.width;
+    
+    
+    if (navigationBarsAnimatedOut){
+        
+        [UIView setAnimationDidStopSelector:@selector(navigationAnimationOut:finished:context:)];
+
+        mealScrollView.frame = CGRectMake(0, 0, mealScrollWidth, mealScrollHeight);
+        topFillerBar.frame = CGRectMake(0 , -1, fillerBarWidth, fillerBarHeight);
+        hallScrollView.frame = CGRectMake(0 , mealScrollHeight, hallScrollWidth, hallScrollHeight);
+        alternateScroller.frame = CGRectMake(0, mealScrollHeight + hallScrollHeight, altScrollerWidth, altScrollerHeight);
+               
+        
+        navigationBarsAnimatedOut = NO;
+        [customTableView setAlpha:1.0];
+        [alternateScroller setAlpha:0.0];
+        [dayDeciderBar setAlpha:0.0];
+        
+        
+        
+    } else {
+        
+        [UIView setAnimationDidStopSelector:@selector(navigationAnimationIn:finished:context:)];
+
+        mealScrollView.frame = CGRectMake(0 , mealScrollOriginY-(mealScrollHeight), mealScrollWidth, mealScrollHeight);
+        topFillerBar.frame = CGRectMake(0 , fillerBarOriginY-(fillerBarHeight), fillerBarWidth, fillerBarHeight);
+        hallScrollView.frame = CGRectMake(0 , mealScrollHeight, hallScrollWidth, hallScrollHeight);
+        alternateScroller.frame = CGRectMake(0, hallScrollHeight + mealScrollHeight, altScrollerWidth, altScrollerHeight);
+        
+        
+        navigationBarsAnimatedOut = YES;
+        [customTableView setAlpha:0.0];
+        [alternateScroller setAlpha:1.0];
+        [dayDeciderBar setAlpha:1.0];
+
+        
+    }
+    
+    [UIView commitAnimations];
+    
+
+}
+
+- (void)navigationAnimationOut{
+    
+    [customTableView removeFromSuperview];
+    [self.view addSubview:dayDeciderView];
+
+    [alternateScroller setAlpha:1.0];
+    [alternateScroller setUserInteractionEnabled:YES];
+    
+}
+
+-(void)navigationAnimationIn{
+    
+    [self.view addSubview:customTableView];
+    [alternateScroller setUserInteractionEnabled:NO];
+    [alternateScroller setAlpha:0.0];
+    
 }
 		 
 - (void)tableViewAnimationDone:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
@@ -245,9 +323,7 @@
 			 
 			
 			 
-		 }
-		 
-
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -257,17 +333,15 @@
 #pragma mark -
 #pragma mark Table view data source
 
-
-
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [todaysMealHandler numberOfSectionsForArray:currentArray];
+    return [todaysMealHandler numberOfSectionsForLocation:currentHallPage atMealIndex:currentMealPage];
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [todaysMealHandler sizeOfSection:section inArray:currentArray];
+	return [todaysMealHandler sizeOfSection:section forLocation:currentHallPage atMealIndex:currentMealPage];
 	
 }
 
@@ -283,7 +357,7 @@
         cell = [[[CustomTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	cell.textLabel.text = [todaysMealHandler returnItem:@"Whatever" atIndex:indexPath inArray:currentArray];
+	cell.textLabel.text = [todaysMealHandler returnItemFromLocation:currentHallPage atMealIndex:currentMealPage atPath:indexPath];
 	
 	if (cell.isFavorited == YES) {
 		[cell setAccessoryType:UITableViewCellAccessoryCheckmark];;
@@ -325,7 +399,7 @@
 	}
 	else {
 		
-		return [todaysMealHandler returnHeightForCellatIndex:indexPath inArray:currentArray]; //+ (cell.detailTextLabel.numberOfLines - 1) * 19.0;
+		return [todaysMealHandler returnHeightForCellatLocation:currentHallPage atMealIndex:currentMealPage atPath:indexPath]; //+ (cell.detailTextLabel.numberOfLines - 1) * 19.0;
 	}
 
 }
@@ -341,8 +415,6 @@
 }
 														
 
-
-
 #pragma mark -
 #pragma mark Table view delegate
 
@@ -357,10 +429,7 @@
 	
 	
 	if (cell.isFavorited) {
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(swipeLeft)
-													 name:@"TableViewSwipeLeft" object:nil];
-		
+
 		UIActionSheet *favoriteSheet = [[UIActionSheet alloc] initWithTitle:itemTitle 
 																   delegate:self 
 														  cancelButtonTitle:canelButtonTitle 
@@ -370,10 +439,7 @@
 		
 
 	} else {
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(swipeLeft)
-													 name:@"TableViewSwipeLeft" object:nil];
-		
+				
 		UIActionSheet *favoriteSheet = [[UIActionSheet alloc] initWithTitle:itemTitle 
 																   delegate:self 
 														  cancelButtonTitle:canelButtonTitle 
@@ -390,27 +456,13 @@
 	
 }
 
-- (void)swipeRight{
-	NSLog(@"Trying to Swipe Right");
-	
-	
-}
-
-- (void)swipeLeft{
-	NSLog(@"Trying to Swipe Left");
-	
-}
-
 
 #pragma mark -
-#pragma mark Favorite Controll
+#pragma mark Favorite Control
 // Method for registering favorite selection
 -(void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex{
 	
 	CustomTableViewCell *cell = (CustomTableViewCell *)[customTableView cellForRowAtIndexPath:selectedIndexPath];
-	NSString *itemTitle = cell.textLabel.text;
-	NSString *mealTitle = @"Breakfast";
-	NSString *hallTitle = @"Thorne";
 	
 	// Favoriting Tag
 	if (buttonIndex == 0) {
@@ -427,9 +479,6 @@
 		
 	}
 	else if (buttonIndex == 1) {
-		
-		
-	
 		
 		
 		
@@ -459,8 +508,6 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-
-
 -(IBAction)settingsPage {
 	
 	SettingsController *settingsPage = [[SettingsController alloc] init];
@@ -470,6 +517,14 @@
 	
 	
 }
+
+-(IBAction)navigateRight {
+    
+    NSLog(@"Animating Right");
+    [mealScrollView setContentOffset:CGPointMake(320, 0) animated:YES];
+    
+}
+
 
 #pragma mark -
 #pragma mark Export Options
@@ -490,23 +545,10 @@
 
 -(IBAction)displayPolarPoints{
 	
-	// If no password is saved
-	LogInViewController *theController = [[LogInViewController alloc] init];
-	[self.navigationController presentModalViewController:theController animated:YES];
-	
-	[theController release];
-	
-	// Else load polar point page
-	
-}
-
--(void)launchPolarPoints {
-	
 	PolarPoints *polarController = [[PolarPoints alloc] init];
 	[self.navigationController pushViewController:polarController animated:YES];
-	[polarController release];
-	
-	
+	[polarController release];	
+
 }
 
 

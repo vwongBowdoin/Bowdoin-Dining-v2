@@ -10,6 +10,7 @@
 #import <MessageUI/MessageUI.h>
 
 @class mealHandler;
+@class MealDecider;
 @class UICustomTableView;
 
 @interface RootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
@@ -22,15 +23,25 @@
 	// Navigation Scrollers and Views
 	IBOutlet UIScrollView *hallScrollView;
 	IBOutlet UIScrollView *mealScrollView;
+    IBOutlet UIScrollView *alternateScroller;
 	IBOutlet UIView *hallHeaderView;
+    IBOutlet UIView *hallHeaderTemplate;
+
 	IBOutlet UIView *mealHeaderView;
+    IBOutlet UIView *dayDeciderView;
+    IBOutlet UISegmentedControl *dayDeciderBar;
+    IBOutlet UIToolbar *topFillerBar;
+    
+    IBOutlet UIView *grillView;
 	
 	// Data Controllers
 	mealHandler *todaysMealHandler;
+	MealDecider *localMealDecider;
 	NSIndexPath *selectedIndexPath;
 	NSMutableArray *currentArray;
+    
+    BOOL navigationBarsAnimatedOut;
 
-	
 	int currentHallPage;
 	int currentMealPage;
 }
@@ -38,12 +49,22 @@
 @property (nonatomic, retain) IBOutlet UICustomTableView *customTableView;
 @property (nonatomic, retain) IBOutlet UIScrollView *hallScrollView;
 @property (nonatomic, retain) IBOutlet UIScrollView *mealScrollView;
+@property (nonatomic, retain) IBOutlet UIScrollView * alternateScroller;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *dayDeciderBar;
 @property (nonatomic, retain) NSIndexPath *selectedIndexPath;
 
+-(void)setupMealData;
+-(void)registerNotifications;
 
--(id)init;
+// Table View Swiping
+-(void)animateNavigationBars;
+-(IBAction)navigateRight;
+-(IBAction)navigateLeft;
+
+// Pages to Navigate To
 -(IBAction)settingsPage;
 -(IBAction)displayActionPage;
 -(IBAction)displayPolarPoints;
+
 
 @end

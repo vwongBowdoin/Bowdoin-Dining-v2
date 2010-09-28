@@ -17,9 +17,10 @@
 -(void)initializeDownloads {
    
     MealDecider *theDecider = [[MealDecider alloc] init];
-    
+    localDecider = theDecider;
+	
     // Checks to see if Menus aren't Current
-	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] != [theDecider getWeekofYear]){
+	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] != [localDecider getWeekofYear]){
         
         // Download New Menus
         [NSThread detachNewThreadSelector:@selector(downloadMenus) toTarget:self withObject:nil];
@@ -27,16 +28,16 @@
     }
     
     // Menus are current -- check for rest of week downloads
-    else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] == [theDecider getWeekofYear]) {
+    else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] == [localDecider getWeekofYear]) {
         
         // Check current day of week
         // initialize for loop at day of week and check user defaults to see if downloaded
         
-        [NSThread detachNewThreadSelector:@selector(loadMenus) toTarget:self withObject:nil];
+        [NSThread detachNewThreadSelector:@selector(downloadMenus) toTarget:self withObject:nil];
         
     }
     
-    
+    //[theDecider release];
     
     
     
@@ -46,26 +47,26 @@
 
 -(void) downloadMenus {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];  
-
-    MealDecider *theDecider = [[MealDecider alloc]init];
-    NSLog(@"Downloading Menus");
+	NSLog(@"Downloading Menus");
     
-    NSString *serverPath = [theDecider atreusSeverPath];
-    NSString *sundayString = [theDecider sundayDateString];
+	
+	// Establishes Server Paths for Parsing Correct Files
+    NSString *serverPath = [localDecider atreusSeverPath];
+    NSString *sundayString = [localDecider sundayDateString];
     
-    NSLog(@"Server Path: %@",serverPath);
-    for (int i = [theDecider getWeekDay]; i < 8; i++){
+	// Initializes Dining Parser
+	DiningParser *todaysParser = [[DiningParser alloc]init];
+    for (int i = [localDecider getWeekDay]; i < 8; i++){
         
         
         NSString *dayString = [NSString stringWithFormat:@"%d.xml", i];
-        
         NSString *downloadAddress = [NSString stringWithFormat:@"%@%@/%@", serverPath, sundayString, dayString];
         NSURL *downloadURL = [NSURL URLWithString:downloadAddress];
-        NSLog(@"Currently Downloading From %@", downloadAddress);
         
-        NSError *error = nil;
+		
+        // Saving File for Parser - checking for error
+		NSError *error = nil;
         NSData *xmlFile = [NSData dataWithContentsOfURL:downloadURL options:0 error:&error];
-        
         
         if (error != NULL) {
             [self errorOccurred];
@@ -73,22 +74,14 @@
         }
         
         // Parse XML from downloaded Data
-        DiningParser *todaysParser = [[DiningParser alloc]init];
         [todaysParser parseXMLData:xmlFile forDay:i];
-        
-
-        
-        
-        
-        
-        
-        
+	
     }
-    // alert rootview controller when current xml has been downloaded
     
     // once downloaded and no error - set download confirm for day to YES
-    [[NSUserDefaults standardUserDefaults] setInteger:[theDecider getWeekofYear] forKey:@"lastUpdatedWeek"];
+    [[NSUserDefaults standardUserDefaults] setInteger:[localDecider getWeekofYear] forKey:@"lastUpdatedWeek"];
     
+	// alert that menus are parsed and ready
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
     
     [pool release];
@@ -97,7 +90,6 @@
 -(void)loadMenus{
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];  
     
-    MealDecider *theDecider = [[MealDecider alloc] init];
     
     // ** EASTER EGG ** 
 	//if April Fools Day - load fakeXML File
@@ -108,12 +100,12 @@
     
     // Parse XML from downloaded Data
     DiningParser *todaysParser = [[DiningParser alloc]init];
-    [todaysParser parseXMLData:xmlFile forDay:[theDecider getWeekDay]];
+    [todaysParser parseXMLData:xmlFile forDay:[localDecider getWeekDay]];
     
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
     
-    
+    [todaysParser release];
     [pool release];
     
 }
@@ -124,6 +116,14 @@
     
     
     // handle the error
+}
+
+-(void)dealloc{
+	[super dealloc];
+	[localDecider release];
+	
+	
+	
 }
 
 

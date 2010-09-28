@@ -10,97 +10,128 @@
 
 
 @implementation mealHandler
-@synthesize thorneBreakfast, thorneLunch, thorneDinner, thorneBrunch, moultonBreakfast, moultonLunch, moultonDinner, moultonBrunch;
+@synthesize moultonArrayHolder, thorneArrayHolder, moultonArray, thorneArray;
 
 
-//@synthesize locationArray, thorneCourseTitles, thorneCourseItems, moultonCourseTitles, moultonCourseItems;
-
--(id)initArraysFromWeekday:(NSString *)weekDay {
+- (id)initWithMoultonArray:(NSMutableArray*)firstArray  thorneArray:(NSMutableArray *)secondArray {
 	
-    // Use Meal Decider to pull correct arrays.
-    NSLog(@"Trying to Recover Arrays");
-    
-    NSString *archivePath = [NSString stringWithFormat:@"%@/thorneBreakfast%d.xml",[self documentsDirectory],weekDay];
-
-    
-    thorneBreakfast = [[NSMutableArray alloc] initWithContentsOfFile:archivePath];
-
-   
-    archivePath = [NSString stringWithFormat:@"%@/thorneLunch%d.xml",[self documentsDirectory],weekDay];
-    
-    
-    thorneLunch = [[NSMutableArray alloc] initWithContentsOfFile:archivePath];
-
-    archivePath = [NSString stringWithFormat:@"%@/thorneDinner%d.xml",[self documentsDirectory],weekDay];
-    
-    
-    thorneDinner = [[NSMutableArray alloc] initWithContentsOfFile:archivePath];
-
-    archivePath = [NSString stringWithFormat:@"%@/thorneBrunch%d.xml",[self documentsDirectory],weekDay];
-    
-    
-    thorneBrunch = [[NSMutableArray alloc] initWithContentsOfFile:archivePath];
-
-    archivePath = [NSString stringWithFormat:@"%@/moultonBreakfast%d.xml",[self documentsDirectory],weekDay];
-    
-    
-    moultonBreakfast = [[NSMutableArray alloc] initWithContentsOfFile:archivePath];
-
-    archivePath = [NSString stringWithFormat:@"%@/moultonLunch%d.xml",[self documentsDirectory],weekDay];
-    
-    
-    moultonLunch = [[NSMutableArray alloc] initWithContentsOfFile:archivePath];
-
-    archivePath = [NSString stringWithFormat:@"%@/moultonDinner%d.xml",[self documentsDirectory],weekDay];
-    
-    
-    moultonDinner = [[NSMutableArray alloc] initWithContentsOfFile:archivePath];
-
-    archivePath = [NSString stringWithFormat:@"%@/moultonBrunch%d.xml",[self documentsDirectory],weekDay];
-    
-    
-    moultonBrunch = [[NSMutableArray alloc] initWithContentsOfFile:archivePath];
-
-    
-    
-    
+	
+	// Local Copy of Schedule Decider Arrays
+	moultonArray = firstArray;
+	thorneArray = secondArray;
+	
 	return self;
 }
 
--(void)printItems {
+- (void)processArrays{
 	
+	
+	[self setMoultonArray:moultonArray];
+	[self setThorneArray:thorneArray];
+	
+	
+}
+- (void)setMoultonArray:(NSMutableArray*)mArray {
+		
+	NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+	
+	for (NSMutableDictionary *element in mArray){
+		
+		NSMutableArray *array;		
+		
+		if ([element objectForKey:@"FileLocation"] != NULL) {
+			NSLog(@"File String = %@", [element objectForKey:@"FileLocation"]);
+			array = [[NSMutableArray alloc] initWithContentsOfFile:[element objectForKey:@"FileLocation"]];
+		} 
+		
+		[tempArray addObject:array];
+		
+	}
+	
+	self.moultonArrayHolder = tempArray;
+	
+}
+- (void)setThorneArray:(NSMutableArray *)tArray {
+	
+	NSMutableArray *tempArray2 = [[NSMutableArray alloc] init];
+
+	
+	for (NSMutableDictionary *element in tArray){
+		
+		NSMutableArray *array;		
+		
+		if ([element objectForKey:@"FileLocation"] != NULL) {
+			NSLog(@"File String = %@", [element objectForKey:@"FileLocation"]);
+			array = [[NSMutableArray alloc] initWithContentsOfFile:[element objectForKey:@"FileLocation"]];
+		} 
+		
+		[tempArray2 addObject:array];
+		
+	}
+	
+	self.thorneArrayHolder = tempArray2;
+	
+}
+
+//////////////////////////// Data for TableViews ////////////////////////////////////
+
+-(NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex{
+	
+	if (location == 0){
+		
+		return [[[thorneArrayHolder objectAtIndex:mealIndex] objectAtIndex:section] count];
+		
+	} else {
+		
+		return [[[moultonArrayHolder objectAtIndex:mealIndex] objectAtIndex:section] count];
+
+	}
 
 }
 
--(NSInteger)sizeOfSection:(NSInteger)section inArray:(NSMutableArray *)theCurrentArray{
+-(NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex{
 	
-	return [[theCurrentArray objectAtIndex:section] count];
+	if (location == 0){
+
+		return [[thorneArrayHolder objectAtIndex:mealIndex] count];
+		
+	} else {
+		
+		return [[moultonArrayHolder objectAtIndex:mealIndex] count];
+		
+	}
+
+}
+
+-(NSString *)returnItemFromLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath  {
+	
+	if (location == 0){
+		
+		return [[[thorneArrayHolder objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+		
+	} else {
+		
+		return [[[moultonArrayHolder objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+		
+	}
 	
 }
 
--(NSInteger)numberOfSectionsForArray:(NSMutableArray *)theCurrentArray{
-	
-	
-	return [theCurrentArray count];
-}
-
--(NSString *)returnItem:(NSString *)theHall atIndex:(NSIndexPath *)indexPath inArray:(NSMutableArray *)theCurrentArray {
-	
-	NSString *stringToReturn;
-	
-	stringToReturn = [[theCurrentArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	
-	
-	return stringToReturn;
-	
-}
-
--(CGFloat)returnHeightForCellatIndex:(NSIndexPath *)indexPath inArray:(NSMutableArray *)currentArray{
+-(CGFloat)returnHeightForCellatLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath{
 	
 	NSString *stringToConsider;
 	
-	stringToConsider = [[currentArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	if (location == 0){
+		
+		stringToConsider = [[[thorneArrayHolder objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+		
+	} else {
+		
+		stringToConsider = [[[moultonArrayHolder objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+		
+	}
 	
+
 	CGSize constraint = CGSizeMake(320.0f - (10.0f * 2), 50.0f);
 	CGSize size = [stringToConsider sizeWithFont:[UIFont systemFontOfSize:14.0f] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
 	CGFloat height = size.height;

@@ -69,12 +69,8 @@
 	mealArray = [[NSMutableArray alloc] init];
 	
     
-    currentDayIndex = day;
-	//convert the path to a proper NSURL or it won't work
-//temp	NSURL *xmlURL = [NSURL URLWithString:URL];
+    currentDayIndex = day-1;
 	
-
-
 	rssParser = [[NSXMLParser alloc] initWithData:data];
 
 	// Set self as the delegate of the parser so that it will receive the parser delegate methods callbacks.
@@ -89,14 +85,20 @@
 	
 	//return self;
 }
-	
-- (void)displayError:(NSString*)errorToDisplay {
-	NSLog(@"Error parsing XML: %@", errorToDisplay);
-	
-}
-
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
 	NSLog(@"Found file and started parsing");
+	
+	thorneBreakfast = [[NSMutableArray alloc] init];
+	thorneLunch = [[NSMutableArray alloc] init];
+	thorneDinner = [[NSMutableArray alloc] init];
+	thorneBrunch = [[NSMutableArray alloc] init];
+	
+	moultonBreakfast = [[NSMutableArray alloc] init];
+	moultonLunch = [[NSMutableArray alloc] init];
+	moultonDinner = [[NSMutableArray alloc] init];
+	moultonBrunch = [[NSMutableArray alloc] init];
+
+	
 	
 }
 
@@ -111,7 +113,7 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	
-	NSString * errorString = [NSString stringWithFormat:@"We were unable to download any news or specials from our web site. Check to see if you are connected to the internet and try again. Sorry!"];
+	NSString * errorString = [NSString stringWithFormat:@"Something went wrong! We were unable to download the menus right now. Sorry!"];
 	[self performSelectorOnMainThread:@selector(displayError:) 
 						   withObject:errorString
 						waitUntilDone:false];
@@ -219,7 +221,13 @@
 
 	}
 }
+
+- (void)displayError:(NSString*)errorToDisplay {
+	NSLog(@"Error parsing XML: %@", errorToDisplay);
 	
+}
+
+
 #pragma mark -
 #pragma mark Data Storage
 	

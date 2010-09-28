@@ -16,19 +16,22 @@
     return self;
 }
 
+// returns the atreus server path
 -(NSString *)atreusSeverPath {
     
     return @"http://www.bowdoin.edu/atreus/lib/xml/";
 }
-
 
 // returns the local document directory
 - (NSString *)documentsDirectory {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	return [paths objectAtIndex:0];
 }
-     
-     
+ 
+/* 
+ The Atreus server bundles XML documents for 
+ weekly meals in folder labled with the sunday of each week 
+ */
 -(NSString *)sundayDateString {
     
     NSDate *today = [[NSDate alloc] init];
@@ -72,6 +75,8 @@
     
 }
 
+
+// returns todays xml string
 -(NSString *)todaysXMLString{
     
     

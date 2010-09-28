@@ -7,15 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class PolarPoints;
 
 @interface LogInViewController : UIViewController {
 
+	IBOutlet UISwitch *saveSwitch;
+	IBOutlet UITextField *userNameField;
+	IBOutlet UITextField *passwordField;
 	
 	
+	PolarPoints *delegate;
 	
 }
 
+@property (nonatomic, retain) NSObject *delegate;
 
 -(IBAction)dismissModalController;
 -(IBAction)launchPolarPoints;

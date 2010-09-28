@@ -11,45 +11,36 @@
 
 @interface mealHandler : NSObject {
 
-	NSMutableArray *thorneBreakfast;
-	NSMutableArray *thorneLunch;
-	NSMutableArray *thorneDinner;
-	NSMutableArray *thorneBrunch;
-	
-	NSMutableArray *moultonBreakfast;
-	NSMutableArray *moultonLunch;
-	NSMutableArray *moultonDinner;
-	NSMutableArray *moultonBrunch;
+	NSMutableArray *moultonArrayHolder;
+	NSMutableArray *thorneArrayHolder;
 
+	
+	NSMutableArray *moultonArray;
+	NSMutableArray *thorneArray;
 	
 }
 
-@property (nonatomic, retain) NSMutableArray *thorneBreakfast;
-@property (nonatomic, retain) NSMutableArray *thorneLunch;
-@property (nonatomic, retain) NSMutableArray *thorneDinner;
-@property (nonatomic, retain) NSMutableArray *thorneBrunch;
-@property (nonatomic, retain) NSMutableArray *moultonBreakfast;
-@property (nonatomic, retain) NSMutableArray *moultonLunch;
-@property (nonatomic, retain) NSMutableArray *moultonDinner;
-@property (nonatomic, retain) NSMutableArray *moultonBrunch;
+@property (nonatomic, retain) NSMutableArray *moultonArrayHolder;
+@property (nonatomic, retain) NSMutableArray *thorneArrayHolder;
 
+@property (nonatomic, retain) NSMutableArray *moultonArray;
+@property (nonatomic, retain) NSMutableArray *thorneArray;
 
--(id)initArraysFromWeekday:(NSString *)weekDay;
--(void)printItems;
--(NSString*)documentsDirectory;
-
+// Initialization method
+- (id)initWithMoultonArray:(NSMutableArray*)firstArray thorneArray:(NSMutableArray *)secondArray;
 
 // TableView Data
+- (void)setMoultonArray:(NSMutableArray*)moultonArray;
+- (void)setThorneArray:(NSMutableArray *)thorneArray;
 
 // Methods that return TableView Data
--(NSString *)returnItem:(NSString *)theHall atIndex:(NSIndexPath *)indexPath inArray:(NSMutableArray *)theCurrentArray;
-
--(NSInteger)numberOfSectionsForArray:(NSMutableArray *)theCurrentArray;
--(NSInteger)sizeOfSection:(NSInteger)section inArray:(NSMutableArray *)theCurrentArray;
-
--(CGFloat)returnHeightForCellatIndex:(NSIndexPath *)indexPath inArray:(NSMutableArray*)theCurrentArray;
+-(NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex;
+-(NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex;
+-(NSString *)returnItemFromLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath;
+-(CGFloat)returnHeightForCellatLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath;
 
 
+-(NSString*)documentsDirectory;
 
 
 @end
