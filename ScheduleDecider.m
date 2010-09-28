@@ -34,7 +34,7 @@
 #pragma mark -
 #pragma mark Express Meals
     
-    NSArray *open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mExpressLunchStart], // Mon
+    NSArray *open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mExpressLunchStart],	 // Mon
                                                         [NSNumber numberWithInt:mExpressLunchStart], // Tue
                                                         [NSNumber numberWithInt:mExpressLunchStart], // Wed
                                                         [NSNumber numberWithInt:mExpressLunchStart], // Thu
@@ -57,7 +57,9 @@
     expressLunch.openTimes = open;
     expressLunch.closeTimes = close;
     expressLunch.mealName = @"Express Lunch";
-    
+	expressLunch.shortName = @"Express Dinner";
+	expressLunch.location = @"Moulton";
+
     
     //
     // Express Dinner
@@ -89,7 +91,9 @@
     expressDinner.openTimes = open;
     expressDinner.closeTimes = close;
     expressDinner.mealName = @"Express Dinner";
-    
+	expressDinner.shortName = @"Express Dinner";
+	expressDinner.location = @"Moulton";
+
     //
     // Moulton Hot Breakfast
     //
@@ -491,8 +495,9 @@
     
     tSuperSnax.openTimes = open;
     tSuperSnax.closeTimes = close;
-    tSuperSnax.mealName = @"Super Snacks";  
-    
+    tSuperSnax.mealName = @"Super Snacks"; 
+	tSuperSnax.shortName = @"Super Snacks";
+    tSuperSnax.location = @"Thorne";
     
     
     
@@ -531,7 +536,8 @@
     cafeMorning.openTimes = open;
     cafeMorning.closeTimes = close;
     cafeMorning.mealName = @"Cafe";  
-    
+    cafeMorning.shortName = @"Cafe";
+	cafeMorning.location = @"Smith Union";
     
     
     
@@ -566,7 +572,8 @@
     cafeNight.openTimes = open;
     cafeNight.closeTimes = close;
     cafeNight.mealName = @"Cafe";  
-    
+	cafeNight.shortName = @"Cafe";
+	cafeNight.location = @"Smith Union";
     
     
     
@@ -601,8 +608,9 @@
     
     theGrill.openTimes = open;
     theGrill.closeTimes = close;
-    theGrill.mealName = @"Grill";  
-    
+    theGrill.mealName = @"The Grill";  
+	theGrill.shortName = @"The Grill";
+	theGrill.location = @"Smith Union";
     
     
     //
@@ -635,9 +643,10 @@
     
     thePub.openTimes = open;
     thePub.closeTimes = close;
-    thePub.mealName = @"Pub";  
-    
-    
+    thePub.mealName = @"The Pub";  
+    thePub.shortName = @"The Pub";
+    thePub.location = @"Smith Union";
+	
     //
     // The Convenience Store
     //
@@ -669,7 +678,9 @@
     theCStore.openTimes = open;
     theCStore.closeTimes = close;
     theCStore.mealName = @"C-Store";  
-    
+	theCStore.shortName = @"C-Store";  
+    theCStore.location = @"Smith Union";  
+
 
     // Creates an Array with Meals
     NSMutableArray *arrayMeals = [[NSArray alloc] initWithObjects:
@@ -722,20 +733,40 @@
     NSMutableArray *array = [[NSMutableArray alloc]init];
     int currentDay = (int)[self returnCurrentWeekDay];
     
+
     for(MealSchedule *element in mealArray){
         [element setCurrentDay:currentDay];
-        if ([element isOpen]){
+		
+		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
+        if ([element isOpen] || [element willOpen]){
             
-            [array addObject:element];
-            
+			if (element.location != nil) {
+				[dictionary setObject:element.location forKey:@"location"];
+			} else {
+				[dictionary setObject:@"NOLOC" forKey:@"location"];	
+			}
+
+			if (element.shortName != nil) {
+				[dictionary setObject:element.shortName forKey:@"meal"];
+			}
+			else {
+				[dictionary setObject:@"NONAME" forKey:@"meal"];
+	
+			}
+
+			
+			[dictionary setObject:[element dateText] forKey:@"hours"];
+			[dictionary setObject:[element fullHoursText] forKey:@"fullhours"];
+			         
+			[array addObject:dictionary];
+
         }
+		
+
         
     }
     
-    NSMutableArray *arrayToReturn = array;
-    [array release];
-    
-    return arrayToReturn;
+    return array;
     
 }
 

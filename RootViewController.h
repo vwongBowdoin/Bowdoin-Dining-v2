@@ -12,6 +12,7 @@
 @class mealHandler;
 @class WristWatch;
 @class UICustomTableView;
+@class ScheduleDecider;
 
 @interface RootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
 	
@@ -39,6 +40,8 @@
 	WristWatch *localMealDecider;
 	NSIndexPath *selectedIndexPath;
 	NSMutableArray *currentArray;
+	
+	ScheduleDecider *localScheduler;
     
     BOOL navigationBarsAnimatedOut;
 
@@ -65,6 +68,8 @@
 -(IBAction)settingsPage;
 -(IBAction)displayActionPage;
 -(IBAction)displayPolarPoints;
+-(IBAction)displayHoursPage;
+
 
 
 @end

@@ -200,7 +200,7 @@
         
         NSString *stringToReturn = [NSString stringWithFormat:@"Open Until %@", closingTime];
        
-        NSLog(@"%@ returning %@", mealName, stringToReturn);
+        NSLog(@"%@ returning %@",mealName, stringToReturn);
         return stringToReturn;
         
     }
@@ -211,14 +211,13 @@
         
         NSString *stringToReturn = [NSString stringWithFormat:@"%@ - %@", openingTime, closingTime];
 
-        NSLog(@"%@ returning %@", mealName, stringToReturn);
+        NSLog(@"%@ returning %@",mealName, stringToReturn);
         return stringToReturn;
     }
     
     else if ([self hasClosed]){
         
-        
-        NSLog(@"%@ returning Closed for the Day", mealName);
+        NSLog(@"Returning Closed");
         return @"Closed for the Day";
 
         
@@ -235,6 +234,9 @@
     
     NSString *stringToReturn = [NSString stringWithFormat:@"%@ - %@", openingTime, closingTime];
     
+	NSLog(@"Full Hours returning %@", stringToReturn);
+
+	
     return stringToReturn;
 
     

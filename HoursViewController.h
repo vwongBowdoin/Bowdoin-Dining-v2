@@ -11,13 +11,13 @@
 
 @interface HoursViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
  
-    ScheduleDecider *hoursScheduler;
-    NSMutableArray *openArray;
+    ScheduleDecider *localScheduler;
+    NSMutableArray *openNowArray;
     
-    
+    IBOutlet UITableView *theTableView;
 }
 
 @property (nonatomic, retain) ScheduleDecider *hoursScheduler;
-@property (nonatomic, retain) NSMutableArray *openArray;
+@property (nonatomic, retain) NSMutableArray *openNowArray;
 
 @end

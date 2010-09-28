@@ -143,6 +143,9 @@
 	ScheduleDecider *scheduler = [[ScheduleDecider alloc] init];
 	[scheduler processMealArrays];
 	
+	localScheduler = scheduler;
+	
+	
 	// Creates a Meal Handler to Populate Dining Menu Data
 	// and initializes with Moulton and Thorne Arrays
     mealHandler *handler = [[mealHandler alloc] initWithMoultonArray:[scheduler returnMoultonArray] thorneArray:[scheduler returnThorneArray]];
@@ -542,6 +545,16 @@
 	[polarController release];	
 
 }
+
+-(IBAction)displayHoursPage{
+	
+	HoursViewController *controller = [[HoursViewController alloc] initWithScheduleDecider:localScheduler];
+	[self.navigationController pushViewController:controller animated:YES];
+	[controller release];	
+	
+	
+	
+}	
 
 
 #pragma mark -

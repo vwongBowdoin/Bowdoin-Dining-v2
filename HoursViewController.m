@@ -12,31 +12,45 @@
 
 @implementation HoursViewController
 
-@synthesize hoursScheduler, openArray;
+@synthesize hoursScheduler, openNowArray;
 
 #pragma mark -
 #pragma mark View lifecycle
 
+// Required to initialize Hours View Controller
+-(id)initWithScheduleDecider:(ScheduleDecider*)decider{
+	
+	localScheduler = decider;
+	
+	return self;
+	
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
- 
-    // Pull in the Array of Open Meals and Full Meal Schedule
-    
-    // NEEDS A SEPARATE THREAD
-    // Testing the scheduler
-    ScheduleDecider *scheduler = [[ScheduleDecider alloc] init];
-    [scheduler setDiningSchedule];
-    NSMutableArray *returnedArray = [scheduler returnArrayOfOpenMeals];
-    openArray = returnedArray;
-    hoursScheduler = scheduler;
-    [scheduler release];
+
+	NSMutableArray *theArray = [localScheduler returnArrayOfOpenMeals];
+	openNowArray = theArray;
+	//[theArray release];
+	
+	[theTableView reloadData];
+	//[NSThread detachNewThreadSelector:@selector(processDeciderArrays) toTarget:self withObject:nil];
     
     
+}
+
+// Begins to Process the Decider's Arrays
+- (void)processDeciderArrays{
     
-    
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];  
+	
+	
+	
+	
+	
+	
+	[pool release];
 }
 
 
@@ -80,7 +94,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [openArray count];
+    return [openNowArray count];
+	
 }
 
 
@@ -91,15 +106,13 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
     }
     
    // cell.textLabel.text = @"Test";
-    
-    MealSchedule *tempSchedule = [openArray objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = [tempSchedule dateText];
-    
+        
+    cell.textLabel.text = [[openNowArray objectAtIndex:indexPath.row] objectForKey:@"meal"];
+    cell.detailTextLabel.text = [[openNowArray objectAtIndex:indexPath.row] objectForKey:@"hours"];
     
     // Configure the cell...
     
