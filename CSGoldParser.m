@@ -48,6 +48,14 @@
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"CSGold DownloadCompleted" object:nil];
 
+	
+	NSLog(@"Testing 0: %@", [self returnFormattedMoneyBalance:@"0"]);
+	NSLog(@"Testing 12: %@", [self returnFormattedMoneyBalance:@"12"]);
+	NSLog(@"Testing 123: %@", [self returnFormattedMoneyBalance:@"123"]);
+	NSLog(@"Testing 1234: %@", [self returnFormattedMoneyBalance:@"1234"]);
+	NSLog(@"Testing 12345: %@", [self returnFormattedMoneyBalance:@"12345"]);
+	NSLog(@"Testing 123456: %@", [self returnFormattedMoneyBalance:@"123456"]);
+
 
 	
 }
@@ -116,13 +124,16 @@
 		
 		if (currentSVCAccount == polarpoints) {
 			NSLog(@"Polar Points Balance = %@", string);
-			[[NSUserDefaults standardUserDefaults] setValue:[self returnFormattedOneCardBalance:string]  forKey:@"PolarPointBalance"];
-
+			[[NSUserDefaults standardUserDefaults] setValue:string  forKey:@"PolarPointBalance_RAW"];
+			[[NSUserDefaults standardUserDefaults] setValue:[self returnFormattedMoneyBalance:string]  forKey:@"PolarPointBalance"];
+			
+			
 		}
 		
 		if (currentSVCAccount == onecard) {
 			NSLog(@"One Card Balance = %@", string);
-			[[NSUserDefaults standardUserDefaults] setValue:[self returnFormattedOneCardBalance:string] forKey:@"OneCardBalance"];
+			[[NSUserDefaults standardUserDefaults] setValue:string  forKey:@"OneCardBalance_RAW"];
+			[[NSUserDefaults standardUserDefaults] setValue:[self returnFormattedMoneyBalance:string] forKey:@"OneCardBalance"];
 
 		}
 		
@@ -131,15 +142,68 @@
 	
 }
 
-- (NSString*)returnFormattedOneCardBalance:(NSString *)inputString{
+- (NSString*)returnFormattedMoneyBalance:(NSString *)inputString{
 	NSLog(@"Formatting One Card");
 	NSString *stringToReturn;
 	
 
 	if (inputString !=nil) {
 		
-		NSString *firstHalf = [inputString substringToIndex:2];
-		NSString *secondHalf = [inputString substringFromIndex:2];
+		NSString *firstHalf;
+		NSString *secondHalf;
+		
+		int indexForPeriod;
+		
+		switch (inputString.length) {
+			// Must be displayed as $0.00
+			case 0:
+				return @"$0.00";
+				break;
+			
+				
+			// Must be displayed $0.01
+			case 1:
+				
+				return [NSString stringWithFormat:@"$0.0%@", inputString];
+				break;
+				
+			// Must be displayed $0.12
+			case 2:
+				return [NSString stringWithFormat:@"$0.%@", inputString];
+				break;
+				
+			// Must be displayed $1.23
+			case 3:
+				indexForPeriod = 1;
+				break;
+
+			
+			// Must be displayed $12.34
+			case 4:
+				indexForPeriod = 2;
+				break;
+				
+			// Must be displayed $123.45	
+			case 5:
+				indexForPeriod = 3;
+				break;
+
+			// Must be displayed $1234.56
+			case 6:
+				indexForPeriod = 4;
+				break;
+				
+			// If they have this many polar points - I envy them and you should too.
+			case 7:
+				indexForPeriod = 5;
+				break;
+
+			default:
+				break;
+		}
+		
+		firstHalf = [inputString substringToIndex:indexForPeriod];
+		secondHalf = [inputString substringFromIndex:indexForPeriod];
 		
 		stringToReturn = [NSString stringWithFormat:@"$%@.%@", firstHalf, secondHalf];
 		

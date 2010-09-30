@@ -71,8 +71,26 @@
 	NSLog(@"Updating Visible Information");
 	
 	mealsRemaining.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"MealsRemaining"];
+	
+	if ([mealsRemaining.text intValue] <= 5) {
+		mealsRemaining.textColor = [UIColor redColor];
+	}
+	
 	polarPoints.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"PolarPointBalance"];
+	NSString *polarPointsRaw = [[NSUserDefaults standardUserDefaults] valueForKey:@"PolarPointBalance_RAW"];
+	
+	if (polarPointsRaw != nil && [polarPointsRaw intValue] <= 1000) {
+		polarPoints.textColor = [UIColor redColor];
+	}
+	
 	oneCardBalance.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"OneCardBalance"];
+	NSString *oneCardBalanceRAW = [[NSUserDefaults standardUserDefaults] valueForKey:@"OneCardBalance_RAW"];
+
+	if (oneCardBalanceRAW != nil && [oneCardBalanceRAW intValue] <= 1000) {
+		oneCardBalance.textColor = [UIColor redColor];
+	}
+	
+	
 	
 }
 
