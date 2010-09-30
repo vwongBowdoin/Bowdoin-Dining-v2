@@ -19,7 +19,7 @@
 	
 	CSGoldController *theController = [[CSGoldController alloc]init];	
 	[theController getCSGoldDataWithUserName:login password:pass];
-	[theController release];
+//	[theController release];
 
 }
 
@@ -72,7 +72,7 @@
 	
 	mealsRemaining.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"MealsRemaining"];
 	polarPoints.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"PolarPointBalance"];
-	
+	oneCardBalance.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"OneCardBalance"];
 	
 }
 

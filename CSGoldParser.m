@@ -11,6 +11,8 @@
 
 @implementation CSGoldParser
 
+@synthesize smallBucket, mediumBucket;
+
 - (void)parseWithData:(NSData *)data{
 	
 	theParser = [[NSXMLParser alloc] initWithData:data];
@@ -30,14 +32,29 @@
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
     
-    // Store plan type and meals remaining in NSUserDefaults and Post Notification
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"CSGold DownloadCompleted" object:nil];
+	NSLog(@"Done With Document");
 	
-	NSLog(@"Posted Notification Regarding CSGold");
+    // Store plan type and meals remaining in NSUserDefaults and Post Notification
+	
+	if (mediumBucket != nil) {
+		NSString *combinedBalance = [self returnCombinedBalance];
+		[[NSUserDefaults standardUserDefaults] setValue:combinedBalance forKey:@"MealsRemaining"];
+
+	}
+	
+		
+	
+	NSLog(@"Posting Notification");
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"CSGold DownloadCompleted" object:nil];
+
+
+	
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	
+	NSLog(@"ERROR!");
 	// Handle Error
 }
 
@@ -76,8 +93,17 @@
 	//NSLog(@"found characters: %@", string);
 	// save the characters for the current item...
 	if ([currentElement isEqualToString:@"MEDIUMBUCKET"]) {
-		NSLog(@"Meals Remaining = %@", string);
-		[[NSUserDefaults standardUserDefaults] setValue:string forKey:@"MealsRemaining"];
+		NSLog(@"Medium Bucket = %@", string);
+
+		self.mediumBucket = string;
+
+	}
+	
+	if ([currentElement isEqualToString:@"SMALLBUCKET"]) {
+
+		NSLog(@"Small Bucket = %@", string);
+
+		self.smallBucket = string;
 
 	}
 	
@@ -90,13 +116,13 @@
 		
 		if (currentSVCAccount == polarpoints) {
 			NSLog(@"Polar Points Balance = %@", string);
-			[[NSUserDefaults standardUserDefaults] setValue:string forKey:@"PolarPointBalance"];
+			[[NSUserDefaults standardUserDefaults] setValue:[self returnFormattedOneCardBalance:string]  forKey:@"PolarPointBalance"];
 
 		}
 		
 		if (currentSVCAccount == onecard) {
 			NSLog(@"One Card Balance = %@", string);
-			[[NSUserDefaults standardUserDefaults] setValue:string forKey:@"OneCardBalance"];
+			[[NSUserDefaults standardUserDefaults] setValue:[self returnFormattedOneCardBalance:string] forKey:@"OneCardBalance"];
 
 		}
 		
@@ -104,5 +130,61 @@
 	}
 	
 }
+
+- (NSString*)returnFormattedOneCardBalance:(NSString *)inputString{
+	NSLog(@"Formatting One Card");
+	NSString *stringToReturn;
+	
+
+	if (inputString !=nil) {
+		
+		NSString *firstHalf = [inputString substringToIndex:2];
+		NSString *secondHalf = [inputString substringFromIndex:2];
+		
+		stringToReturn = [NSString stringWithFormat:@"$%@.%@", firstHalf, secondHalf];
+		
+	}
+	
+	return stringToReturn;
+	
+}
+
+
+- (NSString*)returnCombinedBalance{
+	
+	int smallValue;
+	int mediumValue;
+	
+	if (smallBucket != nil) {
+		NSLog(@"Printing small value %@", smallBucket);
+		smallValue = [smallBucket intValue];
+
+	} else {
+		smallValue = 0;
+	}
+
+	
+	
+	if (mediumBucket != nil) {
+		
+		NSLog(@"Printing medium value %@", mediumBucket);
+		mediumValue = [mediumBucket intValue];
+		
+		
+	} else {
+		mediumValue = 0;
+	}
+
+
+		
+	int result = smallValue + mediumValue;
+	
+	
+	return [NSString stringWithFormat:@"%d", result];
+	
+}
+
+
+
 
 @end

@@ -12,6 +12,8 @@
 
 	IBOutlet UILabel *mealsRemaining;
 	IBOutlet UILabel *polarPoints;
+	IBOutlet UILabel *oneCardBalance;
+
 	
 	// Login Information
 	NSString *userName;

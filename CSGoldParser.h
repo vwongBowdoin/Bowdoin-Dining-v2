@@ -15,7 +15,15 @@
 	NSXMLParser *theParser;
 	NSString *currentElement;
 	int currentSVCAccount;
+	
+	
+	NSString *smallBucket;
+	NSString *mediumBucket;
+	
 }
+
+@property (nonatomic, retain) NSString *smallBucket;
+@property (nonatomic, retain) NSString *mediumBucket;
 
 - (void)parseWithData:(NSData *)data;
 

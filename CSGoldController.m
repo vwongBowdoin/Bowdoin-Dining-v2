@@ -77,7 +77,7 @@
 	[SOAPRequest setPostBody:(NSMutableData*)[SOAPEnvelope dataUsingEncoding:NSUTF8StringEncoding]];
 	[SOAPRequest startSynchronous];
 	
-	NSLog(@"Response: %@", [SOAPRequest responseString]);
+	//NSLog(@"Response: %@", [SOAPRequest responseString]);
 	
 	
 	CSGoldParser *parser = [[CSGoldParser alloc] init];
