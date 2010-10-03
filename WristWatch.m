@@ -62,9 +62,6 @@
     NSInteger formattedInt;
 	formattedInt = [formattedMonth intValue] - 1;
     
-    
-    NSLog(@"Formatter returning: %@-%d-%@", formattedYear, formattedInt, formattedDay);
-	
     NSString *formattedDate = [NSString stringWithFormat:@"%@-%d-%@",formattedYear, formattedInt, formattedDay];
     
     
@@ -115,7 +112,7 @@
 	NSDate *toBeFormatted = [[[NSDate alloc] init] autorelease];
 	
 	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
-	NSLog(@"formattedDay: %@", formattedDate);
+	//NSLog(@"formattedDay: %@", formattedDate);
 	
 	return[formattedDate intValue];
 }
@@ -137,7 +134,6 @@
 	NSDate *toBeFormatted = [[[NSDate alloc] init] autorelease];
 	
 	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
-	//NSLog(@"formattedMinute: %@", formattedDate);
 	
 	return[formattedDate intValue];
 }
@@ -148,7 +144,6 @@
 	NSDate *toBeFormatted = [[[NSDate alloc] init] autorelease];
 	
 	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
-	NSLog(@"formattedWeekday: %@", formattedDate);
 	
 	return[formattedDate intValue];
 	
@@ -165,7 +160,7 @@
 	// Returns the week of the year
 	NSInteger formattedWeek;
 	formattedWeek = [formattedDate intValue];
-	NSLog(@"formattedWeek: %d", formattedWeek);
+	//NSLog(@"formattedWeek: %d", formattedWeek);
 	
 	return formattedWeek;
 	

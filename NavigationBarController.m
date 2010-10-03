@@ -21,7 +21,6 @@
     
 }
 
-
 -(UIScrollView*)returnTopScrollBar{
 	
 	
@@ -30,7 +29,6 @@
 	return theScroller;
 	
 }
-
 
 -(UIView*)returnMealNavigationBar{
     
@@ -59,9 +57,7 @@
         } else {
             rightTitle = NULL;
         }
-        
-        NSLog(@"Meal Title: %@, leftTitle: %@, rightTitle: %@", mealTitle,leftTitle,rightTitle);
-        
+			
         [theMasterView addSubview:[self createMealHeader:mealTitle atIndex:i leftTitle:leftTitle rightTitle:rightTitle]];
         
     }
@@ -80,10 +76,9 @@
     
     UIView *theView = [[UIView alloc] initWithFrame:CGRectMake(0+ index*barWidth, 0, barWidth, barHeight)];
 	
-	NSLog(@"Coordinates = X_START: %f \n Y_START: 0 \n X_WIDTH: %f \n Y_HEIGHT: %f", index*barWidth, barWidth, barHeight);
 	[theView setBackgroundColor:[UIColor clearColor]];
 	
-	UILabel *mealDescription = [[UILabel alloc]initWithFrame:CGRectMake(0 + index*barWidth, 0, barWidth, barHeight)];
+	UILabel *mealDescription = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, barWidth, barHeight)];
     mealDescription.text = [NSString stringWithFormat:@"Today's %@", mealName];
     mealDescription.textColor = [UIColor whiteColor];
 	mealDescription.backgroundColor = [UIColor clearColor];
@@ -94,7 +89,7 @@
    
     if (leftTitle != NULL){
         
-		UILabel *leftIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset+ index*barWidth, 0, barWidth - 2*indicatorOffset, barHeight)];
+		UILabel *leftIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset, 0, barWidth - 2*indicatorOffset, barHeight)];
         
 		leftIndicator.text = [NSString stringWithFormat:@"< %@", leftTitle];
         leftIndicator.textColor = [UIColor whiteColor];
@@ -108,7 +103,7 @@
     
     
     if (rightTitle != NULL){
-		UILabel *rightIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset+ index*barWidth, 0, barWidth - 2*indicatorOffset, barHeight)];
+		UILabel *rightIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset, 0, barWidth - 2*indicatorOffset, barHeight)];
         
 		rightIndicator.text = [NSString stringWithFormat:@"%@ >", rightTitle];
         rightIndicator.textColor = [UIColor whiteColor];
@@ -123,13 +118,22 @@
     
     
     [theView addSubview:mealDescription];
+	NSLog(@"\n Meal Description: \n x = %f \n y = %f \n x_width = %f \n y_width = %f" , mealDescription.frame.origin.x, mealDescription.frame.origin.y, mealDescription.frame.size.width, mealDescription.frame.size.height);
 
+	
+	NSLog(@"\n Meal Header View: \n x = %f \n y = %f \n x_width = %f \n y_width = %f" , theView.frame.origin.x, theView.frame.origin.y, theView.frame.size.width, theView.frame.size.height);
+	NSLog(@"\n Left Title = %@ \n Meal Title = %@ \n Right Title = %@", leftTitle, mealName, rightTitle);
+	
     return theView;
     
 }
 
-
-
+-(UIView*)returnHallNavigationBar{
+	
+	UIView *masterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+	
+	
+}
 
 
 @end

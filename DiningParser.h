@@ -42,7 +42,7 @@
 }
 
 // Methods that add to TableView Data
-- (void)parseXMLData:(NSData *)data forDay:(NSString *)day;
+- (void)parseXMLData:(NSData *)data forDay:(int)day;
 -(NSMutableArray*)addTitleToArray:(NSString*)theTitle forArray:(NSMutableArray *)theArray;
 -(void)addArrayofItems:(NSMutableArray *)items forCourse:(NSString *)courseTitle forMeal:(NSString *)mealTitle forHall:(NSString *)diningHall;
 -(NSString*)documentsDirectory;

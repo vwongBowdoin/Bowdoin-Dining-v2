@@ -10,6 +10,7 @@
 #import "MealSchedule.h"
 #import "mealHandler.h"
 #import "ScheduleConstants.h"
+#import "WristWatch.h"
 
 @implementation ScheduleDecider
 
@@ -726,117 +727,15 @@
     return self;
 }
 
-// This does not need to be repeat code of ProcessArrayOfOpenMeals
--(void)processArrayOfAllMeals{
+- (void)processArrays{
 	
-	
-    //Assumes we want an array of today's meals.
-    allHoursArray = [[NSMutableArray alloc] init];
-    NSMutableArray *array1 = [[NSMutableArray alloc]init];
-	NSMutableArray *array2 = [[NSMutableArray alloc]init];
-    NSMutableArray *array3 = [[NSMutableArray alloc]init];
-	
-    int currentDay = (int)[self returnCurrentWeekDay];
-    
-	
-    for(MealSchedule *element in mealArray){
-        [element setCurrentDay:currentDay];
-		
-		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
-        if ([element isOpen] || [element willOpen]){
-            
-			
-			if (element.mealName != nil) {
-				[dictionary setObject:element.mealName forKey:@"meal"];
-			}
-			else {
-				[dictionary setObject:@"NONAME" forKey:@"meal"];
-				
-			}
-			
-			
-			[dictionary setObject:[element dateText] forKey:@"hours"];
-			[dictionary setObject:[element fullHoursText] forKey:@"fullhours"];
-			
-			
-			// This is the place for user defaults
-			if (element.location == @"Thorne") {
-				[array1 addObject:dictionary];
-			} else if (element.location == @"Moulton") {
-				[array2 addObject:dictionary];
-			} else {
-				[array3 addObject:dictionary];
-			}
-			
-			
-			
-			
-			
-        }
-		
-    }
-	
-	[allHoursArray addObject:array1];
-	[allHoursArray addObject:array2];
-	[allHoursArray addObject:array3];
-	
+	[self processHoursArrays];
+	[self processMealArrays];
 	
 	
 }
 
--(void)processArrayOfOpenMeals{
-    
-    //Assumes we want an array of today's meals.
-    openArray = [[NSMutableArray alloc] init];
-    NSMutableArray *array1 = [[NSMutableArray alloc]init];
-	NSMutableArray *array2 = [[NSMutableArray alloc]init];
-    NSMutableArray *array3 = [[NSMutableArray alloc]init];
-
-    int currentDay = (int)[self returnCurrentWeekDay];
-    
-
-    for(MealSchedule *element in mealArray){
-        [element setCurrentDay:currentDay];
-		
-		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
-        if ([element isOpen]){
-            
-		
-			if (element.mealName != nil) {
-				[dictionary setObject:element.mealName forKey:@"meal"];
-			}
-			else {
-				[dictionary setObject:@"NONAME" forKey:@"meal"];
-	
-			}
-
-			
-			[dictionary setObject:[element dateText] forKey:@"hours"];
-			[dictionary setObject:[element fullHoursText] forKey:@"fullhours"];
-			    
-
-			// This is the place for user defaults
-			if (element.location == @"Thorne") {
-				[array1 addObject:dictionary];
-			} else if (element.location == @"Moulton") {
-				[array2 addObject:dictionary];
-			} else {
-				[array3 addObject:dictionary];
-			}
-
-				
-
-				
-
-        }
-   
-    }
-	
-	[openArray addObject:array1];
-	[openArray addObject:array2];
-	[openArray addObject:array3];
-}
-
+// Meal Schedule and Meal Items
 -(void)processMealArrays{
     
 	// We establish three arrays to keep track of our meal information
@@ -844,19 +743,16 @@
     NSMutableArray *moulton_array = [[NSMutableArray alloc] init];
     NSMutableArray *navigation_array  = [[NSMutableArray alloc] init];
 	
-	
-    int currentDay = (int)[self returnCurrentWeekDay];
-   
+	WristWatch *clock= [[WristWatch alloc] init];
+		
 	// Running through every element of the DiningHallMealArray
     for(MealSchedule *element in diningHallMealArray){
         NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
-        
-		[element setCurrentDay:currentDay];
+		[element setCurrentDay:[clock getWeekDay]];
+		
         if ([element isOpen] || [element willOpen]){
             
-            
-            NSLog(@"Storing Short Name: %@", element.shortName);
-            
+                        
             [dictionary setObject:element.shortName forKey:@"Shortname"];
             [dictionary setObject:[element returnFileLocation] forKey:@"FileLocation"];
             [dictionary setObject:[element returnDescription] forKey:@"Day"];
@@ -886,6 +782,8 @@
 	
 	
 	
+	
+	
 	// Resolve Inconsistencies in Populating Arrays
 	// Array with fewer objects needs a placeholder dictionary inserted
 	
@@ -895,6 +793,7 @@
 		
 		[fakeDictionary setObject:[[moulton_array objectAtIndex:0] objectForKey:@"Shortname"] forKey:@"Shortname"];
 		[fakeDictionary setObject:[[moulton_array objectAtIndex:0] objectForKey:@"Day"] forKey:@"Day"];
+		[fakeDictionary setObject:[[moulton_array objectAtIndex:0] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
 
 		// placeholder dictionary inserted at index 0
 		[thorne_array insertObject:fakeDictionary atIndex:0];
@@ -904,15 +803,16 @@
 	} else if ([moulton_array count] < [thorne_array count]) {
 		
 		NSMutableDictionary *fakeDictionary = [[NSMutableDictionary alloc] init];
-
+		
 		[fakeDictionary setObject:[[thorne_array objectAtIndex:0] objectForKey:@"Shortname"] forKey:@"Shortname"];
 		[fakeDictionary setObject:[[thorne_array objectAtIndex:0] objectForKey:@"Day"] forKey:@"Day"];
-		
+		[fakeDictionary setObject:[[thorne_array objectAtIndex:0] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
+
 		// placeholder dictionary inserted at index 0
 		[moulton_array insertObject:fakeDictionary atIndex:0];
 		
 		[fakeDictionary release];
-
+		
 	} else {
 		
 		// Must be equal - no Inconsistencies
@@ -930,7 +830,7 @@
 	thorneArray = thorne_array;
 	moultonArray = moulton_array;
 	navBarArray = navigation_array;
-	   
+	
 }
 
 -(NSMutableArray*)returnThorneArray{
@@ -953,26 +853,113 @@
 }
 
 
--(int)returnCurrentWeekDay{
+
+// Hours of Operation Code
+-(void)processHoursArrays{
+	
+	allHoursArray = [[NSMutableArray alloc] init];
+
+    //Assumes we want an array of today's hours.
+    NSMutableArray *array1 = [[NSMutableArray alloc]init];
+	NSMutableArray *array2 = [[NSMutableArray alloc]init];
+    NSMutableArray *array3 = [[NSMutableArray alloc]init];
+	
+    int currentDay = (int)[self returnCurrentWeekDay];
     
-    NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
-	[inputFormatter setDateFormat:@"e"];
-	NSDate *toBeFormatted = [[[NSDate alloc] init] autorelease];
 	
-	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
+    for(MealSchedule *element in mealArray){
+        [element setCurrentDay:currentDay];
+		
+		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
+        if ([element isOpen] || [element willOpen]){
+            
+			
+			if (element.mealName != nil) {
+				[dictionary setObject:element.mealName forKey:@"meal"];
+			}
+			else {
+				[dictionary setObject:@"NONAME" forKey:@"meal"];
+				
+			}
+			
+			
+			[dictionary setObject:[element dateText] forKey:@"hours"];
+			[dictionary setObject:[element fullHoursText] forKey:@"fullhours"];
+			
+			
+			// This is the place for user defaults
+			if (element.location == @"Thorne") {
+				[array1 addObject:dictionary];
+			} else if (element.location == @"Moulton") {
+				[array2 addObject:dictionary];
+			} else {
+				[array3 addObject:dictionary];
+			}
+        }
+    }
+	
+	[allHoursArray addObject:array1];
+	[allHoursArray addObject:array2];
+	[allHoursArray addObject:array3];
 	
 	
-	if ([formattedDate intValue] == 1) {
-		NSLog(@"formattedWeekday: %d", 6);
-
-		return 6;
-	} else {
-		NSLog(@"formattedWeekday: %d", [formattedDate intValue] - 2);
-
-		return [formattedDate intValue] - 2;
-	}
-
+	
 }
+
+-(void)processArrayOfOpenMeals{
+    
+    //Assumes we want an array of today's meals.
+    openArray = [[NSMutableArray alloc] init];
+    NSMutableArray *section_one = [[NSMutableArray alloc]init];
+	NSMutableArray *section_two = [[NSMutableArray alloc]init];
+    NSMutableArray *section_three = [[NSMutableArray alloc]init];
+
+    int currentDay = (int)[self returnCurrentWeekDay];
+    
+
+    for(MealSchedule *element in mealArray){
+        [element setCurrentDay:currentDay];
+		
+		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
+        if ([element isOpen]){
+            
+		
+			if (element.mealName != nil) {
+				[dictionary setObject:element.mealName forKey:@"meal"];
+			}
+			else {
+				[dictionary setObject:@"NONAME" forKey:@"meal"];
+	
+			}
+
+			
+			[dictionary setObject:[element dateText] forKey:@"hours"];
+			[dictionary setObject:[element fullHoursText] forKey:@"fullhours"];
+			    
+
+			// This is the place for user defaults
+			if (element.location == @"Thorne") {
+				[section_one addObject:dictionary];
+			} else if (element.location == @"Moulton") {
+				[section_two addObject:dictionary];
+			} else {
+				[section_three addObject:dictionary];
+			}
+
+				
+
+				
+
+        }
+   
+    }
+	
+	[openArray addObject:section_one];
+	[openArray addObject:section_two];
+	[openArray addObject:section_three];
+}
+
+
 
 -(NSNumber *)returnCurrentWeekDayNSNumber{
     

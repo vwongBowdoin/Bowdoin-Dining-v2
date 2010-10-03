@@ -29,50 +29,13 @@
 	return self;
 }
 
-
--(void)storeXMLDataforDay:(NSString *)day{
-
-    
-    NSString *archivePath = [NSString stringWithFormat:@"%@/thorneBreakfast%d.xml",[self documentsDirectory],day];
-    [thorneBreakfast writeToFile:archivePath atomically:YES];
-
-    archivePath = [NSString stringWithFormat:@"%@/thorneLunch%d.xml",[self documentsDirectory],day];
-    [thorneLunch writeToFile:archivePath atomically:YES];
-    
-    archivePath = [NSString stringWithFormat:@"%@/thorneDinner%d.xml",[self documentsDirectory],day];
-    [thorneDinner writeToFile:archivePath atomically:YES];
-    
-    archivePath = [NSString stringWithFormat:@"%@/thorneBrunch%d.xml",[self documentsDirectory],day];
-    [thorneBrunch writeToFile:archivePath atomically:YES];
-    
-    archivePath = [NSString stringWithFormat:@"%@/moultonBreakfast%d.xml",[self documentsDirectory],day];
-    [moultonBreakfast writeToFile:archivePath atomically:YES];
-    
-    archivePath = [NSString stringWithFormat:@"%@/moultonLunch%d.xml",[self documentsDirectory],day];
-    [moultonLunch writeToFile:archivePath atomically:YES];
-    
-    archivePath = [NSString stringWithFormat:@"%@/moultonDinner%d.xml",[self documentsDirectory],day];
-    [moultonDinner writeToFile:archivePath atomically:YES];
-    
-    archivePath = [NSString stringWithFormat:@"%@/moultonBrunch%d.xml",[self documentsDirectory],day];
-    [moultonBrunch writeToFile:archivePath atomically:YES];
-    
-    
-    
-    
-}
-
-#pragma mark -
-#pragma mark Parser Code
-
-- (void)parseXMLData:(NSData *)data forDay:(NSString *)day{
+-(void)parseXMLData:(NSData *)data forDay:(int)day{
 	mealArray = [[NSMutableArray alloc] init];
 	
-    
-    currentDayIndex = day-1;
+    currentDayIndex = day;
 	
 	rssParser = [[NSXMLParser alloc] initWithData:data];
-
+	
 	// Set self as the delegate of the parser so that it will receive the parser delegate methods callbacks.
 	[rssParser setDelegate:self];
 	
@@ -85,7 +48,11 @@
 	
 	//return self;
 }
-- (void)parserDidStartDocument:(NSXMLParser *)parser {
+
+#pragma mark -
+#pragma mark Parser Code
+
+-(void)parserDidStartDocument:(NSXMLParser *)parser {
 	NSLog(@"Found file and started parsing");
 	
 	thorneBreakfast = [[NSMutableArray alloc] init];
@@ -98,41 +65,28 @@
 	moultonDinner = [[NSMutableArray alloc] init];
 	moultonBrunch = [[NSMutableArray alloc] init];
 
-	
-	
 }
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
     
-    
     [self storeXMLDataforDay:currentDayIndex];
-    
-    // Save a confirmed storage
+	// Confirm Storage Notification through NSNotification System
     
 }
 
-- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
-	
-	NSString * errorString = [NSString stringWithFormat:@"Something went wrong! We were unable to download the menus right now. Sorry!"];
-	[self performSelectorOnMainThread:@selector(displayError:) 
-						   withObject:errorString
-						waitUntilDone:false];
-	
-}
-
-- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
+-(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
 	currentElement = [elementName copy];
 	
 	// storing Breakfast
 	if ([elementName isEqualToString:@"meal"] && [[attributeDict objectForKey:@"id"] isEqualToString:@"Breakfast"]) {
 		currentMeal = @"Breakfast";
-
+		
 	}
 	
 	// storing Brunch
 	if ([elementName isEqualToString:@"meal"] && [[attributeDict objectForKey:@"id"] isEqualToString:@"Brunch"]) {
 		currentMeal = @"Brunch";
-
+		
 	}
 	
 	// storing Lunch
@@ -148,7 +102,7 @@
 	// Storing to Thorne Array
 	if ([elementName isEqualToString:@"unit"] && [[attributeDict objectForKey:@"id"] isEqualToString:@"49"]) {
 		currentUnit = @"Thorne";
-
+		
 	}
 	
 	// Storing to Moulton Array
@@ -167,19 +121,19 @@
 		currentTitle = [[NSMutableString alloc] init];
 		
 	}
-	
+
 	// changing course
 	
 }
 
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+-(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
 	
 	// if course is the the same as current course - continue to add to course array key
 	if ([elementName isEqualToString:@"course"]) {
 		if (currentCourse == nil) {
 			currentCourse = currentTitle;
 			mealArray = [[NSMutableArray alloc] init];
-
+			
 		}
 		
 		else if (![currentCourse isEqualToString:currentTitle]) {
@@ -194,46 +148,95 @@
 	if ([elementName isEqualToString:@"webLongName"]) {
 		// save values to an item, then store that item into the array with the current course key
 		[mealArray addObject:currentTitle];
-				
+		
 	}
 	
-	if ([elementName isEqualToString:@"menu"]) {
-		// save values to an item, then store that item into the array with the current course key
-		if (currentCourse != nil) {
-
-		}
-	
+	if ([elementName isEqualToString:@"error"]) {
+		// Creeates / or wipes the array for safety
+		mealArray = [[NSMutableArray alloc] init];
+		[mealArray addObject:@""];
+		// Save values to an item, then store that item into the array with the current course key
+		
 	}
 	
 	
 }
 
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
+-(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
 	//NSLog(@"found characters: %@", string);
 	// save the characters for the current item...
 	if ([currentElement isEqualToString:@"webLongName"]) {
 		[currentTitle appendString:string];
-
+		
 	}
 	
 	if ([currentElement isEqualToString:@"course"]) {
 		[currentTitle appendString:string];
-
+		
 	}
 }
 
-- (void)displayError:(NSString*)errorToDisplay {
+-(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
+	
+	NSString * errorString = [NSString stringWithFormat:@"Something went wrong! We were unable to download the menus right now. Sorry!"];
+	[self performSelectorOnMainThread:@selector(displayError:) 
+						   withObject:errorString
+						waitUntilDone:false];
+	
+}
+
+-(void)displayError:(NSString*)errorToDisplay {
 	NSLog(@"Error parsing XML: %@", errorToDisplay);
 	
 }
 
-
 #pragma mark -
 #pragma mark Data Storage
+
+-(void)storeXMLDataforDay:(int)day{
 	
-- (void)addArrayofItems:(NSMutableArray *)items forCourse:(NSString *)courseTitle forMeal:(NSString *)mealTitle forHall:(NSString *)diningHall {	
+    NSString *archivePath = [NSString stringWithFormat:@"%@/thorneBreakfast%d.xml",[self documentsDirectory], day];
+    [thorneBreakfast writeToFile:archivePath atomically:YES];
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+
+    archivePath = [NSString stringWithFormat:@"%@/thorneLunch%d.xml",[self documentsDirectory],day];
+    [thorneLunch writeToFile:archivePath atomically:YES];
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	
+    archivePath = [NSString stringWithFormat:@"%@/thorneDinner%d.xml",[self documentsDirectory],day];
+    [thorneDinner writeToFile:archivePath atomically:YES];
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	
+    archivePath = [NSString stringWithFormat:@"%@/thorneBrunch%d.xml",[self documentsDirectory],day];
+    [thorneBrunch writeToFile:archivePath atomically:YES];
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	
+    archivePath = [NSString stringWithFormat:@"%@/moultonBreakfast%d.xml",[self documentsDirectory],day];
+    [moultonBreakfast writeToFile:archivePath atomically:YES];
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	
+    archivePath = [NSString stringWithFormat:@"%@/moultonLunch%d.xml",[self documentsDirectory],day];
+    [moultonLunch writeToFile:archivePath atomically:YES];
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	
+    archivePath = [NSString stringWithFormat:@"%@/moultonDinner%d.xml",[self documentsDirectory],day];
+    [moultonDinner writeToFile:archivePath atomically:YES];
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	
+    archivePath = [NSString stringWithFormat:@"%@/moultonBrunch%d.xml",[self documentsDirectory],day];
+    [moultonBrunch writeToFile:archivePath atomically:YES];
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	
+}
+
+-(NSString *)documentsDirectory {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	return [paths objectAtIndex:0];
+}
+
+-(void)addArrayofItems:(NSMutableArray *)items forCourse:(NSString *)courseTitle forMeal:(NSString *)mealTitle forHall:(NSString *)diningHall {	
 	if ([diningHall isEqualToString:@"Thorne"]) {
-			
+		
 		if ([mealTitle isEqualToString:@"Breakfast"]) {
 			items = [self addTitleToArray:courseTitle forArray:items];
 			
@@ -243,9 +246,9 @@
 			} else {
 				[thorneBreakfast addObject:items];
 			}
-				
-		}
 			
+		}
+		
 		if ([mealTitle isEqualToString:@"Lunch"]) {
 			items = [self addTitleToArray:courseTitle forArray:items];
 			
@@ -330,12 +333,6 @@
 		
 	}
 	
-}
-
-// returns the local document directory
-- (NSString *)documentsDirectory {
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	return [paths objectAtIndex:0];
 }
 
 -(NSMutableArray*)addTitleToArray:(NSString*)theTitle forArray:(NSMutableArray *)theArray{

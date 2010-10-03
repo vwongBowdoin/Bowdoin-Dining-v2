@@ -12,6 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
+			<integer value="6"/>
 			<integer value="14"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -538,7 +539,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="309885113">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -598,7 +599,7 @@
 					<object class="IBUILabel" id="490670861">
 						<reference key="NSNextResponder" ref="309885113"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{62, 20}, {196, 18}}</string>
+						<string key="NSFrame">{{0, 15}, {320, 27}}</string>
 						<reference key="NSSuperview" ref="309885113"/>
 						<reference key="NSNextKeyView" ref="162259355"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -612,8 +613,13 @@
 							<double key="NSSize">14</double>
 							<int key="NSfFlags">16</int>
 						</object>
-						<reference key="IBUITextColor" ref="612985082"/>
+						<object class="NSColor" key="IBUITextColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MSAwIDAAA</bytes>
+						</object>
 						<nil key="IBUIHighlightedColor"/>
+						<reference key="IBUIShadowColor" ref="612985082"/>
+						<string key="IBUIShadowOffset">{0, 0}</string>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUITextAlignment">1</int>
@@ -703,7 +709,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Closes in 15 Minutes</string>
+						<string key="IBUIText">Open until 10:30 a.m.</string>
 						<reference key="IBUIFont" ref="505384978"/>
 						<reference key="IBUITextColor" ref="612985082"/>
 						<nil key="IBUIHighlightedColor"/>
@@ -771,6 +777,7 @@
 					</object>
 				</object>
 				<string key="NSFrameSize">{960, 44}</string>
+				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="186992409"/>
 				<reference key="IBUIBackgroundColor" ref="494767339"/>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
@@ -1362,13 +1369,13 @@ IGZvdW50YWluIGJldmVyYWdlLiAkNi41MCBTb3VwOiBUaGFpIENoaWNrZW4gU291cAo</string>
 							<reference ref="566365460"/>
 							<reference ref="378887526"/>
 							<reference ref="595243536"/>
-							<reference ref="490670861"/>
 							<reference ref="397669487"/>
 							<reference ref="213781626"/>
 							<reference ref="250123206"/>
 							<reference ref="685488836"/>
 							<reference ref="848460819"/>
 							<reference ref="162259355"/>
+							<reference ref="490670861"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">HallHeader</string>
@@ -1635,6 +1642,7 @@ IGZvdW50YWluIGJldmVyYWdlLiAkNi41MCBTb3VwOiBUaGFpIENoaWNrZW4gU291cAo</string>
 					<string>-1.CustomClassName</string>
 					<string>-2.CustomClassName</string>
 					<string>10.IBPluginDependency</string>
+					<string>10.IBViewBoundsToFrameTransform</string>
 					<string>100.IBUserGuides</string>
 					<string>102.IBPluginDependency</string>
 					<string>131.IBPluginDependency</string>
@@ -1683,6 +1691,9 @@ IGZvdW50YWluIGJldmVyYWdlLiAkNi41MCBTb3VwOiBUaGFpIENoaWNrZW4gU291cAo</string>
 					<string>RootViewController</string>
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAABCeAAAwigAAA</bytes>
+					</object>
 					<object class="NSArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="IBUserGuide">
@@ -1728,7 +1739,7 @@ IGZvdW50YWluIGJldmVyYWdlLiAkNi41MCBTb3VwOiBUaGFpIENoaWNrZW4gU291cAo</string>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{736, 495}, {320, 480}}</string>
+					<string>{{1013, 348}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<integer value="6"/>
 					<real value="0.0"/>
@@ -1748,7 +1759,7 @@ IGZvdW50YWluIGJldmVyYWdlLiAkNi41MCBTb3VwOiBUaGFpIENoaWNrZW4gU291cAo</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{1245, 193}, {640, 44}}</string>
+					<string>{{836, 58}, {960, 44}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>

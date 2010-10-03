@@ -16,7 +16,7 @@
 // Returns an NSDate initialized for the current opening time.
 -(NSDate *)currentOpening{
     
-    NSTimeInterval interval = [[openTimes objectAtIndex:currentDay] intValue];
+    NSTimeInterval interval = [[openTimes objectAtIndex:currentDay-1] intValue];
     
     NSDate *openTime = [[NSDate alloc] initWithTimeInterval:interval 
                                                   sinceDate:[self midnightDate]];
@@ -31,7 +31,7 @@
 
 -(NSDate *)currentClosing{
     
-    NSTimeInterval interval = [[closeTimes objectAtIndex:currentDay] intValue];
+    NSTimeInterval interval = [[closeTimes objectAtIndex:currentDay-1] intValue];
     
     
     NSDate *closeTime = [[NSDate alloc] initWithTimeInterval:interval 
@@ -124,7 +124,6 @@
 
 -(BOOL)isOpen{
     
-	NSLog(@"Checking %@", fileName);
 	
     NSDate *currentTime = [NSDate date];
     NSDate *currentOpening = [self currentOpening];
@@ -200,7 +199,6 @@
         
         NSString *stringToReturn = [NSString stringWithFormat:@"Closes at %@", closingTime];
        
-        NSLog(@"%@ returning %@",mealName, stringToReturn);
         return stringToReturn;
         
     }
@@ -211,13 +209,11 @@
         
         NSString *stringToReturn = [NSString stringWithFormat:@"%@ - %@", openingTime, closingTime];
 
-        NSLog(@"%@ returning %@",mealName, stringToReturn);
         return stringToReturn;
     }
     
     else if ([self hasClosed]){
         
-        NSLog(@"Returning Closed");
         return @"Closed for the Day";
 
         
@@ -233,9 +229,6 @@
     NSString *closingTime = [self formattedTimeString:[self currentClosing]];
     
     NSString *stringToReturn = [NSString stringWithFormat:@"%@ - %@", openingTime, closingTime];
-    
-	NSLog(@"Full Hours returning %@", stringToReturn);
-
 	
     return stringToReturn;
 

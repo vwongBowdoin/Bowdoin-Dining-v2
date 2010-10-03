@@ -72,17 +72,20 @@
 	
 	mealsRemaining.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"MealsRemaining"];
 	
+	// Low Balance Warning
 	if ([mealsRemaining.text intValue] <= 5) {
 		mealsRemaining.textColor = [UIColor redColor];
-	}
+	} 
 	
 	polarPoints.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"PolarPointBalance"];
 	NSString *polarPointsRaw = [[NSUserDefaults standardUserDefaults] valueForKey:@"PolarPointBalance_RAW"];
 	
+	// Low Balance Warning
 	if (polarPointsRaw != nil && [polarPointsRaw intValue] <= 1000) {
 		polarPoints.textColor = [UIColor redColor];
 	}
 	
+	// Low Balance Warning
 	oneCardBalance.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"OneCardBalance"];
 	NSString *oneCardBalanceRAW = [[NSUserDefaults standardUserDefaults] valueForKey:@"OneCardBalance_RAW"];
 

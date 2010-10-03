@@ -86,18 +86,20 @@
 //Registering Notifications
 -(void)registerNotifications{
     
-    
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swipeRight)
-												 name:@"TableViewSwipeRight" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(swipeLeft)
-												 name:@"TableViewSwipeLeft" object:nil];
-	
     // Menu Download Completion
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadCompleted)
 												 name:@"Download Completed" object:nil];
 	
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoMealNotification)
+												 name:@"No Meal Displayed" object:nil];
     
+}
+
+-(void)showNoMealNotification{
+	
+	NSLog(@"NO MEAL");
+	
 }
 
 -(void)setNavigationBarsWithArray:(NSMutableArray*)scheduleArray{
@@ -113,6 +115,7 @@
 	[mealScrollView setTag:mealScroller];
 	[mealScrollView setDelegate:self];
 	[mealScrollView addSubview:[navBarController returnMealNavigationBar]];
+	[mealScrollView setPagingEnabled:YES];
 
     
    // [mealScrollView addSubview:[navBarController returnMealNavigationBar]];
@@ -407,12 +410,11 @@
 
 
 // Method for Setting Background Color
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath	{
-		NSLog(@"Trying to Set Background Color");
-		
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath	{		
 		cell.backgroundColor = [UIColor whiteColor];
 		cell.textLabel.backgroundColor = [UIColor clearColor];
 		cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+	
 }
 														
 

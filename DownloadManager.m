@@ -33,7 +33,7 @@
         // Check current day of week
         // initialize for loop at day of week and check user defaults to see if downloaded
         
-        [NSThread detachNewThreadSelector:@selector(loadMenus) toTarget:self withObject:nil];
+        [NSThread detachNewThreadSelector:@selector(downloadMenus) toTarget:self withObject:nil];
         
     }
     
@@ -59,6 +59,8 @@
         NSString *dayString = [NSString stringWithFormat:@"%d.xml", i];
         NSString *downloadAddress = [NSString stringWithFormat:@"%@%@/%@", serverPath, sundayString, dayString];
         NSURL *downloadURL = [NSURL URLWithString:downloadAddress];
+		
+		NSLog(@"Download Address: %@", downloadAddress);
         
 		
         // Saving File for Parser - checking for error
@@ -71,6 +73,7 @@
         }
         
         // Parse XML from downloaded Data
+		NSLog(@"Initializing parser with Day %d", i);
         [todaysParser parseXMLData:xmlFile forDay:i];
 	
     }

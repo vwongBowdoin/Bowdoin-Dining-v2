@@ -40,11 +40,18 @@
 		NSMutableArray *array;		
 		
 		if ([element objectForKey:@"FileLocation"] != NULL) {
-			NSLog(@"File String = %@", [element objectForKey:@"FileLocation"]);
+			NSLog(@"Loading Array = %@", [[element objectForKey:@"FileLocation"] stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 			array = [[NSMutableArray alloc] initWithContentsOfFile:[element objectForKey:@"FileLocation"]];
+			
+			
+			if (array == NULL) {
+				array = [[NSMutableArray alloc] initWithObjects:@"NULL STRING BITCH", nil];
+			}
+			
+			[tempArray addObject:array];
+
 		} 
 		
-		[tempArray addObject:array];
 		
 	}
 	
@@ -60,10 +67,10 @@
 		
 		NSMutableArray *array;		
 		
-		if ([element objectForKey:@"FileLocation"] != NULL) {
-			NSLog(@"File String = %@", [element objectForKey:@"FileLocation"]);
+		if ([element objectForKey:@"FileLocation"] != nil) {
+			NSLog(@"Loading Array = %@", [[element objectForKey:@"FileLocation"] stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 			array = [[NSMutableArray alloc] initWithContentsOfFile:[element objectForKey:@"FileLocation"]];
-		} 
+		}
 		
 		[tempArray2 addObject:array];
 		
