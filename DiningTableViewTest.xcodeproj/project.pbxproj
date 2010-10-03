@@ -46,6 +46,7 @@
 		A1B36AB7120099AD00D27351 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B36AB6120099AD00D27351 /* DownloadManager.m */; };
 		A1B6FB2B11FDE33800C472EB /* bearIcon-black.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */; };
 		A1B6FB4811FDE4DF00C472EB /* fakeXMLDoc.xml in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */; };
+		A1DCE62F1258E97C00746201 /* HallNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DCE62E1258E97C00746201 /* HallNavigationBar.m */; };
 		A1E0D3C211E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = A1E0D3C111E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png */; };
 		A1FC340A12089D8200B5635E /* MealSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC340912089D8200B5635E /* MealSchedule.m */; };
 		A1FC34121208BA3D00B5635E /* ScheduleDecider.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC34111208BA3D00B5635E /* ScheduleDecider.m */; };
@@ -117,6 +118,8 @@
 		A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bearIcon-black.png"; sourceTree = "<group>"; };
 		A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fakeXMLDoc.xml; sourceTree = "<group>"; };
 		A1D1944811FFE75F00339484 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		A1DCE62D1258E97C00746201 /* HallNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HallNavigationBar.h; sourceTree = "<group>"; };
+		A1DCE62E1258E97C00746201 /* HallNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HallNavigationBar.m; sourceTree = "<group>"; };
 		A1E0D3C111E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen shot 2010-07-08 at 10.59.02 AM.png"; sourceTree = "<group>"; };
 		A1FC340812089D8200B5635E /* MealSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealSchedule.h; sourceTree = "<group>"; };
 		A1FC340912089D8200B5635E /* MealSchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealSchedule.m; sourceTree = "<group>"; };
@@ -220,6 +223,8 @@
 		A10BC6C7124E892500B9575A /* Navigation Bars */ = {
 			isa = PBXGroup;
 			children = (
+				A1DCE62D1258E97C00746201 /* HallNavigationBar.h */,
+				A1DCE62E1258E97C00746201 /* HallNavigationBar.m */,
 				A11AE51A1212F3C900007801 /* NavigationBarController.h */,
 				A11AE51B1212F3C900007801 /* NavigationBarController.m */,
 			);
@@ -428,6 +433,7 @@
 				A16B6AF2124C581400774456 /* CSGoldController.m in Sources */,
 				A16B6B03124C5AFB00774456 /* CSGoldParser.m in Sources */,
 				A185E9741251977C00812356 /* WristWatch.m in Sources */,
+				A1DCE62F1258E97C00746201 /* HallNavigationBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

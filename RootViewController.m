@@ -20,6 +20,7 @@
 #import "HoursViewController.h"
 #import "NavigationBarController.h"
 #import "CSGoldController.h"
+#import "HallNavigationBar.h"
 
 
 @implementation RootViewController
@@ -114,7 +115,10 @@
 
 	[mealScrollView setTag:mealScroller];
 	[mealScrollView setDelegate:self];
-	[mealScrollView addSubview:[navBarController returnMealNavigationBar]];
+	
+	HallNavigationBar *navBar = [[HallNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+	
+	[mealScrollView addSubview:navBar]; //[navBarController returnMealNavigationBar]];
 	[mealScrollView setPagingEnabled:YES];
 
     
