@@ -113,7 +113,7 @@
             [NSNumber numberWithInt:mwkBreakfastStart],  // Sun
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mExpressDinnerStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mHotBreakfastStop], // Mon
              [NSNumber numberWithInt:mHotBreakfastStop], // Tue
              [NSNumber numberWithInt:mHotBreakfastStop], // Wed
              [NSNumber numberWithInt:mHotBreakfastStop], // Thu
@@ -259,7 +259,7 @@
             [NSNumber numberWithInt:mwkDinnerStart],  // Sun
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mLunchStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mDinnerStop], // Mon
              [NSNumber numberWithInt:mDinnerStop], // Tue
              [NSNumber numberWithInt:mDinnerStop], // Wed
              [NSNumber numberWithInt:mDinnerStop], // Thu
@@ -295,7 +295,7 @@
             [NSNumber numberWithInt:noMealForDay],  // Sun
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mLunchStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:tHotBreakfastStop], // Mon
              [NSNumber numberWithInt:tHotBreakfastStop], // Tue
              [NSNumber numberWithInt:tHotBreakfastStop], // Wed
              [NSNumber numberWithInt:tHotBreakfastStop], // Thu
@@ -370,7 +370,7 @@
             [NSNumber numberWithInt:noMealForDay],  // Sun
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mLunchStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:tHotLunchStop], // Mon
              [NSNumber numberWithInt:tHotLunchStop], // Tue
              [NSNumber numberWithInt:tHotLunchStop], // Wed
              [NSNumber numberWithInt:tHotLunchStop], // Thu
@@ -407,7 +407,7 @@
             [NSNumber numberWithInt:noMealForDay],  // Sun
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mLunchStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:tColdLunchStop], // Mon
              [NSNumber numberWithInt:tColdLunchStop], // Tue
              [NSNumber numberWithInt:tColdLunchStop], // Wed
              [NSNumber numberWithInt:tColdLunchStop], // Thu
