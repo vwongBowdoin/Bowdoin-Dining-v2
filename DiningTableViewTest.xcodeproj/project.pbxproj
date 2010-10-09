@@ -16,6 +16,9 @@
 		A1032236120355C0008C3D30 /* Favorites.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1032234120355C0008C3D30 /* Favorites.xcdatamodeld */; };
 		A111E11711EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */; };
 		A11AE51C1212F3C900007801 /* NavigationBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AE51B1212F3C900007801 /* NavigationBarController.m */; };
+		A131FE24125FAD90000B5E23 /* CSGoldTransactionsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A131FE23125FAD90000B5E23 /* CSGoldTransactionsParser.m */; };
+		A131FE44125FBF56000B5E23 /* RecentTransactions.m in Sources */ = {isa = PBXBuildFile; fileRef = A131FE42125FBF56000B5E23 /* RecentTransactions.m */; };
+		A131FE45125FBF56000B5E23 /* RecentTransactions.xib in Resources */ = {isa = PBXBuildFile; fileRef = A131FE43125FBF56000B5E23 /* RecentTransactions.xib */; };
 		A13D0AE511ECC11100616B3F /* PolarPoints.xib in Resources */ = {isa = PBXBuildFile; fileRef = A13D0AE311ECC11100616B3F /* PolarPoints.xib */; };
 		A14BBBDF120C5231006AD070 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14BBBDE120C5231006AD070 /* CFNetwork.framework */; };
 		A14BBBE3120C5238006AD070 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14BBBE2120C5238006AD070 /* MessageUI.framework */; };
@@ -46,6 +49,7 @@
 		A1B36AB7120099AD00D27351 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B36AB6120099AD00D27351 /* DownloadManager.m */; };
 		A1B6FB2B11FDE33800C472EB /* bearIcon-black.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */; };
 		A1B6FB4811FDE4DF00C472EB /* fakeXMLDoc.xml in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */; };
+		A1D6FECB125C28BB00E132A5 /* MealNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D6FECA125C28BB00E132A5 /* MealNavigationBar.m */; };
 		A1DCE62F1258E97C00746201 /* HallNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DCE62E1258E97C00746201 /* HallNavigationBar.m */; };
 		A1E0D3C211E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = A1E0D3C111E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png */; };
 		A1FC340A12089D8200B5635E /* MealSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC340912089D8200B5635E /* MealSchedule.m */; };
@@ -66,6 +70,11 @@
 		A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen shot 2010-07-12 at 2.23.27 PM.png"; sourceTree = "<group>"; };
 		A11AE51A1212F3C900007801 /* NavigationBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarController.h; sourceTree = "<group>"; };
 		A11AE51B1212F3C900007801 /* NavigationBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarController.m; sourceTree = "<group>"; };
+		A131FE22125FAD90000B5E23 /* CSGoldTransactionsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGoldTransactionsParser.h; sourceTree = "<group>"; };
+		A131FE23125FAD90000B5E23 /* CSGoldTransactionsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGoldTransactionsParser.m; sourceTree = "<group>"; };
+		A131FE41125FBF56000B5E23 /* RecentTransactions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTransactions.h; sourceTree = "<group>"; };
+		A131FE42125FBF56000B5E23 /* RecentTransactions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTransactions.m; sourceTree = "<group>"; };
+		A131FE43125FBF56000B5E23 /* RecentTransactions.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentTransactions.xib; sourceTree = "<group>"; };
 		A13D0AE311ECC11100616B3F /* PolarPoints.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarPoints.xib; sourceTree = "<group>"; };
 		A14BBBDE120C5231006AD070 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A14BBBE2120C5238006AD070 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -118,6 +127,8 @@
 		A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bearIcon-black.png"; sourceTree = "<group>"; };
 		A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fakeXMLDoc.xml; sourceTree = "<group>"; };
 		A1D1944811FFE75F00339484 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		A1D6FEC9125C28BB00E132A5 /* MealNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealNavigationBar.h; sourceTree = "<group>"; };
+		A1D6FECA125C28BB00E132A5 /* MealNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealNavigationBar.m; sourceTree = "<group>"; };
 		A1DCE62D1258E97C00746201 /* HallNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HallNavigationBar.h; sourceTree = "<group>"; };
 		A1DCE62E1258E97C00746201 /* HallNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HallNavigationBar.m; sourceTree = "<group>"; };
 		A1E0D3C111E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen shot 2010-07-08 at 10.59.02 AM.png"; sourceTree = "<group>"; };
@@ -225,6 +236,8 @@
 			children = (
 				A1DCE62D1258E97C00746201 /* HallNavigationBar.h */,
 				A1DCE62E1258E97C00746201 /* HallNavigationBar.m */,
+				A1D6FEC9125C28BB00E132A5 /* MealNavigationBar.h */,
+				A1D6FECA125C28BB00E132A5 /* MealNavigationBar.m */,
 				A11AE51A1212F3C900007801 /* NavigationBarController.h */,
 				A11AE51B1212F3C900007801 /* NavigationBarController.m */,
 			);
@@ -238,6 +251,9 @@
 				A1A407EF11F4D29300608B9C /* LogInViewController.m */,
 				A1A4078C11F4CA7500608B9C /* PolarPoints.h */,
 				A1A4078D11F4CA7500608B9C /* PolarPoints.m */,
+				A131FE41125FBF56000B5E23 /* RecentTransactions.h */,
+				A131FE42125FBF56000B5E23 /* RecentTransactions.m */,
+				A131FE43125FBF56000B5E23 /* RecentTransactions.xib */,
 				A16B6A75124C3E6600774456 /* Parsers */,
 				A16B6A50124C3CAB00774456 /* SOAP */,
 			);
@@ -271,6 +287,8 @@
 			children = (
 				A16B6B01124C5AFB00774456 /* CSGoldParser.h */,
 				A16B6B02124C5AFB00774456 /* CSGoldParser.m */,
+				A131FE22125FAD90000B5E23 /* CSGoldTransactionsParser.h */,
+				A131FE23125FAD90000B5E23 /* CSGoldTransactionsParser.m */,
 				A16B6AF0124C581400774456 /* CSGoldController.h */,
 				A16B6AF1124C581400774456 /* CSGoldController.m */,
 			);
@@ -284,7 +302,6 @@
 				A10BC6C7124E892500B9575A /* Navigation Bars */,
 				A1A4079211F4CA8000608B9C /* Table View */,
 				A16B6A4F124C3C9F00774456 /* OneCard */,
-				A1A4079311F4CA9F00608B9C /* Settings */,
 				A1FC340712089D3B00B5635E /* Hours Information */,
 				A1B36AC71200A46E00D27351 /* Data Management */,
 			);
@@ -300,13 +317,6 @@
 				A198560611F61E12001DFF4F /* UICustomTableView.m */,
 			);
 			name = "Table View";
-			sourceTree = "<group>";
-		};
-		A1A4079311F4CA9F00608B9C /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Settings;
 			sourceTree = "<group>";
 		};
 		A1B36AC71200A46E00D27351 /* Data Management */ = {
@@ -398,6 +408,7 @@
 				A1B6FB2B11FDE33800C472EB /* bearIcon-black.png in Resources */,
 				A1B6FB4811FDE4DF00C472EB /* fakeXMLDoc.xml in Resources */,
 				A159E969120B0EA100FE7BD5 /* HoursViewController.xib in Resources */,
+				A131FE45125FBF56000B5E23 /* RecentTransactions.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +445,9 @@
 				A16B6B03124C5AFB00774456 /* CSGoldParser.m in Sources */,
 				A185E9741251977C00812356 /* WristWatch.m in Sources */,
 				A1DCE62F1258E97C00746201 /* HallNavigationBar.m in Sources */,
+				A1D6FECB125C28BB00E132A5 /* MealNavigationBar.m in Sources */,
+				A131FE24125FAD90000B5E23 /* CSGoldTransactionsParser.m in Sources */,
+				A131FE44125FBF56000B5E23 /* RecentTransactions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

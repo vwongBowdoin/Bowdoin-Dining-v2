@@ -11,7 +11,6 @@
 
 @implementation HallNavigationBar
 
-
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
@@ -20,70 +19,91 @@
 }
 
 
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-	
-	float barWidth = 320;
-    float barHeight = 44;
-    float indicatorOffset = 10;
-	
-	[self setBackgroundColor:[UIColor clearColor]];
-	
-	UILabel *mealDescription = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, barWidth, barHeight)];
-    mealDescription.text = [NSString stringWithFormat:@"Today's %@", @"Lunch"];
-    mealDescription.textColor = [UIColor whiteColor];
-	mealDescription.backgroundColor = [UIColor clearColor];
-    mealDescription.textAlignment = UITextAlignmentCenter;
-	
-	[mealDescription setFont:[UIFont boldSystemFontOfSize:18.0]];
-	
-	
-	NSString *leftTitle = @"Breakfast";
-	NSString *rightTitle = @"Dinner";
-	
-    if (leftTitle != NULL){
-        
-		UILabel *leftIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset, 0, barWidth - 2*indicatorOffset, barHeight)];
-        
-		leftIndicator.text = [NSString stringWithFormat:@"< %@", leftTitle];
-        leftIndicator.textColor = [UIColor whiteColor];
-		leftIndicator.backgroundColor = [UIColor clearColor];
-        leftIndicator.textAlignment = UITextAlignmentLeft;
-        [leftIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
-		
-		[self addSubview:leftIndicator];
-		
-    }
-    
-    
-    if (rightTitle != NULL){
-		UILabel *rightIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset, 0, barWidth - 2*indicatorOffset, barHeight)];
-        
-		rightIndicator.text = [NSString stringWithFormat:@"%@ >", rightTitle];
-        rightIndicator.textColor = [UIColor whiteColor];
-		rightIndicator.backgroundColor = [UIColor clearColor];
-        rightIndicator.textAlignment = UITextAlignmentRight;
-        [rightIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
-		
-		[self addSubview:rightIndicator];
-		
-        
-    }
-    
-    
-    [self addSubview:mealDescription];
-	NSLog(@"\n Meal Description: \n x = %f \n y = %f \n x_width = %f \n y_width = %f" , mealDescription.frame.origin.x, mealDescription.frame.origin.y, mealDescription.frame.size.width, mealDescription.frame.size.height);
-	
-	
-	NSLog(@"\n Meal Header View: \n x = %f \n y = %f \n x_width = %f \n y_width = %f" , self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
-	NSLog(@"\n Left Title = %@ \n Meal Title = %@ \n Right Title = %@", leftTitle, @"Lunch", rightTitle);
-	
-	
-	
-	
-}
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+	 
+	 float barWidth = 320;
+	 float barHeight = 44;
+	 float indicatorOffset = 10;
+	 [self setBackgroundColor:[UIColor whiteColor]];
 
+	 
+	 NSString *title;
+	 // Iterator to populate the entire bar
+	 for (int x = 0; x < 3; x++) {
+
+		 switch (x) {
+			 case 0:
+				 title = @"Thorne Hall";
+				 break;
+			 case 1:
+				 title = @"Moulton Union";
+				 break;
+			 case 2:
+				 title = @"The Grill | The Cafe";
+				 break;
+			 default:
+				 break;
+		 }
+		 
+		 UILabel *mealDescription = [[UILabel alloc]initWithFrame:CGRectMake(0 + (barWidth * x), 0, barWidth, 30)];
+		 mealDescription.text = title;
+		 mealDescription.textColor = [UIColor blackColor];
+		 mealDescription.backgroundColor = [UIColor whiteColor];
+		 mealDescription.textAlignment = UITextAlignmentCenter;
+		 [mealDescription setFont:[UIFont boldSystemFontOfSize:18.0]];
+		 
+		 [self addSubview:mealDescription];		
+		 
+		 
+		 UILabel *mealTimes = [[UILabel alloc]initWithFrame:CGRectMake(0 + (barWidth * x), 22, barWidth, 22)];
+		 mealTimes.text = @"Closes in 15 minutes";
+		 mealTimes.textColor = [UIColor blackColor];
+		 mealTimes.backgroundColor = [UIColor whiteColor];
+		 mealTimes.textAlignment = UITextAlignmentCenter;
+		 [mealTimes setFont:[UIFont systemFontOfSize:14.0]];
+		 
+		 [self addSubview:mealTimes];	
+		 
+		 
+		 // Makes sure no out of bounds errors will occur
+		 if (x != 0){
+
+			 UILabel *leftIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset + (barWidth * x), 0, barWidth - 2*indicatorOffset, barHeight)];
+			 
+			 leftIndicator.text = @"< Thorne";
+			 leftIndicator.textColor = [UIColor blackColor];
+			 leftIndicator.backgroundColor = [UIColor clearColor];
+			 leftIndicator.textAlignment = UITextAlignmentLeft;
+			 [leftIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
+			 
+			 [self addSubview:leftIndicator];
+			 
+			 
+		 } 
+		 
+		 
+		 if (x != 2){
+
+			 UILabel *rightIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset + (barWidth * x), 0, barWidth - 2*indicatorOffset, barHeight)];
+			
+			 rightIndicator.text = @"Moulton >";
+			 rightIndicator.textColor = [UIColor blackColor];
+			 rightIndicator.backgroundColor = [UIColor clearColor];
+			 rightIndicator.textAlignment = UITextAlignmentRight;
+			 [rightIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
+			 
+			 [self addSubview:rightIndicator];
+			 
+		 } 
+
+		 
+	 }
+	
+	 
+ }
 
 - (void)dealloc {
     [super dealloc];
@@ -91,3 +111,4 @@
 
 
 @end
+

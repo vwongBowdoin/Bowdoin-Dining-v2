@@ -21,6 +21,7 @@
 #import "NavigationBarController.h"
 #import "CSGoldController.h"
 #import "HallNavigationBar.h"
+#import "MealNavigationBar.h"
 
 
 @implementation RootViewController
@@ -111,30 +112,34 @@
     // Establishes the navigation bars at the top of the page
 	// Top Scroll Bar for Meals
 	[mealScrollView setContentSize:CGSizeMake(320 * [navBarController.scheduleArray count], 44)];
-	[mealScrollView setBackgroundColor:[UIColor clearColor]];
 
 	[mealScrollView setTag:mealScroller];
 	[mealScrollView setDelegate:self];
+	[mealScrollView setOpaque:NO];
+	[mealScrollView setShowsHorizontalScrollIndicator:NO];
+
+	MealNavigationBar *navBar = [[MealNavigationBar alloc] initWithArray:scheduleArray];
 	
-	HallNavigationBar *navBar = [[HallNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-	
-	[mealScrollView addSubview:navBar]; //[navBarController returnMealNavigationBar]];
+	[mealScrollView addSubview:navBar];
+	[mealScrollView setBackgroundColor:[UIColor blackColor]];
 	[mealScrollView setPagingEnabled:YES];
 
     
-   // [mealScrollView addSubview:[navBarController returnMealNavigationBar]];
-	//[mealScrollView addSubview:mealHeaderView];
     
-    
+	HallNavigationBar *hallNavBar = [[HallNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 960, 44)];
+	
     // Second Scroll Bar for Meals
     [hallScrollView setContentSize:CGSizeMake(960, 44)];
-	[hallScrollView setBackgroundColor:[UIColor clearColor]];
-	[hallScrollView setPagingEnabled:YES];
+
+	[hallScrollView setOpaque:NO];
+
 	[hallScrollView setShowsHorizontalScrollIndicator:NO];
 	[hallScrollView setTag:hallScroller];
 	[hallScrollView setDelegate:self];
-	[hallScrollView addSubview:hallHeaderView];
-
+	
+	[hallScrollView addSubview:hallNavBar];
+	[hallScrollView setBackgroundColor:[UIColor whiteColor]];
+	[hallScrollView setPagingEnabled:YES];
     
     
 }
@@ -343,8 +348,12 @@
 
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [todaysMealHandler numberOfSectionsForLocation:currentHallPage atMealIndex:currentMealPage];
+	
+	return [todaysMealHandler numberOfSectionsForLocation:currentHallPage atMealIndex:currentMealPage];
+
 }
+
+
 
 
 // Customize the number of rows in the table view.

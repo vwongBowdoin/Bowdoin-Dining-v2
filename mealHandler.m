@@ -100,9 +100,19 @@
 	
 	if (location == 0){
 
+		if ([thorneArrayHolder count] == 0) {
+			
+			return 0;
+		}
+		
 		return [[thorneArrayHolder objectAtIndex:mealIndex] count];
 		
 	} else {
+		
+		if ([moultonArrayHolder count] == 0) {
+			
+			return 0;
+		}
 		
 		return [[moultonArrayHolder objectAtIndex:mealIndex] count];
 		

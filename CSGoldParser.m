@@ -49,15 +49,6 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"CSGold DownloadCompleted" object:nil];
 
 	
-	NSLog(@"Testing 0: %@", [self returnFormattedMoneyBalance:@"0"]);
-	NSLog(@"Testing 12: %@", [self returnFormattedMoneyBalance:@"12"]);
-	NSLog(@"Testing 123: %@", [self returnFormattedMoneyBalance:@"123"]);
-	NSLog(@"Testing 1234: %@", [self returnFormattedMoneyBalance:@"1234"]);
-	NSLog(@"Testing 12345: %@", [self returnFormattedMoneyBalance:@"12345"]);
-	NSLog(@"Testing 123456: %@", [self returnFormattedMoneyBalance:@"123456"]);
-
-
-	
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
@@ -83,10 +74,6 @@
 	if ([elementName isEqualToString:@"dtCSGoldSVCBalances"] && [[attributeDict objectForKey:@"diffgr:id"] isEqualToString:@"dtCSGoldSVCBalances2"]) {
 		currentSVCAccount = polarpoints;	
 	}
-	
-	
-	
-	
 	
 	
 }
