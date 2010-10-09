@@ -78,10 +78,9 @@
 	[SOAPRequest setValidatesSecureCertificate:YES];
 	[SOAPRequest setPostBody:(NSMutableData*)[SOAPEnvelope dataUsingEncoding:NSUTF8StringEncoding]];
 	[SOAPRequest startSynchronous];
-	
-	int i = SOAPRequest.responseStatusCode;
-	
-	if (SOAPRequest.responseStatusCode != 401) {
+		
+	// Makes sure authentication was successful
+	if (SOAPRequest.responseStatusCode == 200) {
 		
 		CSGoldParser *parser = [[CSGoldParser alloc] init];
 		[parser parseWithData:[SOAPRequest responseData]];

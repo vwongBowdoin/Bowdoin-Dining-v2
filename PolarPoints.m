@@ -78,6 +78,13 @@
 	
 }
 
+// Privacy Protection on view exit
+- (void)viewWillDisappear:(BOOL)animated{
+	
+	[self destroySessionInformation];
+	
+}
+
 - (void)beginCSGoldDownload{
 	
 	CSGoldController *theController = [[CSGoldController alloc]init];	
@@ -163,35 +170,48 @@
 
 - (IBAction)logout{
 	
-	NSLog(@"Loging out and Destroying Saved Login");
-	[self destroyPastInformation];
+	[self destroyLoginInformation];
+	[self destroySessionInformation];
 	
 	[self.navigationController popViewControllerAnimated:YES];
 
 }
 
-- (void)destroyPastInformation{
+- (void)destroyLoginInformation{
+	
+	NSLog(@"Destroying Login Information");
+
 	
 	// Destroy Previous Saved Login and set LoginStored to NO
 	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"LoginStored"];
 	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"Login"];
 	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"Password"];
 	
-	// Destroy Past One Card Balance 
-	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"OneCardBalance"];
-	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"OneCardBalance_RAW"];
+	}
+
+- (void)destroySessionInformation{
 	
-	// Destroy Past Polar Point Balance 
-	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"PolarPointBalance"];
-	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"PolarPointBalance_RAW"];
+	NSLog(@"Destroying Session Information");
 	
-	// Destroy Past Meal Balances
-	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"MealsRemaining"];
-	
-	
-	
+	// If the login is not stored, destroy session information
+	if (![[NSUserDefaults standardUserDefaults] boolForKey:@"LoginStored"]) {
+		
+		// Destroy Past One Card Balance 
+		[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"OneCardBalance"];
+		[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"OneCardBalance_RAW"];
+		
+		// Destroy Past Polar Point Balance 
+		[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"PolarPointBalance"];
+		[[NSUserDefaults standardUserDefaults] setValue`:NULL forKey:@"PolarPointBalance_RAW"];
+		
+		// Destroy Past Meal Balances
+		[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"MealsRemaining"];
+		
+		
+	}
 	
 }
+	
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
