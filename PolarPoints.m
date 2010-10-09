@@ -202,7 +202,7 @@
 		
 		// Destroy Past Polar Point Balance 
 		[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"PolarPointBalance"];
-		[[NSUserDefaults standardUserDefaults] setValue`:NULL forKey:@"PolarPointBalance_RAW"];
+		[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"PolarPointBalance_RAW"];
 		
 		// Destroy Past Meal Balances
 		[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"MealsRemaining"];

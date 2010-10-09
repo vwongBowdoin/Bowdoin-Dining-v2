@@ -32,10 +32,9 @@
 
 	self.title = @"Dining Hours";
 	
-	[self.navigationController setNavigationBarHidden:NO animated:YES];
+	[self.navigationController setNavigationBarHidden:YES animated:YES];
 
-	[localScheduler processArrayOfOpenMeals];
-	[localScheduler processArrayOfAllMeals];
+	[localScheduler processArrays];
 	theTableView.separatorColor = [UIColor clearColor];
 	theTableView.backgroundColor = [UIColor blackColor];
 	[theTableView reloadData];

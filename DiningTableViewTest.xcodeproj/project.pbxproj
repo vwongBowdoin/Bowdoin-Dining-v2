@@ -305,7 +305,7 @@
 			children = (
 				A10BC6C6124E891200B9575A /* Main Controllers */,
 				A10BC6C7124E892500B9575A /* Navigation Bars */,
-				A1A4079211F4CA8000608B9C /* Table View */,
+				A1A4079211F4CA8000608B9C /* Menus TableView */,
 				A16B6A4F124C3C9F00774456 /* OneCard */,
 				A1FC340712089D3B00B5635E /* Hours Information */,
 				A1B36AC71200A46E00D27351 /* Data Management */,
@@ -313,7 +313,7 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		A1A4079211F4CA8000608B9C /* Table View */ = {
+		A1A4079211F4CA8000608B9C /* Menus TableView */ = {
 			isa = PBXGroup;
 			children = (
 				A19855F611F61D0F001DFF4F /* CustomTableViewCell.h */,
@@ -321,7 +321,7 @@
 				A198560511F61E12001DFF4F /* UICustomTableView.h */,
 				A198560611F61E12001DFF4F /* UICustomTableView.m */,
 			);
-			name = "Table View";
+			name = "Menus TableView";
 			sourceTree = "<group>";
 		};
 		A1B36AC71200A46E00D27351 /* Data Management */ = {

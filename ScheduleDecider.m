@@ -940,8 +940,10 @@
 			// This is the place for user defaults
 			if (element.location == @"Thorne") {
 				[section_one addObject:dictionary];
+				
 			} else if (element.location == @"Moulton") {
 				[section_two addObject:dictionary];
+				
 			} else {
 				[section_three addObject:dictionary];
 			}
@@ -968,6 +970,18 @@
     
     return [NSNumber numberWithInt:intToReturn];
     
+}
+
+- (int)returnCurrentWeekDay {
+	
+	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[inputFormatter setDateFormat:@"e"];
+	NSDate *toBeFormatted = [[[NSDate alloc] init] autorelease];
+	
+	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
+	
+	return[formattedDate intValue];
+	
 }
 
 
