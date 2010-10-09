@@ -11,8 +11,10 @@
 
 @interface HallNavigationBar : UIView {
 	
-	
+	NSString *timeToDisplay;
 	
 }
+
+@property (nonatomic, retain) NSString *timeToDisplay;
 
 @end

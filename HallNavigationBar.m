@@ -10,6 +10,7 @@
 
 
 @implementation HallNavigationBar
+@synthesize timeToDisplay;
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
@@ -59,7 +60,7 @@
 		 
 		 
 		 UILabel *mealTimes = [[UILabel alloc]initWithFrame:CGRectMake(0 + (barWidth * x), 22, barWidth, 22)];
-		 mealTimes.text = @"Closes in 15 minutes";
+		 mealTimes.text = timeToDisplay;
 		 mealTimes.textColor = [UIColor blackColor];
 		 mealTimes.backgroundColor = [UIColor whiteColor];
 		 mealTimes.textAlignment = UITextAlignmentCenter;

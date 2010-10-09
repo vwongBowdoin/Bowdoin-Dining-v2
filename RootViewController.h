@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "HallNavigationBar.h"
 
 @class mealHandler;
 @class WristWatch;
@@ -47,6 +48,9 @@
 
 	int currentHallPage;
 	int currentMealPage;
+	
+	HallNavigationBar *hallNavBar;
+	
 }
 
 @property (nonatomic, retain) IBOutlet UICustomTableView *customTableView;
@@ -69,6 +73,8 @@
 -(IBAction)displayActionPage;
 -(IBAction)displayPolarPoints;
 -(IBAction)displayHoursPage;
+
+-(IBAction)changeTime;
 
 
 

@@ -14,13 +14,26 @@
 
 
 - (void)loadCSGoldDataWithUserName:(NSString *)login password:(NSString*)pass{
+		
+	userName = login;
+	password = pass;
 	
-	// Should detach a thread
+	// ** HUD Code by Matej Bukovinski ** //
 	
-	CSGoldController *theController = [[CSGoldController alloc]init];	
-	[theController getCSGoldDataWithUserName:login password:pass];
-//	[theController release];
-
+	// Initializes Heads Up Display
+	HUD = [[MBProgressHUD alloc] initWithView:self.view];
+	
+	// Adds HUD to screen
+	
+	HUD.delegate = self;
+	
+	HUD.labelText = @"Loading..";
+	[self.view addSubview:HUD];
+	
+	[HUD showWhileExecuting:@selector(beginCSGoldDownload) onTarget:self withObject:nil animated:YES];	
+	//[self parseXMLFileAtURL:feedAddress];
+	
+		
 }
 
 - (void)viewDidLoad{
@@ -30,6 +43,15 @@
 	self.title = @"Polar Points";
 	[self registerForNotifications];
 	
+	// Sets up the Activity Indicators to Start Spinning when view is loaded.
+	activityIndicator1.hidesWhenStopped = YES;
+	activityIndicator2.hidesWhenStopped = YES;
+	activityIndicator3.hidesWhenStopped = YES;
+
+	
+	[activityIndicator1 startAnimating];
+	[activityIndicator2	startAnimating];
+	[activityIndicator3	startAnimating];
 	
 	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"LoginStored"]) {
@@ -38,6 +60,8 @@
 		NSString *pass = [[NSUserDefaults standardUserDefaults] valueForKey:@"Password"];
 		
 		NSLog(@"Updating with Stored Login:%@ and Password:*****", login);
+		
+		
 		[self loadCSGoldDataWithUserName:login password:pass];
 		
 	
@@ -55,6 +79,16 @@
 	
 }
 
+- (void)beginCSGoldDownload{
+	
+
+	
+	CSGoldController *theController = [[CSGoldController alloc]init];	
+	[theController getCSGoldDataWithUserName:userName password:password];
+	
+	
+}
+
 - (void)registerForNotifications{
 	
 	NSLog(@"Registering For Notification");
@@ -69,6 +103,11 @@
 - (void)updateVisibleInformation{
 	
 	NSLog(@"Updating Visible Information");
+	
+	// Information is Current - stop animating indicators
+	[activityIndicator1 stopAnimating];
+	[activityIndicator2	stopAnimating];
+	[activityIndicator3	stopAnimating];
 	
 	mealsRemaining.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"MealsRemaining"];
 	

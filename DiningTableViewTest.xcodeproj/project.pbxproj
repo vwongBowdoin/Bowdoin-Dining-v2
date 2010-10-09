@@ -36,6 +36,7 @@
 		A16B6A6A124C3CB400774456 /* ASINSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A16B6A5F124C3CB400774456 /* ASINSStringAdditions.m */; };
 		A16B6AF2124C581400774456 /* CSGoldController.m in Sources */ = {isa = PBXBuildFile; fileRef = A16B6AF1124C581400774456 /* CSGoldController.m */; };
 		A16B6B03124C5AFB00774456 /* CSGoldParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A16B6B02124C5AFB00774456 /* CSGoldParser.m */; };
+		A176F11A125FF66100F814FF /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A176F119125FF66100F814FF /* MBProgressHUD.m */; };
 		A185E9741251977C00812356 /* WristWatch.m in Sources */ = {isa = PBXBuildFile; fileRef = A185E9731251977C00812356 /* WristWatch.m */; };
 		A19855F811F61D0F001DFF4F /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A19855F711F61D0F001DFF4F /* CustomTableViewCell.m */; };
 		A198560711F61E12001DFF4F /* UICustomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A198560611F61E12001DFF4F /* UICustomTableView.m */; };
@@ -103,6 +104,8 @@
 		A16B6AF1124C581400774456 /* CSGoldController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGoldController.m; sourceTree = "<group>"; };
 		A16B6B01124C5AFB00774456 /* CSGoldParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGoldParser.h; sourceTree = "<group>"; };
 		A16B6B02124C5AFB00774456 /* CSGoldParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGoldParser.m; sourceTree = "<group>"; };
+		A176F118125FF66100F814FF /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		A176F119125FF66100F814FF /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A185E9721251977C00812356 /* WristWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WristWatch.h; sourceTree = "<group>"; };
 		A185E9731251977C00812356 /* WristWatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WristWatch.m; sourceTree = "<group>"; };
 		A19855F611F61D0F001DFF4F /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
@@ -254,6 +257,8 @@
 				A131FE41125FBF56000B5E23 /* RecentTransactions.h */,
 				A131FE42125FBF56000B5E23 /* RecentTransactions.m */,
 				A131FE43125FBF56000B5E23 /* RecentTransactions.xib */,
+				A176F118125FF66100F814FF /* MBProgressHUD.h */,
+				A176F119125FF66100F814FF /* MBProgressHUD.m */,
 				A16B6A75124C3E6600774456 /* Parsers */,
 				A16B6A50124C3CAB00774456 /* SOAP */,
 			);
@@ -448,6 +453,7 @@
 				A1D6FECB125C28BB00E132A5 /* MealNavigationBar.m in Sources */,
 				A131FE24125FAD90000B5E23 /* CSGoldTransactionsParser.m in Sources */,
 				A131FE44125FBF56000B5E23 /* RecentTransactions.m in Sources */,
+				A176F11A125FF66100F814FF /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
+
 
 @interface PolarPoints : UIViewController {
 
@@ -14,6 +16,11 @@
 	IBOutlet UILabel *polarPoints;
 	IBOutlet UILabel *oneCardBalance;
 
+	IBOutlet UIActivityIndicatorView *activityIndicator1;
+	IBOutlet UIActivityIndicatorView *activityIndicator2;
+	IBOutlet UIActivityIndicatorView *activityIndicator3;
+
+	MBProgressHUD *HUD;
 	
 	// Login Information
 	NSString *userName;

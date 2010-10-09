@@ -64,12 +64,10 @@
 
 }
 
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
 }
-
 
 // Handles Downloading or Processing of Already Downloaded Menus
 -(void)setupMealData{
@@ -126,8 +124,8 @@
 
     
     
-	HallNavigationBar *hallNavBar = [[HallNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 960, 44)];
-	
+	hallNavBar = [[HallNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 960, 44)];
+	hallNavBar.timeToDisplay = @"DEFAULT";
     // Second Scroll Bar for Meals
     [hallScrollView setContentSize:CGSizeMake(960, 44)];
 
@@ -570,6 +568,12 @@
 	
 }	
 
+-(IBAction)changeTime{
+	
+	hallNavBar.timeToDisplay = @"FUN";
+	[hallNavBar setNeedsDisplay];
+	
+}
 
 #pragma mark -
 #pragma mark Memory management
