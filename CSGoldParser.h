@@ -20,6 +20,8 @@
 	NSString *smallBucket;
 	NSString *mediumBucket;
 	
+	NSError *error;
+	
 }
 
 @property (nonatomic, retain) NSString *smallBucket;

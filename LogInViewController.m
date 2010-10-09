@@ -32,10 +32,10 @@
 		
 		// Destroy Previous Saved Login and set LoginStored to NO
 		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"LoginStored"];
-		[[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Login"];
-		[[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Password"];
+		[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"Login"];
+		[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"Password"];
 		
-		NSLog(@"Updating with Non Stored Login");
+		NSLog(@"Updating with Non Stored Login: Login = %@", login);
 
 		[delegate loadCSGoldDataWithUserName:login password:pass];
 		

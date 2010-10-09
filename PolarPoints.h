@@ -28,7 +28,11 @@
 
 }
 
--(IBAction)dismissPage;
 - (void)loadCSGoldDataWithUserName:(NSString *)login password:(NSString*)password;
+
+- (IBAction)dismissPage;
+- (IBAction)logout;
+- (IBAction)refreshInformation;
+
 
 @end

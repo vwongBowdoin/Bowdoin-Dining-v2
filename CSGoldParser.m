@@ -20,7 +20,6 @@
 	[theParser setShouldProcessNamespaces:NO];
 	[theParser setShouldReportNamespacePrefixes:NO];
 	[theParser setShouldResolveExternalEntities:NO];
-	
 	[theParser parse];
 	
 }
@@ -37,24 +36,16 @@
     // Store plan type and meals remaining in NSUserDefaults and Post Notification
 	
 	if (mediumBucket != nil) {
+		
 		NSString *combinedBalance = [self returnCombinedBalance];
 		[[NSUserDefaults standardUserDefaults] setValue:combinedBalance forKey:@"MealsRemaining"];
 
 	}
 	
-		
-	
-	NSLog(@"Posting Notification");
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"CSGold DownloadCompleted" object:nil];
-
-	
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	
-	NSLog(@"ERROR!");
-	// Handle Error
 }
 
 #define onecard 1
@@ -77,12 +68,6 @@
 	
 	
 }
-
-- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-	
-	
-}
-
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
 	//NSLog(@"found characters: %@", string);
@@ -235,6 +220,12 @@
 	
 }
 
+
+- (void)dealloc{
+	[error release];
+	[theParser release];
+	[super dealloc];
+}
 
 
 

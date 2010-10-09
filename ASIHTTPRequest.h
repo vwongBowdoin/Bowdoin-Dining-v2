@@ -59,7 +59,7 @@ extern unsigned long const ASIWWANBandwidthThrottleAmount;
 	NSURL *url; 
 	
 	// Will always contain the original url used for making the request (the value of url can change when a request is redirected)
-	NSURL *originalURL;
+	NSURL *originalURL; 
 	
 	// The delegate, you need to manage setting and talking to your delegate in your subclasses
 	id delegate;

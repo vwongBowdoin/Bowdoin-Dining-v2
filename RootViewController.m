@@ -550,7 +550,7 @@
 	
 }
 
--(IBAction)displayPolarPoints{
+- (IBAction)displayPolarPoints{
 	
 	PolarPoints *polarController = [[PolarPoints alloc] init];
 	[self.navigationController pushViewController:polarController animated:YES];
@@ -558,7 +558,7 @@
 
 }
 
--(IBAction)displayHoursPage{
+- (IBAction)displayHoursPage{
 	
 	HoursViewController *controller = [[HoursViewController alloc] initWithScheduleDecider:localScheduler];
 	[self.navigationController pushViewController:controller animated:YES];
@@ -568,7 +568,7 @@
 	
 }	
 
--(IBAction)changeTime{
+- (IBAction)changeTime{
 	
 	hallNavBar.timeToDisplay = @"FUN";
 	[hallNavBar setNeedsDisplay];

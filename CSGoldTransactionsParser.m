@@ -36,11 +36,7 @@
 	
     // Store plan type and meals remaining in NSUserDefaults and Post Notification
 	
-	
-	
-	
 	NSLog(@"Posting Notification");
-	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"CSGold Transactions Completed" object:nil];
 	
 	

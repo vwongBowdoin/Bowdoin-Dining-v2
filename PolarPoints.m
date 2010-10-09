@@ -24,7 +24,6 @@
 	HUD = [[MBProgressHUD alloc] initWithView:self.view];
 	
 	// Adds HUD to screen
-	
 	HUD.delegate = self;
 	
 	HUD.labelText = @"Loading..";
@@ -81,12 +80,9 @@
 
 - (void)beginCSGoldDownload{
 	
-
-	
 	CSGoldController *theController = [[CSGoldController alloc]init];	
 	[theController getCSGoldDataWithUserName:userName password:password];
-	
-	
+	[theController release];
 }
 
 - (void)registerForNotifications{
@@ -133,17 +129,66 @@
 	}
 	
 	
-	
 }
 
 -(IBAction)dismissPage{
 	
 	[self.navigationController popViewControllerAnimated:self];
 	
+}
+
+- (IBAction)refreshInformation{
+	
+	
+	NSString *login = [[NSUserDefaults standardUserDefaults] valueForKey:@"Login"];
+	NSString *pass = [[NSUserDefaults standardUserDefaults] valueForKey:@"Password"];
+	
+	if (login != NULL && pass != NULL) {
+		
+		NSLog(@"Updating with Stored Login:%@ and Password:*****", login);
+		[self loadCSGoldDataWithUserName:login password:pass];
+
+	} else {
+		
+		LogInViewController *loginController = [[LogInViewController alloc] init];
+		[self.navigationController presentModalViewController:loginController animated:YES];
+		loginController.delegate = self;
+		[loginController release];	
+	}
+
+	
+	
 	
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (IBAction)logout{
+	
+	NSLog(@"Loging out and Destroying Saved Login");
+	[self destroyPastInformation];
+	
+	[self.navigationController popViewControllerAnimated:YES];
+
+}
+
+- (void)destroyPastInformation{
+	
+	// Destroy Previous Saved Login and set LoginStored to NO
+	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"LoginStored"];
+	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"Login"];
+	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"Password"];
+	
+	// Destroy Past One Card Balance 
+	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"OneCardBalance"];
+	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"OneCardBalance_RAW"];
+	
+	// Destroy Past Polar Point Balance 
+	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"PolarPointBalance"];
+	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"PolarPointBalance_RAW"];
+	
+	// Destroy Past Meal Balances
+	[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"MealsRemaining"];
+	
+	
 	
 	
 }

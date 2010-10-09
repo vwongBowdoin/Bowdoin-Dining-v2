@@ -33,6 +33,9 @@
 	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldSVCBalances/>"]];
 	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldLineCounts/>"]];
 
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"CSGold DownloadCompleted" object:nil];
+
 }
 
 /***** CSGold SOAP request/actions *****/
@@ -71,17 +74,24 @@
 	[SOAPRequest setPassword:password];
 	[SOAPRequest setDomain:@"bowdoincollege"];
 	
-	
-	[SOAPRequest setUseSessionPersistence:YES];
+	[SOAPRequest setUseSessionPersistence:NO];
 	[SOAPRequest setValidatesSecureCertificate:YES];
 	[SOAPRequest setPostBody:(NSMutableData*)[SOAPEnvelope dataUsingEncoding:NSUTF8StringEncoding]];
 	[SOAPRequest startSynchronous];
 	
-	//NSLog(@"Response: %@", [SOAPRequest responseString]);
+	int i = SOAPRequest.responseStatusCode;
 	
-	
-	CSGoldParser *parser = [[CSGoldParser alloc] init];
-	[parser parseWithData:[SOAPRequest responseData]];
+	if (SOAPRequest.responseStatusCode != 401) {
+		
+		CSGoldParser *parser = [[CSGoldParser alloc] init];
+		[parser parseWithData:[SOAPRequest responseData]];
+		[parser release];
+		
+
+	}
+
+	//[SOAPRequest clearSession];
+
 	
 }
 
