@@ -35,8 +35,8 @@
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
 
 	[localScheduler processArrays];
-	theTableView.separatorColor = [UIColor clearColor];
-	theTableView.backgroundColor = [UIColor blackColor];
+	theTableView.separatorColor = [UIColor lightGrayColor];
+	//theTableView.backgroundColor = [UIColor blackColor];
 	[theTableView reloadData];
 	//[NSThread detachNewThreadSelector:@selector(processDeciderArrays) toTarget:self withObject:nil];
     
@@ -118,14 +118,14 @@
 
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section { 
-	UIView* customView = [[[UIView alloc]initWithFrame:CGRectMake(10.0, 0.0, 300.0, 44.0)]autorelease];
-	customView.backgroundColor = [UIColor blackColor];
+	UIView* customView = [[[UIView alloc]initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)]autorelease];
+	customView.backgroundColor = [UIColor clearColor];
 	
 	UILabel * headerLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
 	headerLabel.backgroundColor = [UIColor clearColor];
-	headerLabel.textColor = [UIColor whiteColor];
+	headerLabel.textColor = [UIColor blackColor];
 	headerLabel.font = [UIFont boldSystemFontOfSize:18];
-	headerLabel.frame = CGRectMake(20, -5.0, 300.0, 44.0);
+	headerLabel.frame = CGRectMake(10, -5.0, 320.0, 44.0);
 	headerLabel.textAlignment = UITextAlignmentLeft;
 	headerLabel.text = [localScheduler returnOHSectionTitleForSection:section];	
 	
@@ -160,12 +160,31 @@
 //    cell.textLabel.text = [[localScheduler returnOHDictionaryAtIndex:indexPath] objectForKey:@"meal"];
 //    cell.detailTextLabel.text = [[localScheduler returnOHDictionaryAtIndex:indexPath] objectForKey:@"hours"];		
 
+	cell.backgroundColor = [UIColor whiteColor];
+	
 	cell.textLabel.text = [[localScheduler returnAHDictionaryAtIndex:indexPath] objectForKey:@"meal"];
     [cell.textLabel setFont:[UIFont systemFontOfSize:16.0]]; 
+	cell.textLabel.backgroundColor = [UIColor clearColor];
+	[cell.textLabel setTextColor:[UIColor blackColor]];
+
+
 	
 	cell.detailTextLabel.text = [[localScheduler returnAHDictionaryAtIndex:indexPath] objectForKey:@"fullhours"];	
-	[cell.detailTextLabel setTextColor:[UIColor blackColor]];
+	[cell.detailTextLabel setTextColor:[UIColor grayColor]];
+	cell.detailTextLabel.backgroundColor = [UIColor clearColor];
 
+	
+	if (indexPath.row == 2) {
+		cell.detailTextLabel.text = @"Closes in 4 Minutes";
+		[cell.detailTextLabel setTextColor:[UIColor redColor]];
+
+	}
+	
+	if (indexPath.row == 0 && indexPath.section == 2) {
+		cell.detailTextLabel.text = @"Open Until 12:30 P.M.";
+		[cell.detailTextLabel setTextColor:[UIColor blueColor]];
+
+	}
 	
     return cell;
 }

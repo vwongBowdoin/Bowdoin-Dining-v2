@@ -871,7 +871,7 @@
         [element setCurrentDay:currentDay];
 		
 		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
-        if ([element isOpen] || [element willOpen]){
+        if ([element isOpen]){// || [element willOpen]){
             
 			
 			if (element.mealName != nil) {

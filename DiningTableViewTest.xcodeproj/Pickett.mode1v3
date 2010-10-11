@@ -282,14 +282,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>24</integer>
-									<integer>21</integer>
-									<integer>2</integer>
+									<integer>48</integer>
+									<integer>42</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {331, 944}}</string>
+							<string>{{0, 218}, {331, 944}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -308,7 +307,7 @@
 							<real>331</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>4 55 1918 1003 0 0 1920 1058 </string>
+						<string>3 55 1918 1003 0 0 1920 1058 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -391,7 +390,7 @@
 										<key>Frame</key>
 										<string>{{0, 0}, {0, 957}}</string>
 										<key>RubberWindowFrame</key>
-										<string>4 55 1918 1003 0 0 1920 1058 </string>
+										<string>3 55 1918 1003 0 0 1920 1058 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXNavigatorGroup</string>
@@ -406,7 +405,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20306471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>ScheduleDecider.m</string>
+										<string>HoursViewController.m</string>
 										<key>PBXSplitModuleInNavigatorKey</key>
 										<dict>
 											<key>Split0</key>
@@ -414,11 +413,11 @@
 												<key>PBXProjectModuleGUID</key>
 												<string>1CE0B20406471E060097A5F4</string>
 												<key>PBXProjectModuleLabel</key>
-												<string>ScheduleDecider.m</string>
+												<string>HoursViewController.m</string>
 												<key>_historyCapacity</key>
 												<integer>0</integer>
 												<key>bookmark</key>
-												<string>A1440D291261228D00634659</string>
+												<string>A1440E3C12636BDB00634659</string>
 												<key>history</key>
 												<array>
 													<string>A1A4079511F4CAAA00608B9C</string>
@@ -469,8 +468,8 @@
 													<string>A1440D021261228D00634659</string>
 													<string>A1440D031261228D00634659</string>
 													<string>A1440D051261228D00634659</string>
-													<string>A1440D271261228D00634659</string>
-													<string>A1440D281261228D00634659</string>
+													<string>A1440DBD126368DC00634659</string>
+													<string>A1440DBE126368DC00634659</string>
 												</array>
 											</dict>
 											<key>SplitCount</key>
@@ -484,7 +483,7 @@
 										<key>Frame</key>
 										<string>{{5, 0}, {703, 957}}</string>
 										<key>RubberWindowFrame</key>
-										<string>4 55 1918 1003 0 0 1920 1058 </string>
+										<string>3 55 1918 1003 0 0 1920 1058 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXNavigatorGroup</string>
@@ -509,7 +508,7 @@
 												<key>_historyCapacity</key>
 												<integer>0</integer>
 												<key>bookmark</key>
-												<string>A1440D2A1261228D00634659</string>
+												<string>A1440E3D12636BDB00634659</string>
 												<key>history</key>
 												<array>
 													<string>A1A4079511F4CAAA00608B9C</string>
@@ -573,7 +572,7 @@
 										<key>Frame</key>
 										<string>{{713, 0}, {703, 957}}</string>
 										<key>RubberWindowFrame</key>
-										<string>4 55 1918 1003 0 0 1920 1058 </string>
+										<string>3 55 1918 1003 0 0 1920 1058 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXNavigatorGroup</string>
@@ -586,7 +585,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20306471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>RootViewController.m</string>
+										<string>ScheduleDecider.m</string>
 										<key>PBXSplitModuleInNavigatorKey</key>
 										<dict>
 											<key>Split0</key>
@@ -594,11 +593,11 @@
 												<key>PBXProjectModuleGUID</key>
 												<string>1CE0B20406471E060097A5F4</string>
 												<key>PBXProjectModuleLabel</key>
-												<string>RootViewController.m</string>
+												<string>ScheduleDecider.m</string>
 												<key>_historyCapacity</key>
 												<integer>0</integer>
 												<key>bookmark</key>
-												<string>A1440D2B1261228D00634659</string>
+												<string>A1440E3E12636BDB00634659</string>
 												<key>history</key>
 												<array>
 													<string>A1A4079511F4CAAA00608B9C</string>
@@ -636,7 +635,8 @@
 													<string>A15A8FB71260C5D200392A31</string>
 													<string>A15A910F1260E51700392A31</string>
 													<string>A1B65CE31260EBEF00AAD9F9</string>
-													<string>A1440CF31261228D00634659</string>
+													<string>A1440DC1126368DC00634659</string>
+													<string>A1440DC2126368DC00634659</string>
 												</array>
 											</dict>
 											<key>SplitCount</key>
@@ -650,7 +650,7 @@
 										<key>Frame</key>
 										<string>{{1421, 0}, {144, 957}}</string>
 										<key>RubberWindowFrame</key>
-										<string>4 55 1918 1003 0 0 1920 1058 </string>
+										<string>3 55 1918 1003 0 0 1920 1058 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXNavigatorGroup</string>
@@ -674,7 +674,7 @@
 								<key>Frame</key>
 								<string>{{0, 962}, {1565, 0}}</string>
 								<key>RubberWindowFrame</key>
-								<string>4 55 1918 1003 0 0 1920 1058 </string>
+								<string>3 55 1918 1003 0 0 1920 1058 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -846,16 +846,15 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>A1440D2C1261228D00634659</string>
 		<string>A1440D2D1261228D00634659</string>
 		<string>A1440D1F1261228D00634659</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>A1E0D3A911E61C09006B2E4C</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/Pickett/Code/Bowdoin Code/Bowdoin-Dining-v2/DiningTableViewTest.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>4 55 1918 1003 0 0 1920 1058 </string>
+	<string>3 55 1918 1003 0 0 1920 1058 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -1236,7 +1235,7 @@
 			<key>WindowToolGUID</key>
 			<string>1C78EAAD065D492600B07095</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>Identifier</key>
