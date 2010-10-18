@@ -45,7 +45,7 @@
 			
 			
 			if (array == NULL) {
-				array = [[NSMutableArray alloc] initWithObjects:@"NULL STRING BITCH", nil];
+				array = [[NSMutableArray alloc] initWithObjects:@"NULL ENTRY", nil];
 			}
 			
 			[tempArray addObject:array];

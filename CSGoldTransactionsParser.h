@@ -24,6 +24,7 @@
 
 
 - (void)parseWithData:(NSData *)data;
+-(NSString*)returnFormattedMoneyBalance:(NSString *)inputString;
 
 
 @end

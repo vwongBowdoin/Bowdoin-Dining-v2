@@ -16,4 +16,7 @@
 	
 }
 
+
+-(NSString *)pruneString:(NSString *)stringToProcess;
+
 @end

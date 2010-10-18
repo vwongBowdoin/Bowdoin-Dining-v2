@@ -8,13 +8,17 @@
 
 #import <Foundation/Foundation.h>
 @class MealSchedule;
-@class mealHandler;
 
 @interface ScheduleDecider : NSObject {
 
     // Array of Meals
     NSMutableArray *mealArray;
     NSMutableArray *diningHallMealArray;
+	
+	// Arrays for Dictionary
+	NSMutableArray *thorne_dictionary_array;
+    NSMutableArray *moulton_dictionary_array;
+	
 	
 	NSMutableArray *thorneArray;
 	NSMutableArray *moultonArray;
@@ -23,10 +27,12 @@
 	NSMutableArray *openArray;
 	NSMutableArray *allHoursArray;
 
+	
+	
+	NSMutableArray *moultonEntriesArray;
+	NSMutableArray *thorneEntriesArray;
+	
 
-    // Meal Handler
-    mealHandler *storedMealHandler;
-    
     // Moulton Meals
     MealSchedule *expressLunch;
     MealSchedule *expressDinner;
@@ -68,6 +74,11 @@
 @property (nonatomic, retain) NSMutableArray *navBarArray;
 
 
+@property (nonatomic, retain) NSMutableArray *thorne_dictionary_array;
+@property (nonatomic, retain) NSMutableArray *moulton_dictionary_array;
+
+
+
 // Moulton Express Properties
 @property (nonatomic, retain) MealSchedule *expressLunch;
 @property (nonatomic, retain) MealSchedule *expressDinner;
@@ -98,20 +109,44 @@
 
 
 
--(void)testMethods;
 -(int)returnCurrentWeekDay; 
 -(NSString *)documentsDirectory;
--(NSString *)locationStringForMeal:(NSString*)mealTitle date:(int)date;
 
--(void)processMealArrays;
+// Public Methods for Array Processing
+-(void)processArrays;
 
+// Private Methods for Processing Arrays
+-(void)processMealArraysForDay:(int)day;
+-(void)processHoursArrays;
+-(void)resolveInconsistenciesInArrays;
+
+// Populating Arrays
+-(NSMutableArray*)populateArrayFromDict:(NSMutableArray*)dictArray;
+-(void)populateNavigationBarArray;
+-(void)populateMealArrays;
+
+
+// Private Methods Not To Be Used Outside of Class
+-(NSMutableArray*)mealArrayFromFile:(NSString*)fileLocation;
 
 // Data Accessor Methods
--(NSMutableArray *)returnArrayOfOpenMeals;
--(NSMutableArray *)returnArrayForDiningHalls;
--(NSMutableArray *)returnMoultonArray;
--(NSMutableArray *)returnThorneArray;
 -(NSMutableArray *)returnNavBarArray;
+
+
+// Methods that return TableView Data
+-(NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex;
+-(NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex;
+-(NSString *)returnItemFromLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath;
+-(CGFloat)returnHeightForCellatLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath;
+
+
+// Hours Table View Methods
+-(NSInteger)returnNumberOfSectionsInOH;
+-(NSInteger)returnNumberOfRowsInOH:(NSInteger)section;
+-(NSInteger)returnNumberOfRowsInAH:(NSInteger)section;
+-(NSDictionary *)returnOHDictionaryAtIndex:(NSIndexPath *)indexPath;
+-(NSDictionary *)returnAHDictionaryAtIndex:(NSIndexPath *)indexPath;
+-(NSString *)returnOHSectionTitleForSection:(NSInteger)section;
 
 
 @end

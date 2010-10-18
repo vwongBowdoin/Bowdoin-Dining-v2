@@ -25,6 +25,5 @@
 -(NSString *)sundayDateString;
 -(NSString *)documentsDirectory;
 -(NSString *)atreusSeverPath;
--(void)errorOccurred;
 
 @end

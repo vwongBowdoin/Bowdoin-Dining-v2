@@ -211,6 +211,10 @@
 	}
 	
 }
+
+- (void)hudWasHidden{
+	
+}
 	
 
 - (void)didReceiveMemoryWarning {

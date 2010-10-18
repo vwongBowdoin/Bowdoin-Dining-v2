@@ -22,4 +22,9 @@
 @property (nonatomic, retain) ScheduleDecider *hoursScheduler;
 @property (nonatomic, retain) NSMutableArray *openNowArray;
 
+
+-(id)initWithScheduleDecider:(ScheduleDecider*)decider;
+-(IBAction)backButtonSelected;
+
+
 @end

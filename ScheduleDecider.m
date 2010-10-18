@@ -8,7 +8,6 @@
 
 #import "ScheduleDecider.h"
 #import "MealSchedule.h"
-#import "mealHandler.h"
 #import "ScheduleConstants.h"
 #import "WristWatch.h"
 
@@ -17,7 +16,7 @@
 @synthesize expressLunch, expressDinner, mHotBreakfast, mColdBreakfast, mLunch, mDinner,mBrunch;
 @synthesize tHotBreakfast, tColdLunch, tHotLunch, tDinner, tBrunch, tSuperSnax;
 @synthesize cafeMorning, cafeNight, theGrill, thePub, theCStore;
-@synthesize mealArray, diningHallMealArray, thorneArray, moultonArray, navBarArray;
+@synthesize mealArray, diningHallMealArray, thorneArray, moultonArray, navBarArray, thorne_dictionary_array, moulton_dictionary_array;
 
 
 // This method populates MealSchedule objects with their allotted times
@@ -729,26 +728,44 @@
 
 - (void)processArrays{
 	
+	WristWatch *clock= [[WristWatch alloc] init];
+
 	[self processHoursArrays];
-	[self processMealArrays];
+	
+	// Processes Meals for Today and Tomorrow
+	[self processMealArraysForDay:[clock getWeekDay]];
+	[self processMealArraysForDay:[clock getWeekDay]+1];
+
+	
+	// Resolve Inconsistencies
+	[self resolveInconsistenciesInArrays];
+	
+	// Populate Raw Arrays
+	[self populateNavigationBarArray];
+	[self populateMealArrays];
 	
 	
 }
 
 // Meal Schedule and Meal Items
--(void)processMealArrays{
+-(void)processMealArraysForDay:(int)day{
     
-	// We establish three arrays to keep track of our meal information
-    NSMutableArray *thorne_array  = [[NSMutableArray alloc] init];
-    NSMutableArray *moulton_array = [[NSMutableArray alloc] init];
-    NSMutableArray *navigation_array  = [[NSMutableArray alloc] init];
-	
 	WristWatch *clock= [[WristWatch alloc] init];
+
+	// We establish three arrays to keep dictionary objects of meals
+	
+	if (thorne_dictionary_array == nil || moulton_dictionary_array == nil) {
+		thorne_dictionary_array  = [[NSMutableArray alloc] init];
+		moulton_dictionary_array = [[NSMutableArray alloc] init];
+
+	}
+   	
+	
 		
-	// Running through every element of the DiningHallMealArray
+	// Running through every possible meal to decide which meals are open
     for(MealSchedule *element in diningHallMealArray){
         NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
-		[element setCurrentDay:[clock getWeekDay]];
+		[element setCurrentDay:day];
 		
         if ([element isOpen] || [element willOpen]){
             
@@ -756,6 +773,16 @@
             [dictionary setObject:element.shortName forKey:@"Shortname"];
             [dictionary setObject:[element returnFileLocation] forKey:@"FileLocation"];
             [dictionary setObject:[element returnDescription] forKey:@"Day"];
+			
+			
+			if ([element currentDay] == [clock getWeekDay]) {
+				[dictionary setObject:[NSString stringWithFormat:@"Today's %@", [element returnDescription]] forKey:@"Formatted_Title"];
+
+			} else {
+				[dictionary setObject:[NSString stringWithFormat:@"Tomorrow's %@", [element returnDescription]] forKey:@"Formatted_Title"];
+			}
+
+
             
 			
             // Decides which of our location arrays to populate
@@ -763,15 +790,16 @@
 				
 				// Adds Object if the Shortname does not repeat
 				// This filters out meal objects i.e. Hot Breakfast, Cold Breakfast
-				if (![[[thorne_array lastObject] objectForKey:@"Shortname"] isEqualToString:element.shortName]) {
+				if (![[[thorne_dictionary_array lastObject] objectForKey:@"Shortname"] isEqualToString:element.shortName]) {
 					
-					[thorne_array addObject:dictionary];	
+					[thorne_dictionary_array addObject:dictionary];	
+					
 				}	
 			} else {
 				
-				if (![[[moulton_array lastObject] objectForKey:@"Shortname"] isEqualToString:element.shortName]) {
+				if (![[[moulton_dictionary_array lastObject] objectForKey:@"Shortname"] isEqualToString:element.shortName]) {
 					
-					[moulton_array addObject:dictionary];
+					[moulton_dictionary_array addObject:dictionary];
 					
 				}
 			} // end if, else
@@ -780,79 +808,174 @@
         
     } // end iteration of mealschedule objects
 	
-	
-	
-	
-	
-	// Resolve Inconsistencies in Populating Arrays
-	// Array with fewer objects needs a placeholder dictionary inserted
-	
-	if ([thorne_array count] < [moulton_array count]){
-		
-		NSMutableDictionary *fakeDictionary = [[NSMutableDictionary alloc] init];
-		
-		[fakeDictionary setObject:[[moulton_array objectAtIndex:0] objectForKey:@"Shortname"] forKey:@"Shortname"];
-		[fakeDictionary setObject:[[moulton_array objectAtIndex:0] objectForKey:@"Day"] forKey:@"Day"];
-		[fakeDictionary setObject:[[moulton_array objectAtIndex:0] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
 
-		// placeholder dictionary inserted at index 0
-		[thorne_array insertObject:fakeDictionary atIndex:0];
-		
-		[fakeDictionary release];
-		
-	} else if ([moulton_array count] < [thorne_array count]) {
-		
-		NSMutableDictionary *fakeDictionary = [[NSMutableDictionary alloc] init];
-		
-		[fakeDictionary setObject:[[thorne_array objectAtIndex:0] objectForKey:@"Shortname"] forKey:@"Shortname"];
-		[fakeDictionary setObject:[[thorne_array objectAtIndex:0] objectForKey:@"Day"] forKey:@"Day"];
-		[fakeDictionary setObject:[[thorne_array objectAtIndex:0] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
+	
 
-		// placeholder dictionary inserted at index 0
-		[moulton_array insertObject:fakeDictionary atIndex:0];
+	
+}
+-(void)populateMealArrays{
+	
+	
+	self.thorneArray = [self populateArrayFromDict:thorne_dictionary_array];
+	self.moultonArray = [self populateArrayFromDict:moulton_dictionary_array];
+	
+}
+
+
+
+-(NSMutableArray*)populateArrayFromDict:(NSMutableArray*)dictArray {
+	
+	NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+	
+	for (NSMutableDictionary *element in dictArray){
 		
-		[fakeDictionary release];
+		NSMutableArray *array;		
 		
-	} else {
+		if ([element objectForKey:@"FileLocation"] != NULL) {
+			NSLog(@"Loading Array = %@", [[element objectForKey:@"FileLocation"] stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+			array = [[NSMutableArray alloc] initWithContentsOfFile:[element objectForKey:@"FileLocation"]];
+			
+			
+			if (array == NULL) {
+				array = [[NSMutableArray alloc] initWithObjects:@"NULL ENTRY", nil];
+			}
+			
+			[tempArray addObject:array];
+			
+		} 
 		
-		// Must be equal - no Inconsistencies
 		
 	}
 	
+	return tempArray;
 	
+}		 
+
+-(void)populateNavigationBarArray{
+	
+	
+	navBarArray = [[NSMutableArray alloc] init];
 	// Populate Navigation Array to Properly Display Title Bar
-	for(NSDictionary *element in thorne_array){
-		[navigation_array addObject:[element objectForKey:@"Day"]];
+	for(NSDictionary *element in thorne_dictionary_array){
+		
+		[navBarArray addObject:[element objectForKey:@"Formatted_Title"]];
+		
 	}
+		
+}
+-(void)resolveInconsistenciesInArrays{
+	
+	// Resolve Inconsistencies in Populating Arrays so data structure maintains parallelism.
+	// Array with fewer objects needs a placeholder dictionary inserted.
 	
 	
-	// Sets local copies of Arrays
-	thorneArray = thorne_array;
-	moultonArray = moulton_array;
-	navBarArray = navigation_array;
+	// Decides which array is longer
+	int arrayLength;
 	
+	if ([thorne_dictionary_array count] < [moulton_dictionary_array count]) {
+		arrayLength = [thorne_dictionary_array count];
+	} else {
+		arrayLength = [moulton_dictionary_array count];
+
+	}
+
+	
+	for (int i = 0; i  < arrayLength; i++) {
+
+		NSString *thorneMeal = [[thorne_dictionary_array objectAtIndex:i] objectForKey:@"Shortname"];
+		NSString *moultonMeal = [[moulton_dictionary_array objectAtIndex:i] objectForKey:@"Shortname"];
+
+		// If meal names are not the same, then there is an inconsitency in the data structure
+		if (![thorneMeal isEqualToString:moultonMeal]) {
+			
+			// Catch Out of Bounds Errors
+			if (i+1 == arrayLength) {
+
+				// Get Out of There
+				break;
+				
+			} 
+			
+			
+			NSString *thorneNextItem = [[thorne_dictionary_array objectAtIndex:i+1] objectForKey:@"Shortname"];
+			NSString *moultonNextItem = [[moulton_dictionary_array objectAtIndex:i+1] objectForKey:@"Shortname"];
+			
+			
+			if ([thorneMeal isEqualToString:moultonNextItem]) {
+				
+				NSMutableDictionary *fakeDictionary = [[NSMutableDictionary alloc] init];
+				
+				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"Shortname"] forKey:@"Shortname"];
+				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"Day"] forKey:@"Day"];
+				
+				// ultimately this needs to be a fake file location
+				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
+				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"Formatted_Title"] forKey:@"Formatted_Title"];
+
+				// placeholder dictionary inserted at index 0
+				[thorne_dictionary_array insertObject:fakeDictionary atIndex:i];
+				
+				[fakeDictionary release];
+				
+				
+			
+			} else if ([moultonMeal isEqualToString:thorneNextItem]) {
+				
+				
+				NSMutableDictionary *fakeDictionary = [[NSMutableDictionary alloc] init];
+				
+				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"Shortname"] forKey:@"Shortname"];
+				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"Day"] forKey:@"Day"];
+				
+				// ultimately this needs to be a fake file location
+				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
+				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"Formatted_Title"] forKey:@"Formatted_Title"];
+
+				// placeholder dictionary inserted at index 0
+				[moulton_dictionary_array insertObject:fakeDictionary atIndex:i];
+				
+				[fakeDictionary release];
+				
+			
+			}
+	
+		}	
+		
+
+	}//end for
+		
+	
+}					 
+-(NSMutableArray*)mealArrayFromFile:(NSString*)fileLocation{
+						 
+	NSMutableArray *arrayToReturn;
+	
+	if (fileLocation != NULL) {
+		NSLog(@"Loading Array = %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+		arrayToReturn = [[NSMutableArray alloc] initWithContentsOfFile:fileLocation];
+		
+		
+		if (arrayToReturn == NULL) {
+			arrayToReturn = [[NSMutableArray alloc] initWithObjects:@"NULL ENTRY", nil];
+		}
+				
+	} 
+	
+	return arrayToReturn;
+	
+	
+	
+						 
 }
 
--(NSMutableArray*)returnThorneArray{
-	
-	
-	return thorneArray;
-	
-	
-}
 
--(NSMutableArray *)returnMoultonArray{
+//Navigation Bar Array
+-(NSMutableArray*)returnNavBarArray{
 	
-	return moultonArray;	
-}
-
--(NSMutableArray *)returnNavBarArray{
 	
 	return navBarArray;
 	
 }
-
-
 
 // Hours of Operation Code
 -(void)processHoursArrays{
@@ -905,7 +1028,6 @@
 	
 	
 }
-
 -(void)processArrayOfOpenMeals{
     
     //Assumes we want an array of today's meals.
@@ -915,7 +1037,6 @@
     NSMutableArray *section_three = [[NSMutableArray alloc]init];
 
     int currentDay = (int)[self returnCurrentWeekDay];
-    
 
     for(MealSchedule *element in mealArray){
         [element setCurrentDay:currentDay];
@@ -960,9 +1081,6 @@
 	[openArray addObject:section_two];
 	[openArray addObject:section_three];
 }
-
-
-
 -(NSNumber *)returnCurrentWeekDayNSNumber{
     
     int intToReturn = [self returnCurrentWeekDay];
@@ -971,7 +1089,6 @@
     return [NSNumber numberWithInt:intToReturn];
     
 }
-
 - (int)returnCurrentWeekDay {
 	
 	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
@@ -985,7 +1102,99 @@
 }
 
 
-/// Table View Code
+#pragma mark -
+#pragma mark TableViewCode for Meals
+
+-(NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex{
+	
+	if (location == 0){
+		
+		return [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:section] count];
+		
+	} else {
+		
+		return [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] count];
+		
+	}
+	
+}
+
+-(NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex{
+	
+	if (location == 0){
+		
+		if ([thorneArray count] == 0) {
+			
+			return 0;
+		}
+		
+		return [[thorneArray objectAtIndex:mealIndex] count];
+		
+	} else {
+		
+		if ([moultonArray count] == 0) {
+			
+			return 0;
+		}
+		
+		return [[moultonArray objectAtIndex:mealIndex] count];
+		
+	}
+	
+}
+
+-(NSString *)returnItemFromLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath  {
+	
+	if (location == 0){
+		
+		return [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+		
+	} else {
+		
+		return [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+		
+	}
+	
+}
+
+-(CGFloat)returnHeightForCellatLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath{
+	
+	NSString *stringToConsider;
+	
+	if (location == 0){
+		
+		stringToConsider = [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+		
+	} else {
+		
+		stringToConsider = [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+		
+	}
+	
+	
+	CGSize constraint = CGSizeMake(320.0f - (10.0f * 2), 50.0f);
+	CGSize size = [stringToConsider sizeWithFont:[UIFont systemFontOfSize:14.0f] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+	CGFloat height = size.height;
+    
+	return height + 3;
+}
+
+// returns the local document directory
+- (NSString *)documentsDirectory {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	return [paths objectAtIndex:0];
+}
+
+
+
+
+
+
+
+
+
+
+/// Hours Table View Code
 
 -(NSInteger)returnNumberOfSectionsInOH {
 	
@@ -1043,7 +1252,7 @@
 			break;
 	}
 	
-	
+	return @""; 
 }
 
 @end

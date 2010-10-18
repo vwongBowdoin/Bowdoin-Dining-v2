@@ -14,7 +14,7 @@
 	NSXMLParser * rssParser;
 	NSMutableArray * mealArray;
 	
-	// a temporary item; added to the "stories" array one at a time, and cleared for the next one
+	// a temporary item; added to the "stories" array one at a time, and cleared for the next story
 	NSMutableDictionary * item;
 	
 	// parses through the document, from top to bottom...
@@ -41,11 +41,16 @@
 	
 }
 
-// Methods that add to TableView Data
-- (void)parseXMLData:(NSData *)data forDay:(int)day;
+// Methods that create arrays of raw XML Data
+-(void)parseXMLData:(NSData *)data forDay:(int)day;
+-(void)storeXMLDataforDay:(int)day;
+
+// Private Methods for Populating Data Structure
 -(NSMutableArray*)addTitleToArray:(NSString*)theTitle forArray:(NSMutableArray *)theArray;
 -(void)addArrayofItems:(NSMutableArray *)items forCourse:(NSString *)courseTitle forMeal:(NSString *)mealTitle forHall:(NSString *)diningHall;
 -(NSString*)documentsDirectory;
+
+
 
 // Methods that return TableView Data
 

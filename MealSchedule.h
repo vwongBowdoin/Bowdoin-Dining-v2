@@ -18,6 +18,8 @@
     NSString *shortName;
 	NSString *fileName;
 	NSString *location;
+	
+	BOOL mealIsTomorrow;
     
 }
 
@@ -38,6 +40,8 @@
 
 // Date Manipulation
 -(NSDate *)oneAMDate;
+-(NSDate *)tomorrowOneAM;
+-(NSDate *)tomorrowMidnight;
 -(NSDate *)midnightDate;
 -(NSDate*)currentOpening;
 -(NSDate*)currentClosing;

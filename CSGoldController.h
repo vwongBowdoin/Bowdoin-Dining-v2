@@ -22,8 +22,9 @@
 // Public Methods
 - (void)getCSGoldDataWithUserName:(NSString*)user password:(NSString*)pass;
 
-
 // Private Methods
+- (void)updateAllCSGoldData;
 - (NSMutableString*)returnSoapEnvelopeForService:(NSString*)serviceRequested;
+- (void)createSOAPRequestWithEnvelope:(NSMutableString*)SOAPEnvelope;
 
 @end

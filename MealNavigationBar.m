@@ -45,15 +45,15 @@
 		
 		// Makes sure no out of bounds errors will occur
         if (x != 0){
-            leftTitle = [controllerArray objectAtIndex:x-1];
-        } else {
+            leftTitle = [self pruneString:[controllerArray objectAtIndex:x-1]];
+	        } else {
             leftTitle = NULL;
         }
         
 		
         if (x != [controllerArray count]-1){
-            rightTitle = [controllerArray objectAtIndex:x+1];
-        } else {
+            rightTitle = [self pruneString:[controllerArray objectAtIndex:x+1]];
+			} else {
             rightTitle = NULL;
         }
 		
@@ -61,7 +61,7 @@
 		// Draws the Meal Description
 		
 		UILabel *mealDescription = [[UILabel alloc]initWithFrame:CGRectMake(0 + (barWidth * x), 0, barWidth, barHeight)];
-		mealDescription.text = [NSString stringWithFormat:@"Today's %@", mealTitle];
+		mealDescription.text = mealTitle;
 		mealDescription.textColor = [UIColor whiteColor];
 		mealDescription.backgroundColor = [UIColor clearColor];
 		mealDescription.textAlignment = UITextAlignmentCenter;
@@ -103,6 +103,19 @@
 	
 }
 
+
+-(NSString *)pruneString:(NSString *)stringToProcess{
+	
+	NSLog(@"Pruning");
+	
+	NSString *stringToReturn;
+	
+	stringToReturn = [stringToProcess stringByReplacingOccurrencesOfString:@"Today's" withString:@""];
+	stringToReturn = [stringToReturn stringByReplacingOccurrencesOfString:@"Tomorrow's" withString:@""];
+	
+	return stringToReturn;
+	
+}
 
 - (void)dealloc {
     [super dealloc];

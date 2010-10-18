@@ -8,14 +8,12 @@
 //
 
 #import "RootViewController.h"
-#import "LogInViewController.h"
 #import "PolarPoints.h"
 #import "CustomTableViewCell.h"
 #import "UICustomTableView.h"
 #import "DiningParser.h"
 #import "DownloadManager.h"
 #import "WristWatch.h"
-#import "mealHandler.h"
 #import "ScheduleDecider.h"
 #import "HoursViewController.h"
 #import "NavigationBarController.h"
@@ -37,9 +35,10 @@
 
 // Responsible for setting up the look of Bowdoin Dining
 - (void)viewDidLoad {
-    
-	
+
 	[super viewDidLoad];
+	
+	// Creating the View
 	[self.navigationController setNavigationBarHidden:YES animated: NO];
 	self.title = @"Main";
      
@@ -47,15 +46,15 @@
 	customTableView.delegate = self;
 	customTableView.dataSource = self;
 	customTableView.separatorColor = [UIColor clearColor];
-	
-	/* Create Local Helpers */
-	
+		
     // Meal Decider decides what meal to display
     WristWatch *localWatch = [[WristWatch alloc]init];
 	localMealDecider = localWatch;
-	//[mealDecider release];
+
+	// Register for Notifications
+    [self registerNotifications];
 	
-	
+	// Check for New Meal Information
 	[self setupMealData];
        
     // Grill View
@@ -69,22 +68,26 @@
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
+
+// Method to deal with application resumes from multi-tasking or backgrounding.
+- (void)becomeActive:(NSNotification *)notification {
+    
+	NSLog(@"Becoming Active");
+	
+}
+
+
 // Handles Downloading or Processing of Already Downloaded Menus
--(void)setupMealData{
-	
-	// Register for Notifications regarding Downloading
-    [self registerNotifications];
-	
+- (void)setupMealData{
+
 	// Initializes the Download Manager to Deal with Meal Data
 	DownloadManager *manager = [[DownloadManager alloc] init];
     [manager initializeDownloads];
 	
-
-	
 }
 
 //Registering Notifications
--(void)registerNotifications{
+- (void)registerNotifications{
     
     // Menu Download Completion
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadCompleted)
@@ -93,16 +96,21 @@
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoMealNotification)
 												 name:@"No Meal Displayed" object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self 
+											 selector:@selector(becomeActive:)
+												 name:UIApplicationDidBecomeActiveNotification
+											   object:nil];
     
 }
 
--(void)showNoMealNotification{
+- (void)showNoMealNotification{
 	
 	NSLog(@"NO MEAL");
 	
 }
 
--(void)setNavigationBarsWithArray:(NSMutableArray*)scheduleArray{
+- (void)setNavigationBarsWithArray:(NSMutableArray*)scheduleArray{
     
     NavigationBarController *navBarController = [[NavigationBarController alloc] initWithScheduleArray:scheduleArray];
 
@@ -143,26 +151,17 @@
 }
 
 // Activated when Menus have Downloaded
--(void)downloadCompleted{
+- (void)downloadCompleted{
     NSLog(@"Download Completed");
     
     // Initializes the Schedule Decider which determines the array of meals
 	// that will be displayed
     
 	ScheduleDecider *scheduler = [[ScheduleDecider alloc] init];
-	[scheduler processMealArrays];
+	[scheduler processArrays];
 	
 	localScheduler = scheduler;
 	
-	
-	// Creates a Meal Handler to Populate Dining Menu Data
-	// and initializes with Moulton and Thorne Arrays
-    mealHandler *handler = [[mealHandler alloc] initWithMoultonArray:[scheduler returnMoultonArray] thorneArray:[scheduler returnThorneArray]];
-	todaysMealHandler = handler;
-	
-	// Creates Arrays
-	[todaysMealHandler processArrays];
-                
 	
     [self setNavigationBarsWithArray:[scheduler returnNavBarArray]]; 
 	
@@ -314,7 +313,7 @@
 }
 
 // Method Triggerd at the Stop of an Animation
--(void)navigationAnimationIn{
+- (void)navigationAnimationIn{
     
     [self.view addSubview:customTableView];
     [alternateScroller setUserInteractionEnabled:NO];
@@ -322,7 +321,6 @@
     
 }
 		 
-
 - (void)tableViewAnimationDone:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
 			 
 	// reloads the table view		
@@ -346,17 +344,16 @@
 
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-	
-	return [todaysMealHandler numberOfSectionsForLocation:currentHallPage atMealIndex:currentMealPage];
+	NSLog(@"Number of Sections");
+
+	return [localScheduler numberOfSectionsForLocation:currentHallPage atMealIndex:currentMealPage];
 
 }
 
-
-
-
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [todaysMealHandler sizeOfSection:section forLocation:currentHallPage atMealIndex:currentMealPage];
+	NSLog(@"Number of Rows");
+	return [localScheduler sizeOfSection:section forLocation:currentHallPage atMealIndex:currentMealPage];
 	
 }
 
@@ -372,7 +369,7 @@
         cell = [[[CustomTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
     
-	cell.textLabel.text = [todaysMealHandler returnItemFromLocation:currentHallPage atMealIndex:currentMealPage atPath:indexPath];
+	cell.textLabel.text = [localScheduler returnItemFromLocation:currentHallPage atMealIndex:currentMealPage atPath:indexPath];
 	
 	if (cell.isFavorited == YES) {
 		[cell setAccessoryType:UITableViewCellAccessoryCheckmark];;
@@ -397,6 +394,7 @@
 // Height of Table View Headers
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
+	
 	if (section == 0) {
 		return 0.0;
 	}
@@ -414,7 +412,8 @@
 	}
 	else {
 		
-		return [todaysMealHandler returnHeightForCellatLocation:currentHallPage atMealIndex:currentMealPage atPath:indexPath]; //+ (cell.detailTextLabel.numberOfLines - 1) * 19.0;
+		return [localScheduler returnHeightForCellatLocation:currentHallPage atMealIndex:currentMealPage atPath:indexPath];
+		//return [loca returnHeightForCellatLocation:currentHallPage atMealIndex:currentMealPage atPath:indexPath]; //+ (cell.detailTextLabel.numberOfLines - 1) * 19.0;
 	}
 
 }
@@ -524,12 +523,55 @@
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
 	[self dismissModalViewControllerAnimated:YES];
 }
+// Generic method for navigating a ScrollView right.
+- (void)navigateScrollBarRight:(UIScrollView*)scrollView {
+	
+	NSLog(@"Navigate Right Method");
+	
+	// Decides the current page of the Hall scroller.	
+	CGFloat hallPageCurrentX = scrollView.contentOffset.x;
+	CGFloat hallPageTotalWidth = scrollView.contentSize.width;
+	
+	if (hallPageCurrentX + 320.0 >= hallPageTotalWidth) {
+		// Do Nothing
+	} else {
+		[scrollView setContentOffset:CGPointMake(hallPageCurrentX + 320.0, 0) animated:YES];
+	}
+}
 
--(IBAction)navigateRight {
+// Generic method for navigating a ScrollView left 
+- (void)navigateScrollBarLeft:(UIScrollView*)scrollView {
+	
+	// Decides the current page of the Hall scroller.	
+	CGFloat hallPageCurrentX = scrollView.contentOffset.x;
+	
+	if (hallPageCurrentX - 320.0 < 0) {
+		// Do Nothing
+	} else {
+		[scrollView setContentOffset:CGPointMake(hallPageCurrentX - 320.0, 0) animated:YES];
+	}
+}
+
+- (IBAction)navigateRight:(id)sender {
     
-    NSLog(@"Animating Right");
-    [mealScrollView setContentOffset:CGPointMake(320, 0) animated:YES];
+	if ([sender tag] == 1) {
+		[self navigateScrollBarRight:mealScrollView];
+	} else {
+		[self navigateScrollBarRight:hallScrollView];
+
+	}
+
     
+}
+
+- (IBAction)navigateLeft:(id)sender {
+	
+	if ([sender tag] == 1) {
+		[self navigateScrollBarLeft:mealScrollView];
+	} else {
+		[self navigateScrollBarLeft:hallScrollView];
+		
+	}	
 }
 
 
@@ -550,29 +592,45 @@
 	
 }
 
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+
+	if (item.tag == 0) {
+		
+		hallNavBar.timeToDisplay = @"FUN";
+		[hallNavBar setNeedsDisplay];
+
+	} else if (item.tag == 1) {
+		
+		HoursViewController *controller = [[HoursViewController alloc] initWithScheduleDecider:localScheduler];
+		[self.navigationController pushViewController:controller animated:YES];
+		[controller release];	
+		
+	} else if (item.tag == 2) {
+
+		PolarPoints *polarController = [[PolarPoints alloc] init];
+		[self.navigationController pushViewController:polarController animated:YES];
+		[polarController release];	
+		
+	}
+	
+	
+}
+
 - (IBAction)displayPolarPoints{
 	
-	PolarPoints *polarController = [[PolarPoints alloc] init];
-	[self.navigationController pushViewController:polarController animated:YES];
-	[polarController release];	
-
+	
 }
 
 - (IBAction)displayHoursPage{
 	
-	HoursViewController *controller = [[HoursViewController alloc] initWithScheduleDecider:localScheduler];
-	[self.navigationController pushViewController:controller animated:YES];
-	[controller release];	
-	
+		
 	
 	
 }	
 
 - (IBAction)changeTime{
 	
-	hallNavBar.timeToDisplay = @"FUN";
-	[hallNavBar setNeedsDisplay];
-	
+		
 }
 
 #pragma mark -
@@ -590,8 +648,8 @@
     // For example: self.myOutlet = nil;
 }
 
-
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }
 

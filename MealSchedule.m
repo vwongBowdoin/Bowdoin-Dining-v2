@@ -7,7 +7,7 @@
 //
 
 #import "MealSchedule.h"
-
+#import "WristWatch.h"
 
 @implementation MealSchedule
 
@@ -23,7 +23,19 @@
     
     NSDate *timeToReturn = openTime;
     
-//    [openTime release];
+    return timeToReturn;
+    
+}
+
+// Returns an NSDate initialized for the current opening time tomorrow.
+-(NSDate *)currentOpeningTomorrow{
+    
+    NSTimeInterval interval = [[openTimes objectAtIndex:currentDay-1] intValue];
+    
+    NSDate *openTime = [[NSDate alloc] initWithTimeInterval:interval 
+                                                  sinceDate:[self tomorrowMidnight]];
+    
+    NSDate *timeToReturn = openTime;
     
     return timeToReturn;
     
@@ -38,8 +50,6 @@
                                                   sinceDate:[self midnightDate]];
     
     NSDate *timeToReturn = closeTime;
-
- //   [closeTime release];
     
     return timeToReturn;    
 }
@@ -72,6 +82,66 @@
     
     }
 
+-(NSDate *)tomorrowOneAM{
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	
+    NSDate* now = [NSDate date];
+	
+    NSDateComponents* nowHour = [gregorian components:NSHourCalendarUnit fromDate:now];
+    NSDateComponents* nowMinute = [gregorian components:NSMinuteCalendarUnit fromDate:now];
+    NSDateComponents* nowSecond = [gregorian components:NSSecondCalendarUnit fromDate:now];
+    
+    NSDateComponents* componentsToAdd = [[NSDateComponents alloc] init];
+    
+    [componentsToAdd setHour:25-[nowHour hour]];
+    [componentsToAdd setMinute:60-[nowMinute minute]];
+    [componentsToAdd setSecond:60-[nowSecond second]];
+    
+    
+    NSDate *oneAMTomorrow = [gregorian dateByAddingComponents:componentsToAdd toDate:now options:0];
+    
+    [componentsToAdd release];
+    [gregorian release];
+    
+	
+	NSLog(@"One AM Tomorrow = %@", oneAMTomorrow);
+	
+    return oneAMTomorrow;
+    
+}
+
+-(NSDate *)tomorrowMidnight{
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	
+    NSDate* now = [NSDate date];
+	
+    NSDateComponents* nowHour = [gregorian components:NSHourCalendarUnit fromDate:now];
+    NSDateComponents* nowMinute = [gregorian components:NSMinuteCalendarUnit fromDate:now];
+    NSDateComponents* nowSecond = [gregorian components:NSSecondCalendarUnit fromDate:now];
+    
+    NSDateComponents* componentsToAdd = [[NSDateComponents alloc] init];
+    
+    [componentsToAdd setHour:24-[nowHour hour]];
+    [componentsToAdd setMinute:60-[nowMinute minute]];
+    [componentsToAdd setSecond:60-[nowSecond second]];
+    
+    
+    NSDate *oneAMTomorrow = [gregorian dateByAddingComponents:componentsToAdd toDate:now options:0];
+    
+    [componentsToAdd release];
+    [gregorian release];
+    
+	
+	NSLog(@"Midnight Tomorrow = %@", oneAMTomorrow);
+	
+    return oneAMTomorrow;
+    
+}
+
+
+
 
 // uses the one AM date to decide if today's hours of operation should be initialized from todays 12AM or yesterdays
 // i.e. if someone is still out and about before 1AM - the grill is still open on some days.
@@ -82,8 +152,6 @@
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate * oneAM = [self oneAMDate];
    
-    
-    
     NSComparisonResult result = [currentTime compare:oneAM];
     
     int hoursToSubtract = 0;
@@ -102,18 +170,19 @@
     NSDateComponents* nowSecond = [gregorian components:NSSecondCalendarUnit fromDate:currentTime];
     
     NSDateComponents* componentsToSubtract = [[NSDateComponents alloc] init];
-    
+	
     [componentsToSubtract setHour:0-[nowHour hour] - hoursToSubtract];
     [componentsToSubtract setMinute:0-[nowMinute minute]];
     [componentsToSubtract setSecond:0-[nowSecond second]];
     
+	
+	
     
     NSDate *midnightDate = [gregorian dateByAddingComponents:componentsToSubtract toDate:currentTime options:0];
     
     [componentsToSubtract release];
     [gregorian release];
     
-   // NSLog(@"Returning Midnight Date: %@", midnightDate);
     
     return midnightDate;
         
@@ -139,9 +208,7 @@
     
     // Within Hours of Operation
     if (nowOpeningComparison ==  NSOrderedDescending  && nowClosingComparison == NSOrderedAscending){
-        
 		return YES;
-		
     } else {
         return NO;
     }
@@ -170,8 +237,24 @@
 
 -(BOOL)willOpen{
     
-    NSDate *currentTime = [NSDate date];
-    NSDate *currentOpening = [self currentOpening];
+	NSDate *currentTime;
+	NSDate *currentOpening;
+	
+	// Initial Check for Tomorrow Query
+	WristWatch *clock= [[WristWatch alloc] init];
+	
+	if (currentDay != [clock getWeekDay]) {
+		currentTime = [self tomorrowOneAM];
+		currentOpening = [self currentOpeningTomorrow];
+		
+	} else {
+		currentTime = [NSDate date];
+		currentOpening = [self currentOpening];
+	}
+
+	[clock release];
+	
+	
     
     
     NSComparisonResult nowOpeningComparison = [currentTime compare:currentOpening];
@@ -179,6 +262,7 @@
     
     if (nowOpeningComparison == NSOrderedAscending){
 
+		NSLog(@"WILL OPEN: %@", mealName);
         return YES;
         
     } else {
@@ -235,7 +319,6 @@
     
     
 }
-
 
 -(NSString *)returnDescription{
 	

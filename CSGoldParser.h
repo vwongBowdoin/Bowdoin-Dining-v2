@@ -27,6 +27,8 @@
 @property (nonatomic, retain) NSString *smallBucket;
 @property (nonatomic, retain) NSString *mediumBucket;
 
-- (void)parseWithData:(NSData *)data;
+-(void)parseWithData:(NSData *)data;
+-(NSString*)returnFormattedMoneyBalance:(NSString *)inputString;
+-(NSString*)returnCombinedBalance;
 
 @end

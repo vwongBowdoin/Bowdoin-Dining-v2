@@ -24,6 +24,7 @@
 		A14BBBE3120C5238006AD070 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14BBBE2120C5238006AD070 /* MessageUI.framework */; };
 		A159E968120B0EA100FE7BD5 /* HoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A159E966120B0EA100FE7BD5 /* HoursViewController.m */; };
 		A159E969120B0EA100FE7BD5 /* HoursViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A159E967120B0EA100FE7BD5 /* HoursViewController.xib */; };
+		A15A87111268CC4600899F27 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A15A87101268CC4600899F27 /* Default.png */; };
 		A16B6A48124C3C6C00774456 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16B6A47124C3C6C00774456 /* MobileCoreServices.framework */; };
 		A16B6A4B124C3C7900774456 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A16B6A4A124C3C7900774456 /* libz.1.2.3.dylib */; };
 		A16B6A4D124C3C8300774456 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16B6A4C124C3C8300774456 /* SystemConfiguration.framework */; };
@@ -82,6 +83,7 @@
 		A159E965120B0EA100FE7BD5 /* HoursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoursViewController.h; sourceTree = "<group>"; };
 		A159E966120B0EA100FE7BD5 /* HoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoursViewController.m; sourceTree = "<group>"; };
 		A159E967120B0EA100FE7BD5 /* HoursViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HoursViewController.xib; sourceTree = "<group>"; };
+		A15A87101268CC4600899F27 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A16B6A47124C3C6C00774456 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A16B6A4A124C3C7900774456 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		A16B6A4C124C3C8300774456 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -194,6 +196,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A15A87101268CC4600899F27 /* Default.png */,
 				A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */,
 				A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */,
 				A1A407F011F4D29300608B9C /* LogInViewController.xib */,
@@ -414,6 +417,7 @@
 				A1B6FB4811FDE4DF00C472EB /* fakeXMLDoc.xml in Resources */,
 				A159E969120B0EA100FE7BD5 /* HoursViewController.xib in Resources */,
 				A131FE45125FBF56000B5E23 /* RecentTransactions.xib in Resources */,
+				A15A87111268CC4600899F27 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

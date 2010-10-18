@@ -10,7 +10,7 @@
 #import "MBProgressHUD.h"
 
 
-@interface PolarPoints : UIViewController {
+@interface PolarPoints : UIViewController <MBProgressHUDDelegate> {
 
 	IBOutlet UILabel *mealsRemaining;
 	IBOutlet UILabel *polarPoints;
@@ -28,7 +28,17 @@
 
 }
 
+// Public Methods
 - (void)loadCSGoldDataWithUserName:(NSString *)login password:(NSString*)password;
+- (void)updateVisibleInformation;
+
+
+// Private Methods
+- (void)beginCSGoldDownload;
+- (void)registerForNotifications;
+- (void)destroyLoginInformation;
+- (void)destroySessionInformation;
+
 
 - (IBAction)dismissPage;
 - (IBAction)logout;

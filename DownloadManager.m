@@ -21,31 +21,41 @@
 	
     // Checks to see if Menus aren't Current
 	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] != [localWatch getWeekofYear]){
-        
-        // Download New Menus
+     
+		// Download New Menus
         [NSThread detachNewThreadSelector:@selector(downloadMenus) toTarget:self withObject:nil];
         
     }
     
-    // Menus are current -- check for rest of week downloads
+    // Menus are current
     else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] == [localWatch getWeekofYear]) {
         
-        // Check current day of week
-        // initialize for loop at day of week and check user defaults to see if downloaded
-        
-        [NSThread detachNewThreadSelector:@selector(loadMenus) toTarget:self withObject:nil];
-        
+		// Post that menus are current
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
+
     }
     
     
 }
 
 // Download Menus
-
 -(void) downloadMenus {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];  
-	NSLog(@"Downloading Menus");
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];      
+	
+	// ** EASTER EGG ** 
+	//if April Fools Day - load fakeXML File
+	
+	
+    ////NSString *fakeXMLPath = [[NSBundle mainBundle] pathForResource:@"fakeXMLDoc" ofType:@"xml"];
+    ////NSData *xmlFile = [NSData dataWithContentsOfFile:fakeXMLPath];
+	
     
+    // Parse XML from downloaded Data
+	//  DiningParser *todaysParser = [[DiningParser alloc]init];
+	//  [todaysParser parseXMLData:xmlFile forDay:[localWatch getWeekDay]];
+	
+	
+	
 	
 	// Establishes Server Paths for Parsing Correct Files
     NSString *serverPath = [localWatch atreusSeverPath];
@@ -87,28 +97,6 @@
     [pool release];
 }
 
--(void)loadMenus{
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];  
-    
-    
-    // ** EASTER EGG ** 
-	//if April Fools Day - load fakeXML File
-	
-    NSString *fakeXMLPath = [[NSBundle mainBundle] pathForResource:@"fakeXMLDoc" ofType:@"xml"];
-    NSData *xmlFile = [NSData dataWithContentsOfFile:fakeXMLPath];
-
-    
-    // Parse XML from downloaded Data
-    DiningParser *todaysParser = [[DiningParser alloc]init];
-    [todaysParser parseXMLData:xmlFile forDay:[localWatch getWeekDay]];
-    
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
-    
-    [todaysParser release];
-    [pool release];
-    
-}
 
 // returns the atreus server path
 -(NSString *)atreusSeverPath {

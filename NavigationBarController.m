@@ -128,12 +128,6 @@
     
 }
 
--(UIView*)returnHallNavigationBar{
-	
-	UIView *masterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-	
-	
-}
 
 
 @end

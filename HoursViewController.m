@@ -36,54 +36,10 @@
 
 	[localScheduler processArrays];
 	theTableView.separatorColor = [UIColor lightGrayColor];
-	//theTableView.backgroundColor = [UIColor blackColor];
 	[theTableView reloadData];
-	//[NSThread detachNewThreadSelector:@selector(processDeciderArrays) toTarget:self withObject:nil];
     
     
 }
-
-// Begins to Process the Decider's Arrays
-- (void)processDeciderArrays{
-    
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];  
-	
-	
-	
-	
-	
-	
-	[pool release];
-}
-
-
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-*/
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 
 #pragma mark -
@@ -174,20 +130,10 @@
 	cell.detailTextLabel.backgroundColor = [UIColor clearColor];
 
 	
-	if (indexPath.row == 2) {
-		cell.detailTextLabel.text = @"Closes in 4 Minutes";
-		[cell.detailTextLabel setTextColor:[UIColor redColor]];
-
-	}
-	
-	if (indexPath.row == 0 && indexPath.section == 2) {
-		cell.detailTextLabel.text = @"Open Until 12:30 P.M.";
-		[cell.detailTextLabel setTextColor:[UIColor blueColor]];
-
-	}
 	
     return cell;
 }
+
 
 
 
@@ -196,6 +142,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
+}
+
+- (IBAction)backButtonSelected{
+	
+	
+	[self.navigationController popViewControllerAnimated:YES];
+	
+	
 }
 
 

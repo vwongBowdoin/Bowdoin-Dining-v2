@@ -15,7 +15,7 @@
 @class UICustomTableView;
 @class ScheduleDecider;
 
-@interface RootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
+@interface RootViewController : UIViewController <UITableViewDelegate, UITabBarDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
 	
 
 	// Table View Outlets
@@ -65,11 +65,10 @@
 
 // Table View Swiping
 -(void)animateNavigationBars;
--(IBAction)navigateRight;
--(IBAction)navigateLeft;
+-(IBAction)navigateRight:(id)sender;
+-(IBAction)navigateLeft:(id)sender;
 
 // Pages to Navigate To
--(IBAction)settingsPage;
 -(IBAction)displayActionPage;
 -(IBAction)displayPolarPoints;
 -(IBAction)displayHoursPage;
