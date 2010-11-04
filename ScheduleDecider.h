@@ -24,6 +24,9 @@
 	NSMutableArray *moultonArray;
 	NSMutableArray *navBarArray;
 	
+	NSMutableArray *thorneNavHours;
+	NSMutableArray *moultonNavHours;
+	
 	NSMutableArray *openArray;
 	NSMutableArray *allHoursArray;
 
@@ -59,6 +62,9 @@
     MealSchedule *theGrill;
     MealSchedule *thePub;
     MealSchedule *theCStore;
+	
+	
+	NSInteger currentHours;
 
 
 
@@ -141,12 +147,14 @@
 
 
 // Hours Table View Methods
--(NSInteger)returnNumberOfSectionsInOH;
--(NSInteger)returnNumberOfRowsInOH:(NSInteger)section;
--(NSInteger)returnNumberOfRowsInAH:(NSInteger)section;
--(NSDictionary *)returnOHDictionaryAtIndex:(NSIndexPath *)indexPath;
--(NSDictionary *)returnAHDictionaryAtIndex:(NSIndexPath *)indexPath;
--(NSString *)returnOHSectionTitleForSection:(NSInteger)section;
+-(NSInteger)returnNumberOfSections;
+-(NSInteger)returnNumberOfRows:(NSInteger)section;
+-(NSDictionary *)returnDictionaryAtIndex:(NSIndexPath *)indexPath;
+-(NSString *)returnSectionTitleForSection:(NSInteger)section;
+
+
+// Return method for time of navigation bar
+-(NSString*)hoursOfOperationForHall:(int)hall meal:(int)meal;
 
 
 @end

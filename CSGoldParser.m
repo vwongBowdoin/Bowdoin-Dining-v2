@@ -7,7 +7,7 @@
 //
 
 #import "CSGoldParser.h"
-
+#import "WristWatch.h"
 
 @implementation CSGoldParser
 
@@ -34,6 +34,12 @@
 	NSLog(@"Done With Document");
 	
     // Store plan type and meals remaining in NSUserDefaults and Post Notification
+	
+	WristWatch *watch = [[WristWatch alloc] init];
+	
+	[[NSUserDefaults standardUserDefaults] setValue:[watch getUpdatedTimeString] forKey:@"CSGold_LastTime_Updated"];
+	
+	[watch release];
 	
 	if (mediumBucket != nil) {
 		

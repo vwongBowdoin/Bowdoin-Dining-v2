@@ -82,8 +82,13 @@
 
 	// Initializes the Download Manager to Deal with Meal Data
 	DownloadManager *manager = [[DownloadManager alloc] init];
-    [manager initializeDownloads];
+    [manager setDelegate:self];
+	// Initializes Heads Up Display
+		
+	[manager initializeDownloads];
 	
+	
+	// Begin Animating Activity Indicator
 }
 
 //Registering Notifications
@@ -133,7 +138,7 @@
     
     
 	hallNavBar = [[HallNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 960, 44)];
-	hallNavBar.timeToDisplay = @"DEFAULT";
+	hallNavBar.timeToDisplay = [localScheduler hoursOfOperationForHall:0 meal:0];
     // Second Scroll Bar for Meals
     [hallScrollView setContentSize:CGSizeMake(960, 44)];
 
@@ -204,6 +209,10 @@
             
             [self animateNavigationBars];
             NSLog(@"Reloading Data for Hall:%d, Meal:%d,", currentHallPage, currentMealPage);
+			
+			
+			
+			
 			[customTableView reloadData];
             
             currentHallPage = hallPage;
@@ -223,6 +232,9 @@
 		 
 		currentHallPage = hallPage;
 		currentMealPage = mealPage;
+		
+		hallNavBar.timeToDisplay = [localScheduler hoursOfOperationForHall:currentHallPage meal:currentMealPage];
+		[hallNavBar setNeedsDisplay];
         
         
 	} else if (currentHallPage != hallPage && hallPage == 2){

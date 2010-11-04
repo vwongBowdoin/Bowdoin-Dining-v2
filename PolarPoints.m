@@ -115,7 +115,7 @@
 	mealsRemaining.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"MealsRemaining"];
 	
 	// Low Balance Warning
-	if ([mealsRemaining.text intValue] <= 5) {
+	if ([mealsRemaining.text intValue] <= 3) {
 		mealsRemaining.textColor = [UIColor redColor];
 	} 
 	
@@ -135,6 +135,8 @@
 		oneCardBalance.textColor = [UIColor redColor];
 	}
 	
+	lastUpdatedLabel.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"CSGold_LastTime_Updated"];
+
 	
 }
 

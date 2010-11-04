@@ -12,6 +12,8 @@
     
     UIWindow *window;
     UINavigationController *navigationController;
+	UIImageView *splashView;
+
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

@@ -13,7 +13,7 @@
 
 @implementation HoursViewController
 
-@synthesize hoursScheduler, openNowArray, theTableView;
+@synthesize hoursScheduler, hourSelector, openNowArray, theTableView;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -24,12 +24,14 @@
 	localScheduler = decider;
 	
 	return self;
-	
+		
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+	[hourSelector addTarget:self action:@selector(hourSelectorDidChange:) forControlEvents:UIControlEventValueChanged];
+	
 	self.title = @"Dining Hours";
 	
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -41,38 +43,35 @@
     
 }
 
+- (void)hourSelectorDidChange:(UISegmentedControl*)sender{
+	
+	NSLog(@"Value = %d", [sender selectedSegmentIndex]);
+	[localScheduler changeDisplayedHourInformation:[sender selectedSegmentIndex]];
+	[theTableView reloadData];
+	
+}
+
 
 #pragma mark -
 #pragma mark Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    //return [localScheduler returnNumberOfSectionsInOH];
-	
-	return 3;
+	return [localScheduler returnNumberOfSections];
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    //return [localScheduler returnNumberOfRowsInOH:section];
-	return [localScheduler returnNumberOfRowsInAH:section];
+	return [localScheduler returnNumberOfRows:section];
 
 }
-/*
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-	
-	return [localScheduler returnOHSectionTitleForSection:section];
-}
-
- */
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-	
 	return 30.0;
 }
 
 
+// Custom Header
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section { 
 	UIView* customView = [[[UIView alloc]initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)]autorelease];
 	customView.backgroundColor = [UIColor clearColor];
@@ -83,7 +82,7 @@
 	headerLabel.font = [UIFont boldSystemFontOfSize:18];
 	headerLabel.frame = CGRectMake(10, -5.0, 320.0, 44.0);
 	headerLabel.textAlignment = UITextAlignmentLeft;
-	headerLabel.text = [localScheduler returnOHSectionTitleForSection:section];	
+	headerLabel.text = [localScheduler returnSectionTitleForSection:section];	
 	
 	[customView addSubview:headerLabel];
 
@@ -98,9 +97,6 @@
 
 }
 
-
-
-
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -110,23 +106,30 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
     }
-    
-   // cell.textLabel.text = @"Test";
-        
-//    cell.textLabel.text = [[localScheduler returnOHDictionaryAtIndex:indexPath] objectForKey:@"meal"];
-//    cell.detailTextLabel.text = [[localScheduler returnOHDictionaryAtIndex:indexPath] objectForKey:@"hours"];		
 
 	cell.backgroundColor = [UIColor whiteColor];
 	
-	cell.textLabel.text = [[localScheduler returnAHDictionaryAtIndex:indexPath] objectForKey:@"meal"];
+	cell.textLabel.text = [[localScheduler returnDictionaryAtIndex:indexPath] objectForKey:@"meal"];
     [cell.textLabel setFont:[UIFont systemFontOfSize:16.0]]; 
 	cell.textLabel.backgroundColor = [UIColor clearColor];
 	[cell.textLabel setTextColor:[UIColor blackColor]];
 
+	
+	
+	cell.detailTextLabel.text = [[localScheduler returnDictionaryAtIndex:indexPath] objectForKey:@"hours"];	
+	
+	
+	// A simple check to change "Closes at..." notifications to blue color.
+	if ([cell.detailTextLabel.text rangeOfString:@"Closes"].location != NSNotFound){
+		
+		[cell.detailTextLabel setTextColor:[UIColor blueColor]];
+
+	} else {
+		[cell.detailTextLabel setTextColor:[UIColor grayColor]];
+
+	}
 
 	
-	cell.detailTextLabel.text = [[localScheduler returnAHDictionaryAtIndex:indexPath] objectForKey:@"fullhours"];	
-	[cell.detailTextLabel setTextColor:[UIColor grayColor]];
 	cell.detailTextLabel.backgroundColor = [UIColor clearColor];
 
 	
@@ -134,21 +137,12 @@
     return cell;
 }
 
-
-
-
 #pragma mark -
 #pragma mark Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-}
-
 - (IBAction)backButtonSelected{
 	
-	
 	[self.navigationController popViewControllerAnimated:YES];
-	
 	
 }
 

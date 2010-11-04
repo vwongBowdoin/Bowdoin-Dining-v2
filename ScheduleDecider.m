@@ -731,6 +731,7 @@
 	WristWatch *clock= [[WristWatch alloc] init];
 
 	[self processHoursArrays];
+	[self processArrayOfOpenMeals];
 	
 	// Processes Meals for Today and Tomorrow
 	[self processMealArraysForDay:[clock getWeekDay]];
@@ -748,7 +749,7 @@
 }
 
 // Meal Schedule and Meal Items
--(void)processMealArraysForDay:(int)day{
+- (void)processMealArraysForDay:(int)day{
     
 	WristWatch *clock= [[WristWatch alloc] init];
 
@@ -768,12 +769,11 @@
 		[element setCurrentDay:day];
 		
         if ([element isOpen] || [element willOpen]){
-            
                         
             [dictionary setObject:element.shortName forKey:@"Shortname"];
             [dictionary setObject:[element returnFileLocation] forKey:@"FileLocation"];
             [dictionary setObject:[element returnDescription] forKey:@"Day"];
-			
+			[dictionary setObject:[element dateText] forKey:@"Hours_of_Operation"];
 			
 			if ([element currentDay] == [clock getWeekDay]) {
 				[dictionary setObject:[NSString stringWithFormat:@"Today's %@", [element returnDescription]] forKey:@"Formatted_Title"];
@@ -855,14 +855,41 @@
 	
 	
 	navBarArray = [[NSMutableArray alloc] init];
+	thorneNavHours = [[NSMutableArray alloc] init];
+	moultonNavHours = [[NSMutableArray alloc] init];
+
 	// Populate Navigation Array to Properly Display Title Bar
 	for(NSDictionary *element in thorne_dictionary_array){
 		
 		[navBarArray addObject:[element objectForKey:@"Formatted_Title"]];
-		
+		[thorneNavHours addObject:[element objectForKey:@"Hours_of_Operation"]];
 	}
+	
+	for(NSDictionary *element in moulton_dictionary_array){
 		
+		[moultonNavHours addObject:[element objectForKey:@"Hours_of_Operation"]];
+	}
+			
 }
+
+
+-(NSString*)hoursOfOperationForHall:(int)hall meal:(int)meal{
+	
+	NSLog(@"Redisplaying Hours");
+	
+	// Thorne
+	if (hall == 0) {
+		return [thorneNavHours objectAtIndex:meal];
+	} else {
+		return [moultonNavHours objectAtIndex:meal];
+	}
+
+	
+	
+	
+	
+}
+
 -(void)resolveInconsistenciesInArrays{
 	
 	// Resolve Inconsistencies in Populating Arrays so data structure maintains parallelism.
@@ -912,6 +939,8 @@
 				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
 				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"Formatted_Title"] forKey:@"Formatted_Title"];
 
+				[fakeDictionary setObject:@"Closed" forKey:@"Hours_of_Operation"];
+
 				// placeholder dictionary inserted at index 0
 				[thorne_dictionary_array insertObject:fakeDictionary atIndex:i];
 				
@@ -931,6 +960,9 @@
 				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
 				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"Formatted_Title"] forKey:@"Formatted_Title"];
 
+				[fakeDictionary setObject:@"Closed" forKey:@"Hours_of_Operation"];
+
+				
 				// placeholder dictionary inserted at index 0
 				[moulton_dictionary_array insertObject:fakeDictionary atIndex:i];
 				
@@ -994,7 +1026,7 @@
         [element setCurrentDay:currentDay];
 		
 		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
-        if ([element isOpen]){// || [element willOpen]){
+        if ([element isOpen] || [element willOpen]){
             
 			
 			if (element.mealName != nil) {
@@ -1005,10 +1037,7 @@
 				
 			}
 			
-			
 			[dictionary setObject:[element dateText] forKey:@"hours"];
-			[dictionary setObject:[element fullHoursText] forKey:@"fullhours"];
-			
 			
 			// This is the place for user defaults
 			if (element.location == @"Thorne") {
@@ -1021,9 +1050,21 @@
         }
     }
 	
-	[allHoursArray addObject:array1];
-	[allHoursArray addObject:array2];
-	[allHoursArray addObject:array3];
+	
+	if ([array1 count] != 0) {
+		[allHoursArray addObject:array1];
+	}
+	
+	if ([array2 count] != 0) {
+		[allHoursArray addObject:array2];
+
+	}
+	
+	if ([array3 count] != 0) {
+		[allHoursArray addObject:array3];
+
+	}
+	
 	
 	
 	
@@ -1054,8 +1095,7 @@
 			}
 
 			
-			[dictionary setObject:[element dateText] forKey:@"hours"];
-			[dictionary setObject:[element fullHoursText] forKey:@"fullhours"];
+			[dictionary setObject:[element fullHoursText] forKey:@"hours"];
 			    
 
 			// This is the place for user defaults
@@ -1077,9 +1117,19 @@
    
     }
 	
-	[openArray addObject:section_one];
-	[openArray addObject:section_two];
-	[openArray addObject:section_three];
+	if ([section_one count] != 0) {
+		[openArray addObject:section_one];
+	}
+	
+	if ([section_two count] != 0) {
+		[openArray addObject:section_two];
+	}
+	
+	if ([section_three count] != 0) {
+		[openArray addObject:section_three];
+	}
+	
+	
 }
 -(NSNumber *)returnCurrentWeekDayNSNumber{
     
@@ -1187,51 +1237,73 @@
 
 
 
+- (void) changeDisplayedHourInformation:(NSInteger)newHour{
+	
+	currentHours = newHour;
+	
+}
 
-
-
-
-
-
+#define now_hours 0
+#define all_hours 1
 
 /// Hours Table View Code
 
--(NSInteger)returnNumberOfSectionsInOH {
+- (NSInteger)returnNumberOfSections{
 	
+	switch (currentHours) {
+		case now_hours:
+			return [openArray count];
+			break;
+			
+		case all_hours:
+			return [allHoursArray count];
+			break;
+
+		default:
+			return 0;
+			break;
+	}
+
+}
+
+- (NSInteger)returnNumberOfRows:(NSInteger)section {
 	
-	return [openArray count];
+	switch (currentHours) {
+		case now_hours:
+			return [[openArray objectAtIndex:section] count];
+			break;
+			
+		case all_hours:
+			return [[allHoursArray objectAtIndex:section] count];
+			break;
+			
+		default:
+			return 0;
+			break;
+	}
+	
+}
+
+- (NSDictionary *)returnDictionaryAtIndex:(NSIndexPath *)indexPath{
+	
+	switch (currentHours) {
+		case now_hours:
+			return [[openArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+			break;
+			
+		case all_hours:
+			return [[allHoursArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+			break;
+			
+		default:
+			return NULL;
+			break;
+	}
 	
 	
 }
 
-- (NSInteger)returnNumberOfRowsInOH:(NSInteger)section {
-	
-	return [[openArray objectAtIndex:section] count];
-	
-}
-
-- (NSInteger)returnNumberOfRowsInAH:(NSInteger)section {
-	
-	return [[allHoursArray objectAtIndex:section] count];
-	
-}
-
-
-- (NSDictionary *)returnOHDictionaryAtIndex:(NSIndexPath *)indexPath{
-	
-	return [[openArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	
-	
-}
-
-- (NSDictionary *)returnAHDictionaryAtIndex:(NSIndexPath *)indexPath{
-	
-	return [[allHoursArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	
-	
-}
-
-- (NSString *)returnOHSectionTitleForSection:(NSInteger)section{
+- (NSString *)returnSectionTitleForSection:(NSInteger)section{
 	
 	
 	switch (section) {

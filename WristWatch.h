@@ -25,5 +25,6 @@
 -(NSString *)sundayDateString;
 -(NSString *)documentsDirectory;
 -(NSString *)atreusSeverPath;
+-(NSString *)getUpdatedTimeString;
 
 @end

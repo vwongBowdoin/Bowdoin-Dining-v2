@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "HallNavigationBar.h"
+#import "MBProgressHUD.h"
 
 @class mealHandler;
 @class WristWatch;
 @class UICustomTableView;
 @class ScheduleDecider;
 
-@interface RootViewController : UIViewController <UITableViewDelegate, UITabBarDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate> {
+@interface RootViewController : UIViewController <UITableViewDelegate, UITabBarDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, MBProgressHUDDelegate> {
 	
 
 	// Table View Outlets

@@ -7,13 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RootViewController.h"
+
 @class WristWatch;
 
-@interface DownloadManager : NSObject {
+@interface DownloadManager : NSObject <MBProgressHUDDelegate> {
 
 	WristWatch *localWatch;
 	
+	RootViewController *delegate;
 }
+
+@property (nonatomic, retain) RootViewController *delegate;
 
 -(void)initializeDownloads;
 -(void)errorOccurred;

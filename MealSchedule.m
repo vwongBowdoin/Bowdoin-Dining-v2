@@ -282,8 +282,7 @@
     if ([self isOpen]){
         
         NSString *stringToReturn = [NSString stringWithFormat:@"Closes at %@", closingTime];
-       
-        return stringToReturn;
+		return stringToReturn;
         
     }
     

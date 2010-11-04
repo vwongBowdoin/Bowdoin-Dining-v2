@@ -15,6 +15,7 @@
 	IBOutlet UILabel *mealsRemaining;
 	IBOutlet UILabel *polarPoints;
 	IBOutlet UILabel *oneCardBalance;
+	IBOutlet UILabel *lastUpdatedLabel;
 
 	IBOutlet UIActivityIndicatorView *activityIndicator1;
 	IBOutlet UIActivityIndicatorView *activityIndicator2;

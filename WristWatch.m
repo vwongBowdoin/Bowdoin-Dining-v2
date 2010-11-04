@@ -205,4 +205,20 @@
 	
 }
 
+-(NSString*)getUpdatedTimeString{
+	
+	
+	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[inputFormatter setDateFormat:@"hh:mm a"];
+	NSDate *toBeFormatted = [[[NSDate alloc] init] autorelease];
+	
+	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
+	
+	NSString *combinedString = [NSString stringWithFormat:@"Last Updated %@ at %@", [self getCurrentDayTitle], formattedDate];
+		
+	return combinedString;
+	
+	
+}
+
 @end

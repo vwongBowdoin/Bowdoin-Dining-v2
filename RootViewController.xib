@@ -67,7 +67,7 @@
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
 						</object>
-						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -199,7 +199,7 @@
 								<int key="IBUITag">1</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUITabBar" ref="205773220"/>
-								<int key="IBUISystemItemIdentifier">4</int>
+								<int key="IBUISystemItemIdentifier">6</int>
 							</object>
 							<object class="IBUITabBarItem" id="681618012">
 								<int key="IBUITag">2</int>
@@ -783,7 +783,7 @@ IGZvdW50YWluIGJldmVyYWdlLiAkNi41MCBTb3VwOiBUaGFpIENoaWNrZW4gU291cAo</string>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>RootViewController</string>
 					<string>UIResponder</string>
-					<string>{{631, 705}, {320, 330}}</string>
+					<string>{{718, 705}, {320, 330}}</string>
 					<object class="NSArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="IBUserGuide">
@@ -889,11 +889,9 @@ IGZvdW50YWluIGJldmVyYWdlLiAkNi41MCBTb3VwOiBUaGFpIENoaWNrZW4gU291cAo</string>
 							<string>displayPolarPoints</string>
 							<string>navigateLeft:</string>
 							<string>navigateRight:</string>
-							<string>settingsPage</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -912,7 +910,6 @@ IGZvdW50YWluIGJldmVyYWdlLiAkNi41MCBTb3VwOiBUaGFpIENoaWNrZW4gU291cAo</string>
 							<string>displayPolarPoints</string>
 							<string>navigateLeft:</string>
 							<string>navigateRight:</string>
-							<string>settingsPage</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -938,10 +935,6 @@ IGZvdW50YWluIGJldmVyYWdlLiAkNi41MCBTb3VwOiBUaGFpIENoaWNrZW4gU291cAo</string>
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">navigateRight:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">settingsPage</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

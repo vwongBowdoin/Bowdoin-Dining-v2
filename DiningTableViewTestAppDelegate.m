@@ -27,7 +27,35 @@
     [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
 
+	[self startAnimation];
+
     return YES;
+}
+
+// Startup Animation
+- (void)startAnimation{
+	
+	// Splash View is The Overlay View Presented on top of the Main Page
+	splashView = [[UIImageView alloc] initWithFrame:CGRectMake(0,20, 320, 460)];
+	splashView.image = [UIImage imageNamed:@"Default.png"];
+	[window addSubview:splashView];
+	[window bringSubviewToFront:splashView];
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:0.5];
+	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:window cache:YES];
+	[UIView setAnimationDelegate:self]; 
+	[UIView setAnimationDidStopSelector:@selector(startupAnimationDone:finished:context:)];
+	
+	// Expands the View to give a "Blow Up" animation and fades out.
+	splashView.alpha = 0.0;
+	splashView.frame = CGRectMake(-60, -60, 440, 600);
+	[UIView commitAnimations];
+}
+
+//
+- (void)startupAnimationDone:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+	[splashView removeFromSuperview];
+	[splashView release];
 }
 
 

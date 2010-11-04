@@ -7,6 +7,7 @@
 //
 
 #import "CSGoldTransactionsParser.h"
+#import "WristWatch.h"
 
 
 @implementation CSGoldTransactionsParser
@@ -34,8 +35,13 @@
     
 	NSLog(@"Done With Document");
 	
-    // Store plan type and meals remaining in NSUserDefaults and Post Notification
+	// Updating Last Updated Time
 	
+	
+	
+	
+	
+    // Store plan type and meals remaining in NSUserDefaults and Post Notification
 	NSLog(@"Posting Notification");
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"CSGold Transactions Completed" object:nil];
 	

@@ -10,11 +10,13 @@
 #import "WristWatch.h"
 #import "Constants.h"
 #import "DiningParser.h"
+#import "MBProgressHUD.h"
 
 @implementation DownloadManager
 
+@synthesize delegate;
 
--(void)initializeDownloads {
+- (void)initializeDownloads {
    
 	WristWatch *aTimer = [[WristWatch alloc] init];
 	localWatch = aTimer;
@@ -23,8 +25,21 @@
 	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] != [localWatch getWeekofYear]){
      
 		// Download New Menus
-        [NSThread detachNewThreadSelector:@selector(downloadMenus) toTarget:self withObject:nil];
-        
+        //[NSThread detachNewThreadSelector:@selector(downloadMenus) toTarget:self withObject:nil];
+       // [self downloadMenus];
+		
+		MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:delegate.view];
+		
+		// Adds HUD to screen
+		HUD.delegate = self;
+		
+		HUD.labelText = @"Downloading:";
+		HUD.detailsLabelText = @"Updating Menus...";
+		[delegate.view addSubview:HUD];
+		
+		[HUD showWhileExecuting:@selector(downloadMenus) onTarget:self withObject:nil animated:YES];  
+		
+		
     }
     
     // Menus are current
@@ -32,15 +47,14 @@
         
 		// Post that menus are current
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
-
+		
     }
     
     
 }
 
 // Download Menus
--(void) downloadMenus {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];      
+- (void) downloadMenus {
 	
 	// ** EASTER EGG ** 
 	//if April Fools Day - load fakeXML File
@@ -54,9 +68,7 @@
 	//  DiningParser *todaysParser = [[DiningParser alloc]init];
 	//  [todaysParser parseXMLData:xmlFile forDay:[localWatch getWeekDay]];
 	
-	
-	
-	
+
 	// Establishes Server Paths for Parsing Correct Files
     NSString *serverPath = [localWatch atreusSeverPath];
     NSString *sundayString = [localWatch sundayDateString];
@@ -94,24 +106,23 @@
 	// alert that menus are parsed and ready
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
     
-    [pool release];
 }
-
 
 // returns the atreus server path
--(NSString *)atreusSeverPath {
+- (NSString *)atreusSeverPath {
     
     return @"http://www.bowdoin.edu/atreus/lib/xml/";
+	
 }
 
 
--(void)errorOccurred{
+- (void)errorOccurred{
     
     
     // handle the error
 }
 
--(void)dealloc{
+- (void)dealloc{
 	[super dealloc];
 	[localWatch release];
 	

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface CSGoldTransactionsParser : NSObject <NSXMLParserDelegate> {
 
 	NSXMLParser *theParser;
