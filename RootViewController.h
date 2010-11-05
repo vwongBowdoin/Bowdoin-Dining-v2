@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import <CoreData/CoreData.h>
+
 #import "HallNavigationBar.h"
 #import "MBProgressHUD.h"
 
@@ -52,6 +54,10 @@
 	
 	HallNavigationBar *hallNavBar;
 	
+	// Core Data and Favorites Objects
+	NSManagedObjectContext *managedObjectContext;
+
+	
 }
 
 @property (nonatomic, retain) IBOutlet UICustomTableView *customTableView;
@@ -60,6 +66,11 @@
 @property (nonatomic, retain) IBOutlet UIScrollView * alternateScroller;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *dayDeciderBar;
 @property (nonatomic, retain) NSIndexPath *selectedIndexPath;
+
+// Core Data and Favorites Property Declaration
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
+
 
 -(void)setupMealData;
 -(void)registerNotifications;

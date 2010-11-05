@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 @interface DiningTableViewTestAppDelegate : NSObject <UIApplicationDelegate> {
     
@@ -14,6 +15,12 @@
     UINavigationController *navigationController;
 	UIImageView *splashView;
 
+	// Core Data
+	NSManagedObjectModel *managedObjectModel;
+    NSManagedObjectContext *managedObjectContext;	    
+    NSPersistentStoreCoordinator *persistentStoreCoordinator;
+	
+	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;

@@ -20,11 +20,13 @@
 #import "CSGoldController.h"
 #import "HallNavigationBar.h"
 #import "MealNavigationBar.h"
-
+#import "Favorites.h"
+#import "Item.h"
 
 @implementation RootViewController
 
 @synthesize customTableView, hallScrollView, mealScrollView, alternateScroller, selectedIndexPath, dayDeciderBar;
+@synthesize managedObjectContext;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -51,6 +53,9 @@
     WristWatch *localWatch = [[WristWatch alloc]init];
 	localMealDecider = localWatch;
 
+	// ****** Favorites Testing ******* //
+	[self testFavorites];
+	
 	// Register for Notifications
     [self registerNotifications];
 	
@@ -60,7 +65,28 @@
     // Grill View
     [alternateScroller addSubview:grillView];
     [alternateScroller setContentSize:CGSizeMake(320, 600)];
+	
+	
+	
 
+}
+
+- (void)testFavorites{
+	
+	/*
+	Item *favoritedItem = (Item*)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+						   
+	[favoritedItem setItem_Name:@"TestingOneTwoThree"];
+	
+	 */
+	
+	NSError *error;
+	if (![managedObjectContext save:&error]) {
+		// Handle the error.
+	}
+	 
+	 
+	
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -501,6 +527,19 @@
 		} else {
 			cell.isFavorited = YES;
 		}
+		
+		
+		Item *favoritedItem = (Item*)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:managedObjectContext];
+		
+		[favoritedItem setItem_Name:cell.textLabel.text];
+		
+		
+		NSError *error;
+		if (![managedObjectContext save:&error]) {
+			// Handle the error.
+		}
+		
+		
 
 		[customTableView reloadData];
 		
@@ -608,8 +647,10 @@
 
 	if (item.tag == 0) {
 		
-		hallNavBar.timeToDisplay = @"FUN";
-		[hallNavBar setNeedsDisplay];
+		Favorites *favoritesPage = [[Favorites alloc] initWithStyle:UITableViewStyleGrouped];
+		favoritesPage.managedObjectContext = self.managedObjectContext;
+		[self.navigationController pushViewController:favoritesPage animated:YES];
+		[favoritesPage release];
 
 	} else if (item.tag == 1) {
 		
