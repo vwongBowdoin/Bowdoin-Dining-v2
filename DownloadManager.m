@@ -11,6 +11,7 @@
 #import "Constants.h"
 #import "DiningParser.h"
 #import "MBProgressHUD.h"
+#import "GrillParser.h"
 
 @implementation DownloadManager
 
@@ -20,6 +21,19 @@
    
 	WristWatch *aTimer = [[WristWatch alloc] init];
 	localWatch = aTimer;
+	
+	
+	
+	NSString *downloadAddress = @"http://www.bowdoin.edu/atreus/diningspecials/admin/lib/xml/specials.xml";
+	NSURL *downloadURL = [NSURL URLWithString:downloadAddress];
+	NSError *error = nil;
+	NSData *specialsXML = [NSData dataWithContentsOfURL:downloadURL options:0 error:&error];
+	
+	GrillParser *grillParser = [[GrillParser alloc] init];
+	[grillParser parseSpecialsFromData:specialsXML];
+	
+	
+	
 	
     // Checks to see if Menus aren't Current
 	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] != [localWatch getWeekofYear]){
@@ -49,7 +63,8 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
 		
     }
-    
+	
+
     
 }
 
@@ -106,6 +121,10 @@
 	// alert that menus are parsed and ready
     [[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
     
+
+	
+	
+	
 }
 
 // returns the atreus server path
