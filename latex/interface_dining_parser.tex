@@ -1,0 +1,139 @@
+\hypertarget{interface_dining_parser}{
+\section{DiningParser Class Reference}
+\label{interface_dining_parser}\index{DiningParser@{DiningParser}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{interface_dining_parser_ad1cd6dd8634c959a36b254cb8c2b1bc0}{
+(void) -\/ {\bfseries parseXMLData:forDay:}}
+\label{interface_dining_parser_ad1cd6dd8634c959a36b254cb8c2b1bc0}
+
+\item 
+\hypertarget{interface_dining_parser_a10412c2e64bb008cd459c80f8b6aaf14}{
+(void) -\/ {\bfseries storeXMLDataforDay:}}
+\label{interface_dining_parser_a10412c2e64bb008cd459c80f8b6aaf14}
+
+\item 
+\hypertarget{interface_dining_parser_adcc6e3511cb692ec2df52cf7c32a47f0}{
+(NSMutableArray $\ast$) -\/ {\bfseries addTitleToArray:forArray:}}
+\label{interface_dining_parser_adcc6e3511cb692ec2df52cf7c32a47f0}
+
+\item 
+\hypertarget{interface_dining_parser_a20161fb14e91e3439c2283b99d560fa7}{
+(void) -\/ {\bfseries addArrayofItems:forCourse:forMeal:forHall:}}
+\label{interface_dining_parser_a20161fb14e91e3439c2283b99d560fa7}
+
+\item 
+\hypertarget{interface_dining_parser_a53024594987e7e5c51a5f77882f19cfb}{
+(\hyperlink{class_n_s_string}{NSString} $\ast$) -\/ {\bfseries documentsDirectory}}
+\label{interface_dining_parser_a53024594987e7e5c51a5f77882f19cfb}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{interface_dining_parser_a9343cee336a1d787fe7147788669b45e}{
+NSXMLParser $\ast$ {\bfseries rssParser}}
+\label{interface_dining_parser_a9343cee336a1d787fe7147788669b45e}
+
+\item 
+\hypertarget{interface_dining_parser_ab596504e474c38f7aa1e9a5b971be21e}{
+NSMutableArray $\ast$ {\bfseries mealArray}}
+\label{interface_dining_parser_ab596504e474c38f7aa1e9a5b971be21e}
+
+\item 
+\hypertarget{interface_dining_parser_a3abb895f16e4f81beaf6ed4e29a47e09}{
+NSMutableDictionary $\ast$ {\bfseries item}}
+\label{interface_dining_parser_a3abb895f16e4f81beaf6ed4e29a47e09}
+
+\item 
+\hypertarget{interface_dining_parser_adf35bff1e95b56d9f0d8320add1cf2c1}{
+\hyperlink{class_n_s_string}{NSString} $\ast$ {\bfseries currentElement}}
+\label{interface_dining_parser_adf35bff1e95b56d9f0d8320add1cf2c1}
+
+\item 
+\hypertarget{interface_dining_parser_a4d2eb139cb0457f8fe4cc5da179d09b1}{
+\hyperlink{class_n_s_string}{NSString} $\ast$ {\bfseries currentCourse}}
+\label{interface_dining_parser_a4d2eb139cb0457f8fe4cc5da179d09b1}
+
+\item 
+\hypertarget{interface_dining_parser_adbdfff7bedcabcff35924cd7bd1e3f07}{
+\hyperlink{class_n_s_string}{NSString} $\ast$ {\bfseries currentUnit}}
+\label{interface_dining_parser_adbdfff7bedcabcff35924cd7bd1e3f07}
+
+\item 
+\hypertarget{interface_dining_parser_a438259cd6491328c4e18078da250cb19}{
+\hyperlink{class_n_s_string}{NSString} $\ast$ {\bfseries currentMeal}}
+\label{interface_dining_parser_a438259cd6491328c4e18078da250cb19}
+
+\item 
+\hypertarget{interface_dining_parser_a5ecad8a2ab1bc52c4d3b027a94592b58}{
+NSMutableString $\ast$ {\bfseries currentTitle}}
+\label{interface_dining_parser_a5ecad8a2ab1bc52c4d3b027a94592b58}
+
+\item 
+\hypertarget{interface_dining_parser_af24b2bffd54c4c9a10ef15f429839d4f}{
+\hyperlink{class_n_s_string}{NSString} $\ast$ {\bfseries feedAddress}}
+\label{interface_dining_parser_af24b2bffd54c4c9a10ef15f429839d4f}
+
+\item 
+\hypertarget{interface_dining_parser_ab96f4b7068f176129a5d24ff3f42274b}{
+\hyperlink{class_n_s_string}{NSString} $\ast$ {\bfseries currentDayIndex}}
+\label{interface_dining_parser_ab96f4b7068f176129a5d24ff3f42274b}
+
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{interface_dining_parser_af1a8cd17148e581e680ff45f690f8126}{
+\hyperlink{interfacemeal_handler}{mealHandler} $\ast$ {\bfseries todaysMealHandler}}
+\label{interface_dining_parser_af1a8cd17148e581e680ff45f690f8126}
+
+\item 
+\hypertarget{interface_dining_parser_a08db52b5ebb1d6f2721bffa01ca7e7de}{
+NSMutableArray $\ast$ {\bfseries thorneBreakfast}}
+\label{interface_dining_parser_a08db52b5ebb1d6f2721bffa01ca7e7de}
+
+\item 
+\hypertarget{interface_dining_parser_a40ded97a595628f9757f4670a531f084}{
+NSMutableArray $\ast$ {\bfseries thorneLunch}}
+\label{interface_dining_parser_a40ded97a595628f9757f4670a531f084}
+
+\item 
+\hypertarget{interface_dining_parser_ab61efd5365908e83a1f4e0e14cfd04c6}{
+NSMutableArray $\ast$ {\bfseries thorneDinner}}
+\label{interface_dining_parser_ab61efd5365908e83a1f4e0e14cfd04c6}
+
+\item 
+\hypertarget{interface_dining_parser_a4dee5b072798cddb4ad528916eb6b9aa}{
+NSMutableArray $\ast$ {\bfseries thorneBrunch}}
+\label{interface_dining_parser_a4dee5b072798cddb4ad528916eb6b9aa}
+
+\item 
+\hypertarget{interface_dining_parser_a757ef961a3bc36567970eab989c09f6b}{
+NSMutableArray $\ast$ {\bfseries moultonBreakfast}}
+\label{interface_dining_parser_a757ef961a3bc36567970eab989c09f6b}
+
+\item 
+\hypertarget{interface_dining_parser_aa35071c55a1ff573e5dc083ba0aecb48}{
+NSMutableArray $\ast$ {\bfseries moultonLunch}}
+\label{interface_dining_parser_aa35071c55a1ff573e5dc083ba0aecb48}
+
+\item 
+\hypertarget{interface_dining_parser_a956d2d7ef2a1591843e3fe958af4cefa}{
+NSMutableArray $\ast$ {\bfseries moultonDinner}}
+\label{interface_dining_parser_a956d2d7ef2a1591843e3fe958af4cefa}
+
+\item 
+\hypertarget{interface_dining_parser_ac528f0f392bbeeca3be016a5bf426938}{
+NSMutableArray $\ast$ {\bfseries moultonBrunch}}
+\label{interface_dining_parser_ac528f0f392bbeeca3be016a5bf426938}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+DiningParser.h\item 
+DiningParser.m\end{DoxyCompactItemize}

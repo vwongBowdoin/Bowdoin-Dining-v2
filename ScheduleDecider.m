@@ -23,6 +23,9 @@
 
 -(id)init{
     
+	
+	currentHours = 1;
+	
 	//
     // Express Lunch
     //  
@@ -1236,12 +1239,6 @@
 }
 
 
-
-- (void) changeDisplayedHourInformation:(NSInteger)newHour{
-	
-	currentHours = newHour;
-	
-}
 
 #define now_hours 0
 #define all_hours 1

@@ -40,14 +40,12 @@
 	theTableView.separatorColor = [UIColor lightGrayColor];
 	[theTableView reloadData];
     
-    
+
 }
 
 - (void)hourSelectorDidChange:(UISegmentedControl*)sender{
 	
 	NSLog(@"Value = %d", [sender selectedSegmentIndex]);
-	[localScheduler changeDisplayedHourInformation:[sender selectedSegmentIndex]];
-	[theTableView reloadData];
 	
 }
 
@@ -70,7 +68,7 @@
 	return 30.0;
 }
 
-
+ 
 // Custom Header
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section { 
 	UIView* customView = [[[UIView alloc]initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)]autorelease];

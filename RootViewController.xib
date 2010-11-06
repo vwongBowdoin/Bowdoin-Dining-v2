@@ -12,8 +12,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="14"/>
 			<integer value="100"/>
+			<integer value="14"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -45,7 +45,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIScrollView" id="94916521">
 						<reference key="NSNextResponder" ref="997759238"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">260</int>
 						<string key="NSFrame">{{0, 44}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="997759238"/>
 						<reference key="NSNextKeyView" ref="613400554"/>
@@ -59,7 +59,7 @@
 					</object>
 					<object class="IBUIScrollView" id="309652369">
 						<reference key="NSNextResponder" ref="997759238"/>
-						<int key="NSvFlags">268</int>
+						<int key="NSvFlags">260</int>
 						<string key="NSFrameSize">{320, 44}</string>
 						<reference key="NSSuperview" ref="997759238"/>
 						<reference key="NSNextKeyView" ref="94916521"/>
@@ -827,7 +827,7 @@ IGZvdW50YWluIGJldmVyYWdlLiAkNi41MCBTb3VwOiBUaGFpIENoaWNrZW4gU291cAo</string>
 							<int key="affinity">1</int>
 						</object>
 					</object>
-					<string>{{826, 556}, {320, 480}}</string>
+					<string>{{994, 360}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">

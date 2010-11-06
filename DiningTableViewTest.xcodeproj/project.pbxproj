@@ -21,6 +21,7 @@
 		A131FE24125FAD90000B5E23 /* CSGoldTransactionsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A131FE23125FAD90000B5E23 /* CSGoldTransactionsParser.m */; };
 		A131FE44125FBF56000B5E23 /* RecentTransactions.m in Sources */ = {isa = PBXBuildFile; fileRef = A131FE42125FBF56000B5E23 /* RecentTransactions.m */; };
 		A131FE45125FBF56000B5E23 /* RecentTransactions.xib in Resources */ = {isa = PBXBuildFile; fileRef = A131FE43125FBF56000B5E23 /* RecentTransactions.xib */; };
+		A13890AD12850D51008664B0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A13890AC12850D51008664B0 /* Default.png */; };
 		A13D0AE511ECC11100616B3F /* PolarPoints.xib in Resources */ = {isa = PBXBuildFile; fileRef = A13D0AE311ECC11100616B3F /* PolarPoints.xib */; };
 		A14BBBDF120C5231006AD070 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14BBBDE120C5231006AD070 /* CFNetwork.framework */; };
 		A14BBBE3120C5238006AD070 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14BBBE2120C5238006AD070 /* MessageUI.framework */; };
@@ -56,7 +57,7 @@
 		A1B36AB7120099AD00D27351 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B36AB6120099AD00D27351 /* DownloadManager.m */; };
 		A1B6FB2B11FDE33800C472EB /* bearIcon-black.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */; };
 		A1B6FB4811FDE4DF00C472EB /* fakeXMLDoc.xml in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */; };
-		A1D2AB3F1283535E0022B18E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D2AB3E1283535E0022B18E /* Default.png */; };
+		A1D2AB3F1283535E0022B18E /* Default-Main.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D2AB3E1283535E0022B18E /* Default-Main.png */; };
 		A1D6FECB125C28BB00E132A5 /* MealNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D6FECA125C28BB00E132A5 /* MealNavigationBar.m */; };
 		A1DCE62F1258E97C00746201 /* HallNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DCE62E1258E97C00746201 /* HallNavigationBar.m */; };
 		A1E0D3C211E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = A1E0D3C111E61F4B006B2E4C /* Screen shot 2010-07-08 at 10.59.02 AM.png */; };
@@ -87,6 +88,7 @@
 		A131FE41125FBF56000B5E23 /* RecentTransactions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTransactions.h; sourceTree = "<group>"; };
 		A131FE42125FBF56000B5E23 /* RecentTransactions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTransactions.m; sourceTree = "<group>"; };
 		A131FE43125FBF56000B5E23 /* RecentTransactions.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentTransactions.xib; sourceTree = "<group>"; };
+		A13890AC12850D51008664B0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A13D0AE311ECC11100616B3F /* PolarPoints.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarPoints.xib; sourceTree = "<group>"; };
 		A14BBBDE120C5231006AD070 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A14BBBE2120C5238006AD070 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -146,7 +148,7 @@
 		A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bearIcon-black.png"; sourceTree = "<group>"; };
 		A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fakeXMLDoc.xml; sourceTree = "<group>"; };
 		A1D1944811FFE75F00339484 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		A1D2AB3E1283535E0022B18E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A1D2AB3E1283535E0022B18E /* Default-Main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Main.png"; sourceTree = "<group>"; };
 		A1D6FEC9125C28BB00E132A5 /* MealNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealNavigationBar.h; sourceTree = "<group>"; };
 		A1D6FECA125C28BB00E132A5 /* MealNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealNavigationBar.m; sourceTree = "<group>"; };
 		A1DCE62D1258E97C00746201 /* HallNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HallNavigationBar.h; sourceTree = "<group>"; };
@@ -213,7 +215,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A1D2AB3E1283535E0022B18E /* Default.png */,
+				A13890AC12850D51008664B0 /* Default.png */,
+				A1D2AB3E1283535E0022B18E /* Default-Main.png */,
 				A15A87101268CC4600899F27 /* Default-Beta.png */,
 				A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */,
 				A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */,
@@ -451,8 +454,9 @@
 				A159E969120B0EA100FE7BD5 /* HoursViewController.xib in Resources */,
 				A131FE45125FBF56000B5E23 /* RecentTransactions.xib in Resources */,
 				A15A87111268CC4600899F27 /* Default-Beta.png in Resources */,
-				A1D2AB3F1283535E0022B18E /* Default.png in Resources */,
+				A1D2AB3F1283535E0022B18E /* Default-Main.png in Resources */,
 				A1957934128392D5000BE2BA /* Favorites.xib in Resources */,
+				A13890AD12850D51008664B0 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
