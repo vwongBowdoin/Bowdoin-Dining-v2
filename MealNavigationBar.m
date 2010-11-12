@@ -105,9 +105,7 @@
 
 
 -(NSString *)pruneString:(NSString *)stringToProcess{
-	
-	NSLog(@"Pruning");
-	
+		
 	NSString *stringToReturn;
 	
 	stringToReturn = [stringToProcess stringByReplacingOccurrencesOfString:@"Today's" withString:@""];

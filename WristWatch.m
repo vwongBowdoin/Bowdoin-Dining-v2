@@ -149,6 +149,23 @@
 	
 }
 
+- (int)getNextWeekDay {
+	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[inputFormatter setDateFormat:@"e"];
+	
+	NSTimeInterval oneDay = 24 * 60 * 60;
+	NSDate *toBeFormatted = [[[NSDate alloc] initWithTimeIntervalSinceNow:oneDay] autorelease];
+	
+	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
+	
+	
+	NSLog(@"Returning Next Day: %d", [formattedDate intValue]);
+	return[formattedDate intValue];
+	
+}
+
+
+
 - (int)getWeekofYear{
 	
 	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
@@ -170,8 +187,7 @@
 	
 	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
 	[inputFormatter setDateFormat:@"EEEE"];
-	NSTimeInterval zeroDays = 24 * 60 * 60;
-	NSDate *toBeFormatted = [[[NSDate alloc] initWithTimeIntervalSinceNow:zeroDays] autorelease];
+	NSDate *toBeFormatted = [[[NSDate alloc] init] autorelease];
 	
 	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
 	//NSLog(@"formattedNextDayTitle: %@", formattedDate);
@@ -183,7 +199,7 @@
 	
 	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
 	[inputFormatter setDateFormat:@"EEEE"];
-	NSTimeInterval oneDay = 48 * 60 * 60;
+	NSTimeInterval oneDay = 24 * 60 * 60;
 	NSDate *toBeFormatted = [[[NSDate alloc] initWithTimeIntervalSinceNow:oneDay] autorelease];
 	
 	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];

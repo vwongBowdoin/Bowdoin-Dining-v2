@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class MealSchedule;
+@class WristWatch;
 
 @interface ScheduleDecider : NSObject {
 
@@ -67,7 +68,7 @@
 	NSInteger currentHours;
 
 
-
+	WristWatch *watch;
 
 }
 

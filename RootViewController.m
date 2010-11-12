@@ -49,7 +49,7 @@
 		
     // Meal Decider decides what meal to display
     WristWatch *localWatch = [[WristWatch alloc]init];
-	localMealDecider = localWatch;
+	watch = localWatch;
 
 	// Register for Notifications
     [self registerNotifications];
@@ -69,13 +69,6 @@
 }
 
 
-// Method to deal with application resumes from multi-tasking or backgrounding.
-- (void)becomeActive:(NSNotification *)notification {
-    
-	NSLog(@"Becoming Active");
-	
-}
-
 
 // Handles Downloading or Processing of Already Downloaded Menus
 - (void)setupMealData{
@@ -87,8 +80,7 @@
 		
 	[manager initializeDownloads];
 	
-	
-	// Begin Animating Activity Indicator
+	[manager release];
 }
 
 //Registering Notifications
@@ -109,11 +101,28 @@
     
 }
 
+
+- (void)becomeActive:(NSNotification *)notification{
+	
+	NSLog(@"Did Become Active");
+	
+	[self setupMealData];
+	
+
+}
+
+
+
+
+
 - (void)showNoMealNotification{
 	
 	NSLog(@"NO MEAL");
 	
 }
+
+
+
 
 - (void)setNavigationBarsWithArray:(NSMutableArray*)scheduleArray{
     
@@ -162,13 +171,12 @@
     // Initializes the Schedule Decider which determines the array of meals
 	// that will be displayed
     
+	
 	ScheduleDecider *scheduler = [[ScheduleDecider alloc] init];
-	[scheduler processArrays];
-	
 	localScheduler = scheduler;
+	[localScheduler processArrays];
 	
-	
-    [self setNavigationBarsWithArray:[scheduler returnNavBarArray]]; 
+    [self setNavigationBarsWithArray:[localScheduler returnNavBarArray]]; 
 	
 	NSLog(@"Reloading Data for Hall:%d, Meal:%d,", currentHallPage, currentMealPage);
     [customTableView reloadData];
@@ -661,6 +669,7 @@
 }
 
 - (void)dealloc {
+	[localScheduler release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }

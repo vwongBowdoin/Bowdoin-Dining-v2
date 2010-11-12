@@ -34,22 +34,24 @@
 #pragma mark -
 #pragma mark Express Meals
     
-    NSArray *open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mExpressLunchStart],	 // Mon
-                                                        [NSNumber numberWithInt:mExpressLunchStart], // Tue
-                                                        [NSNumber numberWithInt:mExpressLunchStart], // Wed
-                                                        [NSNumber numberWithInt:mExpressLunchStart], // Thu
-                                                        [NSNumber numberWithInt:mExpressLunchStart], // Fri
-                                                        [NSNumber numberWithInt:noMealForDay],       // Sat
-                                                        [NSNumber numberWithInt:noMealForDay],       // Sun
+    NSArray *open = [[NSArray alloc] initWithObjects:
+														[NSNumber numberWithInt:noMealForDay],			// Sun
+														[NSNumber numberWithInt:mExpressLunchStart],	// Mon
+                                                        [NSNumber numberWithInt:mExpressLunchStart],	// Tue
+                                                        [NSNumber numberWithInt:mExpressLunchStart],	// Wed
+                                                        [NSNumber numberWithInt:mExpressLunchStart],	// Thu
+                                                        [NSNumber numberWithInt:mExpressLunchStart],	// Fri
+                                                        [NSNumber numberWithInt:noMealForDay],			// Sat
                                                         nil];
     
-    NSArray *close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mExpressLunchStop], // Mon
+    NSArray *close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Sun
+					 [NSNumber numberWithInt:mExpressLunchStop], // Mon
                      [NSNumber numberWithInt:mExpressLunchStop], // Tue
                      [NSNumber numberWithInt:mExpressLunchStop], // Wed
                      [NSNumber numberWithInt:mExpressLunchStop], // Thu
                      [NSNumber numberWithInt:mExpressLunchStop], // Fri
-                     [NSNumber numberWithInt:noMealForDay],       // Sat
-                     [NSNumber numberWithInt:noMealForDay],       // Sun
+                     [NSNumber numberWithInt:noMealForDay],      // Sat
+
                      nil];
 
 	
@@ -69,22 +71,23 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mExpressDinnerStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Sun
+					 [NSNumber numberWithInt:mExpressDinnerStart], // Mon
                      [NSNumber numberWithInt:mExpressDinnerStart], // Tue
                      [NSNumber numberWithInt:mExpressDinnerStart], // Wed
                      [NSNumber numberWithInt:mExpressDinnerStart], // Thu
                      [NSNumber numberWithInt:mExpressDinnerStart], // Fri
                      [NSNumber numberWithInt:noMealForDay],       // Sat
-                     [NSNumber numberWithInt:noMealForDay],       // Sun
+                    
                      nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mExpressDinnerStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+					  [NSNumber numberWithInt:mExpressDinnerStop], // Mon
                       [NSNumber numberWithInt:mExpressDinnerStop], // Tue
                       [NSNumber numberWithInt:mExpressDinnerStop], // Wed
                       [NSNumber numberWithInt:mExpressDinnerStop], // Thu
                       [NSNumber numberWithInt:mExpressDinnerStop], // Fri
                       [NSNumber numberWithInt:noMealForDay],       // Sat
-                      [NSNumber numberWithInt:noMealForDay],       // Sun
                       nil];
     
     
@@ -103,22 +106,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mHotBreakfastStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBreakfastStart],  // Sun
+			[NSNumber numberWithInt:mHotBreakfastStart], // Mon
             [NSNumber numberWithInt:mHotBreakfastStart], // Tue
             [NSNumber numberWithInt:mHotBreakfastStart], // Wed
             [NSNumber numberWithInt:mHotBreakfastStart], // Thu
             [NSNumber numberWithInt:mHotBreakfastStart], // Fri
             [NSNumber numberWithInt:mwkBreakfastStart],  // Sat
-            [NSNumber numberWithInt:mwkBreakfastStart],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mHotBreakfastStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBreakfastStop],  // Sun
+			 [NSNumber numberWithInt:mHotBreakfastStop], // Mon
              [NSNumber numberWithInt:mHotBreakfastStop], // Tue
              [NSNumber numberWithInt:mHotBreakfastStop], // Wed
              [NSNumber numberWithInt:mHotBreakfastStop], // Thu
              [NSNumber numberWithInt:mHotBreakfastStop], // Fri
              [NSNumber numberWithInt:mwkBreakfastStop],  // Sat
-             [NSNumber numberWithInt:mwkBreakfastStop],  // Sun
+             
              nil];
     
     
@@ -139,22 +144,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mColdBreakfastStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			[NSNumber numberWithInt:mColdBreakfastStart], // Mon
             [NSNumber numberWithInt:mColdBreakfastStart], // Tue
             [NSNumber numberWithInt:mColdBreakfastStart], // Wed
             [NSNumber numberWithInt:mColdBreakfastStart], // Thu
             [NSNumber numberWithInt:mColdBreakfastStart], // Fri
             [NSNumber numberWithInt:noMealForDay],  // Sat
-            [NSNumber numberWithInt:noMealForDay],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mColdBreakfastStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			 [NSNumber numberWithInt:mColdBreakfastStop], // Mon
              [NSNumber numberWithInt:mColdBreakfastStop], // Tue
              [NSNumber numberWithInt:mColdBreakfastStop], // Wed
              [NSNumber numberWithInt:mColdBreakfastStop], // Thu
              [NSNumber numberWithInt:mColdBreakfastStop], // Fri
              [NSNumber numberWithInt:noMealForDay],  // Sat
-             [NSNumber numberWithInt:noMealForDay],  // Sun
+             
              nil];
     
     
@@ -175,22 +182,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBrunchStart],  // Sun
+			[NSNumber numberWithInt:noMealForDay], // Mon
             [NSNumber numberWithInt:noMealForDay], // Tue
             [NSNumber numberWithInt:noMealForDay], // Wed
             [NSNumber numberWithInt:noMealForDay], // Thu
             [NSNumber numberWithInt:noMealForDay], // Fri
             [NSNumber numberWithInt:mwkBrunchStart],  // Sat
-            [NSNumber numberWithInt:mwkBrunchStart],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBrunchStop],  // Sun
+			 [NSNumber numberWithInt:noMealForDay], // Mon
              [NSNumber numberWithInt:noMealForDay], // Tue
              [NSNumber numberWithInt:noMealForDay], // Wed
              [NSNumber numberWithInt:noMealForDay], // Thu
              [NSNumber numberWithInt:noMealForDay], // Fri
              [NSNumber numberWithInt:mwkBrunchStop],  // Sat
-             [NSNumber numberWithInt:mwkBrunchStop],  // Sun
+             
              nil];
     
     
@@ -213,22 +222,23 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mLunchStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			[NSNumber numberWithInt:mLunchStart], // Mon
             [NSNumber numberWithInt:mLunchStart], // Tue
             [NSNumber numberWithInt:mLunchStart], // Wed
             [NSNumber numberWithInt:mLunchStart], // Thu
             [NSNumber numberWithInt:mLunchStart], // Fri
             [NSNumber numberWithInt:noMealForDay],  // Sat
-            [NSNumber numberWithInt:noMealForDay],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mLunchStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			 [NSNumber numberWithInt:mLunchStop], // Mon
              [NSNumber numberWithInt:mLunchStop], // Tue
              [NSNumber numberWithInt:mLunchStop], // Wed
              [NSNumber numberWithInt:mLunchStop], // Thu
              [NSNumber numberWithInt:mLunchStop], // Fri
              [NSNumber numberWithInt:noMealForDay],  // Sat
-             [NSNumber numberWithInt:noMealForDay],  // Sun
              nil];
     
     
@@ -249,22 +259,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mDinnerStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkDinnerStart],  // Sun
+			[NSNumber numberWithInt:mDinnerStart], // Mon
             [NSNumber numberWithInt:mDinnerStart], // Tue
             [NSNumber numberWithInt:mDinnerStart], // Wed
             [NSNumber numberWithInt:mDinnerStart], // Thu
             [NSNumber numberWithInt:mDinnerStart], // Fri
             [NSNumber numberWithInt:mwkDinnerStart],  // Sat
-            [NSNumber numberWithInt:mwkDinnerStart],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mDinnerStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkDinnerStop],  // Sun
+			 [NSNumber numberWithInt:mDinnerStop], // Mon
              [NSNumber numberWithInt:mDinnerStop], // Tue
              [NSNumber numberWithInt:mDinnerStop], // Wed
              [NSNumber numberWithInt:mDinnerStop], // Thu
              [NSNumber numberWithInt:mDinnerStop], // Fri
              [NSNumber numberWithInt:mwkDinnerStop],  // Sat
-             [NSNumber numberWithInt:mwkDinnerStop],  // Sun
+             
              nil];
     
     
@@ -285,22 +297,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:tHotBreakfastStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			[NSNumber numberWithInt:tHotBreakfastStart], // Mon
             [NSNumber numberWithInt:tHotBreakfastStart], // Tue
             [NSNumber numberWithInt:tHotBreakfastStart], // Wed
             [NSNumber numberWithInt:tHotBreakfastStart], // Thu
             [NSNumber numberWithInt:tHotBreakfastStart], // Fri
             [NSNumber numberWithInt:noMealForDay],  // Sat
-            [NSNumber numberWithInt:noMealForDay],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:tHotBreakfastStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			 [NSNumber numberWithInt:tHotBreakfastStop], // Mon
              [NSNumber numberWithInt:tHotBreakfastStop], // Tue
              [NSNumber numberWithInt:tHotBreakfastStop], // Wed
              [NSNumber numberWithInt:tHotBreakfastStop], // Thu
              [NSNumber numberWithInt:tHotBreakfastStop], // Fri
              [NSNumber numberWithInt:noMealForDay],  // Sat
-             [NSNumber numberWithInt:noMealForDay],  // Sun
+             
              nil];
     
     
@@ -323,22 +337,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:twkBrunchStart],  // Sun
+			[NSNumber numberWithInt:noMealForDay], // Mon
             [NSNumber numberWithInt:noMealForDay], // Tue
             [NSNumber numberWithInt:noMealForDay], // Wed
             [NSNumber numberWithInt:noMealForDay], // Thu
             [NSNumber numberWithInt:noMealForDay], // Fri
             [NSNumber numberWithInt:twkBrunchStart],  // Sat
-            [NSNumber numberWithInt:twkBrunchStart],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:twkBrunchStop],  // Sun
+			 [NSNumber numberWithInt:noMealForDay], // Mon
              [NSNumber numberWithInt:noMealForDay], // Tue
              [NSNumber numberWithInt:noMealForDay], // Wed
              [NSNumber numberWithInt:noMealForDay], // Thu
              [NSNumber numberWithInt:noMealForDay], // Fri
              [NSNumber numberWithInt:twkBrunchStop],  // Sat
-             [NSNumber numberWithInt:twkBrunchStop],  // Sun
+             
              nil];
     
     
@@ -360,22 +376,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:tHotLunchStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			[NSNumber numberWithInt:tHotLunchStart], // Mon
             [NSNumber numberWithInt:tHotLunchStart], // Tue
             [NSNumber numberWithInt:tHotLunchStart], // Wed
             [NSNumber numberWithInt:tHotLunchStart], // Thu
             [NSNumber numberWithInt:tHotLunchStart], // Fri
             [NSNumber numberWithInt:noMealForDay],  // Sat
-            [NSNumber numberWithInt:noMealForDay],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:tHotLunchStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			 [NSNumber numberWithInt:tHotLunchStop], // Mon
              [NSNumber numberWithInt:tHotLunchStop], // Tue
              [NSNumber numberWithInt:tHotLunchStop], // Wed
              [NSNumber numberWithInt:tHotLunchStop], // Thu
              [NSNumber numberWithInt:tHotLunchStop], // Fri
              [NSNumber numberWithInt:noMealForDay],  // Sat
-             [NSNumber numberWithInt:noMealForDay],  // Sun
+             
              nil];
     
     
@@ -397,22 +415,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:tColdLunchStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			[NSNumber numberWithInt:tColdLunchStart], // Mon
             [NSNumber numberWithInt:tColdLunchStart], // Tue
             [NSNumber numberWithInt:tColdLunchStart], // Wed
             [NSNumber numberWithInt:tColdLunchStart], // Thu
             [NSNumber numberWithInt:tColdLunchStart], // Fri
             [NSNumber numberWithInt:noMealForDay],  // Sat
-            [NSNumber numberWithInt:noMealForDay],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:tColdLunchStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			 [NSNumber numberWithInt:tColdLunchStop], // Mon
              [NSNumber numberWithInt:tColdLunchStop], // Tue
              [NSNumber numberWithInt:tColdLunchStop], // Wed
              [NSNumber numberWithInt:tColdLunchStop], // Thu
              [NSNumber numberWithInt:tColdLunchStop], // Fri
              [NSNumber numberWithInt:noMealForDay],  // Sat
-             [NSNumber numberWithInt:noMealForDay],  // Sun
+             
              nil];
     
     
@@ -434,22 +454,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:tDinnerStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:twkDinnerStart],  // Sun
+			[NSNumber numberWithInt:tDinnerStart], // Mon
             [NSNumber numberWithInt:tDinnerStart], // Tue
             [NSNumber numberWithInt:tDinnerStart], // Wed
             [NSNumber numberWithInt:tDinnerStart], // Thu
             [NSNumber numberWithInt:tDinnerStart], // Fri
             [NSNumber numberWithInt:twkDinnerStart],  // Sat
-            [NSNumber numberWithInt:twkDinnerStart],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:tDinnerStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:twkDinnerStop],  // Sun
+			 [NSNumber numberWithInt:tDinnerStop], // Mon
              [NSNumber numberWithInt:tDinnerStop], // Tue
              [NSNumber numberWithInt:tDinnerStop], // Wed
              [NSNumber numberWithInt:tDinnerStop], // Thu
              [NSNumber numberWithInt:tDinnerStop], // Fri
              [NSNumber numberWithInt:twkDinnerStop],  // Sat
-             [NSNumber numberWithInt:twkDinnerStop],  // Sun
+             
              nil];
     
     
@@ -474,22 +496,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			[NSNumber numberWithInt:noMealForDay], // Mon
             [NSNumber numberWithInt:noMealForDay], // Tue
             [NSNumber numberWithInt:noMealForDay], // Wed
             [NSNumber numberWithInt:sSnackStart], // Thu
             [NSNumber numberWithInt:sSnackStart], // Fri
             [NSNumber numberWithInt:sSnackStart],  // Sat
-            [NSNumber numberWithInt:noMealForDay],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			 [NSNumber numberWithInt:noMealForDay], // Mon
              [NSNumber numberWithInt:noMealForDay], // Tue
              [NSNumber numberWithInt:noMealForDay], // Wed
              [NSNumber numberWithInt:sSnackStop], // Thu
              [NSNumber numberWithInt:sSnackStop], // Fri
              [NSNumber numberWithInt:sSnackStop],  // Sat
-             [NSNumber numberWithInt:noMealForDay],  // Sun
+             
              nil];
     
     
@@ -514,22 +538,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:cmwMorningStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:csuMorningStart],  // Sun
+			[NSNumber numberWithInt:cmwMorningStart], // Mon
             [NSNumber numberWithInt:cmwMorningStart], // Tue
             [NSNumber numberWithInt:cmwMorningStart], // Wed
             [NSNumber numberWithInt:ctfMorningStart], // Thu
             [NSNumber numberWithInt:ctfMorningStart], // Fri
             [NSNumber numberWithInt:csaMorningStart],  // Sat
-            [NSNumber numberWithInt:csuMorningStart],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:cmwMorningStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:csuMorningStop],  // Sun
+			 [NSNumber numberWithInt:cmwMorningStop], // Mon
              [NSNumber numberWithInt:cmwMorningStop], // Tue
              [NSNumber numberWithInt:cmwMorningStop], // Wed
              [NSNumber numberWithInt:ctfMorningStop], // Thu
              [NSNumber numberWithInt:ctfMorningStop], // Fri
              [NSNumber numberWithInt:csaMorningStop],  // Sat
-             [NSNumber numberWithInt:csuMorningStop],  // Sun
+             
              nil];
     
     
@@ -550,22 +576,23 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:cmwNightStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:csuNightStart],  // Sun
+			[NSNumber numberWithInt:cmwNightStart], // Mon
             [NSNumber numberWithInt:cmwNightStart], // Tue
             [NSNumber numberWithInt:cmwNightStart], // Wed
             [NSNumber numberWithInt:ctfNightStart], // Thu
             [NSNumber numberWithInt:ctfNightStart], // Fri
             [NSNumber numberWithInt:noMealForDay],  // Sat
-            [NSNumber numberWithInt:csuNightStart],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:cmwNightStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:csuNightStop],  // Sun
+			 [NSNumber numberWithInt:cmwNightStop], // Mon
              [NSNumber numberWithInt:cmwNightStop], // Tue
              [NSNumber numberWithInt:cmwNightStop], // Wed
              [NSNumber numberWithInt:ctfNightStop], // Thu
              [NSNumber numberWithInt:ctfNightStop], // Fri
              [NSNumber numberWithInt:noMealForDay],  // Sat
-             [NSNumber numberWithInt:csuNightStop],  // Sun
              nil];
     
     
@@ -587,22 +614,23 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:grillmwStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:grillsuStart],  // Sun
+			[NSNumber numberWithInt:grillmwStart], // Mon
             [NSNumber numberWithInt:grillmwStart], // Tue
             [NSNumber numberWithInt:grillmwStart], // Wed
             [NSNumber numberWithInt:grilltfStart], // Thu
             [NSNumber numberWithInt:grilltfStart], // Fri
             [NSNumber numberWithInt:grillsaStart],  // Sat
-            [NSNumber numberWithInt:grillsuStart],  // Sun
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:grillmwStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:grillsuStop],  // Sun
+			 [NSNumber numberWithInt:grillmwStop], // Mon
              [NSNumber numberWithInt:grillmwStop], // Tue
              [NSNumber numberWithInt:grillmwStop], // Wed
              [NSNumber numberWithInt:grilltfStop], // Thu
              [NSNumber numberWithInt:grilltfStop], // Fri
              [NSNumber numberWithInt:grillsaStop],  // Sat
-             [NSNumber numberWithInt:grillsuStop],  // Sun
+             
              nil];
     
     
@@ -622,22 +650,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			[NSNumber numberWithInt:noMealForDay], // Mon
             [NSNumber numberWithInt:noMealForDay], // Tue
             [NSNumber numberWithInt:noMealForDay], // Wed
             [NSNumber numberWithInt:pubtStart], // Thu
             [NSNumber numberWithInt:pubfsStart], // Fri
             [NSNumber numberWithInt:pubfsStart],  // Sat
-            [NSNumber numberWithInt:noMealForDay],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			 [NSNumber numberWithInt:noMealForDay], // Mon
              [NSNumber numberWithInt:noMealForDay], // Tue
              [NSNumber numberWithInt:noMealForDay], // Wed
              [NSNumber numberWithInt:pubtStop], // Thu
              [NSNumber numberWithInt:pubfsStop], // Fri
              [NSNumber numberWithInt:pubfsStop],  // Sat
-             [NSNumber numberWithInt:noMealForDay],  // Sun
+             
              nil];
     
     
@@ -656,22 +686,24 @@
     [tempSchedule release];
     
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:emfStart], // Mon
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:emssStart],  // Sun
+			[NSNumber numberWithInt:emfStart], // Mon
             [NSNumber numberWithInt:emfStart], // Tue
             [NSNumber numberWithInt:emfStart], // Wed
             [NSNumber numberWithInt:emfStart], // Thu
             [NSNumber numberWithInt:emfStart], // Fri
             [NSNumber numberWithInt:emssStart],  // Sat
-            [NSNumber numberWithInt:emssStart],  // Sun
+            
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:emfStop], // Mon
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:emssStop],  // Sun
+			 [NSNumber numberWithInt:emfStop], // Mon
              [NSNumber numberWithInt:emfStop], // Tue
              [NSNumber numberWithInt:emfStop], // Wed
              [NSNumber numberWithInt:emfStop], // Thu
              [NSNumber numberWithInt:emfStop], // Fri
              [NSNumber numberWithInt:emssStop],  // Sat
-             [NSNumber numberWithInt:emssStop],  // Sun
+             
              nil];
     
     
@@ -729,15 +761,16 @@
 - (void)processArrays{
 	
 	WristWatch *clock= [[WristWatch alloc] init];
-
+	watch = clock;
+	//[clock release];
+	
 	[self processHoursArrays];
 	[self processArrayOfOpenMeals];
 	
 	// Processes Meals for Today and Tomorrow
-	[self processMealArraysForDay:[clock getWeekDay]];
-	[self processMealArraysForDay:[clock getWeekDay]+1];
+	[self processMealArraysForDay:[watch getWeekDay]];
+	[self processMealArraysForDay:[watch getNextWeekDay]];
 
-	
 	// Resolve Inconsistencies
 	[self resolveInconsistenciesInArrays];
 	
@@ -750,9 +783,7 @@
 
 // Meal Schedule and Meal Items
 - (void)processMealArraysForDay:(int)day{
-    
-	WristWatch *clock= [[WristWatch alloc] init];
-
+	
 	// We establish three arrays to keep dictionary objects of meals
 	
 	if (thorne_dictionary_array == nil || moulton_dictionary_array == nil) {
@@ -766,6 +797,8 @@
 	// Running through every possible meal to decide which meals are open
     for(MealSchedule *element in diningHallMealArray){
         NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
+		
+		
 		[element setCurrentDay:day];
 		
         if ([element isOpen] || [element willOpen]){
@@ -775,7 +808,7 @@
             [dictionary setObject:[element returnDescription] forKey:@"Day"];
 			[dictionary setObject:[element dateText] forKey:@"Hours_of_Operation"];
 			
-			if ([element currentDay] == [clock getWeekDay]) {
+			if ([element currentDay] == [watch getWeekDay]) {
 				[dictionary setObject:[NSString stringWithFormat:@"Today's %@", [element returnDescription]] forKey:@"Formatted_Title"];
 
 			} else {
@@ -813,7 +846,7 @@
 
 	
 }
--(void)populateMealArrays{
+- (void)populateMealArrays{
 	
 	
 	self.thorneArray = [self populateArrayFromDict:thorne_dictionary_array];
@@ -1019,7 +1052,7 @@
 	NSMutableArray *array2 = [[NSMutableArray alloc]init];
     NSMutableArray *array3 = [[NSMutableArray alloc]init];
 	
-    int currentDay = (int)[self returnCurrentWeekDay];
+    int currentDay = (int)[watch getWeekDay];
     
 	
     for(MealSchedule *element in mealArray){
@@ -1077,7 +1110,7 @@
 	NSMutableArray *section_two = [[NSMutableArray alloc]init];
     NSMutableArray *section_three = [[NSMutableArray alloc]init];
 
-    int currentDay = (int)[self returnCurrentWeekDay];
+    int currentDay = (int)[watch getWeekDay];
 
     for(MealSchedule *element in mealArray){
         [element setCurrentDay:currentDay];
@@ -1133,23 +1166,13 @@
 }
 -(NSNumber *)returnCurrentWeekDayNSNumber{
     
-    int intToReturn = [self returnCurrentWeekDay];
+    int intToReturn = [watch getWeekDay];
     
     
     return [NSNumber numberWithInt:intToReturn];
     
 }
-- (int)returnCurrentWeekDay {
-	
-	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
-	[inputFormatter setDateFormat:@"e"];
-	NSDate *toBeFormatted = [[[NSDate alloc] init] autorelease];
-	
-	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
-	
-	return[formattedDate intValue];
-	
-}
+
 
 
 #pragma mark -
@@ -1325,6 +1348,42 @@
 	}
 	
 	return @""; 
+}
+
+- (void)dealloc{
+	[mealArray release];
+	[diningHallMealArray release];
+	[thorneArray release];
+	[moultonArray release];
+	[navBarArray release];
+	[thorne_dictionary_array release];
+	[moulton_dictionary_array release];
+	[expressLunch release];
+	[expressDinner release];
+	[mHotBreakfast release];
+	[mColdBreakfast release];
+	[mLunch release];
+	[mDinner release];
+	[mBrunch release];
+	[tHotBreakfast release];
+	[tColdLunch release];
+	[tHotLunch release];
+	[tDinner release];
+	[tBrunch release];
+	[tSuperSnax release];
+	[cafeMorning release];
+	[cafeNight release];
+	[theGrill release];
+	[thePub release];
+	[theCStore release];
+	[openArray release];
+	[allHoursArray release];
+	[super dealloc];
+
+	
+	
+	
+	
 }
 
 @end

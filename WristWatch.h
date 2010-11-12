@@ -18,6 +18,7 @@
 - (int)getHour;
 - (int)getMinute;
 - (int)getWeekDay;
+- (int)getNextWeekDay;
 - (int)getWeekofYear;
 -(NSString*)getCurrentDayTitle;
 -(NSString*)getNextDayTitle;

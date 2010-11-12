@@ -39,7 +39,7 @@
 	
 	// Data Controllers
 	mealHandler *todaysMealHandler;
-	WristWatch *localMealDecider;
+	WristWatch *watch;
 	NSIndexPath *selectedIndexPath;
 	NSMutableArray *currentArray;
 	

@@ -16,6 +16,8 @@
 // Returns an NSDate initialized for the current opening time.
 -(NSDate *)currentOpening{
     
+	//NSLog(@"Checking Opening Time for Day = %d", currentDay);
+	
     NSTimeInterval interval = [[openTimes objectAtIndex:currentDay-1] intValue];
     
     NSDate *openTime = [[NSDate alloc] initWithTimeInterval:interval 
