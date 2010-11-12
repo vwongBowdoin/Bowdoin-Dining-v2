@@ -219,16 +219,17 @@
             NSLog(@"Reloading Data for Hall:%d, Meal:%d,", currentHallPage, currentMealPage);
 			
 			
-			
+			currentHallPage = hallPage;
+            currentMealPage = mealPage;
 			
 			[customTableView reloadData];
             
-            currentHallPage = hallPage;
-            currentMealPage = mealPage;
+          
             return;
             
         }
         
+		// Flashes TableView
 		 [UIView beginAnimations:nil context:nil];
 		 [UIView setAnimationDuration:0.2];
 		 [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:YES];
@@ -251,7 +252,13 @@
         [self animateNavigationBars];
      
         currentHallPage = hallPage;
+		currentMealPage = mealPage;
 
+		[customTableView reloadData];
+		
+		hallNavBar.timeToDisplay = [localScheduler hoursOfOperationForHall:currentHallPage meal:currentMealPage];
+		[hallNavBar setNeedsDisplay];
+		
     }		
 	
 }
@@ -262,6 +269,7 @@
     [UIView setAnimationDuration:0.5];
     [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:YES];
     [UIView setAnimationDelegate:self]; 
+
    
     // Constants for Navigation Bar Animation
     CGFloat mealScrollWidth = mealScrollView.frame.size.width;
@@ -277,8 +285,8 @@
     CGFloat fillerBarHeight = topFillerBar.frame.size.height;
     CGFloat fillerBarOriginY = topFillerBar.frame.origin.y;
     
-    CGFloat altScrollerHeight = alternateScroller.frame.size.height;
-    CGFloat altScrollerWidth = alternateScroller.frame.size.width;
+ //   CGFloat altScrollerHeight = alternateScroller.frame.size.height;
+ //   CGFloat altScrollerWidth = alternateScroller.frame.size.width;
     
     
     if (navigationBarsAnimatedOut){
@@ -288,12 +296,12 @@
         mealScrollView.frame = CGRectMake(0, 0, mealScrollWidth, mealScrollHeight);
         topFillerBar.frame = CGRectMake(0 , -1, fillerBarWidth, fillerBarHeight);
         hallScrollView.frame = CGRectMake(0 , mealScrollHeight, hallScrollWidth, hallScrollHeight);
-        alternateScroller.frame = CGRectMake(0, mealScrollHeight + hallScrollHeight, altScrollerWidth, altScrollerHeight);
+       // alternateScroller.frame = CGRectMake(0, mealScrollHeight + hallScrollHeight, altScrollerWidth, altScrollerHeight);
                
         
         navigationBarsAnimatedOut = NO;
         [customTableView setAlpha:1.0];
-        [alternateScroller setAlpha:0.0];
+  //      [alternateScroller setAlpha:0.0];
         [dayDeciderBar setAlpha:0.0];
         
         
@@ -305,12 +313,12 @@
         mealScrollView.frame = CGRectMake(0 , mealScrollOriginY-(mealScrollHeight), mealScrollWidth, mealScrollHeight);
         topFillerBar.frame = CGRectMake(0 , fillerBarOriginY-(fillerBarHeight), fillerBarWidth, fillerBarHeight);
         hallScrollView.frame = CGRectMake(0 , mealScrollHeight, hallScrollWidth, hallScrollHeight);
-        alternateScroller.frame = CGRectMake(0, hallScrollHeight + mealScrollHeight, altScrollerWidth, altScrollerHeight);
+      //  alternateScroller.frame = CGRectMake(0, hallScrollHeight + mealScrollHeight, altScrollerWidth, altScrollerHeight);
         
         
         navigationBarsAnimatedOut = YES;
-        [customTableView setAlpha:0.0];
-        [alternateScroller setAlpha:1.0];
+        [customTableView setAlpha:1.0];
+//	[alternateScroller setAlpha:1.0];
         [dayDeciderBar setAlpha:1.0];
 
         
@@ -324,20 +332,20 @@
 // Method Triggerd at the Stop of an Animation
 - (void)navigationAnimationOut{
     
-    [customTableView removeFromSuperview];
+  //  [customTableView removeFromSuperview];
     [self.view addSubview:dayDeciderView];
 
-    [alternateScroller setAlpha:1.0];
-    [alternateScroller setUserInteractionEnabled:YES];
+  //  [alternateScroller setAlpha:1.0];
+//    [alternateScroller setUserInteractionEnabled:YES];
     
 }
 
 // Method Triggerd at the Stop of an Animation
 - (void)navigationAnimationIn{
     
-    [self.view addSubview:customTableView];
-    [alternateScroller setUserInteractionEnabled:NO];
-    [alternateScroller setAlpha:0.0];
+ //   [self.view addSubview:customTableView];
+//    [alternateScroller setUserInteractionEnabled:NO];
+ //   [alternateScroller setAlpha:0.0];
     
 }
 		 
@@ -398,10 +406,10 @@
 	// Configures whether a cell is bold or not
 	if (indexPath.row != 0) {
 		[cell.textLabel setFont:[UIFont systemFontOfSize:14.0]];
-		cell.textLabel.numberOfLines = 3;
+		cell.textLabel.numberOfLines = 10;
 		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
 		
-	} else {
+	} else{
 		[cell.textLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
 		
 	}

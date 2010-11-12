@@ -24,6 +24,8 @@
 	NSMutableArray *thorneArray;
 	NSMutableArray *moultonArray;
 	NSMutableArray *navBarArray;
+	NSMutableArray *specialsArray;
+
 	
 	NSMutableArray *thorneNavHours;
 	NSMutableArray *moultonNavHours;
@@ -79,6 +81,8 @@
 @property (nonatomic, retain) NSMutableArray *thorneArray;
 @property (nonatomic, retain) NSMutableArray *moultonArray;
 @property (nonatomic, retain) NSMutableArray *navBarArray;
+@property (nonatomic, retain) NSMutableArray *specialsArray;
+
 
 
 @property (nonatomic, retain) NSMutableArray *thorne_dictionary_array;

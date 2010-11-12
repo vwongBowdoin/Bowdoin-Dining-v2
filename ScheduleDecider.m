@@ -16,7 +16,7 @@
 @synthesize expressLunch, expressDinner, mHotBreakfast, mColdBreakfast, mLunch, mDinner,mBrunch;
 @synthesize tHotBreakfast, tColdLunch, tHotLunch, tDinner, tBrunch, tSuperSnax;
 @synthesize cafeMorning, cafeNight, theGrill, thePub, theCStore;
-@synthesize mealArray, diningHallMealArray, thorneArray, moultonArray, navBarArray, thorne_dictionary_array, moulton_dictionary_array;
+@synthesize mealArray, diningHallMealArray, thorneArray, moultonArray, navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 
 // This method populates MealSchedule objects with their allotted times
@@ -778,7 +778,19 @@
 	[self populateNavigationBarArray];
 	[self populateMealArrays];
 	
+	[self populateSpecialsArray];
 	
+	
+}
+
+- (void)populateSpecialsArray{
+	
+	NSString *fileLocation = [NSString stringWithFormat:@"%@/%@.xml",[self documentsDirectory], @"specials"];
+
+	NSLog(@"Loading Array = %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	specialsArray = [[NSMutableArray alloc] initWithContentsOfFile:fileLocation];
+	
+
 }
 
 // Meal Schedule and Meal Items
@@ -911,10 +923,22 @@
 	NSLog(@"Redisplaying Hours");
 	
 	// Thorne
-	if (hall == 0) {
-		return [thorneNavHours objectAtIndex:meal];
-	} else {
-		return [moultonNavHours objectAtIndex:meal];
+	
+	switch (hall) {
+		case 0:
+			return [thorneNavHours objectAtIndex:meal];
+			break;
+			
+		case 1:
+			return [moultonNavHours objectAtIndex:meal];
+			break;
+
+		case 2:
+			return [[specialsArray objectAtIndex:0] objectForKey:@"description"];
+			break;
+
+		default:
+			break;
 	}
 
 	
@@ -1180,52 +1204,80 @@
 
 -(NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex{
 	
-	if (location == 0){
-		
-		return [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:section] count];
-		
-	} else {
-		
-		return [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] count];
-		
+	
+	switch (location) {
+		case 0:
+			return [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:section] count];
+			break;
+			
+		case 1:
+			return [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] count];
+			break;
+
+		case 2:
+			return 2;
+			break;
+
+		default:
+			return 0;
+			break;
 	}
+	
+
 	
 }
 
 -(NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex{
 	
-	if (location == 0){
-		
-		if ([thorneArray count] == 0) {
+	
+	switch (location) {
+		case 0:
+			if ([thorneArray count] == 0) { return 0; }
+			return [[thorneArray objectAtIndex:mealIndex] count];
+			break;
 			
-			return 0;
-		}
-		
-		return [[thorneArray objectAtIndex:mealIndex] count];
-		
-	} else {
-		
-		if ([moultonArray count] == 0) {
+		case 1:
+			if ([moultonArray count] == 0) {return 0;}
+			return [[moultonArray objectAtIndex:mealIndex] count];
+			break;
 			
+		case 2:
+			return 2;
+			break;
+			
+		default:
 			return 0;
-		}
-		
-		return [[moultonArray objectAtIndex:mealIndex] count];
-		
+			break;
 	}
 	
 }
 
 -(NSString *)returnItemFromLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath  {
 	
-	if (location == 0){
-		
-		return [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-		
-	} else {
-		
-		return [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-		
+	
+	switch (location) {
+		case 0:
+			return [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+			break;
+			
+		case 1:
+			return [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+			break;
+			
+		case 2:
+			// Grill Data
+			if (indexPath.section == 0 && indexPath.row == 0)	{return @"The Grill";}
+			if (indexPath.section == 0) {return [[specialsArray objectAtIndex:1] objectForKey:@"magees"];}
+			
+			// Cafe Data
+			if (indexPath.section == 1 && indexPath.row == 0)	{return @"The Cafe";}
+			if (indexPath.section == 1) {return [[specialsArray objectAtIndex:1] objectForKey:@"cafe"];}
+			else { return @"NULL";}
+			break;
+			
+		default:
+			return 0;
+			break;
 	}
 	
 }
@@ -1234,18 +1286,28 @@
 	
 	NSString *stringToConsider;
 	
-	if (location == 0){
-		
-		stringToConsider = [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-		
-	} else {
-		
-		stringToConsider = [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-		
+	switch (location) {
+		case 0:
+			stringToConsider = [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+			break;
+			
+		case 1:
+			stringToConsider = [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+			break;
+			
+		case 2:
+			if (indexPath.section == 0) {stringToConsider = [[specialsArray objectAtIndex:1] objectForKey:@"magees"];}
+			if (indexPath.section == 1) {stringToConsider = [[specialsArray objectAtIndex:1] objectForKey:@"cafe"];}
+			break;
+			
+		default:
+			break;
 	}
 	
+
 	
-	CGSize constraint = CGSizeMake(320.0f - (10.0f * 2), 50.0f);
+	
+	CGSize constraint = CGSizeMake(320.0f - (10.0f * 2), 200.0f);
 	CGSize size = [stringToConsider sizeWithFont:[UIFont systemFontOfSize:14.0f] constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
 	CGFloat height = size.height;
     

@@ -488,6 +488,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DiningTableViewTest_Prefix.pch;
 				INFOPLIST_FILE = "DiningTableViewTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				PRODUCT_NAME = DiningTableViewTest;
 				SDKROOT = iphoneos4.1;
 			};

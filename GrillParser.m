@@ -26,6 +26,7 @@
 	
 	currentDaySpecials = [[NSMutableDictionary alloc] init];
 	cafeGrillSpecials = [[NSMutableArray alloc] init];
+	//specialsForToday = [[NSMutableArray alloc] init];
 	currentItem = [[NSString alloc] init];
 	currentUnit = [[NSString alloc] init];
 
@@ -43,8 +44,8 @@
 
 -(void)parserDidStartDocument:(NSXMLParser *)parser {
 	NSLog(@"Found Grill/Cafe XML and started parsing");
-
-
+	
+	
 }
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
@@ -52,6 +53,13 @@
 	NSLog(@"Ended");
 	NSLog(@"Printing Data Structure:");
 	NSLog(@"%@", cafeGrillSpecials);
+	
+	
+	
+    NSString *archivePath = [NSString stringWithFormat:@"%@/specials.xml",[self documentsDirectory]];
+    [cafeGrillSpecials writeToFile:archivePath atomically:YES];
+	NSLog(@"Storing Specials: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	
     
 }
 
@@ -71,13 +79,12 @@
 		
 		//Wipes specials
 		currentDaySpecials = [[NSMutableDictionary alloc] init];
-	
+		//specialsForToday = [[NSMutableArray alloc] init];
 	}
 	
 	if ([elementName isEqualToString:@"item"]) {
 		
 		[currentDaySpecials setObject:currentItem forKey:currentUnit];
-
 		
 		// Resetting CurrentItem
 		currentItem = [[NSString alloc] init];
@@ -90,8 +97,7 @@
 	
 	if ([currentElement isEqualToString:@"description"]) {
 		
-		// store the description of this week's special
-		
+		[currentDaySpecials setObject:string forKey:@"description"];
 	}
 	
 
@@ -118,9 +124,6 @@
 		
 
 	}
-
-	
-	
 }
 
 -(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
@@ -135,6 +138,11 @@
 -(void)displayError:(NSString*)errorToDisplay {
 	NSLog(@"Error parsing XML: %@", errorToDisplay);
 	
+}
+
+-(NSString *)documentsDirectory {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	return [paths objectAtIndex:0];
 }
 
 
