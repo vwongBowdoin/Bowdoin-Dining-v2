@@ -25,6 +25,8 @@
 		A159E968120B0EA100FE7BD5 /* HoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A159E966120B0EA100FE7BD5 /* HoursViewController.m */; };
 		A159E969120B0EA100FE7BD5 /* HoursViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A159E967120B0EA100FE7BD5 /* HoursViewController.xib */; };
 		A15A87111268CC4600899F27 /* Default-Beta.png in Resources */ = {isa = PBXBuildFile; fileRef = A15A87101268CC4600899F27 /* Default-Beta.png */; };
+		A1662C18128D1E28000F557C /* 11-clock.png in Resources */ = {isa = PBXBuildFile; fileRef = A1662C17128D1E28000F557C /* 11-clock.png */; };
+		A1662C1C128D1E7F000F557C /* 190-bank.png in Resources */ = {isa = PBXBuildFile; fileRef = A1662C1B128D1E7F000F557C /* 190-bank.png */; };
 		A16B6A48124C3C6C00774456 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16B6A47124C3C6C00774456 /* MobileCoreServices.framework */; };
 		A16B6A4B124C3C7900774456 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A16B6A4A124C3C7900774456 /* libz.1.2.3.dylib */; };
 		A16B6A4D124C3C8300774456 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16B6A4C124C3C8300774456 /* SystemConfiguration.framework */; };
@@ -86,6 +88,8 @@
 		A159E966120B0EA100FE7BD5 /* HoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoursViewController.m; sourceTree = "<group>"; };
 		A159E967120B0EA100FE7BD5 /* HoursViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HoursViewController.xib; sourceTree = "<group>"; };
 		A15A87101268CC4600899F27 /* Default-Beta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Beta.png"; sourceTree = "<group>"; };
+		A1662C17128D1E28000F557C /* 11-clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "11-clock.png"; sourceTree = "<group>"; };
+		A1662C1B128D1E7F000F557C /* 190-bank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "190-bank.png"; sourceTree = "<group>"; };
 		A16B6A47124C3C6C00774456 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A16B6A4A124C3C7900774456 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		A16B6A4C124C3C8300774456 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -201,6 +205,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A1662C1B128D1E7F000F557C /* 190-bank.png */,
+				A1662C17128D1E28000F557C /* 11-clock.png */,
 				A1D2AB3E1283535E0022B18E /* Default.png */,
 				A15A87101268CC4600899F27 /* Default-Beta.png */,
 				A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */,
@@ -427,6 +433,8 @@
 				A131FE45125FBF56000B5E23 /* RecentTransactions.xib in Resources */,
 				A15A87111268CC4600899F27 /* Default-Beta.png in Resources */,
 				A1D2AB3F1283535E0022B18E /* Default.png in Resources */,
+				A1662C18128D1E28000F557C /* 11-clock.png in Resources */,
+				A1662C1C128D1E7F000F557C /* 190-bank.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

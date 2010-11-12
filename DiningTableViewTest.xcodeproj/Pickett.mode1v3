@@ -272,6 +272,7 @@
 								<string>A10BC6C6124E891200B9575A</string>
 								<string>A10BC6C7124E892500B9575A</string>
 								<string>A1A4079211F4CA8000608B9C</string>
+								<string>A16B6A4F124C3C9F00774456</string>
 								<string>A1FC340712089D3B00B5635E</string>
 								<string>A1B36AC71200A46E00D27351</string>
 								<string>29B97315FDCFA39411CA2CEA</string>
@@ -284,13 +285,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>45</integer>
-									<integer>44</integer>
+									<integer>56</integer>
+									<integer>55</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 271}, {296, 944}}</string>
+							<string>{{0, 552}, {296, 944}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -397,7 +398,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20306471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>Default.png</string>
+										<string>190-bank.png</string>
 										<key>PBXSplitModuleInNavigatorKey</key>
 										<dict>
 											<key>Split0</key>
@@ -405,11 +406,11 @@
 												<key>PBXProjectModuleGUID</key>
 												<string>1CE0B20406471E060097A5F4</string>
 												<key>PBXProjectModuleLabel</key>
-												<string>Default.png</string>
+												<string>190-bank.png</string>
 												<key>_historyCapacity</key>
 												<integer>0</integer>
 												<key>bookmark</key>
-												<string>A1662BCF128D14AF000F557C</string>
+												<string>A1662C22128D1EA4000F557C</string>
 												<key>history</key>
 												<array>
 													<string>A1A4079511F4CAAA00608B9C</string>
@@ -419,8 +420,6 @@
 													<string>A131FE5A125FC0FA000B5E23</string>
 													<string>A176F1CC12601B0900F814FF</string>
 													<string>A15A906C1260D75900392A31</string>
-													<string>A15A90881260D8A100392A31</string>
-													<string>A15A90971260DA4000392A31</string>
 													<string>A15A90981260DA4000392A31</string>
 													<string>A15A91331260E79B00392A31</string>
 													<string>A10BADD01263F43100795190</string>
@@ -462,17 +461,22 @@
 													<string>A1662AD0128CF377000F557C</string>
 													<string>A1662AD1128CF377000F557C</string>
 													<string>A1662AF2128CF825000F557C</string>
-													<string>A1662B94128D10A0000F557C</string>
 													<string>A1662B95128D10A0000F557C</string>
 													<string>A1662B96128D10A0000F557C</string>
 													<string>A1662B98128D10A0000F557C</string>
 													<string>A1662BA9128D1396000F557C</string>
-													<string>A1662BAB128D1396000F557C</string>
 													<string>A1662BAC128D1396000F557C</string>
-													<string>A1662BB3128D13C2000F557C</string>
 													<string>A1662BCC128D14AF000F557C</string>
 													<string>A1662BCD128D14AF000F557C</string>
-													<string>A1662BCE128D14AF000F557C</string>
+													<string>A1662BF7128D1AA4000F557C</string>
+													<string>A1662BF8128D1AA4000F557C</string>
+													<string>A1662BF9128D1AA4000F557C</string>
+													<string>A1662BFA128D1AA4000F557C</string>
+													<string>A1662BFB128D1AA4000F557C</string>
+													<string>A1662BFC128D1AA4000F557C</string>
+													<string>A1662C1F128D1EA4000F557C</string>
+													<string>A1662C20128D1EA4000F557C</string>
+													<string>A1662C21128D1EA4000F557C</string>
 												</array>
 											</dict>
 											<key>SplitCount</key>
@@ -511,7 +515,7 @@
 												<key>_historyCapacity</key>
 												<integer>0</integer>
 												<key>bookmark</key>
-												<string>A1662BD0128D14AF000F557C</string>
+												<string>A1662C23128D1EA4000F557C</string>
 												<key>history</key>
 												<array>
 													<string>A1A4079511F4CAAA00608B9C</string>
@@ -612,7 +616,7 @@
 												<key>_historyCapacity</key>
 												<integer>0</integer>
 												<key>bookmark</key>
-												<string>A1662BD1128D14AF000F557C</string>
+												<string>A1662C24128D1EA4000F557C</string>
 												<key>history</key>
 												<array>
 													<string>A177342C12690E4900E0468C</string>
@@ -853,7 +857,6 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>A1662BD2128D14AF000F557C</string>
 		<string>A16629D4128CD8B5000F557C</string>
 		<string>A16629D3128CD8AA000F557C</string>
 		<string>A16629CE128CD84A000F557C</string>
@@ -880,14 +883,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>ScheduleDecider.m</string>
+								<string>DiningParser.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -904,6 +905,8 @@
 							<string>203pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>

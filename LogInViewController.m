@@ -12,6 +12,21 @@
 @implementation LogInViewController
 @synthesize delegate;
 
+
+-(void)viewDidLoad{
+	
+	userNameField.delegate = self;
+	passwordField.delegate = self;
+	
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	
+	[self launchPolarPoints];
+	
+	return YES;
+}
+
 -(IBAction)launchPolarPoints{
 	
 	[self dismissModalViewControllerAnimated:YES];

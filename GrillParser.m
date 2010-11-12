@@ -46,13 +46,26 @@
 	NSLog(@"Found Grill/Cafe XML and started parsing");
 	
 	
+	// Adds Value for Sunday Meal
+	[currentDaySpecials setObject:@"There are no Grill Specials on the Weekend" forKey:@"magees"];
+	[currentDaySpecials setObject:@"There are no Cafe Specials on the Weekend" forKey:@"cafe"];
+	[cafeGrillSpecials addObject:currentDaySpecials];
+
+	// Resets the Specials Dictionary
+	currentDaySpecials = [[NSMutableDictionary alloc] init];
+
+	
 }
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
     
-	NSLog(@"Ended");
-	NSLog(@"Printing Data Structure:");
-	NSLog(@"%@", cafeGrillSpecials);
+	// Adds Value for Saturday Meal
+	[currentDaySpecials setObject:@"There are no Grill Specials on the Weekend" forKey:@"magees"];
+	[currentDaySpecials setObject:@"There are no Cafe Specials on the Weekend" forKey:@"cafe"];
+	[cafeGrillSpecials addObject:currentDaySpecials];
+	
+	// Resets the Specials Dictionary
+	currentDaySpecials = [[NSMutableDictionary alloc] init];
 	
 	
 	

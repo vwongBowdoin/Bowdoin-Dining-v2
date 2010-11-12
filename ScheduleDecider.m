@@ -934,7 +934,7 @@
 			break;
 
 		case 2:
-			return [[specialsArray objectAtIndex:0] objectForKey:@"description"];
+			return [[specialsArray objectAtIndex:1] objectForKey:@"description"];
 			break;
 
 		default:
@@ -1267,11 +1267,11 @@
 		case 2:
 			// Grill Data
 			if (indexPath.section == 0 && indexPath.row == 0)	{return @"The Grill";}
-			if (indexPath.section == 0) {return [[specialsArray objectAtIndex:1] objectForKey:@"magees"];}
+			if (indexPath.section == 0) {return [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"magees"];}
 			
 			// Cafe Data
 			if (indexPath.section == 1 && indexPath.row == 0)	{return @"The Cafe";}
-			if (indexPath.section == 1) {return [[specialsArray objectAtIndex:1] objectForKey:@"cafe"];}
+			if (indexPath.section == 1) {return [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"cafe"];}
 			else { return @"NULL";}
 			break;
 			

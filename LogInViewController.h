@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class PolarPoints;
 
-@interface LogInViewController : UIViewController {
+@interface LogInViewController : UIViewController <UITextFieldDelegate> {
 
 	IBOutlet UISwitch *saveSwitch;
 	IBOutlet UITextField *userNameField;
