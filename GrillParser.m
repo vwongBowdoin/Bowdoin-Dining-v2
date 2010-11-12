@@ -10,18 +10,7 @@
 
 
 @implementation GrillParser
-@synthesize currentDaySpecials, cafeGrillSpecials;
-
-
--(id)init{
-	
-	
-	currentDaySpecials = [[NSMutableDictionary alloc] init];
-	cafeGrillSpecials = [[NSMutableArray alloc] init];
-	
-	return self;	
-	
-}
+@synthesize currentDaySpecials, cafeGrillSpecials, currentUnit;
 
 -(void)parseSpecialsFromData:(NSData*)data{
 
@@ -34,6 +23,13 @@
 	[rssParser setShouldProcessNamespaces:NO];
 	[rssParser setShouldReportNamespacePrefixes:NO];
 	[rssParser setShouldResolveExternalEntities:NO];
+	
+	currentDaySpecials = [[NSMutableDictionary alloc] init];
+	cafeGrillSpecials = [[NSMutableArray alloc] init];
+	currentItem = [[NSString alloc] init];
+	currentUnit = [[NSString alloc] init];
+
+	
 	
 	[rssParser parse];
 	
@@ -54,6 +50,8 @@
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
     
 	NSLog(@"Ended");
+	NSLog(@"Printing Data Structure:");
+	NSLog(@"%@", cafeGrillSpecials);
     
 }
 
@@ -70,18 +68,26 @@
 	if ([elementName isEqualToString:@"day"]) {
 		
 		[cafeGrillSpecials addObject:currentDaySpecials];
+		
+		//Wipes specials
+		currentDaySpecials = [[NSMutableDictionary alloc] init];
 	
 	}
 	
 	if ([elementName isEqualToString:@"item"]) {
+		
 		[currentDaySpecials setObject:currentItem forKey:currentUnit];
 
+		
+		// Resetting CurrentItem
+		currentItem = [[NSString alloc] init];
 	}
 	
 }
 
 -(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
 
+	
 	if ([currentElement isEqualToString:@"description"]) {
 		
 		// store the description of this week's special
@@ -93,18 +99,23 @@
 		
 		if ([string isEqualToString:@"magees"]) {
 			
-			currentUnit = string;
-			
+			self.currentUnit = string;			
 		} else if ([string isEqualToString:@"cafe"]) {
 			
-			currentUnit = string;
+			self.currentUnit = string;
 		}
 		
 	}
 	
 	if ([currentElement isEqualToString:@"item"]) {
 		
-		currentItem = [currentItem stringByAppendingString:string];
+		NSString *tempString = string;
+		
+		
+		tempString = [string stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+	
+		currentItem = [currentItem stringByAppendingFormat:@"%@", tempString];
+		
 
 	}
 

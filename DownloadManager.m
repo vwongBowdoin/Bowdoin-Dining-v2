@@ -22,7 +22,7 @@
 	WristWatch *aTimer = [[WristWatch alloc] init];
 	localWatch = aTimer;
 	
-	/*
+	
 	
 	NSString *downloadAddress = @"http://www.bowdoin.edu/atreus/diningspecials/admin/lib/xml/specials.xml";
 	NSURL *downloadURL = [NSURL URLWithString:downloadAddress];
@@ -31,7 +31,7 @@
 	
 	GrillParser *grillParser = [[GrillParser alloc] init];
 	[grillParser parseSpecialsFromData:specialsXML];
-	*/
+	
 	
 	
 	

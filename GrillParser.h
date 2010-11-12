@@ -20,6 +20,7 @@
 
 }
 
+@property (nonatomic, retain) NSString *currentUnit;
 @property (nonatomic, retain) NSMutableArray *cafeGrillSpecials;
 @property (nonatomic, retain) NSMutableDictionary *currentDaySpecials;
 
