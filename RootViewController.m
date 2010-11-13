@@ -54,7 +54,7 @@
 	localMealDecider = localWatch;
 
 	// ****** Favorites Testing ******* //
-	[self testFavorites];
+	//[self testFavorites];
 	
 	// Register for Notifications
     [self registerNotifications];
