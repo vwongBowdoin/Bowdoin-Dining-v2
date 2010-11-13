@@ -20,11 +20,13 @@
 #import "CSGoldController.h"
 #import "HallNavigationBar.h"
 #import "MealNavigationBar.h"
+#import "GrillAreaViewController.h"
 
 
 @implementation RootViewController
 
-@synthesize customTableView, hallScrollView, mealScrollView, alternateScroller, selectedIndexPath, dayDeciderBar;
+@synthesize customTableView, hallScrollView, mealScrollView, selectedIndexPath, dayDeciderBar;
+@synthesize callButton, callText, menuButton, menuText;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -296,12 +298,18 @@
         mealScrollView.frame = CGRectMake(0, 0, mealScrollWidth, mealScrollHeight);
         topFillerBar.frame = CGRectMake(0 , -1, fillerBarWidth, fillerBarHeight);
         hallScrollView.frame = CGRectMake(0 , mealScrollHeight, hallScrollWidth, hallScrollHeight);
-       // alternateScroller.frame = CGRectMake(0, mealScrollHeight + hallScrollHeight, altScrollerWidth, altScrollerHeight);
                
         
         navigationBarsAnimatedOut = NO;
         [customTableView setAlpha:1.0];
-  //      [alternateScroller setAlpha:0.0];
+
+		// Sets Buttons
+		[callButton setAlpha:0.0];
+		[callText setAlpha:0.0];
+		[menuButton setAlpha:0.0];
+		[menuText setAlpha:0.0];
+		
+		
         [dayDeciderBar setAlpha:0.0];
         
         
@@ -313,13 +321,16 @@
         mealScrollView.frame = CGRectMake(0 , mealScrollOriginY-(mealScrollHeight), mealScrollWidth, mealScrollHeight);
         topFillerBar.frame = CGRectMake(0 , fillerBarOriginY-(fillerBarHeight), fillerBarWidth, fillerBarHeight);
         hallScrollView.frame = CGRectMake(0 , mealScrollHeight, hallScrollWidth, hallScrollHeight);
-      //  alternateScroller.frame = CGRectMake(0, hallScrollHeight + mealScrollHeight, altScrollerWidth, altScrollerHeight);
         
         
         navigationBarsAnimatedOut = YES;
         [customTableView setAlpha:1.0];
-//	[alternateScroller setAlpha:1.0];
-        [dayDeciderBar setAlpha:1.0];
+
+		[callButton setAlpha:1.0];
+		[callText setAlpha:1.0];
+		[menuButton setAlpha:1.0];
+		[menuText setAlpha:1.0];
+		
 
         
     }
@@ -332,20 +343,28 @@
 // Method Triggerd at the Stop of an Animation
 - (void)navigationAnimationOut{
     
-  //  [customTableView removeFromSuperview];
-    [self.view addSubview:dayDeciderView];
+	[callButton setAlpha:1.0];
+	[callButton setUserInteractionEnabled:YES];
+	
+	[callText setAlpha:1.0];
+	[menuText setAlpha:1.0];
 
-  //  [alternateScroller setAlpha:1.0];
-//    [alternateScroller setUserInteractionEnabled:YES];
+	[menuButton setAlpha:1.0];
+	[menuButton setUserInteractionEnabled:YES];
+
     
 }
 
 // Method Triggerd at the Stop of an Animation
 - (void)navigationAnimationIn{
-    
- //   [self.view addSubview:customTableView];
-//    [alternateScroller setUserInteractionEnabled:NO];
- //   [alternateScroller setAlpha:0.0];
+    [callButton setAlpha:0.0];
+	[callButton setUserInteractionEnabled:NO];
+	
+	[callText setAlpha:0.0];
+	[menuText setAlpha:0.0];
+	
+	[menuButton setAlpha:0.0];
+	[menuButton setUserInteractionEnabled:NO];
     
 }
 		 
@@ -656,10 +675,39 @@
 	
 }	
 
-- (IBAction)changeTime{
+// Calls the Grill
+- (IBAction)launchPhone{
 	
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://2077253888"]];
+	
+	UIDevice *device = [UIDevice currentDevice];
+	if (![device.model isEqualToString:@"iPhone"]){
+		NSString *title = @"Jack Magee's Grill";
+		NSString *message = @"207-725-3888";
+		NSString *cancelButtonTitle = @"Dismiss";
 		
+		UIAlertView *tempPhoneNumberAlert = [[UIAlertView alloc] initWithTitle:(NSString *)title 
+																	   message:(NSString *)message 
+																	  delegate: self 
+															 cancelButtonTitle:(NSString *)cancelButtonTitle
+															 otherButtonTitles: NULL];
+		
+		[tempPhoneNumberAlert show];
+		
+	}
+	
+	
 }
+
+- (IBAction)launchGrillMenu{
+	
+	GrillAreaViewController *grill = [[GrillAreaViewController alloc] init];
+	[self.navigationController presentModalViewController:grill animated:YES];
+	[grill release];
+	
+	
+}
+
 
 #pragma mark -
 #pragma mark Memory management

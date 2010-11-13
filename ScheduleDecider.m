@@ -1296,8 +1296,8 @@
 			break;
 			
 		case 2:
-			if (indexPath.section == 0) {stringToConsider = [[specialsArray objectAtIndex:1] objectForKey:@"magees"];}
-			if (indexPath.section == 1) {stringToConsider = [[specialsArray objectAtIndex:1] objectForKey:@"cafe"];}
+			if (indexPath.section == 0) {stringToConsider = [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"magees"];}
+			if (indexPath.section == 1) {stringToConsider = [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"cafe"];}
 			break;
 			
 		default:

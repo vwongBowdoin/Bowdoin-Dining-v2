@@ -29,6 +29,13 @@
     IBOutlet UIScrollView *alternateScroller;
 	IBOutlet UIView *hallHeaderView;
     IBOutlet UIView *hallHeaderTemplate;
+	
+	// Grill Buttons
+	IBOutlet UIButton *callButton;
+	IBOutlet UIButton *menuButton;
+	IBOutlet UILabel *callText;
+	IBOutlet UILabel *menuText;
+	
 
 	IBOutlet UIView *mealHeaderView;
     IBOutlet UIView *dayDeciderView;
@@ -57,8 +64,15 @@
 @property (nonatomic, retain) IBOutlet UICustomTableView *customTableView;
 @property (nonatomic, retain) IBOutlet UIScrollView *hallScrollView;
 @property (nonatomic, retain) IBOutlet UIScrollView *mealScrollView;
-@property (nonatomic, retain) IBOutlet UIScrollView * alternateScroller;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *dayDeciderBar;
+
+@property (nonatomic, retain) IBOutlet UIButton * callButton;
+@property (nonatomic, retain) IBOutlet UILabel * callText;
+@property (nonatomic, retain) IBOutlet UIButton * menuButton;
+@property (nonatomic, retain) IBOutlet UILabel * menuText;
+
+
+
 @property (nonatomic, retain) NSIndexPath *selectedIndexPath;
 
 -(void)setupMealData;
@@ -75,6 +89,8 @@
 -(IBAction)displayHoursPage;
 
 -(IBAction)changeTime;
+-(IBAction)launchPhone;
+-(IBAction)launchGrillMenu;
 
 
 

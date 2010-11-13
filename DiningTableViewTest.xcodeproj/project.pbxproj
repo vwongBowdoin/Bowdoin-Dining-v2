@@ -27,6 +27,12 @@
 		A15A87111268CC4600899F27 /* Default-Beta.png in Resources */ = {isa = PBXBuildFile; fileRef = A15A87101268CC4600899F27 /* Default-Beta.png */; };
 		A1662C18128D1E28000F557C /* 11-clock.png in Resources */ = {isa = PBXBuildFile; fileRef = A1662C17128D1E28000F557C /* 11-clock.png */; };
 		A1662C1C128D1E7F000F557C /* 190-bank.png in Resources */ = {isa = PBXBuildFile; fileRef = A1662C1B128D1E7F000F557C /* 190-bank.png */; };
+		A1693177128D1FCA00064E37 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A1693176128D1FCA00064E37 /* Default.png */; };
+		A16931A1128D203F00064E37 /* 75-phone.png in Resources */ = {isa = PBXBuildFile; fileRef = A16931A0128D203F00064E37 /* 75-phone.png */; };
+		A16931C9128D203F00064E37 /* 57-download.png in Resources */ = {isa = PBXBuildFile; fileRef = A16931C8128D203F00064E37 /* 57-download.png */; };
+		A1693245128D203F00064E37 /* GrillAreaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1693242128D203F00064E37 /* GrillAreaViewController.xib */; };
+		A1693246128D203F00064E37 /* GrillAreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1693244128D203F00064E37 /* GrillAreaViewController.m */; };
+		A169324B128D203F00064E37 /* Magees3.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A169324A128D203F00064E37 /* Magees3.pdf */; };
 		A16B6A48124C3C6C00774456 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16B6A47124C3C6C00774456 /* MobileCoreServices.framework */; };
 		A16B6A4B124C3C7900774456 /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A16B6A4A124C3C7900774456 /* libz.1.2.3.dylib */; };
 		A16B6A4D124C3C8300774456 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16B6A4C124C3C8300774456 /* SystemConfiguration.framework */; };
@@ -53,7 +59,7 @@
 		A1B36AB7120099AD00D27351 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B36AB6120099AD00D27351 /* DownloadManager.m */; };
 		A1B6FB2B11FDE33800C472EB /* bearIcon-black.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */; };
 		A1B6FB4811FDE4DF00C472EB /* fakeXMLDoc.xml in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */; };
-		A1D2AB3F1283535E0022B18E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D2AB3E1283535E0022B18E /* Default.png */; };
+		A1D2AB3F1283535E0022B18E /* Default-Main.png in Resources */ = {isa = PBXBuildFile; fileRef = A1D2AB3E1283535E0022B18E /* Default-Main.png */; };
 		A1D2AB8A1283592A0022B18E /* GrillParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2AB891283592A0022B18E /* GrillParser.m */; };
 		A1D6FECB125C28BB00E132A5 /* MealNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D6FECA125C28BB00E132A5 /* MealNavigationBar.m */; };
 		A1DCE62F1258E97C00746201 /* HallNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DCE62E1258E97C00746201 /* HallNavigationBar.m */; };
@@ -90,6 +96,13 @@
 		A15A87101268CC4600899F27 /* Default-Beta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Beta.png"; sourceTree = "<group>"; };
 		A1662C17128D1E28000F557C /* 11-clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "11-clock.png"; sourceTree = "<group>"; };
 		A1662C1B128D1E7F000F557C /* 190-bank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "190-bank.png"; sourceTree = "<group>"; };
+		A1693176128D1FCA00064E37 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A16931A0128D203F00064E37 /* 75-phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "75-phone.png"; sourceTree = "<group>"; };
+		A16931C8128D203F00064E37 /* 57-download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "57-download.png"; sourceTree = "<group>"; };
+		A1693242128D203F00064E37 /* GrillAreaViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GrillAreaViewController.xib; sourceTree = "<group>"; };
+		A1693243128D203F00064E37 /* GrillAreaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrillAreaViewController.h; sourceTree = "<group>"; };
+		A1693244128D203F00064E37 /* GrillAreaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrillAreaViewController.m; sourceTree = "<group>"; };
+		A169324A128D203F00064E37 /* Magees3.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Magees3.pdf; sourceTree = "<group>"; };
 		A16B6A47124C3C6C00774456 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A16B6A4A124C3C7900774456 /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		A16B6A4C124C3C8300774456 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -138,9 +151,10 @@
 		A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bearIcon-black.png"; sourceTree = "<group>"; };
 		A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = fakeXMLDoc.xml; sourceTree = "<group>"; };
 		A1D1944811FFE75F00339484 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		A1D2AB3E1283535E0022B18E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A1D2AB3E1283535E0022B18E /* Default-Main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Main.png"; sourceTree = "<group>"; };
 		A1D2AB881283592A0022B18E /* GrillParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrillParser.h; sourceTree = "<group>"; };
 		A1D2AB891283592A0022B18E /* GrillParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrillParser.m; sourceTree = "<group>"; };
+		A1D49EB1128D253C0030C6C6 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		A1D6FEC9125C28BB00E132A5 /* MealNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealNavigationBar.h; sourceTree = "<group>"; };
 		A1D6FECA125C28BB00E132A5 /* MealNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealNavigationBar.m; sourceTree = "<group>"; };
 		A1DCE62D1258E97C00746201 /* HallNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HallNavigationBar.h; sourceTree = "<group>"; };
@@ -189,6 +203,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				A1D49EB1128D253C0030C6C6 /* Entitlements.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -205,9 +220,13 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A169324A128D203F00064E37 /* Magees3.pdf */,
+				A16931C8128D203F00064E37 /* 57-download.png */,
+				A16931A0128D203F00064E37 /* 75-phone.png */,
 				A1662C1B128D1E7F000F557C /* 190-bank.png */,
 				A1662C17128D1E28000F557C /* 11-clock.png */,
-				A1D2AB3E1283535E0022B18E /* Default.png */,
+				A1693176128D1FCA00064E37 /* Default.png */,
+				A1D2AB3E1283535E0022B18E /* Default-Main.png */,
 				A15A87101268CC4600899F27 /* Default-Beta.png */,
 				A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */,
 				A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */,
@@ -353,6 +372,9 @@
 				A1A4078011F4CA4400608B9C /* mealHandler.m */,
 				A185E9721251977C00812356 /* WristWatch.h */,
 				A185E9731251977C00812356 /* WristWatch.m */,
+				A1693242128D203F00064E37 /* GrillAreaViewController.xib */,
+				A1693243128D203F00064E37 /* GrillAreaViewController.h */,
+				A1693244128D203F00064E37 /* GrillAreaViewController.m */,
 			);
 			name = "Data Management";
 			sourceTree = "<group>";
@@ -432,9 +454,14 @@
 				A159E969120B0EA100FE7BD5 /* HoursViewController.xib in Resources */,
 				A131FE45125FBF56000B5E23 /* RecentTransactions.xib in Resources */,
 				A15A87111268CC4600899F27 /* Default-Beta.png in Resources */,
-				A1D2AB3F1283535E0022B18E /* Default.png in Resources */,
+				A1D2AB3F1283535E0022B18E /* Default-Main.png in Resources */,
 				A1662C18128D1E28000F557C /* 11-clock.png in Resources */,
 				A1662C1C128D1E7F000F557C /* 190-bank.png in Resources */,
+				A1693177128D1FCA00064E37 /* Default.png in Resources */,
+				A16931A1128D203F00064E37 /* 75-phone.png in Resources */,
+				A16931C9128D203F00064E37 /* 57-download.png in Resources */,
+				A1693245128D203F00064E37 /* GrillAreaViewController.xib in Resources */,
+				A169324B128D203F00064E37 /* Magees3.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +503,7 @@
 				A131FE44125FBF56000B5E23 /* RecentTransactions.m in Sources */,
 				A176F11A125FF66100F814FF /* MBProgressHUD.m in Sources */,
 				A1D2AB8A1283592A0022B18E /* GrillParser.m in Sources */,
+				A1693246128D203F00064E37 /* GrillAreaViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +514,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/Code/Bowdoin Code/Bowdoin-Dining-v2/Entitlements.plist";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -496,8 +526,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DiningTableViewTest_Prefix.pch;
 				INFOPLIST_FILE = "DiningTableViewTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PRODUCT_NAME = DiningTableViewTest;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos4.1;
 			};
 			name = Debug;
@@ -506,6 +537,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/Code/Bowdoin Code/Bowdoin-Dining-v2/Entitlements.plist";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -518,6 +550,42 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		A1D49EAD128D250A0030C6C6 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.0;
+			};
+			name = Distribution;
+		};
+		A1D49EAE128D250A0030C6C6 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/Code/Bowdoin Code/Bowdoin-Dining-v2/Entitlements.plist";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bowdoin College";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.0.sdk/System/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = DiningTableViewTest_Prefix.pch;
+				INFOPLIST_FILE = "DiningTableViewTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
+				PRODUCT_NAME = DiningTableViewTest;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C6B408F-CDCB-46B7-B1DC-D6A60273EBAF";
+				SDKROOT = iphoneos4.1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -554,6 +622,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				A1D49EAE128D250A0030C6C6 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -563,6 +632,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				A1D49EAD128D250A0030C6C6 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

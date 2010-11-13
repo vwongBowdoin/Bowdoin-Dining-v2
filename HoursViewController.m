@@ -30,8 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-	[hourSelector addTarget:self action:@selector(hourSelectorDidChange:) forControlEvents:UIControlEventValueChanged];
-	
+	//[hourSelector addTarget:self action:@selector(hourSelectorDidChange:) forControlEvents:UIControlEventValueChanged];
+	[localScheduler changeDisplayedHourInformation:1];
+
 	self.title = @"Dining Hours";
 	
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -46,7 +47,7 @@
 - (void)hourSelectorDidChange:(UISegmentedControl*)sender{
 	
 	NSLog(@"Value = %d", [sender selectedSegmentIndex]);
-	[localScheduler changeDisplayedHourInformation:[sender selectedSegmentIndex]];
+	[localScheduler changeDisplayedHourInformation:1];
 	[theTableView reloadData];
 	
 }
