@@ -21,6 +21,7 @@
 #import "HallNavigationBar.h"
 #import "MealNavigationBar.h"
 #import "GrillAreaViewController.h"
+#import "LineCountAnalyzer.h"
 
 
 @implementation RootViewController
@@ -62,6 +63,17 @@
     // Grill View
     [alternateScroller addSubview:grillView];
     [alternateScroller setContentSize:CGSizeMake(320, 600)];
+	
+	
+	
+	// Testing Line Count Data
+	LineCountAnalyzer *analyzer = [[LineCountAnalyzer alloc] init];
+	
+	NSString *filePath = [[NSBundle mainBundle] pathForResource:@"testLineCount" ofType:@"xml"];  
+	NSData *myData = [NSData dataWithContentsOfFile:filePath];  
+	
+	[analyzer analyzeData:myData];
+	[analyzer release];
 
 }
 

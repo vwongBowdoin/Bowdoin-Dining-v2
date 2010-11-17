@@ -11,8 +11,7 @@
 
 @implementation CSGoldParser
 
-@synthesize smallBucket, mediumBucket, thorne_Line_Array, moulton_Line_Array, express_Line_Array;
-
+@synthesize smallBucket, mediumBucket; 
 - (void)parseWithData:(NSData *)data{
 	
 	theParser = [[NSXMLParser alloc] initWithData:data];
@@ -27,10 +26,6 @@
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
 	NSLog(@"Found CSGold File and started parsing");
 	
-	thorne_Line_Array = [[NSMutableArray alloc] init];
-	moulton_Line_Array = [[NSMutableArray alloc] init];
-	express_Line_Array = [[NSMutableArray alloc] init];
-
 }
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
@@ -51,16 +46,6 @@
 		[[NSUserDefaults standardUserDefaults] setValue:combinedBalance forKey:@"MealsRemaining"];
 
 	}
-	
-	NSLog(@"Thorne Line Counts:");
-	NSLog(@"%@", thorne_Line_Array);
-
-	NSLog(@"Moulton Line Counts:");
-	NSLog(@"%@", moulton_Line_Array);
-
-	NSLog(@"Express Line Counts:");
-	NSLog(@"%@", express_Line_Array);
-
 	
 }
 
@@ -126,47 +111,10 @@
 		}	
 	}	
 	
-	// Line Counts
-	if ([currentElement isEqualToString:@"LOCATION"]) {
-		
-		if ([string isEqualToString:@"MU Aero 01"]) {
-			currentLineLocation = @"moulton";
-		} else if ([string isEqualToString:@"MU Aero 02 - Polar Express"]) {
-			currentLineLocation = @"express";
-		} else if ([string isEqualToString:@"Thorne Aero 01"]) {
-			currentLineLocation = @"thorne";
-		}
-		
-	}
-	
-	if ([currentElement isEqualToString:@"LINECOUNT"]) {
-		
-		if ([currentLineLocation isEqualToString:@"thorne"]) {
-			[thorne_Line_Array addObject:[self returnNSNumberForString:string]];
-		}
-		else if ([currentLineLocation isEqualToString:@"moulton"]) {
-			[moulton_Line_Array addObject:[self returnNSNumberForString:string]];
-
-		}
-		else if ([currentLineLocation isEqualToString:@"express"]) {
-			[express_Line_Array addObject:[self returnNSNumberForString:string]];
-
-		}
-	}
 	
 	
 }
 
--(NSNumber*)returnNSNumberForString:(NSString*)inputString{
-	
-	NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-	[f setNumberStyle:NSNumberFormatterDecimalStyle];
-	NSNumber * myNumber = [f numberFromString:inputString];
-	[f release];
-
-	return myNumber;
-	
-}
 
 
 - (NSString*)returnFormattedMoneyBalance:(NSString *)inputString{
@@ -279,9 +227,6 @@
 - (void)dealloc{
 	[error release];
 	[theParser release];
-	[thorne_Line_Array release];
-	[moulton_Line_Array release];
-	[express_Line_Array release];
 	[super dealloc];
 }
 

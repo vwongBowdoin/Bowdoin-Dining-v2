@@ -46,6 +46,9 @@
 		A16B6B03124C5AFB00774456 /* CSGoldParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A16B6B02124C5AFB00774456 /* CSGoldParser.m */; };
 		A176F11A125FF66100F814FF /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A176F119125FF66100F814FF /* MBProgressHUD.m */; };
 		A185E9741251977C00812356 /* WristWatch.m in Sources */ = {isa = PBXBuildFile; fileRef = A185E9731251977C00812356 /* WristWatch.m */; };
+		A188D2651293832A007BFFCB /* LineCountAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = A188D2641293832A007BFFCB /* LineCountAnalyzer.m */; };
+		A188D26A12938355007BFFCB /* LineCountParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A188D26912938355007BFFCB /* LineCountParser.m */; };
+		A188D288129386DC007BFFCB /* testLineCount.xml in Resources */ = {isa = PBXBuildFile; fileRef = A188D287129386DC007BFFCB /* testLineCount.xml */; };
 		A19855F811F61D0F001DFF4F /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A19855F711F61D0F001DFF4F /* CustomTableViewCell.m */; };
 		A198560711F61E12001DFF4F /* UICustomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A198560611F61E12001DFF4F /* UICustomTableView.m */; };
 		A1A4078411F4CA4400608B9C /* DiningParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4077C11F4CA4400608B9C /* DiningParser.m */; };
@@ -127,6 +130,11 @@
 		A176F119125FF66100F814FF /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A185E9721251977C00812356 /* WristWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WristWatch.h; sourceTree = "<group>"; };
 		A185E9731251977C00812356 /* WristWatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WristWatch.m; sourceTree = "<group>"; };
+		A188D2631293832A007BFFCB /* LineCountAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineCountAnalyzer.h; sourceTree = "<group>"; };
+		A188D2641293832A007BFFCB /* LineCountAnalyzer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineCountAnalyzer.m; sourceTree = "<group>"; };
+		A188D26812938355007BFFCB /* LineCountParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineCountParser.h; sourceTree = "<group>"; };
+		A188D26912938355007BFFCB /* LineCountParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineCountParser.m; sourceTree = "<group>"; };
+		A188D287129386DC007BFFCB /* testLineCount.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testLineCount.xml; sourceTree = "<group>"; };
 		A19855F611F61D0F001DFF4F /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		A19855F711F61D0F001DFF4F /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		A198560511F61E12001DFF4F /* UICustomTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomTableView.h; sourceTree = "<group>"; };
@@ -218,6 +226,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A188D287129386DC007BFFCB /* testLineCount.xml */,
 				A169324A128D203F00064E37 /* Magees3.pdf */,
 				A16931C8128D203F00064E37 /* 57-download.png */,
 				A16931A0128D203F00064E37 /* 75-phone.png */,
@@ -322,6 +331,10 @@
 		A16B6A75124C3E6600774456 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				A188D2631293832A007BFFCB /* LineCountAnalyzer.h */,
+				A188D2641293832A007BFFCB /* LineCountAnalyzer.m */,
+				A188D26812938355007BFFCB /* LineCountParser.h */,
+				A188D26912938355007BFFCB /* LineCountParser.m */,
 				A16B6B01124C5AFB00774456 /* CSGoldParser.h */,
 				A16B6B02124C5AFB00774456 /* CSGoldParser.m */,
 				A131FE22125FAD90000B5E23 /* CSGoldTransactionsParser.h */,
@@ -459,6 +472,7 @@
 				A16931C9128D203F00064E37 /* 57-download.png in Resources */,
 				A1693245128D203F00064E37 /* GrillAreaViewController.xib in Resources */,
 				A169324B128D203F00064E37 /* Magees3.pdf in Resources */,
+				A188D288129386DC007BFFCB /* testLineCount.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +514,8 @@
 				A176F11A125FF66100F814FF /* MBProgressHUD.m in Sources */,
 				A1D2AB8A1283592A0022B18E /* GrillParser.m in Sources */,
 				A1693246128D203F00064E37 /* GrillAreaViewController.m in Sources */,
+				A188D2651293832A007BFFCB /* LineCountAnalyzer.m in Sources */,
+				A188D26A12938355007BFFCB /* LineCountParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
