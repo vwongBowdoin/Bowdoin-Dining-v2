@@ -32,6 +32,7 @@
 	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldMPBalances/>"]];
 	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldSVCBalances/>"]];
 	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldLineCounts/>"]];
+	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldLineCountsHistogram/>"]];
 
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"CSGold DownloadCompleted" object:nil];
@@ -42,7 +43,11 @@
 // [soapEnvelope appendString:@"<tem:GetCSGoldGLTrans/>"];
 // [soapEnvelope appendString:@"<tem:GetCSGoldSVCBalances/>"]; 
 // [soapEnvelope appendString:@"<tem:GetCSGoldLineCounts/>"]; 
-// [soapEnvelope appendString:@"<tem:GetCSGoldMPBalances/>"]; 
+// [soapEnvelope appendString:@"<tem:GetCSGoldMPBalances/>"];
+
+// Line Counts
+// [soapEnvelope appendString:@"<tem:GetCSGoldLineCountsHistogram/>"]; 
+
 
 - (NSMutableString*)returnSoapEnvelopeForService:(NSString*)serviceRequested{
 	
@@ -83,6 +88,7 @@
 	if (SOAPRequest.responseStatusCode == 200) {
 		
 		CSGoldParser *parser = [[CSGoldParser alloc] init];
+		NSLog(@"%@",[SOAPRequest responseString]);
 		[parser parseWithData:[SOAPRequest responseData]];
 		[parser release];
 		

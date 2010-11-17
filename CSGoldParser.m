@@ -11,7 +11,7 @@
 
 @implementation CSGoldParser
 
-@synthesize smallBucket, mediumBucket;
+@synthesize smallBucket, mediumBucket, thorne_Line_Array, moulton_Line_Array, express_Line_Array;
 
 - (void)parseWithData:(NSData *)data{
 	
@@ -27,6 +27,10 @@
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
 	NSLog(@"Found CSGold File and started parsing");
 	
+	thorne_Line_Array = [[NSMutableArray alloc] init];
+	moulton_Line_Array = [[NSMutableArray alloc] init];
+	express_Line_Array = [[NSMutableArray alloc] init];
+
 }
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
@@ -47,6 +51,16 @@
 		[[NSUserDefaults standardUserDefaults] setValue:combinedBalance forKey:@"MealsRemaining"];
 
 	}
+	
+	NSLog(@"Thorne Line Counts:");
+	NSLog(@"%@", thorne_Line_Array);
+
+	NSLog(@"Moulton Line Counts:");
+	NSLog(@"%@", moulton_Line_Array);
+
+	NSLog(@"Express Line Counts:");
+	NSLog(@"%@", express_Line_Array);
+
 	
 }
 
@@ -73,29 +87,28 @@
 	}
 	
 	
+	
+	
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{
-	//NSLog(@"found characters: %@", string);
-	// save the characters for the current item...
+	
+	// Polar Points
 	if ([currentElement isEqualToString:@"MEDIUMBUCKET"]) {
 		NSLog(@"Medium Bucket = %@", string);
-
 		self.mediumBucket = string;
-
 	}
 	
 	if ([currentElement isEqualToString:@"SMALLBUCKET"]) {
-
 		NSLog(@"Small Bucket = %@", string);
-
 		self.smallBucket = string;
-
 	}
 	
+	
+	
+	// Meal Plan | Meal Balances
 	if ([currentElement isEqualToString:@"DESCRIPTION"]) {
 		NSLog(@"Meal Plan = %@", string);
-		
 	}
 	
 	if ([currentElement isEqualToString:@"BALANCE"]) {
@@ -104,21 +117,57 @@
 			NSLog(@"Polar Points Balance = %@", string);
 			[[NSUserDefaults standardUserDefaults] setValue:string  forKey:@"PolarPointBalance_RAW"];
 			[[NSUserDefaults standardUserDefaults] setValue:[self returnFormattedMoneyBalance:string]  forKey:@"PolarPointBalance"];
-			
-			
 		}
 		
 		if (currentSVCAccount == onecard) {
 			NSLog(@"One Card Balance = %@", string);
 			[[NSUserDefaults standardUserDefaults] setValue:string  forKey:@"OneCardBalance_RAW"];
 			[[NSUserDefaults standardUserDefaults] setValue:[self returnFormattedMoneyBalance:string] forKey:@"OneCardBalance"];
-
-		}
+		}	
+	}	
+	
+	// Line Counts
+	if ([currentElement isEqualToString:@"LOCATION"]) {
 		
+		if ([string isEqualToString:@"MU Aero 01"]) {
+			currentLineLocation = @"moulton";
+		} else if ([string isEqualToString:@"MU Aero 02 - Polar Express"]) {
+			currentLineLocation = @"express";
+		} else if ([string isEqualToString:@"Thorne Aero 01"]) {
+			currentLineLocation = @"thorne";
+		}
 		
 	}
 	
+	if ([currentElement isEqualToString:@"LINECOUNT"]) {
+		
+		if ([currentLineLocation isEqualToString:@"thorne"]) {
+			[thorne_Line_Array addObject:[self returnNSNumberForString:string]];
+		}
+		else if ([currentLineLocation isEqualToString:@"moulton"]) {
+			[moulton_Line_Array addObject:[self returnNSNumberForString:string]];
+
+		}
+		else if ([currentLineLocation isEqualToString:@"express"]) {
+			[express_Line_Array addObject:[self returnNSNumberForString:string]];
+
+		}
+	}
+	
+	
 }
+
+-(NSNumber*)returnNSNumberForString:(NSString*)inputString{
+	
+	NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+	[f setNumberStyle:NSNumberFormatterDecimalStyle];
+	NSNumber * myNumber = [f numberFromString:inputString];
+	[f release];
+
+	return myNumber;
+	
+}
+
 
 - (NSString*)returnFormattedMoneyBalance:(NSString *)inputString{
 	NSLog(@"Formatting One Card");
@@ -230,6 +279,9 @@
 - (void)dealloc{
 	[error release];
 	[theParser release];
+	[thorne_Line_Array release];
+	[moulton_Line_Array release];
+	[express_Line_Array release];
 	[super dealloc];
 }
 
