@@ -24,6 +24,8 @@
 		A159E968120B0EA100FE7BD5 /* HoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A159E966120B0EA100FE7BD5 /* HoursViewController.m */; };
 		A159E969120B0EA100FE7BD5 /* HoursViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A159E967120B0EA100FE7BD5 /* HoursViewController.xib */; };
 		A15A87111268CC4600899F27 /* Default-Beta.png in Resources */ = {isa = PBXBuildFile; fileRef = A15A87101268CC4600899F27 /* Default-Beta.png */; };
+		A15D85A312A06F76003EE1C4 /* 01-refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A15D85A212A06F76003EE1C4 /* 01-refresh.png */; };
+		A15D870112A09479003EE1C4 /* TKD-InsaneLine.xml in Resources */ = {isa = PBXBuildFile; fileRef = A15D870012A09479003EE1C4 /* TKD-InsaneLine.xml */; };
 		A1662C18128D1E28000F557C /* 11-clock.png in Resources */ = {isa = PBXBuildFile; fileRef = A1662C17128D1E28000F557C /* 11-clock.png */; };
 		A1662C1C128D1E7F000F557C /* 190-bank.png in Resources */ = {isa = PBXBuildFile; fileRef = A1662C1B128D1E7F000F557C /* 190-bank.png */; };
 		A1693177128D1FCA00064E37 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A1693176128D1FCA00064E37 /* Default.png */; };
@@ -49,6 +51,8 @@
 		A188D2651293832A007BFFCB /* LineCountAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = A188D2641293832A007BFFCB /* LineCountAnalyzer.m */; };
 		A188D26A12938355007BFFCB /* LineCountParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A188D26912938355007BFFCB /* LineCountParser.m */; };
 		A188D288129386DC007BFFCB /* testLineCount.xml in Resources */ = {isa = PBXBuildFile; fileRef = A188D287129386DC007BFFCB /* testLineCount.xml */; };
+		A188D325129391BB007BFFCB /* LineCountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A188D323129391BB007BFFCB /* LineCountViewController.m */; };
+		A188D326129391BB007BFFCB /* LineCountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A188D324129391BB007BFFCB /* LineCountViewController.xib */; };
 		A19855F811F61D0F001DFF4F /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A19855F711F61D0F001DFF4F /* CustomTableViewCell.m */; };
 		A198560711F61E12001DFF4F /* UICustomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A198560611F61E12001DFF4F /* UICustomTableView.m */; };
 		A1A4078411F4CA4400608B9C /* DiningParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4077C11F4CA4400608B9C /* DiningParser.m */; };
@@ -58,6 +62,8 @@
 		A1A4079011F4CA7500608B9C /* PolarPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4078D11F4CA7500608B9C /* PolarPoints.m */; };
 		A1A407F111F4D29300608B9C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A407EF11F4D29300608B9C /* LogInViewController.m */; };
 		A1A407F211F4D29300608B9C /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1A407F011F4D29300608B9C /* LogInViewController.xib */; };
+		A1A949FA12942EE2004666C9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A949F912942EE2004666C9 /* Icon.png */; };
+		A1A94A0912943021004666C9 /* 112-group.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A94A0812943021004666C9 /* 112-group.png */; };
 		A1B36AB7120099AD00D27351 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B36AB6120099AD00D27351 /* DownloadManager.m */; };
 		A1B6FB2B11FDE33800C472EB /* bearIcon-black.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */; };
 		A1B6FB4811FDE4DF00C472EB /* fakeXMLDoc.xml in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */; };
@@ -95,6 +101,8 @@
 		A159E966120B0EA100FE7BD5 /* HoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoursViewController.m; sourceTree = "<group>"; };
 		A159E967120B0EA100FE7BD5 /* HoursViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HoursViewController.xib; sourceTree = "<group>"; };
 		A15A87101268CC4600899F27 /* Default-Beta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Beta.png"; sourceTree = "<group>"; };
+		A15D85A212A06F76003EE1C4 /* 01-refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01-refresh.png"; sourceTree = "<group>"; };
+		A15D870012A09479003EE1C4 /* TKD-InsaneLine.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TKD-InsaneLine.xml"; sourceTree = "<group>"; };
 		A1662C17128D1E28000F557C /* 11-clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "11-clock.png"; sourceTree = "<group>"; };
 		A1662C1B128D1E7F000F557C /* 190-bank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "190-bank.png"; sourceTree = "<group>"; };
 		A1693176128D1FCA00064E37 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -135,6 +143,9 @@
 		A188D26812938355007BFFCB /* LineCountParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineCountParser.h; sourceTree = "<group>"; };
 		A188D26912938355007BFFCB /* LineCountParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineCountParser.m; sourceTree = "<group>"; };
 		A188D287129386DC007BFFCB /* testLineCount.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testLineCount.xml; sourceTree = "<group>"; };
+		A188D322129391BB007BFFCB /* LineCountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineCountViewController.h; sourceTree = "<group>"; };
+		A188D323129391BB007BFFCB /* LineCountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineCountViewController.m; sourceTree = "<group>"; };
+		A188D324129391BB007BFFCB /* LineCountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LineCountViewController.xib; sourceTree = "<group>"; };
 		A19855F611F61D0F001DFF4F /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		A19855F711F61D0F001DFF4F /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		A198560511F61E12001DFF4F /* UICustomTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomTableView.h; sourceTree = "<group>"; };
@@ -152,6 +163,8 @@
 		A1A407EE11F4D29300608B9C /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		A1A407EF11F4D29300608B9C /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		A1A407F011F4D29300608B9C /* LogInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
+		A1A949F912942EE2004666C9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		A1A94A0812943021004666C9 /* 112-group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "112-group.png"; sourceTree = "<group>"; };
 		A1B36AB5120099AD00D27351 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
 		A1B36AB6120099AD00D27351 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
 		A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bearIcon-black.png"; sourceTree = "<group>"; };
@@ -226,6 +239,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A15D85A212A06F76003EE1C4 /* 01-refresh.png */,
+				A1A94A0812943021004666C9 /* 112-group.png */,
+				A1A949F912942EE2004666C9 /* Icon.png */,
 				A188D287129386DC007BFFCB /* testLineCount.xml */,
 				A169324A128D203F00064E37 /* Magees3.pdf */,
 				A16931C8128D203F00064E37 /* 57-download.png */,
@@ -236,6 +252,7 @@
 				A1D2AB3E1283535E0022B18E /* Default-Main.png */,
 				A15A87101268CC4600899F27 /* Default-Beta.png */,
 				A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */,
+				A15D870012A09479003EE1C4 /* TKD-InsaneLine.xml */,
 				A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */,
 				A1A407F011F4D29300608B9C /* LogInViewController.xib */,
 				A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */,
@@ -291,6 +308,7 @@
 		A16B6A4F124C3C9F00774456 /* OneCard */ = {
 			isa = PBXGroup;
 			children = (
+				A188D328129391CA007BFFCB /* Line Count */,
 				A1A407EE11F4D29300608B9C /* LogInViewController.h */,
 				A1A407EF11F4D29300608B9C /* LogInViewController.m */,
 				A1A4078C11F4CA7500608B9C /* PolarPoints.h */,
@@ -331,10 +349,6 @@
 		A16B6A75124C3E6600774456 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
-				A188D2631293832A007BFFCB /* LineCountAnalyzer.h */,
-				A188D2641293832A007BFFCB /* LineCountAnalyzer.m */,
-				A188D26812938355007BFFCB /* LineCountParser.h */,
-				A188D26912938355007BFFCB /* LineCountParser.m */,
 				A16B6B01124C5AFB00774456 /* CSGoldParser.h */,
 				A16B6B02124C5AFB00774456 /* CSGoldParser.m */,
 				A131FE22125FAD90000B5E23 /* CSGoldTransactionsParser.h */,
@@ -343,6 +357,20 @@
 				A16B6AF1124C581400774456 /* CSGoldController.m */,
 			);
 			name = Parsers;
+			sourceTree = "<group>";
+		};
+		A188D328129391CA007BFFCB /* Line Count */ = {
+			isa = PBXGroup;
+			children = (
+				A188D2631293832A007BFFCB /* LineCountAnalyzer.h */,
+				A188D2641293832A007BFFCB /* LineCountAnalyzer.m */,
+				A188D26812938355007BFFCB /* LineCountParser.h */,
+				A188D26912938355007BFFCB /* LineCountParser.m */,
+				A188D322129391BB007BFFCB /* LineCountViewController.h */,
+				A188D323129391BB007BFFCB /* LineCountViewController.m */,
+				A188D324129391BB007BFFCB /* LineCountViewController.xib */,
+			);
+			name = "Line Count";
 			sourceTree = "<group>";
 		};
 		A1A4077211F4CA2700608B9C /* Classes */ = {
@@ -473,6 +501,11 @@
 				A1693245128D203F00064E37 /* GrillAreaViewController.xib in Resources */,
 				A169324B128D203F00064E37 /* Magees3.pdf in Resources */,
 				A188D288129386DC007BFFCB /* testLineCount.xml in Resources */,
+				A188D326129391BB007BFFCB /* LineCountViewController.xib in Resources */,
+				A1A949FA12942EE2004666C9 /* Icon.png in Resources */,
+				A1A94A0912943021004666C9 /* 112-group.png in Resources */,
+				A15D85A312A06F76003EE1C4 /* 01-refresh.png in Resources */,
+				A15D870112A09479003EE1C4 /* TKD-InsaneLine.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +549,7 @@
 				A1693246128D203F00064E37 /* GrillAreaViewController.m in Sources */,
 				A188D2651293832A007BFFCB /* LineCountAnalyzer.m in Sources */,
 				A188D26A12938355007BFFCB /* LineCountParser.m in Sources */,
+				A188D325129391BB007BFFCB /* LineCountViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

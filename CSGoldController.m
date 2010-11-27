@@ -25,6 +25,24 @@
 	[self updateAllCSGoldData];
 
 	
+	
+}
+
+
+- (NSData*)getCSGoldLineCountsWithUserName:(NSString*)user password:(NSString*)pass {
+	
+	// Sets the CSGold controllers UserName and Password
+	userName = user;
+	password = pass;
+	
+	
+	NSLog(@"CSGoldController Using Login:%@ and Password:*****", userName);
+	
+	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldLineCountsHistogram/>"]];
+
+	return lineCountData;
+	
+
 }
 
 - (void)updateAllCSGoldData{
@@ -32,7 +50,6 @@
 	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldMPBalances/>"]];
 	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldSVCBalances/>"]];
 	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldLineCounts/>"]];
-	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldLineCountsHistogram/>"]];
 
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"CSGold DownloadCompleted" object:nil];
@@ -90,6 +107,7 @@
 		CSGoldParser *parser = [[CSGoldParser alloc] init];
 		NSLog(@"%@",[SOAPRequest responseString]);
 		[parser parseWithData:[SOAPRequest responseData]];
+		lineCountData = [SOAPRequest responseData];
 		[parser release];
 		
 

@@ -221,6 +221,20 @@
 	
 }
 
+
+-(NSString*)getFileNameString{
+	
+	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[inputFormatter setDateFormat:@"Y-M-d-H-m"];
+	NSDate *toBeFormatted = [[[NSDate alloc] init] autorelease];
+	
+	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
+	//NSLog(@"formattedWeekday: %@", formattedDate);
+	
+	return formattedDate;
+	
+}
+
 -(NSString*)getUpdatedTimeString{
 	
 	

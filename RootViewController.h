@@ -84,7 +84,7 @@
 -(IBAction)navigateLeft:(id)sender;
 
 // Pages to Navigate To
--(IBAction)displayActionPage;
+-(IBAction)displayLinesPage;
 -(IBAction)displayPolarPoints;
 -(IBAction)displayHoursPage;
 

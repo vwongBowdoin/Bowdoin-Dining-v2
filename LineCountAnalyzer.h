@@ -11,7 +11,15 @@
 
 @interface LineCountAnalyzer : NSObject {
 
-
+	UILabel *thorneLabel;
+	UILabel *moultonLabel;
+	UILabel *expressLabel;
+	
+	
+	int thorneScore;
+	int moultonScore;
+	int expressScore;
+	
 }
 
 

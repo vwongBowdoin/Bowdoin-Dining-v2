@@ -16,6 +16,7 @@
 	NSString *userName;
 	NSString *password;
 	
+	NSData *lineCountData;
 	
 }
 

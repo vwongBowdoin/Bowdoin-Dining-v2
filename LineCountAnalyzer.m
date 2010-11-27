@@ -13,51 +13,149 @@
 
 -(void)analyzeData:(NSData*)data{
 	
+	
 	LineCountParser *LCParser = [[LineCountParser alloc] init];
 	[LCParser parseWithData:data];
 	
 	
+	
+	
 	NSLog(@"Scoring Thorne");
-	[self scoreArray:[LCParser returnThorneCounts]];
+	thorneLabel = [self returnLabelForScore:[self scoreArray:[LCParser returnThorneCounts] forHall:1]];
+	
 	
 	NSLog(@"Scoring Moulton");
-	[self scoreArray:[LCParser returnMoultonCounts]];
+	moultonLabel = [self returnLabelForScore:[self scoreArray:[LCParser returnMoultonCounts] forHall:2]];
 	  
 	NSLog(@"Scoring Express");
-	[self scoreArray:[LCParser returnExpressCounts]];
-	   
+	expressLabel = [self returnLabelForScore:[self scoreArray:[LCParser returnExpressCounts] forHall:3]];
 	   
 	
 	
 }
 
-- (void)scoreArray:(NSMutableArray*)array{
+/// GETTER METHODS ////
+
+- (NSString*)thorneText{
+	return thorneLabel.text;
+}
+
+- (UIColor*)thorneColor{
+	return thorneLabel.textColor;
+}
+
+- (NSString*)moultonText{
+	return moultonLabel.text;	
+}
+
+- (UIColor*)moultonColor{
+	return moultonLabel.textColor;	
+}
+
+- (NSString*)expressText{	
+	return expressLabel.text;	
+}
+
+- (UIColor*)expressColor{
 	
+	return expressLabel.textColor;
+	
+}
+
+- (void)totalPatronsFromHallScore:(int)patrons{
+	
+	
+}
+
+- (UILabel*)returnLabelForScore:(int)score{
+	
+	NSLog(@"Creating Label For Score %d", score);
+	
+	int very_busy_score = 70;
+	int busy_score = 40;
+	
+	
+	UILabel *scoreLabel = [[UILabel alloc] init];
+	
+	if (score >= very_busy_score) {
+		scoreLabel.text = @"Very Busy";
+		scoreLabel.textColor = [UIColor redColor];
+	} else if (score >= busy_score) {
+		scoreLabel.text = @"Busy";
+		scoreLabel.textColor = [UIColor orangeColor];
+	} else {
+		scoreLabel.text = @"Not Busy";
+		scoreLabel.textColor = [UIColor darkGrayColor];
+	}
+
+	
+	return scoreLabel;
+	
+	
+}
+
+- (int)scoreArray:(NSMutableArray*)array forHall:(int)lineID{
+	
+	// Total Array Length
 	double j = [array count];
 	
+	// If no entries, return
+	if (j == 0) {
+		return 0.0;
+	}
+	
+	// Crowdedness Threshold based on Location
+	// Allowable Points assumes crowdedness threshold reached every minute
+	
+	double crowdedness_threshold;
+	double maximum_possible_score;
+	
+	switch (lineID) {
+		case 1: crowdedness_threshold = 15;
+			maximum_possible_score = 4.50;
+			break;
+		
+		case 2:
+			crowdedness_threshold = 20;
+			maximum_possible_score = 4.50;
+			break;
+
+		case 3:
+			crowdedness_threshold = 5;
+			maximum_possible_score = 4.50;
+			break;
+			
+		default:
+			crowdedness_threshold = 15;
+			break;
+	}
+	
+	
+	
+	
 	double totalScore = 0;
+	double totalPatrons = 0;
+	
 	for (double i = 0; i < j; i++) {
 		
 		// Last Five Minutes is 1 for 1 points
-		if (i >= j-5) {
+		if (i >= j-10) {
 			
 			double currentLineCount = [[array objectAtIndex:i] doubleValue];
-
-			totalScore = totalScore + currentLineCount;
+			double minute_crowdedness = currentLineCount / crowdedness_threshold;
+			double index = i - (j-11.0);
+			double scale_multiplier = log10(index);
+			double score = minute_crowdedness*scale_multiplier;
 			
+			
+			totalScore = totalScore + score;
+			totalPatrons = totalPatrons + currentLineCount;
 			
 		} else {
-			double squaredIndex = pow(i+1, 2);
-			double squaredTotal = pow(j-4, 2);
-			
-			double multiplier = squaredIndex / squaredTotal;
-			
+					
 			double currentLineCount = [[array objectAtIndex:i] doubleValue];
-			double score = currentLineCount*multiplier;
-			
-			
-			NSLog(@"Index: %f, Count: %f, Multiplier: %f, Score: %f", i, currentLineCount, multiplier, score);
-			totalScore = totalScore + score;
+			totalPatrons = totalPatrons + currentLineCount;
+
 		}
 
 	}
@@ -66,8 +164,10 @@
 	
 	
 	
+
 	
-	NSLog(@"Score of Array = %f", totalScore);
+	// Returns a value between 0 and 100
+	return (totalScore / maximum_possible_score) * 100.0;
 	
 }
 

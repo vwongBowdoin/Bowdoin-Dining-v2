@@ -21,8 +21,7 @@
 #import "HallNavigationBar.h"
 #import "MealNavigationBar.h"
 #import "GrillAreaViewController.h"
-#import "LineCountAnalyzer.h"
-
+#import "LineCountViewController.h"
 
 @implementation RootViewController
 
@@ -66,15 +65,7 @@
 	
 	
 	
-	// Testing Line Count Data
-	LineCountAnalyzer *analyzer = [[LineCountAnalyzer alloc] init];
 	
-	NSString *filePath = [[NSBundle mainBundle] pathForResource:@"testLineCount" ofType:@"xml"];  
-	NSData *myData = [NSData dataWithContentsOfFile:filePath];  
-	
-	[analyzer analyzeData:myData];
-	[analyzer release];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -655,8 +646,10 @@
 
 	if (item.tag == 0) {
 		
-		hallNavBar.timeToDisplay = @"FUN";
-		[hallNavBar setNeedsDisplay];
+		LineCountViewController *lines = [[LineCountViewController alloc] init];
+		[self.navigationController pushViewController:lines animated:YES];
+		[lines release];
+		
 
 	} else if (item.tag == 1) {
 		
