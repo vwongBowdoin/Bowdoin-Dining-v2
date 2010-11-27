@@ -19,6 +19,9 @@
 	IBOutlet UILabel *thorneCount;
 	IBOutlet UILabel *moultonCount;
 	IBOutlet UILabel *expressCount;
+	
+	IBOutlet UILabel *totalPatrons;
+	
 	IBOutlet UIButton *refreshButton;
 	
 	IBOutlet UISegmentedControl *accuracy;
@@ -37,6 +40,8 @@
 @property (nonatomic, retain) IBOutlet UILabel *thorneCount;
 @property (nonatomic, retain) IBOutlet UILabel *moultonCount;
 @property (nonatomic, retain) IBOutlet UILabel *expressCount;
+@property (nonatomic, retain) IBOutlet UILabel *totalPatrons;
+
 @property (nonatomic, retain) IBOutlet UIButton *refreshButton;
 
 

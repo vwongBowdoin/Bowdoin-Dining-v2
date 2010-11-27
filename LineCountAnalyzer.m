@@ -10,6 +10,7 @@
 #import "LineCountParser.h"
 
 @implementation LineCountAnalyzer
+@synthesize total_Patrons;
 
 -(void)analyzeData:(NSData*)data{
 	
@@ -18,12 +19,9 @@
 	[LCParser parseWithData:data];
 	
 	
-	
-	
 	NSLog(@"Scoring Thorne");
 	thorneLabel = [self returnLabelForScore:[self scoreArray:[LCParser returnThorneCounts] forHall:1]];
-	
-	
+		
 	NSLog(@"Scoring Moulton");
 	moultonLabel = [self returnLabelForScore:[self scoreArray:[LCParser returnMoultonCounts] forHall:2]];
 	  
@@ -44,6 +42,10 @@
 	return thorneLabel.textColor;
 }
 
+- (int)thorneScore{
+	return thorneScore;
+}
+
 - (NSString*)moultonText{
 	return moultonLabel.text;	
 }
@@ -52,15 +54,22 @@
 	return moultonLabel.textColor;	
 }
 
+- (int)moultonScore{
+	return moultonScore;
+}
+
 - (NSString*)expressText{	
 	return expressLabel.text;	
 }
 
-- (UIColor*)expressColor{
-	
-	return expressLabel.textColor;
-	
+- (UIColor*)expressColor{	
+	return expressLabel.textColor;	
 }
+
+- (int)expressScore{
+	return expressScore;
+}
+
 
 - (void)totalPatronsFromHallScore:(int)patrons{
 	
@@ -134,7 +143,6 @@
 	
 	
 	double totalScore = 0;
-	double totalPatrons = 0;
 	
 	for (double i = 0; i < j; i++) {
 		
@@ -149,25 +157,40 @@
 			
 			
 			totalScore = totalScore + score;
-			totalPatrons = totalPatrons + currentLineCount;
+			total_Patrons = total_Patrons + currentLineCount;
 			
 		} else {
 					
 			double currentLineCount = [[array objectAtIndex:i] doubleValue];
-			totalPatrons = totalPatrons + currentLineCount;
+			total_Patrons = total_Patrons + currentLineCount;
 
 		}
 
 	}
 	
+	int finalScore = (totalScore / maximum_possible_score) * 100.0;
 	
 	
+	// Set the Score Value
+	switch (lineID) {
+		case 1: thorneScore = finalScore;
+			break;
+			
+		case 2: moultonScore = finalScore;
+			break;
+			
+		case 3: expressScore = finalScore;
+			break;
+			
+		default:
+			break;
+	}
 	
 	
 
 	
 	// Returns a value between 0 and 100
-	return (totalScore / maximum_possible_score) * 100.0;
+	return finalScore;
 	
 }
 

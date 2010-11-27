@@ -59,14 +59,25 @@
 
 -(void)downloadLineData{
 	
+	NSString *login = [[NSUserDefaults standardUserDefaults] valueForKey:@"Login"];
+	NSString *pass = [[NSUserDefaults standardUserDefaults] valueForKey:@"Password"];
+	
+	if (login == NULL) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Line Counts" message:@"You must store your login and password on the polar point page for this feature to work." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
+		[alert show];
+	}
+	
 	
 	CSGoldController *theController = [[CSGoldController alloc]init];	
-	//NSData *lineData = [theController getCSGoldLineCountsWithUserName:@"ebjohnso"												password:@"Ta1co2ma"];
+	NSData *lineData = [theController getCSGoldLineCountsWithUserName:login password:pass];
 	[theController release];
 	
+	/* For Debugging Purposes
+	 
 	NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TKD-InsaneLine" ofType:@"xml"];  
 	NSData *lineData = [NSData dataWithContentsOfFile:filePath]; 
 	
+	 */
 	
 	stored_data = lineData;
 	[self analyzeData:lineData];
@@ -84,13 +95,20 @@
 	
 	thorne_label.text = [analyzer thorneText];
 	thorne_label.textColor = [analyzer thorneColor];
+	thorneCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer thorneScore]];
+	
 	
 	moulton_label.text = [analyzer moultonText];
 	moulton_label.textColor = [analyzer moultonColor];
+	moultonCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer moultonScore]];
+
 	
 	express_label.text = [analyzer expressText];
 	express_label.textColor = [analyzer expressColor];
-			
+	expressCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer expressScore]];
+		
+	totalPatrons.text = [NSString stringWithFormat:@"%d", analyzer.total_Patrons];
+	
 	[analyzer release];
 	
 	

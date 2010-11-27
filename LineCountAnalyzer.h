@@ -20,7 +20,11 @@
 	int moultonScore;
 	int expressScore;
 	
+	int total_Patrons;
+	
 }
+
+@property (nonatomic) int total_Patrons;
 
 
 
