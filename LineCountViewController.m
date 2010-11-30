@@ -33,11 +33,7 @@
 	
 	[self.navigationController setNavigationBarHidden:NO];
 	
-	
-	NSString *filePath = [[NSBundle mainBundle] pathForResource:@"testLineCount" ofType:@"xml"];  
-	NSData *myData = [NSData dataWithContentsOfFile:filePath]; 
-
-	
+		
 	// ** HUD Code by Matej Bukovinski ** //
 	
 	// Initializes Heads Up Display
@@ -72,12 +68,12 @@
 	NSData *lineData = [theController getCSGoldLineCountsWithUserName:login password:pass];
 	[theController release];
 	
-	/* For Debugging Purposes
-	 
-	NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TKD-InsaneLine" ofType:@"xml"];  
-	NSData *lineData = [NSData dataWithContentsOfFile:filePath]; 
+	// For Debugging Purposes
 	
-	 */
+	//NSString *filePath = [[NSBundle mainBundle] pathForResource:@"No-Thorne-2010-11-29-11-41" ofType:@"xml"];  
+	//NSData *lineData = [NSData dataWithContentsOfFile:filePath]; 
+	
+	
 	
 	stored_data = lineData;
 	[self analyzeData:lineData];
@@ -116,7 +112,7 @@
 
 -(IBAction)refresh{
 	
-	[self downloadLineData];
+	[HUD showWhileExecuting:@selector(downloadLineData) onTarget:self withObject:nil animated:YES];	
 	
 	
 }
@@ -141,7 +137,7 @@
 	
 	
 	// creates the generated report
-	NSString *report_string = [NSString stringWithFormat:@"This is a test report string"];
+	NSString *report_string = [NSString stringWithFormat:@"User Rating / Response: \n Accurate: %@ \n Location: %@ \n Servine Line: %@ \n Dining Hall Crowd: %@ \n \n Algorithm Data: \n \n Thorne: %@, %@ \n Moulton: %@, %@ \n Express: %@, %@ \n \n ",accuracy_response, location_response, line_response, crowd_response, thorneCount.text, thorne_label.text, moultonCount.text, moulton_label.text, expressCount.text, express_label.text ];
 	NSData *report_data = [report_string dataUsingEncoding:NSUTF8StringEncoding];
 	
 	WristWatch *watch = [[WristWatch alloc] init];

@@ -87,14 +87,14 @@
 	UILabel *scoreLabel = [[UILabel alloc] init];
 	
 	if (score >= very_busy_score) {
-		scoreLabel.text = @"Very Busy";
+		scoreLabel.text = @"Long Wait";
 		scoreLabel.textColor = [UIColor redColor];
 	} else if (score >= busy_score) {
-		scoreLabel.text = @"Busy";
+		scoreLabel.text = @"Medium Wait";
 		scoreLabel.textColor = [UIColor orangeColor];
 	} else {
-		scoreLabel.text = @"Not Busy";
-		scoreLabel.textColor = [UIColor darkGrayColor];
+		scoreLabel.text = @"No Wait";
+		scoreLabel.textColor = [UIColor colorWithRed:0 green:80 blue:0 alpha:1.0];
 	}
 
 	
@@ -120,12 +120,12 @@
 	double maximum_possible_score;
 	
 	switch (lineID) {
-		case 1: crowdedness_threshold = 15;
+		case 1: crowdedness_threshold = 20;
 			maximum_possible_score = 4.50;
 			break;
 		
 		case 2:
-			crowdedness_threshold = 20;
+			crowdedness_threshold = 15;
 			maximum_possible_score = 4.50;
 			break;
 

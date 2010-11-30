@@ -13,8 +13,10 @@
 		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
+		A11080CE12A1671D00C00252 /* TKD-NoLine-3quartersFull.xml in Resources */ = {isa = PBXBuildFile; fileRef = A11080CD12A1671D00C00252 /* TKD-NoLine-3quartersFull.xml */; };
 		A111E11711EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */; };
 		A11AE51C1212F3C900007801 /* NavigationBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AE51B1212F3C900007801 /* NavigationBarController.m */; };
+		A127D03412A4193900F80805 /* No-Thorne-2010-11-29-11-41.xml in Resources */ = {isa = PBXBuildFile; fileRef = A127D03312A4193900F80805 /* No-Thorne-2010-11-29-11-41.xml */; };
 		A131FE24125FAD90000B5E23 /* CSGoldTransactionsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A131FE23125FAD90000B5E23 /* CSGoldTransactionsParser.m */; };
 		A131FE44125FBF56000B5E23 /* RecentTransactions.m in Sources */ = {isa = PBXBuildFile; fileRef = A131FE42125FBF56000B5E23 /* RecentTransactions.m */; };
 		A131FE45125FBF56000B5E23 /* RecentTransactions.xib in Resources */ = {isa = PBXBuildFile; fileRef = A131FE43125FBF56000B5E23 /* RecentTransactions.xib */; };
@@ -86,9 +88,11 @@
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* DiningTableViewTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DiningTableViewTest-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		A11080CD12A1671D00C00252 /* TKD-NoLine-3quartersFull.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TKD-NoLine-3quartersFull.xml"; sourceTree = "<group>"; };
 		A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen shot 2010-07-12 at 2.23.27 PM.png"; sourceTree = "<group>"; };
 		A11AE51A1212F3C900007801 /* NavigationBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarController.h; sourceTree = "<group>"; };
 		A11AE51B1212F3C900007801 /* NavigationBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarController.m; sourceTree = "<group>"; };
+		A127D03312A4193900F80805 /* No-Thorne-2010-11-29-11-41.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "No-Thorne-2010-11-29-11-41.xml"; sourceTree = "<group>"; };
 		A131FE22125FAD90000B5E23 /* CSGoldTransactionsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGoldTransactionsParser.h; sourceTree = "<group>"; };
 		A131FE23125FAD90000B5E23 /* CSGoldTransactionsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGoldTransactionsParser.m; sourceTree = "<group>"; };
 		A131FE41125FBF56000B5E23 /* RecentTransactions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTransactions.h; sourceTree = "<group>"; };
@@ -239,10 +243,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A11080C112A166DC00C00252 /* Line Count Data */,
 				A15D85A212A06F76003EE1C4 /* 01-refresh.png */,
 				A1A94A0812943021004666C9 /* 112-group.png */,
 				A1A949F912942EE2004666C9 /* Icon.png */,
-				A188D287129386DC007BFFCB /* testLineCount.xml */,
 				A169324A128D203F00064E37 /* Magees3.pdf */,
 				A16931C8128D203F00064E37 /* 57-download.png */,
 				A16931A0128D203F00064E37 /* 75-phone.png */,
@@ -252,7 +256,6 @@
 				A1D2AB3E1283535E0022B18E /* Default-Main.png */,
 				A15A87101268CC4600899F27 /* Default-Beta.png */,
 				A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */,
-				A15D870012A09479003EE1C4 /* TKD-InsaneLine.xml */,
 				A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */,
 				A1A407F011F4D29300608B9C /* LogInViewController.xib */,
 				A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */,
@@ -303,6 +306,17 @@
 				A11AE51B1212F3C900007801 /* NavigationBarController.m */,
 			);
 			name = "Navigation Bars";
+			sourceTree = "<group>";
+		};
+		A11080C112A166DC00C00252 /* Line Count Data */ = {
+			isa = PBXGroup;
+			children = (
+				A127D03312A4193900F80805 /* No-Thorne-2010-11-29-11-41.xml */,
+				A15D870012A09479003EE1C4 /* TKD-InsaneLine.xml */,
+				A188D287129386DC007BFFCB /* testLineCount.xml */,
+				A11080CD12A1671D00C00252 /* TKD-NoLine-3quartersFull.xml */,
+			);
+			name = "Line Count Data";
 			sourceTree = "<group>";
 		};
 		A16B6A4F124C3C9F00774456 /* OneCard */ = {
@@ -506,6 +520,8 @@
 				A1A94A0912943021004666C9 /* 112-group.png in Resources */,
 				A15D85A312A06F76003EE1C4 /* 01-refresh.png in Resources */,
 				A15D870112A09479003EE1C4 /* TKD-InsaneLine.xml in Resources */,
+				A11080CE12A1671D00C00252 /* TKD-NoLine-3quartersFull.xml in Resources */,
+				A127D03412A4193900F80805 /* No-Thorne-2010-11-29-11-41.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,7 +577,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "~/Code/Bowdoin Code/Bowdoin-Dining-v2/Entitlements.plist";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bowdoin College";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -572,10 +588,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DiningTableViewTest_Prefix.pch;
 				INFOPLIST_FILE = "DiningTableViewTest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				PRODUCT_NAME = DiningTableViewTest;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos4.2;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "52EABAEB-16E0-4877-A5F9-E306BDA011B0";
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -627,8 +643,8 @@
 				INFOPLIST_FILE = "DiningTableViewTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				PRODUCT_NAME = DiningTableViewTest;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C6B408F-CDCB-46B7-B1DC-D6A60273EBAF";
-				SDKROOT = iphoneos4.1;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "52EABAEB-16E0-4877-A5F9-E306BDA011B0";
+				SDKROOT = iphoneos4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Distribution;

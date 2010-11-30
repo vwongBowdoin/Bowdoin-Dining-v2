@@ -55,6 +55,7 @@
 
 #define onecard 1
 #define polarpoints 2
+#define NAaccount 3
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
 	
@@ -67,10 +68,13 @@
 	}
 	
 	// Checks for Polar Points Balance
-	if ([elementName isEqualToString:@"dtCSGoldSVCBalances"] && [[attributeDict objectForKey:@"diffgr:id"] isEqualToString:@"dtCSGoldSVCBalances2"]) {
+	else if ([elementName isEqualToString:@"dtCSGoldSVCBalances"] && [[attributeDict objectForKey:@"diffgr:id"] isEqualToString:@"dtCSGoldSVCBalances2"]) {
 		currentSVCAccount = polarpoints;	
 	}
 	
+	else if ([elementName isEqualToString:@"dtCSGoldSVCBalances"]) {
+		currentSVCAccount = NAaccount;	
+	}
 	
 	
 	

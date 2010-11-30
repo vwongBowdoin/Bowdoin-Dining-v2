@@ -69,36 +69,54 @@
 		 [self addSubview:mealTimes];	
 		 
 		 
+		 UILabel *leftIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset + (barWidth * x), 0, barWidth - 2*indicatorOffset, barHeight)];
+		 
+		// leftIndicator.text = @"< Thorne";
+		 leftIndicator.textColor = [UIColor blackColor];
+		 leftIndicator.backgroundColor = [UIColor clearColor];
+		 leftIndicator.textAlignment = UITextAlignmentLeft;
+		 [leftIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
+		 
+		 
+		 
+		 UILabel *rightIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset + (barWidth * x), 0, barWidth - 2*indicatorOffset, barHeight)];
+		 
+		// rightIndicator.text = @"Moulton >";
+		 rightIndicator.textColor = [UIColor blackColor];
+		 rightIndicator.backgroundColor = [UIColor clearColor];
+		 rightIndicator.textAlignment = UITextAlignmentRight;
+		 [rightIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
+		 
+		 
+		 
 		 // Makes sure no out of bounds errors will occur
-		 if (x != 0){
+		 if (x == 0){
 
-			 UILabel *leftIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset + (barWidth * x), 0, barWidth - 2*indicatorOffset, barHeight)];
-			 
-			 leftIndicator.text = @"< Thorne";
-			 leftIndicator.textColor = [UIColor blackColor];
-			 leftIndicator.backgroundColor = [UIColor clearColor];
-			 leftIndicator.textAlignment = UITextAlignmentLeft;
-			 [leftIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
-			 
-			 [self addSubview:leftIndicator];
-			 
-			 
+			 rightIndicator.text = @"Moulton >";
+			 [self addSubview:rightIndicator];
+
+
 		 } 
 		 
 		 
-		 if (x != 2){
-
-			 UILabel *rightIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset + (barWidth * x), 0, barWidth - 2*indicatorOffset, barHeight)];
-			
-			 rightIndicator.text = @"Moulton >";
-			 rightIndicator.textColor = [UIColor blackColor];
-			 rightIndicator.backgroundColor = [UIColor clearColor];
-			 rightIndicator.textAlignment = UITextAlignmentRight;
-			 [rightIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
-			 
+		 else if (x == 1){
+			 leftIndicator.text = @"< Thorne";
+			 rightIndicator.text = @"Union >";
+			 [self addSubview:leftIndicator];
 			 [self addSubview:rightIndicator];
 			 
 		 } 
+		 
+		 else if (x == 2){
+			 
+			 leftIndicator.text = @"< Moulton";
+			 [self addSubview:leftIndicator];
+			 
+		 }
+		 
+		 
+		 
+		 
 
 		 
 	 }

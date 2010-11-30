@@ -203,7 +203,7 @@
 							</object>
 							<object class="IBUITabBarItem" id="681618012">
 								<int key="IBUITag">2</int>
-								<string key="IBUITitle">Polar Points</string>
+								<string key="IBUITitle">Points &amp; Balances</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">190-bank.png</string>
