@@ -79,7 +79,7 @@
 			leftIndicator.textColor = [UIColor whiteColor];
 			leftIndicator.backgroundColor = [UIColor clearColor];
 			leftIndicator.textAlignment = UITextAlignmentLeft;
-			[leftIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
+			[leftIndicator setFont:[UIFont boldSystemFontOfSize:11.0]];
 			
 			[self addSubview:leftIndicator];
 			
@@ -92,7 +92,7 @@
 			rightIndicator.textColor = [UIColor whiteColor];
 			rightIndicator.backgroundColor = [UIColor clearColor];
 			rightIndicator.textAlignment = UITextAlignmentRight;
-			[rightIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
+			[rightIndicator setFont:[UIFont boldSystemFontOfSize:11.0]];
 			
 			[self addSubview:rightIndicator];
 			

@@ -114,7 +114,7 @@
     [cell.textLabel setFont:[UIFont systemFontOfSize:16.0]]; 
 	cell.textLabel.backgroundColor = [UIColor clearColor];
 	[cell.textLabel setTextColor:[UIColor blackColor]];
-
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
 	
 	cell.detailTextLabel.text = [[localScheduler returnDictionaryAtIndex:indexPath] objectForKey:@"hours"];	
@@ -137,6 +137,8 @@
 	
     return cell;
 }
+
+
 
 #pragma mark -
 #pragma mark Table view delegate
