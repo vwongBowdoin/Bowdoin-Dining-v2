@@ -58,6 +58,7 @@
 	
 	ScheduleDecider *scheduler;
     
+	BOOL downloadSucceeded;
     BOOL navigationBarsAnimatedOut;
 	BOOL contentReady;
 	BOOL animating;

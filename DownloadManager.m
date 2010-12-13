@@ -51,7 +51,7 @@
 			MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:delegate.view];
 			
 			// Adds HUD to screen
-			HUD.delegate = self;
+			HUD.delegate = delegate;
 			HUD.labelText = @"Downloading:";
 			HUD.detailsLabelText = @"Updating Menus...";
 			
@@ -86,11 +86,17 @@
 
 // Checks to see if Menus are current
 - (BOOL)menusAreCurrent{
+	NSLog(@"Checking to see if Menus Are Current");
 	
-	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] != [localWatch getWeekofYear]){
+	int lastUpdatedWeek = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"];
+	int currentWeek = [localWatch getWeekofYear];
+	
+	if (lastUpdatedWeek != currentWeek){
+		NSLog(@"They Are Not Current");
 		return NO;
     }
 	else {        
+		NSLog(@"They Are Current");
 		return YES;
     }
 	
@@ -145,14 +151,14 @@
 		}
         
         NSString *dayString = [NSString stringWithFormat:@"%d.xml", i];
-        NSString *downloadAddress = [NSString stringWithFormat:@"%@%@/%@", serverPath, sundayString, dayString];
+        NSString *downloadAddress = [NSString stringWithFormat:@"%@/%@/%@", serverPath, sundayString, dayString];
         NSURL *downloadURL = [NSURL URLWithString:downloadAddress];
 		        
 		
         // Saving File for Parser - checking for errorq
 		NSError *error = nil;
         NSData *xmlFile = [NSData dataWithContentsOfURL:downloadURL options:0 error:&error];
-        
+        		
         if (error != NULL) {
             [self errorOccurred:error];
             return;
@@ -168,7 +174,6 @@
     [[NSUserDefaults standardUserDefaults] setInteger:[localWatch getWeekofYear] forKey:@"lastUpdatedWeek"];
 	
 	NSLog(@"Downloading Fully Completed: \n-- downloadSuccessful set to YES \n-- lastUpdatedWeek set to %d", [localWatch getWeekofYear]);
-
 
 }
 

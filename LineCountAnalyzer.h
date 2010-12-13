@@ -24,8 +24,19 @@
 	
 }
 
-@property (nonatomic) int total_Patrons;
+- (NSString*)thorneText;
+- (UIColor*)thorneColor;
+- (int)thorneScore;
 
+- (NSString*)moultonText;
+- (UIColor*)moultonColor;
+- (int)moultonScore;
+
+- (NSString*)expressText;
+- (UIColor*)expressColor;
+- (int)expressScore;
+
+- (int)total_Patrons;
 
 
 @end

@@ -29,6 +29,10 @@
 @interface RootViewController (PrivateMethods)
 
 - (void)animateNavigationBars;
+- (void)loadContent;
+- (void)cleanupAlertViews;
+- (void)navigateScrollBarRight:(UIScrollView*)scrollView;
+- (void)navigateScrollBarLeft:(UIScrollView*)scrollView;
 - (IBAction)launchPhone;
 - (IBAction)launchGrillMenu;
 - (void)setNavigationBarsWithArray:(NSMutableArray*)scheduleArray;
@@ -200,6 +204,21 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 #define hallScroller 1
 #define mealScroller 2
 
+// MBProgressHUD delegate method
+- (void)hudWasHidden{
+	
+	NSLog(@"HUD was hidden method triggered in RootView");
+	
+	/*if (downloadSucceeded) {
+		localAlertView = [AlertViews noMealAlert];
+		[self cleanupAlertViews];
+		[self loadContent];
+	} else {
+		localAlertView = [AlertViews closedForSemesterAlert];
+		[self loadContent];
+	} */
+
+}
 - (void)viewDidLoad {
 	
 	[super viewDidLoad];
@@ -274,6 +293,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 
 - (void)downloadSucceeded {
 	
+	
+	downloadSucceeded = YES;
 	localAlertView = [AlertViews noMealAlert];
 	[self cleanupAlertViews];
 	[self loadContent];
@@ -303,6 +324,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 // No Menus Available - Closed for Semester Break
 - (void)noMenusAvailable{
 	
+	downloadSucceeded = NO;
 	localAlertView = [AlertViews closedForSemesterAlert];
 	[self loadContent];
 		
@@ -619,7 +641,6 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	// Rounds Down
 	int page = currentPage;
-	int total = totalPages;
 	
 	NSLog(@"Current Page = %d", page);
 
@@ -776,8 +797,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	NSInteger *numberOfSections = [scheduler numberOfSectionsForLocation:currentHallPage atMealIndex:currentMealPage];
 	
-	NSLog(@"Number of Sections Captured");
-	if (numberOfSections == 1 || numberOfSections == nil) {
+	NSLog(@"Number of Sections Captured == %d", numberOfSections);
+	if (numberOfSections == 0 || numberOfSections == 1 || numberOfSections == nil) {
 		
 		NSLog(@"Showing Local Alert");
 

@@ -9,6 +9,16 @@
 #import "AlertViews.h"
 #import <QuartzCore/QuartzCore.h>
 
+@interface AlertViews (PrivateMethods)
+
++ (UIView*)smallAlertWithText:(NSString*)title subtitle:(NSString*)subtitle;
++ (UIView*)largeAlertWithText:(NSString*)title subtitle:(NSString*)subtitle;
+
+
+@end
+
+
+
 @implementation AlertViews
 
 + (UIView*)noMealAlert{

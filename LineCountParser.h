@@ -26,4 +26,8 @@
 @property (nonatomic, retain) NSMutableArray *express_Line_Array;
 
 
+- (NSMutableArray*)returnThorneCounts;
+- (NSMutableArray*)returnMoultonCounts;
+- (NSMutableArray*)returnExpressCounts;
+
 @end

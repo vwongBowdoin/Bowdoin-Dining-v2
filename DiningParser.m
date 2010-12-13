@@ -8,6 +8,7 @@
 
 #import "DiningParser.h"
 #import "mealHandler.h"
+#import "WristWatch.h"
 
 @implementation DiningParser
 @synthesize todaysMealHandler, thorneBreakfast, thorneLunch, thorneDinner, thorneBrunch, moultonBreakfast, moultonLunch, moultonDinner, moultonBrunch;
@@ -65,12 +66,13 @@
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
     
-    [self storeXMLDataforDay:currentDayIndex];
+    [self storeXMLDataforDay:(int)currentDayIndex];
     
 }
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
 	currentElement = [elementName copy];
+	
 	
 	// storing Breakfast
 	if ([elementName isEqualToString:@"meal"] && [[attributeDict objectForKey:@"id"] isEqualToString:@"Breakfast"]) {
@@ -179,37 +181,43 @@
 
 -(void)storeXMLDataforDay:(int)day{
 	
-    NSString *archivePath = [NSString stringWithFormat:@"%@/thorneBreakfast%d.xml",[self documentsDirectory], day];
+	WristWatch *watch = [[WristWatch alloc] init];
+	
+	int currentWeek = [watch getWeekofYear];
+	
+    NSString *archivePath = [NSString stringWithFormat:@"%@/week%d/thorneBreakfast%d.xml",[self documentsDirectory], currentWeek, day];
     [thorneBreakfast writeToFile:archivePath atomically:YES];
-	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
-
-    archivePath = [NSString stringWithFormat:@"%@/thorneLunch%d.xml",[self documentsDirectory],day];
+	NSLog(@"Storing: %@", archivePath);
+	NSLog(@"Description = %@", thorneBreakfast);
+	
+    archivePath = [NSString stringWithFormat:@"%@/week%d/thorneLunch%d.xml",[self documentsDirectory], currentWeek, day];
     [thorneLunch writeToFile:archivePath atomically:YES];
-	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
-	
-    archivePath = [NSString stringWithFormat:@"%@/thorneDinner%d.xml",[self documentsDirectory],day];
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@"docdirectory"]);
+	NSLog(@"Description = %@", thorneLunch);
+
+    archivePath = [NSString stringWithFormat:@"%@/week%d/thorneDinner%d.xml",[self documentsDirectory], currentWeek, day];
     [thorneDinner writeToFile:archivePath atomically:YES];
-	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@"docdirectory"]);
 	
-    archivePath = [NSString stringWithFormat:@"%@/thorneBrunch%d.xml",[self documentsDirectory],day];
+    archivePath = [NSString stringWithFormat:@"%@/week%d/thorneBrunch%d.xml",[self documentsDirectory], currentWeek, day];
     [thorneBrunch writeToFile:archivePath atomically:YES];
-	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@"docdirectory"]);
 	
-    archivePath = [NSString stringWithFormat:@"%@/moultonBreakfast%d.xml",[self documentsDirectory],day];
+    archivePath = [NSString stringWithFormat:@"%@/week%d/moultonBreakfast%d.xml",[self documentsDirectory], currentWeek, day];
     [moultonBreakfast writeToFile:archivePath atomically:YES];
-	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@"docdirectory"]);
 	
-    archivePath = [NSString stringWithFormat:@"%@/moultonLunch%d.xml",[self documentsDirectory],day];
+    archivePath = [NSString stringWithFormat:@"%@/week%d/moultonLunch%d.xml",[self documentsDirectory], currentWeek, day];
     [moultonLunch writeToFile:archivePath atomically:YES];
-	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@"docdirectory"]);
 	
-    archivePath = [NSString stringWithFormat:@"%@/moultonDinner%d.xml",[self documentsDirectory],day];
+    archivePath = [NSString stringWithFormat:@"%@/week%d/moultonDinner%d.xml",[self documentsDirectory], currentWeek, day];
     [moultonDinner writeToFile:archivePath atomically:YES];
-	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@"docdirectory"]);
 	
-    archivePath = [NSString stringWithFormat:@"%@/moultonBrunch%d.xml",[self documentsDirectory],day];
+    archivePath = [NSString stringWithFormat:@"%@/week%d/moultonBrunch%d.xml",[self documentsDirectory], currentWeek, day];
     [moultonBrunch writeToFile:archivePath atomically:YES];
-	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@"docdirectory"]);
 	
 }
 

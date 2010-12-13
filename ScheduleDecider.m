@@ -12,6 +12,14 @@
 #import "WristWatch.h"
 #import "FavoriteItem.h"
 
+@interface ScheduleDecider (PrivateMethods)
+
+- (NSString*)currentlySelectedHoursDescription;
+- (void)populateSpecialsArray;
+
+@end
+
+
 @implementation ScheduleDecider
 
 @synthesize mealArray, diningHallMealArray, thorneArray, moultonArray, 
@@ -862,7 +870,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		
 	}
    	
-	
+	int currentWeek = [watch getWeekofYear];
 	
 	// Running through every possible meal to decide which meals are open
 	
@@ -872,6 +880,8 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 		
 		[element setCurrentDay:day];
+		[element setCurrentWeek:currentWeek];
+
 		
         if ([element isOpen] || [element willOpen]){
 			
@@ -880,6 +890,8 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
             [dictionary setObject:[element returnFileLocation] forKey:@"FileLocation"];
             [dictionary setObject:[element returnDescription] forKey:@"Day"];
 			[dictionary setObject:[element dateText] forKey:@"Hours_of_Operation"];
+			
+			NSLog(@"File Location = %@", [element returnFileLocation]);
 			
 			if ([element currentDay] == [watch getWeekDay]) {
 				[dictionary setObject:[NSString stringWithFormat:@"Today's %@", [element returnDescription]] forKey:@"Formatted_Title"];
@@ -942,11 +954,11 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		NSMutableArray *array;		
 		
 		if ([element objectForKey:@"FileLocation"] != NULL) {
-			//NSLog(@"Loading Array = %@", [[element objectForKey:@"FileLocation"] stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 			array = [[NSMutableArray alloc] initWithContentsOfFile:[element objectForKey:@"FileLocation"]];
 			
 			
 			if (array == NULL) {
+				NSLog(@"NULL File!!!");
 				array = [[NSMutableArray alloc] initWithObjects:@"NULL ENTRY", nil];
 			}
 			
@@ -1465,6 +1477,21 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     
     return [NSNumber numberWithInt:intToReturn];
     
+}
+
+// Checks to see if Menus are current
+- (BOOL)menusAreCurrent{
+	
+	int lastUpdatedWeek = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"];
+	int currentWeek = [watch getWeekofYear];
+	
+	if (lastUpdatedWeek != currentWeek){
+		return NO;
+    }
+	else {        
+		return YES;
+    }
+	
 }
 
 

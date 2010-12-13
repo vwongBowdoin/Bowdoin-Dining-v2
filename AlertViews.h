@@ -14,8 +14,10 @@
 }
 
 
-- (UIView*)noMealAlert;
-- (UIView *)closedForSemesterAlert;
-- (UIView *)noInternetAlert;
-- (UIView *)noServerAlert;
++ (UIView *)noMealAlert;
++ (UIView *)closedForSemesterAlert;
++ (UIView *)noInternetAlert;
++ (UIView *)noServerAlert;
+
+
 @end

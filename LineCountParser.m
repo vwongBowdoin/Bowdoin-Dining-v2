@@ -8,6 +8,12 @@
 
 #import "LineCountParser.h"
 
+@interface LineCountParser (PrivateMethods)
+
+-(NSNumber*)returnNSNumberForString:(NSString*)inputString;
+
+@end
+
 
 @implementation LineCountParser
 

@@ -13,7 +13,7 @@
 @implementation LineCountViewController
 
 
-@synthesize thorne_label, moulton_label, express_label, thorneCount, moultonCount, expressCount, refreshButton;
+@synthesize thorne_label, moulton_label, express_label, thorneCount, moultonCount, expressCount, refreshButton, totalPatrons;
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -103,7 +103,7 @@
 	express_label.textColor = [analyzer expressColor];
 	expressCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer expressScore]];
 		
-	totalPatrons.text = [NSString stringWithFormat:@"%d", analyzer.total_Patrons];
+	totalPatrons.text = [NSString stringWithFormat:@"%d", [analyzer total_Patrons]];
 	
 	[analyzer release];
 	

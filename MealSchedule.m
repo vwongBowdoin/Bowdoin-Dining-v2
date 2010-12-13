@@ -11,7 +11,7 @@
 
 @implementation MealSchedule
 
-@synthesize mealName, shortName, fileName, currentDay, openTimes, closeTimes, location;
+@synthesize mealName, shortName, fileName, currentDay, currentWeek, openTimes, closeTimes, location;
 
 // Returns an NSDate initialized for the current opening time.
 - (NSDate *)currentOpening{
@@ -345,7 +345,7 @@
 - (NSString*)returnFileLocation{
 	
 	
-	return [NSString stringWithFormat:@"%@/%@%d.xml",[self documentsDirectory], fileName, currentDay];
+	return [NSString stringWithFormat:@"%@/week%d/%@%d.xml",[self documentsDirectory], currentWeek, fileName, currentDay];
 	
 	
 }

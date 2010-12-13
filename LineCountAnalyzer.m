@@ -9,8 +9,14 @@
 #import "LineCountAnalyzer.h"
 #import "LineCountParser.h"
 
+@interface LineCountAnalyzer (PrivateMethods)
+
+- (int)scoreArray:(NSMutableArray*)array forHall:(int)lineID;
+- (UILabel*)returnLabelForScore:(int)score;
+
+@end
+
 @implementation LineCountAnalyzer
-@synthesize total_Patrons;
 
 -(void)analyzeData:(NSData*)data{
 	
@@ -70,11 +76,10 @@
 	return expressScore;
 }
 
-
-- (void)totalPatronsFromHallScore:(int)patrons{
-	
-	
+- (int)total_Patrons{
+	return total_Patrons;
 }
+
 
 - (UILabel*)returnLabelForScore:(int)score{
 	

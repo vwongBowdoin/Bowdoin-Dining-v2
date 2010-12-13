@@ -14,6 +14,7 @@
     NSArray *openTimes;
     NSArray *closeTimes;
     int currentDay;
+	int currentWeek;
     NSString *mealName;
     NSString *shortName;
 	NSString *fileName;
@@ -25,6 +26,7 @@
 
 @property (nonatomic, retain) NSArray *openTimes;
 @property (nonatomic) int currentDay;
+@property (nonatomic) int currentWeek;
 @property (nonatomic, retain) NSArray *closeTimes;
 @property (nonatomic, retain) NSString *mealName;
 @property (nonatomic, retain) NSString *shortName;
