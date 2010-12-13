@@ -24,6 +24,7 @@
 #import "LineCountViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AlertViews.h"
+#import "FavoriteItem.h"
 
 @interface RootViewController (PrivateMethods)
 
@@ -360,34 +361,6 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	@param scrollView the message-sending scrollView
  */
 
-#pragma mark -
-#pragma mark Favorite Control
-// Method for registering favorite selection
--(void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex{
-	
-	CustomTableViewCell *cell = (CustomTableViewCell *)[customTableView cellForRowAtIndexPath:selectedIndexPath];
-	
-	// Favoriting Tag
-	if (buttonIndex == 0) {
-		
-		
-		if (cell.isFavorited) {
-			cell.isFavorited = NO;
-		} else {
-			cell.isFavorited = YES;
-		}
-		
-		[customTableView reloadData];
-		
-		
-	}
-	else if (buttonIndex == 1) {
-		
-		
-		
-	}
-	
-}
 
 // Method for Sending Email with Item
 - (void)composeEmail{
@@ -908,6 +881,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	// Need to add in support for not selecting the first item of any section
 	// so that "Main Course" can't be selected
 	
+	/*
 	if (cell.isFavorited) {
 
 		UIActionSheet *favoriteSheet = [[UIActionSheet alloc] initWithTitle:itemTitle 
@@ -929,12 +903,57 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 		
 	}
 
-		
+	*/
+	
+	
+	UIActionSheet *favoriteSheet = [[UIActionSheet alloc] initWithTitle:itemTitle 
+															   delegate:self 
+													  cancelButtonTitle:canelButtonTitle 
+												 destructiveButtonTitle:nil 
+													  otherButtonTitles:favoriteThisItem, shareThisItem, nil];
+	[favoriteSheet showInView:self.view];
+	
+	
 	
 	selectedIndexPath = indexPath;
 
 	
 }
 
+
+#pragma mark -
+#pragma mark Favorite Control
+// Method for registering favorite selection
+-(void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex{
+	
+	CustomTableViewCell *cell = (CustomTableViewCell *)[customTableView cellForRowAtIndexPath:selectedIndexPath];
+	
+	// Favoriting Tag
+	if (buttonIndex == 0) {
+	
+		/*
+		Create a new instance of the Event entity.
+		*/
+		FavoriteItem *favorite = (FavoriteItem *)[NSEntityDescription insertNewObjectForEntityForName:@"FavoriteItem" inManagedObjectContext:managedObjectContext];
+			
+			
+		[favorite setItemName:cell.textLabel.text];
+			
+		// Commit the change.
+		NSError *error;
+		if (![managedObjectContext save:&error]) {
+			// Handle the error.
+		}
+			
+		
+	}
+		
+	else if (buttonIndex == 1) {
+		
+		
+		
+	}
+	
+}
 @end
 

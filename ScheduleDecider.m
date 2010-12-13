@@ -10,6 +10,7 @@
 #import "MealSchedule.h"
 #import "ScheduleConstants.h"
 #import "WristWatch.h"
+#import "FavoriteItem.h"
 
 @implementation ScheduleDecider
 
@@ -762,6 +763,11 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
 	if (mutableFetchResults == nil) {
 		// Handle the error.
+	}
+	
+	NSLog(@"Core Date:");
+	for (int i = 0; i < [mutableFetchResults count]; i++) {
+		NSLog(@"%@", [[mutableFetchResults objectAtIndex:i] itemName]);
 	}
 	
 	// Set self's events array to the mutable array, then clean up.
