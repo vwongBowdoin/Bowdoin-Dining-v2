@@ -55,6 +55,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 }
 
 - (void)dealloc {
+
 	[customTableView release];
 	[hallScrollView release];
 	[mealScrollView release];
@@ -81,7 +82,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 - (void)registerNotifications{
     
     // Menu Download Completion
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadContent)
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadSucceeded)
 												 name:@"Download Completed" object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noInternetConnection)
@@ -103,8 +104,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 - (void)becomeActive:(NSNotification *)notification{
 	NSLog(@"Application Became Active");
 	[self setupMealData];
-	[self hideLocalAlertView];
-	[self hideGlobalAlertView];
+
 	
 }
 
@@ -172,6 +172,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 }
 
 - (void)hideGlobalAlertView{
+	
+	NSLog(@"Trying to hide global alert view");
 	
 	if (globalAlertView != nil) {
 		
@@ -256,6 +258,14 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 }
 
+- (void)downloadSucceeded {
+	
+	localAlertView = [AlertViews noMealAlert];
+	[self hideGlobalAlertView];
+	[self loadContent];
+	
+}
+
 // No Internet Connectivity
 - (void)noInternetConnection{
 	
@@ -263,11 +273,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	[self loadContent];
 	[self showGlobalAlertView];
-
-
 	
 }
-
 
 // Bowdoin Servers Down
 - (void)noBowdoinConnection{
@@ -277,7 +284,6 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	[self loadContent];
 	[self showGlobalAlertView];
 
-	
 }
 
 // No Menus Available - Closed for Semester Break
@@ -285,8 +291,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	localAlertView = [AlertViews closedForSemesterAlert];
 	[self loadContent];
-	
-	
+		
 }
 
 /**
