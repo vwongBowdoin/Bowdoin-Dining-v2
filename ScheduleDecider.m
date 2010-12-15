@@ -735,7 +735,10 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     
     diningHallMealArray = diningHallMeals;
     
-    
+	WristWatch *clock = [[WristWatch alloc] init];
+	dayLastUpdated = [clock getDayOfYear];
+    [clock release];
+	
     return self;
 }
 
@@ -774,13 +777,28 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	
 	
 	// Running through every possible meal to decide which meals are open
+	
     for(MealSchedule *element in diningHallMealArray){
         NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
 		
+
 		
 		[element setCurrentDay:day];
 		
         if ([element isOpen] || [element willOpen]){
+			
+			
+			NSDate *currentClosingTime = [element currentClosing];
+			
+			// Store the first Open Meal or next Open Meal
+			if (scheduleDeciderMustUpdateDate == nil) {
+
+				scheduleDeciderMustUpdateDate = currentClosingTime;
+				
+			} else if ([self isFirstDateLater:scheduleDeciderMustUpdateDate secondDate:currentClosingTime]) {
+				
+				scheduleDeciderMustUpdateDate = currentClosingTime;
+			}
 			
             [dictionary setObject:element.shortName forKey:@"Shortname"];
             [dictionary setObject:[element returnFileLocation] forKey:@"FileLocation"];
@@ -821,8 +839,42 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     } // end iteration of mealschedule objects
 	
 	
+	NSLog(@"Schedule First Date: %@", scheduleDeciderMustUpdateDate);
 	
 	
+}
+
+- (BOOL)isFirstDateLater:(NSDate *)firstDate secondDate:(NSDate *)secondDate{
+    
+    NSComparisonResult comparison = [firstDate compare:secondDate];
+	
+    // NSOrderedDesceding result means firstDate is AFTER 
+    // NSOrderedAscending result means firstDate is BEFORE
+    // NSOrderedSame means dates are identical
+    
+	NSLog(@"Comparing %@ and %@", firstDate, secondDate);
+	
+    // Within Hours of Operation
+    if (comparison ==  NSOrderedDescending){
+		NSLog(@"First Date After Second");
+		return YES;
+    } else {
+		NSLog(@"First Date Before Second");
+        return NO;
+    }
+	
+}
+
+
+- (BOOL)schedulerOutOfDate:(NSDate*)dateToCompare{
+	
+	if (dayLastUpdated != [watch getDayOfYear]) {
+		return YES;
+	}
+	
+	NSLog(@"Stored Out of Date: %@", scheduleDeciderMustUpdateDate);
+	
+	return [self isFirstDateLater:dateToCompare secondDate:scheduleDeciderMustUpdateDate];
 	
 }
 

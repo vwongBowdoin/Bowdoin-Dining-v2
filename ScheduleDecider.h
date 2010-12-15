@@ -67,6 +67,9 @@
 	
 	NSInteger currentHours;
 
+	
+	NSDate *scheduleDeciderMustUpdateDate;
+	int dayLastUpdated;
 
 	WristWatch *watch;
 

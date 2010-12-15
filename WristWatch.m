@@ -164,7 +164,22 @@
 	
 }
 
-
+- (int)getDayOfYear{
+	
+	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[inputFormatter setDateFormat:@"D"];
+	NSDate *toBeFormatted = [[[NSDate alloc] init] autorelease];
+	
+	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
+    
+	// Returns the week of the year
+	NSInteger formattedWeek;
+	formattedWeek = [formattedDate intValue];
+	NSLog(@"dayofyear: %d", formattedWeek);
+	
+	return formattedWeek;
+	
+}
 
 - (int)getWeekofYear{
 	
