@@ -178,6 +178,8 @@
 
 -(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	
+	NSLog(@"Parsing Error");
+	
 	NSString * errorString = [NSString stringWithFormat:@"Something went wrong! We were unable to download the menus right now. Sorry!"];
 	[self performSelectorOnMainThread:@selector(displayError:) 
 						   withObject:errorString
