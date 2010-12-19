@@ -111,8 +111,6 @@ const int cmwNightStop        = 86400; //  MIDNIGHT
 const int ctfMorningStart     = 27000; //  7:30 a.m.
 const int ctfMorningStop      = 59400; //  4:30 p.m.
 
-const int ctfNightStart       = 72000; //  8:00 p.m.
-const int ctfNightStop        = 79200; // 10:00 p.m.
 
 // Cafe Saturday
 const int csaMorningStart     = 39600; // 11:00 a.m.

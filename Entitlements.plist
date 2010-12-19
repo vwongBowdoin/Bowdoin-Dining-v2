@@ -9,6 +9,6 @@
 		<string>$(AppIdentifierPrefix)$(CFBundleIdentifier)</string>
 	</array>
 	<key>get-task-allow</key>
-	<true/>
+	<false/>
 </dict>
 </plist>

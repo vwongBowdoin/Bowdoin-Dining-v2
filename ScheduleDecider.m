@@ -580,8 +580,8 @@
 			[NSNumber numberWithInt:cmwNightStart], // Mon
             [NSNumber numberWithInt:cmwNightStart], // Tue
             [NSNumber numberWithInt:cmwNightStart], // Wed
-            [NSNumber numberWithInt:ctfNightStart], // Thu
-            [NSNumber numberWithInt:ctfNightStart], // Fri
+            [NSNumber numberWithInt:noMealForDay], // Thu
+            [NSNumber numberWithInt:noMealForDay], // Fri
             [NSNumber numberWithInt:noMealForDay],  // Sat
             
             nil];
@@ -590,8 +590,8 @@
 			 [NSNumber numberWithInt:cmwNightStop], // Mon
              [NSNumber numberWithInt:cmwNightStop], // Tue
              [NSNumber numberWithInt:cmwNightStop], // Wed
-             [NSNumber numberWithInt:ctfNightStop], // Thu
-             [NSNumber numberWithInt:ctfNightStop], // Fri
+             [NSNumber numberWithInt:noMealForDay], // Thu
+             [NSNumber numberWithInt:noMealForDay], // Fri
              [NSNumber numberWithInt:noMealForDay],  // Sat
              nil];
     
