@@ -119,12 +119,11 @@
 		
 	}
 
-	// changing course
 	
 }
 
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-	
+		
 	// if course is the the same as current course - continue to add to course array key
 	if ([elementName isEqualToString:@"course"]) {
 		if (currentCourse == nil) {
@@ -141,7 +140,6 @@
 		}
 	}
 	
-	//NSLog(@"ended element: %@", elementName);
 	if ([elementName isEqualToString:@"webLongName"]) {
 		// save values to an item, then store that item into the array with the current course key
 		[mealArray addObject:currentTitle];
@@ -149,14 +147,16 @@
 	}
 	
 	if ([elementName isEqualToString:@"error"]) {
-		// Creeates / or wipes the array for safety
-		mealArray = [[NSMutableArray alloc] init];
-		[mealArray addObject:@""];
-		// Save values to an item, then store that item into the array with the current course key
+		// Creeates or wipes the array for safety
+		NSLog(@"Error Found In Parser");
+	//	mealArray = [[NSMutableArray alloc] init];
+	//	[mealArray addObject:@"ERROR"];
 		
+	//	[self addArrayofItems:mealArray forCourse:@"No Menu For This Meal" forMeal:currentMeal forHall:currentUnit];
+		
+	//	mealArray = [[NSMutableArray alloc] init];
+
 	}
-	
-	
 }
 
 -(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string{

@@ -1307,7 +1307,19 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		currentHours = 0;
 	}
 
+}
+
+- (NSString*)currentlySelectedHoursDescription{
 	
+	NSString *returnString;
+	
+	if (currentHours == 0) {
+		returnString = @"Now";
+	} else {
+		returnString = @"Today";
+	}
+	
+	return returnString;
 	
 }
 

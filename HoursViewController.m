@@ -29,16 +29,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+		
 	self.title = @"Dining Hours";
-	
-	[localScheduler processHoursArrays];
-	[theTableView reloadData];
-	
+			
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
 
 	theTableView.separatorColor = [UIColor lightGrayColor];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+
+	[hourSelector setTitle:[localScheduler currentlySelectedHoursDescription]
+				  forState:UIControlStateNormal];
 }
 
 - (IBAction)hourSelectorDidChange{
@@ -49,12 +52,12 @@
 	
 	if ([hourSelector.titleLabel.text isEqualToString:@"Today"]) {
 		[hourSelector setTitle:@"Now" forState:UIControlStateNormal];
+		
 	} else {
 		[hourSelector setTitle:@"Today" forState:UIControlStateNormal];
 	}
 
 }
-
 
 #pragma mark -
 #pragma mark Table view data source
@@ -74,8 +77,6 @@
 	return 30.0;
 }
 
-
-// Custom Header
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section { 
 	UIView* customView = [[[UIView alloc]initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)]autorelease];
 	customView.backgroundColor = [UIColor clearColor];
@@ -94,7 +95,6 @@
 	
 }
 
-// Height of Rows
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{	
 	
 	return 30.0;
@@ -135,17 +135,11 @@
     return cell;
 }
 
-
-
-#pragma mark -
-#pragma mark Table view delegate
-
 - (IBAction)backButtonSelected{
 	
 	[self.navigationController popViewControllerAnimated:YES];
 	
 }
-
 
 #pragma mark -
 #pragma mark Memory management

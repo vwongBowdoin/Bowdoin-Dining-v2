@@ -132,11 +132,8 @@
 
 // returns the atreus server path
 - (NSString *)atreusSeverPath {
-    
     return @"http://www.bowdoin.edu/atreus/lib/xml/";
-	
 }
-
 
 - (void)errorOccurred{
     

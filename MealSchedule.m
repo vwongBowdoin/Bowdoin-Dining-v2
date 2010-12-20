@@ -106,9 +106,6 @@
     [componentsToAdd release];
     [gregorian release];
     
-	
-	NSLog(@"One AM Tomorrow = %@", oneAMTomorrow);
-	
     return oneAMTomorrow;
     
 }
@@ -135,9 +132,6 @@
     [componentsToAdd release];
     [gregorian release];
     
-	
-	NSLog(@"Midnight Tomorrow = %@", oneAMTomorrow);
-	
     return oneAMTomorrow;
     
 }
@@ -265,7 +259,6 @@
     
     if (nowOpeningComparison == NSOrderedAscending){
 
-		NSLog(@"WILL OPEN: %@", mealName);
         return YES;
         
     } else {

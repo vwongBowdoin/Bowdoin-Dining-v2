@@ -14,6 +14,7 @@
  
     ScheduleDecider *localScheduler;
     NSMutableArray *openNowArray;
+	
     
     IBOutlet UICustomTableView *theTableView;
 	IBOutlet UIButton *hourSelector;

@@ -22,7 +22,7 @@
 #import "MealNavigationBar.h"
 #import "GrillAreaViewController.h"
 #import "LineCountViewController.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 @interface RootViewController (PrivateMethods)
 
@@ -99,7 +99,15 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 }
 
 - (void)showNoMealNotification{
-	NSLog(@"NO MEAL");	
+	
+	
+	UIView *noMealView = [[UIView alloc] initWithFrame:CGRectMake(60, 175, 200, 130)];
+	noMealView.backgroundColor = [UIColor grayColor];
+	noMealView.layer.cornerRadius = 10.0;
+	[self.view addSubview:noMealView];
+	
+	
+	
 }
 
 #pragma mark -
@@ -425,6 +433,28 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 }
 
+- (IBAction)navigateRight:(id)sender {
+    
+	if ([sender tag] == 1) {
+		[self navigateScrollBarRight:mealScrollView];
+	} else {
+		[self navigateScrollBarRight:hallScrollView];
+		
+	}
+	
+    
+}
+
+- (IBAction)navigateLeft:(id)sender {
+	
+	if ([sender tag] == 1) {
+		[self navigateScrollBarLeft:mealScrollView];
+	} else {
+		[self navigateScrollBarLeft:hallScrollView];
+		
+	}	
+}
+
 - (void)navigateScrollBarRight:(UIScrollView*)scrollView {
 	
 	NSLog(@"Navigate Right Method");
@@ -575,12 +605,21 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 	
-	return [scheduler numberOfSectionsForLocation:currentHallPage atMealIndex:currentMealPage];
+	NSInteger *numberOfSections = [scheduler numberOfSectionsForLocation:currentHallPage atMealIndex:currentMealPage];
+	
+	if (numberOfSections == 0) {
+		
+		[self showNoMealNotification];
+	}
+	
+	return numberOfSections;
 
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	NSLog(@"Rows");
 
+	
 	return [scheduler sizeOfSection:section forLocation:currentHallPage atMealIndex:currentMealPage];
 	
 }
