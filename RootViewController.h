@@ -60,6 +60,10 @@
 	
 	HallNavigationBar *hallNavBar;
 	
+	UIView *noMealAlertView;
+	
+	
+	
 }
 
 @property (nonatomic, retain) IBOutlet UICustomTableView *customTableView;

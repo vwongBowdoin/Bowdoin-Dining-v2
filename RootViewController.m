@@ -74,6 +74,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
+	
 }
 
 - (void)registerNotifications{
@@ -101,13 +102,61 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 - (void)showNoMealNotification{
 	
 	
-	UIView *noMealView = [[UIView alloc] initWithFrame:CGRectMake(60, 175, 200, 130)];
-	noMealView.backgroundColor = [UIColor grayColor];
-	noMealView.layer.cornerRadius = 10.0;
-	[self.view addSubview:noMealView];
+	if (noMealAlertView == nil) {
+		UIView *noMealView = [[UIView alloc] initWithFrame:CGRectMake(60, 175, 200, 130)];
+		noMealView.layer.cornerRadius = 10.0;
+		noMealView.backgroundColor = [UIColor blackColor];
 	
+		
+		noMealAlertView.alpha = 0.0;
+		noMealAlertView = noMealView;
+		
+		
+		UILabel *alertText_Title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 80)];
+		alertText_Title.textAlignment = UITextAlignmentCenter;
+		alertText_Title.text = @"No Menu";
+		alertText_Title.font = [UIFont boldSystemFontOfSize:20.0];
+		alertText_Title.textColor = [UIColor whiteColor];
+		alertText_Title.backgroundColor = [UIColor clearColor];
+		
+		
+		UILabel *alertText_Subtitile = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 200, 100)];
+		alertText_Subtitile.textAlignment = UITextAlignmentCenter;
+		alertText_Subtitile.text = @"This meal is closed or no menu was found.";
+		alertText_Subtitile.numberOfLines = 2;
+		alertText_Subtitile.font = [UIFont systemFontOfSize:16.0];
+		alertText_Subtitile.textColor = [UIColor whiteColor];
+		alertText_Subtitile.backgroundColor = [UIColor clearColor];
+		
+		[noMealAlertView addSubview:alertText_Title];
+		[noMealAlertView addSubview:alertText_Subtitile];
+	}
+
+	// Flashes Meal Notifcation
+	[UIView beginAnimations:nil context:nil];
+	[self.view addSubview:noMealAlertView];
+	[UIView setAnimationDuration:0.2];
+	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:noMealAlertView cache:YES];
+	[UIView setAnimationDelegate:self]; 
+	noMealAlertView.alpha = 1.0;
+	[UIView commitAnimations];
 	
-	
+}
+
+- (void)hideNoMealAlertView{
+		
+	if (noMealAlertView != nil) {
+		
+		// Flashes TableView
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDuration:0.4];
+		[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:noMealAlertView cache:YES];
+		[UIView setAnimationDelegate:self]; 
+		noMealAlertView.alpha = 0.0;
+		[UIView commitAnimations];
+		
+	}
+		
 }
 
 #pragma mark -
@@ -136,6 +185,10 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
     [self registerNotifications];
 	[self setupMealData];
+	
+	// Creates the No Meal Alert View
+	
+
 	
 }
 
@@ -361,11 +414,9 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 
 	// Filters out UITableView Scroll Events which inherits from UIScrollView
 	if ([scrollView isKindOfClass:[UITableView class]]) {
-	
+
 		return;
 	}
-	
-	
 	
 	// Decides the current page of the Hall scroller.	
 	CGFloat hallPageWidth = hallScrollView.frame.size.width;
@@ -386,14 +437,13 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
         if (navigationBarsAnimatedOut){
             
             [self animateNavigationBars];
-            NSLog(@"Reloading Data for Hall:%d, Meal:%d,", currentHallPage, currentMealPage);
 			
 			
 			currentHallPage = hallPage;
             currentMealPage = mealPage;
 			
 			[customTableView reloadData];
-            
+
           
             return;
             
@@ -409,6 +459,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 		 [UIView commitAnimations];
 		 
 		 
+
 		currentHallPage = hallPage;
 		currentMealPage = mealPage;
 		
@@ -425,6 +476,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 		currentMealPage = mealPage;
 
 		[customTableView reloadData];
+
 		
 		hallNavBar.timeToDisplay = [scheduler hoursOfOperationForHall:currentHallPage meal:currentMealPage];
 		[hallNavBar setNeedsDisplay];
@@ -587,6 +639,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 			 
 	// reloads the table view		
 	[customTableView reloadData];
+
 	
 	// animates the tableView back in
 	[UIView beginAnimations:nil context:nil];
@@ -610,7 +663,12 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	if (numberOfSections == 0) {
 		
 		[self showNoMealNotification];
+	} else {
+		
+		[self hideNoMealAlertView];
+		
 	}
+
 	
 	return numberOfSections;
 
