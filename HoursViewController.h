@@ -16,11 +16,12 @@
     NSMutableArray *openNowArray;
     
     IBOutlet UICustomTableView *theTableView;
-	IBOutlet UISegmentedControl *hourSelector;
+	IBOutlet UIButton *hourSelector;
+
 }
 
 @property (nonatomic, retain) IBOutlet UICustomTableView *theTableView;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *hourSelector;
+@property (nonatomic, retain) IBOutlet UIButton *hourSelector;
 
 @property (nonatomic, retain) ScheduleDecider *hoursScheduler;
 @property (nonatomic, retain) NSMutableArray *openNowArray;
@@ -28,6 +29,7 @@
 
 -(id)initWithScheduleDecider:(ScheduleDecider*)decider;
 -(IBAction)backButtonSelected;
+- (IBAction)hourSelectorDidChange;
 
 
 @end

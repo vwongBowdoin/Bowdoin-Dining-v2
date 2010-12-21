@@ -16,8 +16,9 @@
 @synthesize mealArray, diningHallMealArray, thorneArray, moultonArray, 
 navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
-
 - (void)dealloc{
+	NSLog(@"ScheduleDecider De-Allocated");
+
 	
 	[mealArray release];
 	[diningHallMealArray release];
@@ -54,9 +55,9 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
  Populates MealSchedule objects with information
  @returns self
  */
-
 - (id)init{
 	
+	NSLog(@"ScheduleDecider Allocated");
     //
     // Moulton Hot Breakfast
     //
@@ -981,36 +982,6 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 }
 
 #pragma mark -
-#pragma mark Navigation Bar
-
-- (void)populateNavigationBarArray{
-	
-	navBarArray = [[NSMutableArray alloc] init];
-	thorneNavHours = [[NSMutableArray alloc] init];
-	moultonNavHours = [[NSMutableArray alloc] init];
-	
-	// Populate Navigation Array to Properly Display Title Bar
-	for(NSDictionary *element in thorne_dictionary_array){
-		
-		[navBarArray addObject:[element objectForKey:@"Formatted_Title"]];
-		[thorneNavHours addObject:[element objectForKey:@"Hours_of_Operation"]];
-	}
-	
-	for(NSDictionary *element in moulton_dictionary_array){
-		
-		[moultonNavHours addObject:[element objectForKey:@"Hours_of_Operation"]];
-	}
-	
-}
-
-- (NSMutableArray*)returnNavBarArray{
-	
-	
-	return navBarArray;
-	
-}
-
-#pragma mark -
 #pragma mark Meal TableView DataSource
 
 - (NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex{
@@ -1134,13 +1105,16 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 - (void)processHoursArrays{
 	
 	allHoursArray = [[NSMutableArray alloc] init];
-    NSMutableArray *allHours_Thorne = [[NSMutableArray alloc]init];
-	NSMutableArray *allHours_Moulton = [[NSMutableArray alloc]init];
-    NSMutableArray *allHours_Smith = [[NSMutableArray alloc]init];
+	openArray = [[NSMutableArray alloc] init];
+
+    NSMutableArray *allHours_Thorne = [NSMutableArray array];
+	NSMutableArray *allHours_Moulton = [NSMutableArray array];
+    NSMutableArray *allHours_Smith = [NSMutableArray array];	
 	
-	NSMutableArray *nowHours_Thorne = [[NSMutableArray alloc]init];
-	NSMutableArray *nowHours_Moulton = [[NSMutableArray alloc]init];
-    NSMutableArray *nowHours_Smith = [[NSMutableArray alloc]init];
+	
+	NSMutableArray *nowHours_Thorne = [NSMutableArray array];
+	NSMutableArray *nowHours_Moulton = [NSMutableArray array];
+    NSMutableArray *nowHours_Smith = [NSMutableArray array];
 	
 	//Assumes we want an array of today's hours.
     int currentDay = (int)[watch getWeekDay];
@@ -1211,6 +1185,9 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	if ([nowHours_Moulton count] != 0) { [openArray addObject:nowHours_Moulton]; }
 	if ([nowHours_Smith count] != 0) { [openArray addObject:nowHours_Smith]; }
 	
+	
+	// set default current hours to all hours
+	currentHours = 1;
 	
 }
 
@@ -1322,12 +1299,47 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	return @""; 
 }
 
-- (void) changeDisplayedHourInformation:(NSInteger)newHour{
+- (void) changeDisplayedHourInformation{
 	
-	currentHours = newHour;
+	if (currentHours == 0) {
+		currentHours = 1;
+	} else {
+		currentHours = 0;
+	}
+
+	
 	
 }
 
+#pragma mark -
+#pragma mark Navigation Bar
+
+- (void)populateNavigationBarArray{
+	
+	navBarArray = [[NSMutableArray alloc] init];
+	thorneNavHours = [[NSMutableArray alloc] init];
+	moultonNavHours = [[NSMutableArray alloc] init];
+	
+	// Populate Navigation Array to Properly Display Title Bar
+	for(NSDictionary *element in thorne_dictionary_array){
+		
+		[navBarArray addObject:[element objectForKey:@"Formatted_Title"]];
+		[thorneNavHours addObject:[element objectForKey:@"Hours_of_Operation"]];
+	}
+	
+	for(NSDictionary *element in moulton_dictionary_array){
+		
+		[moultonNavHours addObject:[element objectForKey:@"Hours_of_Operation"]];
+	}
+	
+}
+
+- (NSMutableArray*)returnNavBarArray{
+	
+	
+	return navBarArray;
+	
+}
 
 #pragma mark -
 #pragma mark Helper Methods

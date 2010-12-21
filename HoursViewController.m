@@ -29,26 +29,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-	//[hourSelector addTarget:self action:@selector(hourSelectorDidChange:) forControlEvents:UIControlEventValueChanged];
-	[localScheduler changeDisplayedHourInformation:1];
-
+	
 	self.title = @"Dining Hours";
+	
+	[localScheduler processHoursArrays];
+	[theTableView reloadData];
 	
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
 
-	[localScheduler processArrays];
 	theTableView.separatorColor = [UIColor lightGrayColor];
-	[theTableView reloadData];
-    
     
 }
 
-- (void)hourSelectorDidChange:(UISegmentedControl*)sender{
+- (IBAction)hourSelectorDidChange{
 	
-	NSLog(@"Value = %d", [sender selectedSegmentIndex]);
-	[localScheduler changeDisplayedHourInformation:1];
+	[localScheduler changeDisplayedHourInformation];
 	[theTableView reloadData];
+	
+	if (hourSelector.titleLabel.text == @"Today") {
+		hourSelector.titleLabel.text = @"Now";
+	} else {
+		hourSelector.titleLabel.text = @"Today";
+	}
+
 	
 }
 
