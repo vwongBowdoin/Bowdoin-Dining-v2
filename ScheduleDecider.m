@@ -17,8 +17,45 @@
 navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 
-// This method populates MealSchedule objects with their allotted times
--(id)init{
+- (void)dealloc{
+	
+	[mealArray release];
+	[diningHallMealArray release];
+	[thorneArray release];
+	[moultonArray release];
+	[navBarArray release];
+	[thorne_dictionary_array release];
+	[moulton_dictionary_array release];
+	[expressLunch release];
+	[expressDinner release];
+	[mHotBreakfast release];
+	[mColdBreakfast release];
+	[mLunch release];
+	[mDinner release];
+	[mBrunch release];
+	[tHotBreakfast release];
+	[tColdLunch release];
+	[tHotLunch release];
+	[tDinner release];
+	[tBrunch release];
+	[tSuperSnax release];
+	[cafeMorning release];
+	[cafeNight release];
+	[theGrill release];
+	[thePub release];
+	[theCStore release];
+	[openArray release];
+	[allHoursArray release];
+	[super dealloc];
+	
+}
+
+/**
+ Populates MealSchedule objects with information
+ @returns self
+ */
+
+- (id)init{
 	
     //
     // Moulton Hot Breakfast
@@ -28,25 +65,25 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     
 	
     
-     NSArray * open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBreakfastStart],  // Sun
-			[NSNumber numberWithInt:mHotBreakfastStart], // Mon
-            [NSNumber numberWithInt:mHotBreakfastStart], // Tue
-            [NSNumber numberWithInt:mHotBreakfastStart], // Wed
-            [NSNumber numberWithInt:mHotBreakfastStart], // Thu
-            [NSNumber numberWithInt:mHotBreakfastStart], // Fri
-            [NSNumber numberWithInt:mwkBreakfastStart],  // Sat
-            
-            nil];
+	NSArray * open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBreakfastStart],  // Sun
+					  [NSNumber numberWithInt:mHotBreakfastStart], // Mon
+					  [NSNumber numberWithInt:mHotBreakfastStart], // Tue
+					  [NSNumber numberWithInt:mHotBreakfastStart], // Wed
+					  [NSNumber numberWithInt:mHotBreakfastStart], // Thu
+					  [NSNumber numberWithInt:mHotBreakfastStart], // Fri
+					  [NSNumber numberWithInt:mwkBreakfastStart],  // Sat
+					  
+					  nil];
     
-     NSArray * close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBreakfastStop],  // Sun
-			 [NSNumber numberWithInt:mHotBreakfastStop], // Mon
-             [NSNumber numberWithInt:mHotBreakfastStop], // Tue
-             [NSNumber numberWithInt:mHotBreakfastStop], // Wed
-             [NSNumber numberWithInt:mHotBreakfastStop], // Thu
-             [NSNumber numberWithInt:mHotBreakfastStop], // Fri
-             [NSNumber numberWithInt:mwkBreakfastStop],  // Sat
-             
-             nil];
+	NSArray * close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBreakfastStop],  // Sun
+					   [NSNumber numberWithInt:mHotBreakfastStop], // Mon
+					   [NSNumber numberWithInt:mHotBreakfastStop], // Tue
+					   [NSNumber numberWithInt:mHotBreakfastStop], // Wed
+					   [NSNumber numberWithInt:mHotBreakfastStop], // Thu
+					   [NSNumber numberWithInt:mHotBreakfastStop], // Fri
+					   [NSNumber numberWithInt:mwkBreakfastStop],  // Sat
+					   
+					   nil];
     
     
     mHotBreakfast.openTimes = open;
@@ -91,7 +128,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     mColdBreakfast.shortName = @"Breakfast";
     mColdBreakfast.fileName = @"moultonBreakfast";
 	mColdBreakfast.location = @"Moulton";
-
+	
 	
 	//
     // Express Lunch
@@ -99,28 +136,25 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	
     expressLunch = [[MealSchedule alloc] init];
     
-#pragma mark -
-#pragma mark Express Meals
-    
-   open = [[NSArray alloc] initWithObjects:
-					 [NSNumber numberWithInt:noMealForDay],			// Sun
-					 [NSNumber numberWithInt:mExpressLunchStart],	// Mon
-					 [NSNumber numberWithInt:mExpressLunchStart],	// Tue
-					 [NSNumber numberWithInt:mExpressLunchStart],	// Wed
-					 [NSNumber numberWithInt:mExpressLunchStart],	// Thu
-					 [NSNumber numberWithInt:mExpressLunchStart],	// Fri
-					 [NSNumber numberWithInt:noMealForDay],			// Sat
-					 nil];
+	open = [[NSArray alloc] initWithObjects:
+			[NSNumber numberWithInt:noMealForDay],			// Sun
+			[NSNumber numberWithInt:mExpressLunchStart],	// Mon
+			[NSNumber numberWithInt:mExpressLunchStart],	// Tue
+			[NSNumber numberWithInt:mExpressLunchStart],	// Wed
+			[NSNumber numberWithInt:mExpressLunchStart],	// Thu
+			[NSNumber numberWithInt:mExpressLunchStart],	// Fri
+			[NSNumber numberWithInt:noMealForDay],			// Sat
+			nil];
     
 	close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Sun
-					  [NSNumber numberWithInt:mExpressLunchStop], // Mon
-					  [NSNumber numberWithInt:mExpressLunchStop], // Tue
-					  [NSNumber numberWithInt:mExpressLunchStop], // Wed
-					  [NSNumber numberWithInt:mExpressLunchStop], // Thu
-					  [NSNumber numberWithInt:mExpressLunchStop], // Fri
-					  [NSNumber numberWithInt:noMealForDay],      // Sat
-					  
-					  nil];
+			 [NSNumber numberWithInt:mExpressLunchStop], // Mon
+			 [NSNumber numberWithInt:mExpressLunchStop], // Tue
+			 [NSNumber numberWithInt:mExpressLunchStop], // Wed
+			 [NSNumber numberWithInt:mExpressLunchStop], // Thu
+			 [NSNumber numberWithInt:mExpressLunchStop], // Fri
+			 [NSNumber numberWithInt:noMealForDay],      // Sat
+			 
+			 nil];
 	
 	
 	
@@ -131,7 +165,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	expressLunch.location = @"Moulton";
 	
 	
-
+	
 	//
     // Moulton Brunch
     //
@@ -174,7 +208,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     //
     
     mLunch = [[MealSchedule alloc] init];
-
+	
     
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
 			[NSNumber numberWithInt:mLunchStart], // Mon
@@ -202,7 +236,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     mLunch.shortName = @"Lunch";
     mLunch.fileName = @"moultonLunch";
 	mLunch.location = @"Moulton";
-
+	
 	
     //
     // Express Dinner
@@ -272,14 +306,14 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     mDinner.shortName = @"Dinner";
     mDinner.fileName = @"moultonDinner";
 	mDinner.location = @"Moulton";
-
+	
     
     //
     // Thorne Hot Breakfast
     //
     
     tHotBreakfast = [[MealSchedule alloc] init];
-    	
+	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
 			[NSNumber numberWithInt:tHotBreakfastStart], // Mon
             [NSNumber numberWithInt:tHotBreakfastStart], // Tue
@@ -301,14 +335,14 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
              nil];
     
     
-
+	
     tHotBreakfast.openTimes = open;
     tHotBreakfast.closeTimes = close;
     tHotBreakfast.mealName = @"Hot Breakfast";  
     tHotBreakfast.shortName = @"Breakfast";  
     tHotBreakfast.fileName = @"thorneBreakfast";
 	tHotBreakfast.location = @"Thorne";
-
+	
     
 	
     //
@@ -353,7 +387,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     //
     
     tHotLunch = [[MealSchedule alloc] init];
-    	
+	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
 			[NSNumber numberWithInt:tHotLunchStart], // Mon
             [NSNumber numberWithInt:tHotLunchStart], // Tue
@@ -381,7 +415,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     tHotLunch.shortName = @"Lunch";  
     tHotLunch.fileName = @"thorneLunch";
 	tHotLunch.location = @"Thorne";
-
+	
     
     
     //
@@ -389,7 +423,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     //
     
     tColdLunch = [[MealSchedule alloc] init];
-    	
+	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
 			[NSNumber numberWithInt:tColdLunchStart], // Mon
             [NSNumber numberWithInt:tColdLunchStart], // Tue
@@ -417,7 +451,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     tColdLunch.shortName = @"Lunch";  
     tColdLunch.fileName = @"thorneLunch";
 	tColdLunch.location = @"Thorne";
-
+	
     
     
     //
@@ -425,7 +459,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     //
     
     tDinner = [[MealSchedule alloc] init];
-    	
+	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:twkDinnerStart],  // Sun
 			[NSNumber numberWithInt:tDinnerStart], // Mon
             [NSNumber numberWithInt:tDinnerStart], // Tue
@@ -453,8 +487,8 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     tDinner.shortName = @"Dinner";  
     tDinner.fileName = @"thorneDinner";
 	tDinner.location = @"Thorne";
-
-
+	
+	
     //
     // Super Snacks
     //
@@ -499,7 +533,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     //
     
     cafeMorning = [[MealSchedule alloc] init];
-    	
+	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:csuMorningStart],  // Sun
 			[NSNumber numberWithInt:cmwMorningStart], // Mon
             [NSNumber numberWithInt:cmwMorningStart], // Tue
@@ -507,7 +541,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
             [NSNumber numberWithInt:ctfMorningStart], // Thu
             [NSNumber numberWithInt:ctfMorningStart], // Fri
             [NSNumber numberWithInt:csaMorningStart],  // Sat
-            
+			
             nil];
     
     close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:csuMorningStop],  // Sun
@@ -526,14 +560,14 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     cafeMorning.mealName = @"Cafe AM";  
     cafeMorning.shortName = @"Cafe AM";
 	cafeMorning.location = @"Smith Union";
-
+	
     
     //
     // Cafe Evening
     //
     
     cafeNight = [[MealSchedule alloc] init];
-    	
+	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:csuNightStart],  // Sun
 			[NSNumber numberWithInt:cmwNightStart], // Mon
             [NSNumber numberWithInt:cmwNightStart], // Tue
@@ -566,7 +600,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     //
     
     theGrill = [[MealSchedule alloc] init];
-    	
+	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:grillsuStart],  // Sun
 			[NSNumber numberWithInt:grillmwStart], // Mon
             [NSNumber numberWithInt:grillmwStart], // Tue
@@ -599,7 +633,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     //
     
     thePub = [[MealSchedule alloc] init];
-    	
+	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
 			[NSNumber numberWithInt:noMealForDay], // Mon
             [NSNumber numberWithInt:noMealForDay], // Tue
@@ -632,7 +666,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     //
 	
     theCStore = [[MealSchedule alloc] init];
-    	
+	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:emssStart],  // Sun
 			[NSNumber numberWithInt:emfStart], // Mon
             [NSNumber numberWithInt:emfStart], // Tue
@@ -659,45 +693,45 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     theCStore.mealName = @"C-Store";  
 	theCStore.shortName = @"C-Store";  
     theCStore.location = @"Smith Union";  
-
-
+	
+	
     // Creates an Array with Meals
     NSMutableArray *arrayMeals = [[NSArray alloc] initWithObjects:
-                           mHotBreakfast,
-                           mColdBreakfast,
-						   expressLunch,
-                           mLunch,
-						   expressDinner,
-                           mDinner,
-                           mBrunch,
-                           tHotBreakfast,
-                           tColdLunch,
-                           tHotLunch,
-                           tDinner,
-                           tBrunch,
-                           tSuperSnax,
-                           cafeMorning,
-                           cafeNight,
-                           theGrill,
-                           thePub,
-                           theCStore,
-                           nil];
+								  mHotBreakfast,
+								  mColdBreakfast,
+								  expressLunch,
+								  mLunch,
+								  expressDinner,
+								  mDinner,
+								  mBrunch,
+								  tHotBreakfast,
+								  tColdLunch,
+								  tHotLunch,
+								  tDinner,
+								  tBrunch,
+								  tSuperSnax,
+								  cafeMorning,
+								  cafeNight,
+								  theGrill,
+								  thePub,
+								  theCStore,
+								  nil];
     
     mealArray = arrayMeals;
     
     
     NSMutableArray *diningHallMeals = [[NSArray alloc] initWithObjects:
-                                  mHotBreakfast,
-                                  mColdBreakfast,
-								  mBrunch,
-                                  mLunch,
-                                  mDinner,
-                                  tHotBreakfast,
-								  tBrunch,
-                                  tColdLunch,
-                                  tHotLunch,
-                                  tDinner,
-                                  nil];
+									   mHotBreakfast,
+									   mColdBreakfast,
+									   mBrunch,
+									   mLunch,
+									   mDinner,
+									   tHotBreakfast,
+									   tBrunch,
+									   tColdLunch,
+									   tHotLunch,
+									   tDinner,
+									   nil];
     
     diningHallMealArray = diningHallMeals;
     
@@ -711,11 +745,10 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	watch = clock;
 	
 	[self processHoursArrays];
-	[self processArrayOfOpenMeals];
 	
 	[self processMealArraysForDay:[watch getWeekDay]];
 	[self processMealArraysForDay:[watch getNextWeekDay]];
-
+	
 	[self resolveInconsistenciesInArrays];
 	
 	[self populateNavigationBarArray];
@@ -727,7 +760,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 }
 
 #pragma mark -
-#pragma mark Array Processing
+#pragma mark Meal Data Setup
 
 - (void)processMealArraysForDay:(int)day{
 	
@@ -797,24 +830,20 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 - (void)populateSpecialsArray{
 	
 	NSString *fileLocation = [NSString stringWithFormat:@"%@/%@.xml",[self documentsDirectory], @"specials"];
-
+	
 	NSLog(@"Loading Array = %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 	specialsArray = [[NSMutableArray alloc] initWithContentsOfFile:fileLocation];
 	
-
 }
 
-
-
 - (void)populateMealArrays{
-	
 	
 	self.thorneArray = [self populateArrayFromDict:thorne_dictionary_array];
 	self.moultonArray = [self populateArrayFromDict:moulton_dictionary_array];
 	
 }
 
--(NSMutableArray*)populateArrayFromDict:(NSMutableArray*)dictArray {
+- (NSMutableArray*)populateArrayFromDict:(NSMutableArray*)dictArray {
 	
 	NSMutableArray *tempArray = [[NSMutableArray alloc] init];
 	
@@ -842,84 +871,32 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	
 }		 
 
--(void)populateNavigationBarArray{
-	
-	
-	navBarArray = [[NSMutableArray alloc] init];
-	thorneNavHours = [[NSMutableArray alloc] init];
-	moultonNavHours = [[NSMutableArray alloc] init];
-
-	// Populate Navigation Array to Properly Display Title Bar
-	for(NSDictionary *element in thorne_dictionary_array){
-		
-		[navBarArray addObject:[element objectForKey:@"Formatted_Title"]];
-		[thorneNavHours addObject:[element objectForKey:@"Hours_of_Operation"]];
-	}
-	
-	for(NSDictionary *element in moulton_dictionary_array){
-		
-		[moultonNavHours addObject:[element objectForKey:@"Hours_of_Operation"]];
-	}
-			
-}
-
--(NSString*)hoursOfOperationForHall:(int)hall meal:(int)meal{
-	
-	NSLog(@"Redisplaying Hours");
-	
-	// Thorne
-	
-	switch (hall) {
-		case 0:
-			return [thorneNavHours objectAtIndex:meal];
-			break;
-			
-		case 1:
-			return [moultonNavHours objectAtIndex:meal];
-			break;
-
-		case 2:
-			return [[specialsArray objectAtIndex:1] objectForKey:@"description"];
-			break;
-
-		default:
-			break;
-	}
-
-	
-	
-	
-	
-}
-
--(void)resolveInconsistenciesInArrays{
+- (void)resolveInconsistenciesInArrays{
 	
 	// Resolve Inconsistencies in Populating Arrays so data structure maintains parallelism.
 	// Array with fewer objects needs a placeholder dictionary inserted.
 	
-	
-	// Decides which array is longer
 	int arrayLength;
 	
 	if ([thorne_dictionary_array count] < [moulton_dictionary_array count]) {
 		arrayLength = [thorne_dictionary_array count];
 	} else {
 		arrayLength = [moulton_dictionary_array count];
-
+		
 	}
-
+	
 	
 	for (int i = 0; i  < arrayLength; i++) {
-
+		
 		NSString *thorneMeal = [[thorne_dictionary_array objectAtIndex:i] objectForKey:@"Shortname"];
 		NSString *moultonMeal = [[moulton_dictionary_array objectAtIndex:i] objectForKey:@"Shortname"];
-
+		
 		// If meal names are not the same, then there is an inconsitency in the data structure
 		if (![thorneMeal isEqualToString:moultonMeal]) {
 			
 			// Catch Out of Bounds Errors
 			if (i+1 == arrayLength) {
-
+				
 				// Get Out of There
 				break;
 				
@@ -940,16 +917,16 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 				// ultimately this needs to be a fake file location
 				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
 				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"Formatted_Title"] forKey:@"Formatted_Title"];
-
+				
 				[fakeDictionary setObject:@"Closed" forKey:@"Hours_of_Operation"];
-
+				
 				// placeholder dictionary inserted at index 0
 				[thorne_dictionary_array insertObject:fakeDictionary atIndex:i];
 				
 				[fakeDictionary release];
 				
 				
-			
+				
 			} else if ([moultonMeal isEqualToString:thorneNextItem]) {
 				
 				
@@ -961,28 +938,28 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 				// ultimately this needs to be a fake file location
 				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
 				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"Formatted_Title"] forKey:@"Formatted_Title"];
-
+				
 				[fakeDictionary setObject:@"Closed" forKey:@"Hours_of_Operation"];
-
+				
 				
 				// placeholder dictionary inserted at index 0
 				[moulton_dictionary_array insertObject:fakeDictionary atIndex:i];
 				
 				[fakeDictionary release];
 				
-			
+				
 			}
-	
+			
 		}	
 		
-
-	}//end for
 		
+	}//end for
+	
 	
 }		
 
--(NSMutableArray*)mealArrayFromFile:(NSString*)fileLocation{
-						 
+- (NSMutableArray*)mealArrayFromFile:(NSString*)fileLocation{
+	
 	NSMutableArray *arrayToReturn;
 	
 	if (fileLocation != NULL) {
@@ -993,150 +970,50 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		if (arrayToReturn == NULL) {
 			arrayToReturn = [[NSMutableArray alloc] initWithObjects:@"NULL ENTRY", nil];
 		}
-				
+		
 	} 
 	
 	return arrayToReturn;
 	
 	
 	
-						 
+	
 }
 
-//Navigation Bar Array
--(NSMutableArray*)returnNavBarArray{
+#pragma mark -
+#pragma mark Navigation Bar
+
+- (void)populateNavigationBarArray{
+	
+	navBarArray = [[NSMutableArray alloc] init];
+	thorneNavHours = [[NSMutableArray alloc] init];
+	moultonNavHours = [[NSMutableArray alloc] init];
+	
+	// Populate Navigation Array to Properly Display Title Bar
+	for(NSDictionary *element in thorne_dictionary_array){
+		
+		[navBarArray addObject:[element objectForKey:@"Formatted_Title"]];
+		[thorneNavHours addObject:[element objectForKey:@"Hours_of_Operation"]];
+	}
+	
+	for(NSDictionary *element in moulton_dictionary_array){
+		
+		[moultonNavHours addObject:[element objectForKey:@"Hours_of_Operation"]];
+	}
+	
+}
+
+- (NSMutableArray*)returnNavBarArray{
 	
 	
 	return navBarArray;
 	
 }
 
-/**
- *	processHoursArray takes the array of MealSchedule
- *	objects and extracts information (name, hours, location)
- *	for the tableView to display
- */
--(void)processHoursArrays{
-	
-	allHoursArray = [[NSMutableArray alloc] init];
-    NSMutableArray *array1 = [[NSMutableArray alloc]init];
-	NSMutableArray *array2 = [[NSMutableArray alloc]init];
-    NSMutableArray *array3 = [[NSMutableArray alloc]init];
-	
-	//Assumes we want an array of today's hours.
-    int currentDay = (int)[watch getWeekDay];
-    
-    for(MealSchedule *element in mealArray){
-        [element setCurrentDay:currentDay];
-		
-		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
-        if ([element hasClosed] || [element isOpen] || [element willOpen]){
-            
-			NSString *mealName = element.mealName;
-			NSString *hoursText = element.dateText;
-			NSString *location = element.location;
-			
-			if (mealName != nil) {
-				[dictionary setObject:mealName forKey:@"meal"];
-			}
-			else {
-				[dictionary setObject:@"NONAME" forKey:@"meal"];
-			}
-			
-			[dictionary setObject:hoursText forKey:@"hours"];
-			
-			// Decides where to add the dictionary object
-			if (location == @"Thorne") { [array1 addObject:dictionary]; }
-			else if (location == @"Moulton") { [array2 addObject:dictionary];} 
-			else { [array3 addObject:dictionary]; }
-        }
-    }
-	
-	// Arrays added shouldn't be empty
-	if ([array1 count] != 0) { [allHoursArray addObject:array1]; }
-	if ([array2 count] != 0) { [allHoursArray addObject:array2]; }
-	if ([array3 count] != 0) { [allHoursArray addObject:array3]; }
-	
-}
-
--(void)processArrayOfOpenMeals{
-    
-    //Assumes we want an array of today's meals.
-    openArray = [[NSMutableArray alloc] init];
-    NSMutableArray *section_one = [[NSMutableArray alloc]init];
-	NSMutableArray *section_two = [[NSMutableArray alloc]init];
-    NSMutableArray *section_three = [[NSMutableArray alloc]init];
-
-    int currentDay = (int)[watch getWeekDay];
-
-    for(MealSchedule *element in mealArray){
-        [element setCurrentDay:currentDay];
-		
-		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
-        if ([element isOpen]){
-            
-		
-			if (element.mealName != nil) {
-				[dictionary setObject:element.mealName forKey:@"meal"];
-			}
-			else {
-				[dictionary setObject:@"NONAME" forKey:@"meal"];
-	
-			}
-
-			
-			[dictionary setObject:[element fullHoursText] forKey:@"hours"];
-			    
-
-			// This is the place for user defaults
-			if (element.location == @"Thorne") {
-				[section_one addObject:dictionary];
-				
-			} else if (element.location == @"Moulton") {
-				[section_two addObject:dictionary];
-				
-			} else {
-				[section_three addObject:dictionary];
-			}
-
-				
-
-				
-
-        }
-   
-    }
-	
-	if ([section_one count] != 0) {
-		[openArray addObject:section_one];
-	}
-	
-	if ([section_two count] != 0) {
-		[openArray addObject:section_two];
-	}
-	
-	if ([section_three count] != 0) {
-		[openArray addObject:section_three];
-	}
-	
-	
-}
-
--(NSNumber *)returnCurrentWeekDayNSNumber{
-    
-    int intToReturn = [watch getWeekDay];
-    
-    
-    return [NSNumber numberWithInt:intToReturn];
-    
-}
-
-
-
 #pragma mark -
 #pragma mark Meal TableView DataSource
 
--(NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex{
+- (NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex{
 	
 	
 	switch (location) {
@@ -1147,21 +1024,21 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		case 1:
 			return [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] count];
 			break;
-
+			
 		case 2:
 			return 2;
 			break;
-
+			
 		default:
 			return 0;
 			break;
 	}
 	
-
+	
 	
 }
 
--(NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex{
+- (NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex{
 	
 	
 	switch (location) {
@@ -1186,7 +1063,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	
 }
 
--(NSString *)returnItemFromLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath  {
+- (NSString *)returnItemFromLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath  {
 	
 	
 	switch (location) {
@@ -1216,7 +1093,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	
 }
 
--(CGFloat)returnHeightForCellatLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath{
+- (CGFloat)returnHeightForCellatLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath{
 	
 	NSString *stringToConsider;
 	
@@ -1238,7 +1115,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			break;
 	}
 	
-
+	
 	
 	
 	CGSize constraint = CGSizeMake(320.0f - (10.0f * 2), 200.0f);
@@ -1248,27 +1125,123 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	return height + 3;
 }
 
-- (NSString *)documentsDirectory {
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	return [paths objectAtIndex:0];
-}
-
-
-
-
-- (void) changeDisplayedHourInformation:(NSInteger)newHour{
-	
-	currentHours = newHour;
-	
-}
+#pragma mark -
+#pragma mark Hours Of Operation 
 
 #define now_hours 0
 #define all_hours 1
 
-/// Hours Table View Code
+- (void)processHoursArrays{
+	
+	allHoursArray = [[NSMutableArray alloc] init];
+    NSMutableArray *allHours_Thorne = [[NSMutableArray alloc]init];
+	NSMutableArray *allHours_Moulton = [[NSMutableArray alloc]init];
+    NSMutableArray *allHours_Smith = [[NSMutableArray alloc]init];
+	
+	NSMutableArray *nowHours_Thorne = [[NSMutableArray alloc]init];
+	NSMutableArray *nowHours_Moulton = [[NSMutableArray alloc]init];
+    NSMutableArray *nowHours_Smith = [[NSMutableArray alloc]init];
+	
+	//Assumes we want an array of today's hours.
+    int currentDay = (int)[watch getWeekDay];
+    
+    for(MealSchedule *element in mealArray){
+        [element setCurrentDay:currentDay];
+		
+		BOOL hasClosed = [element hasClosed];
+		BOOL isOpen = [element isOpen];
+		BOOL willOpen = [element willOpen];
+		
+		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
+        if (hasClosed || isOpen || willOpen){
+            
+			NSString *mealName = element.mealName;
+			NSString *hoursText = element.dateText;
+			NSString *location = element.location;
+			
+			if (mealName != nil) {
+				[dictionary setObject:mealName forKey:@"meal"];
+			}
+			else {
+				[dictionary setObject:@"NONAME" forKey:@"meal"];
+			}
+			
+			
+			[dictionary setObject:hoursText forKey:@"hours"];
+			
+			// Decides where to add the dictionary object
+			// Adds to openArray if mealSchedule is open
+			if (location == @"Thorne") {
+				
+				if (isOpen) {
+					[allHours_Thorne addObject:dictionary];
+					[nowHours_Thorne addObject:dictionary];
+				} else{ 
+					[allHours_Thorne addObject:dictionary]; 
+				}
+				
+			}
+			else if (location == @"Moulton") { 
+				
+				if (isOpen) {
+					[allHours_Moulton addObject:dictionary];
+					[nowHours_Moulton addObject:dictionary];
+				} else{ 
+					[allHours_Moulton addObject:dictionary]; 
+				}
+			} 
+			else { 
+				
+				if (isOpen) {
+					[allHours_Smith addObject:dictionary];
+					[nowHours_Smith addObject:dictionary];
+				} else{ 
+					[allHours_Smith addObject:dictionary]; 
+				}
+			}
+        }
+    }
+	
+	// Arrays added shouldn't be empty
+	if ([allHours_Thorne count] != 0) { [allHoursArray addObject:allHours_Thorne]; }
+	if ([allHours_Moulton count] != 0) { [allHoursArray addObject:allHours_Moulton]; }
+	if ([allHours_Smith count] != 0) { [allHoursArray addObject:allHours_Smith]; }
+	
+	if ([nowHours_Thorne count] != 0) { [openArray addObject:nowHours_Thorne]; }
+	if ([nowHours_Moulton count] != 0) { [openArray addObject:nowHours_Moulton]; }
+	if ([nowHours_Smith count] != 0) { [openArray addObject:nowHours_Smith]; }
+	
+	
+}
+
+- (NSString*)hoursOfOperationForHall:(int)hall meal:(int)meal{
+	
+	NSString *returnString;
+	
+	switch (hall) {
+		case 0:
+			returnString = [thorneNavHours objectAtIndex:meal];
+			break;
+			
+		case 1:
+			returnString = [moultonNavHours objectAtIndex:meal];
+			break;
+			
+		case 2:
+			returnString = [[specialsArray objectAtIndex:1] objectForKey:@"description"];
+			break;
+			
+		default:
+			returnString = @"Error";
+			break;
+	}
+	
+	return returnString;
+	
+}
 
 #pragma mark -
-#pragma mark HO TableView DataSource
+#pragma mark Hours TableView DataSource
 
 - (NSInteger)returnNumberOfSections{
 	
@@ -1280,12 +1253,12 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		case all_hours:
 			return [allHoursArray count];
 			break;
-
+			
 		default:
 			return 0;
 			break;
 	}
-
+	
 }
 
 - (NSInteger)returnNumberOfRows:(NSInteger)section {
@@ -1332,16 +1305,16 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		case 0:
 			return @"Thorne Hall";
 			break;
-		
+			
 		case 1:
 			return @"Moulton Union";
 			break;
-
+			
 		case 2:
 			return @"Smith Union";
 			break;
-
-
+			
+			
 		default:
 			break;
 	}
@@ -1349,40 +1322,29 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	return @""; 
 }
 
-- (void)dealloc{
-	[mealArray release];
-	[diningHallMealArray release];
-	[thorneArray release];
-	[moultonArray release];
-	[navBarArray release];
-	[thorne_dictionary_array release];
-	[moulton_dictionary_array release];
-	[expressLunch release];
-	[expressDinner release];
-	[mHotBreakfast release];
-	[mColdBreakfast release];
-	[mLunch release];
-	[mDinner release];
-	[mBrunch release];
-	[tHotBreakfast release];
-	[tColdLunch release];
-	[tHotLunch release];
-	[tDinner release];
-	[tBrunch release];
-	[tSuperSnax release];
-	[cafeMorning release];
-	[cafeNight release];
-	[theGrill release];
-	[thePub release];
-	[theCStore release];
-	[openArray release];
-	[allHoursArray release];
-	[super dealloc];
-
+- (void) changeDisplayedHourInformation:(NSInteger)newHour{
 	
-	
-	
+	currentHours = newHour;
 	
 }
+
+
+#pragma mark -
+#pragma mark Helper Methods
+
+- (NSString *)documentsDirectory {
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	return [paths objectAtIndex:0];
+}
+
+- (NSNumber *)returnCurrentWeekDayNSNumber{
+    
+    int intToReturn = [watch getWeekDay];
+    
+    
+    return [NSNumber numberWithInt:intToReturn];
+    
+}
+
 
 @end
