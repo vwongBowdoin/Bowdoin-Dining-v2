@@ -12,6 +12,9 @@
 @implementation DiningParser
 @synthesize todaysMealHandler, thorneBreakfast, thorneLunch, thorneDinner, thorneBrunch, moultonBreakfast, moultonLunch, moultonDinner, moultonBrunch;
 
+
+
+
 // Initialization of Arrays
 -(id)init{
 	

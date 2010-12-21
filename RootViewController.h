@@ -18,6 +18,7 @@
 
 @interface RootViewController : UIViewController <UITableViewDelegate, UITabBarDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, MBProgressHUDDelegate> {
 	
+	@private
 
 	// Table View Outlets
 	IBOutlet UICustomTableView *customTableView;
@@ -50,7 +51,7 @@
 	NSIndexPath *selectedIndexPath;
 	NSMutableArray *currentArray;
 	
-	ScheduleDecider *localScheduler;
+	ScheduleDecider *scheduler;
     
     BOOL navigationBarsAnimatedOut;
 
@@ -71,6 +72,7 @@
 @property (nonatomic, retain) IBOutlet UIButton * menuButton;
 @property (nonatomic, retain) IBOutlet UILabel * menuText;
 
+@property (nonatomic, retain) ScheduleDecider *scheduler;
 
 
 @property (nonatomic, retain) NSIndexPath *selectedIndexPath;
@@ -78,19 +80,7 @@
 -(void)setupMealData;
 -(void)registerNotifications;
 
-// Table View Swiping
--(void)animateNavigationBars;
--(IBAction)navigateRight:(id)sender;
--(IBAction)navigateLeft:(id)sender;
 
-// Pages to Navigate To
--(IBAction)displayLinesPage;
--(IBAction)displayPolarPoints;
--(IBAction)displayHoursPage;
-
--(IBAction)changeTime;
--(IBAction)launchPhone;
--(IBAction)launchGrillMenu;
 
 
 

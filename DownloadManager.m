@@ -21,8 +21,42 @@
    
 	WristWatch *aTimer = [[WristWatch alloc] init];
 	localWatch = aTimer;
+
+	//Check to see if there is a need to download specials
+	[self downloadSpecials];
 	
 	
+	if ([self menusAreCurrent]) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
+
+	} else {
+
+		MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:delegate.view];
+		
+		// Adds HUD to screen
+		HUD.delegate = self;
+		HUD.labelText = @"Downloading:";
+		HUD.detailsLabelText = @"Updating Menus...";
+		[delegate.view addSubview:HUD];
+		
+		[HUD showWhileExecuting:@selector(downloadMenus) onTarget:self withObject:nil animated:YES];  
+		
+	}    
+}
+
+// Checks to see if Menus are current
+- (BOOL)menusAreCurrent{
+	
+	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] != [localWatch getWeekofYear]){
+		return NO;
+    }
+	else {        
+		return YES;
+    }
+	
+}
+
+- (void)downloadSpecials{
 	
 	NSString *downloadAddress = @"http://www.bowdoin.edu/atreus/diningspecials/admin/lib/xml/specials.xml";
 	NSURL *downloadURL = [NSURL URLWithString:downloadAddress];
@@ -33,39 +67,6 @@
 	[grillParser parseSpecialsFromData:specialsXML];
 	
 	
-	
-	
-    // Checks to see if Menus aren't Current
-	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] != [localWatch getWeekofYear]){
-     
-		// Download New Menus
-        //[NSThread detachNewThreadSelector:@selector(downloadMenus) toTarget:self withObject:nil];
-       // [self downloadMenus];
-		
-		MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:delegate.view];
-		
-		// Adds HUD to screen
-		HUD.delegate = self;
-		
-		HUD.labelText = @"Downloading:";
-		HUD.detailsLabelText = @"Updating Menus...";
-		[delegate.view addSubview:HUD];
-		
-		[HUD showWhileExecuting:@selector(downloadMenus) onTarget:self withObject:nil animated:YES];  
-		
-		
-    }
-    
-    // Menus are current
-    else if ([[NSUserDefaults standardUserDefaults] integerForKey:@"lastUpdatedWeek"] == [localWatch getWeekofYear]) {
-        
-		// Post that menus are current
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
-		
-    }
-	
-
-    
 }
 
 // Download Menus
@@ -90,8 +91,15 @@
     
 	// Initializes Dining Parser
 	DiningParser *todaysParser = [[DiningParser alloc]init];
-    for (int i = [localWatch getWeekDay]; i < 8; i++){
+	
+	int startingDay = [localWatch getWeekDay];
+	
+    for (int i = startingDay; i < 8; i++){
         
+		if (i == startingDay + 2) {
+			NSLog(@"Download Completed For Day = %d", i);
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
+		}
         
         NSString *dayString = [NSString stringWithFormat:@"%d.xml", i];
         NSString *downloadAddress = [NSString stringWithFormat:@"%@%@/%@", serverPath, sundayString, dayString];
@@ -117,13 +125,8 @@
     
     // once downloaded and no error - set download confirm for day to YES
     [[NSUserDefaults standardUserDefaults] setInteger:[localWatch getWeekofYear] forKey:@"lastUpdatedWeek"];
-    
-	// alert that menus are parsed and ready
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
-    
+	
 
-	
-	
 	
 }
 
@@ -137,8 +140,8 @@
 
 - (void)errorOccurred{
     
-    
-    // handle the error
+    NSLog(@"Downloading Error - DownloadMananger.m");
+	
 }
 
 - (void)dealloc{

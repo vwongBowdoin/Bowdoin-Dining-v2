@@ -46,7 +46,9 @@
 -(void)storeXMLDataforDay:(int)day;
 
 // Private Methods for Populating Data Structure
--(NSMutableArray*)addTitleToArray:(NSString*)theTitle forArray:(NSMutableArray *)theArray;
+-(NSMutableArray*)addTitleToArray:(NSString*)
+				theTitle forArray:(NSMutableArray *)theArray;
+
 -(void)addArrayofItems:(NSMutableArray *)items forCourse:(NSString *)courseTitle forMeal:(NSString *)mealTitle forHall:(NSString *)diningHall;
 -(NSString*)documentsDirectory;
 

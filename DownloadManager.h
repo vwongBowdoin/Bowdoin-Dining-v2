@@ -11,10 +11,22 @@
 
 @class WristWatch;
 
+/**
+ * The Download Manager is responsible for overseeing the download of all
+ * external files to the application.
+ */
+
 @interface DownloadManager : NSObject <MBProgressHUDDelegate> {
 
+	/**
+	 * The local timer.
+	 */
 	WristWatch *localWatch;
 	
+	
+	/**
+	 * DownloadManager Delegate - a RootViewController.
+	 */ 
 	RootViewController *delegate;
 }
 
@@ -22,5 +34,7 @@
 
 -(void)initializeDownloads;
 -(void)errorOccurred;
+-(void)downloadSpecials;
+-(BOOL)menusAreCurrent;
 
 @end
