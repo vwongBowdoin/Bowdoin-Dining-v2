@@ -19,81 +19,6 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 // This method populates MealSchedule objects with their allotted times
 -(id)init{
-    
-	//
-    // Express Lunch
-    //  
-	
-    expressLunch = [[MealSchedule alloc] init];
-    
-#pragma mark -
-#pragma mark Express Meals
-    
-    NSArray *open = [[NSArray alloc] initWithObjects:
-														[NSNumber numberWithInt:noMealForDay],			// Sun
-														[NSNumber numberWithInt:mExpressLunchStart],	// Mon
-                                                        [NSNumber numberWithInt:mExpressLunchStart],	// Tue
-                                                        [NSNumber numberWithInt:mExpressLunchStart],	// Wed
-                                                        [NSNumber numberWithInt:mExpressLunchStart],	// Thu
-                                                        [NSNumber numberWithInt:mExpressLunchStart],	// Fri
-                                                        [NSNumber numberWithInt:noMealForDay],			// Sat
-                                                        nil];
-    
-    NSArray *close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Sun
-					 [NSNumber numberWithInt:mExpressLunchStop], // Mon
-                     [NSNumber numberWithInt:mExpressLunchStop], // Tue
-                     [NSNumber numberWithInt:mExpressLunchStop], // Wed
-                     [NSNumber numberWithInt:mExpressLunchStop], // Thu
-                     [NSNumber numberWithInt:mExpressLunchStop], // Fri
-                     [NSNumber numberWithInt:noMealForDay],      // Sat
-
-                     nil];
-
-	
-		
-    expressLunch.openTimes = open;
-    expressLunch.closeTimes = close;
-    expressLunch.mealName = @"Express";
-	expressLunch.shortName = @"Express";
-	expressLunch.location = @"Moulton";
-
-    NSLog(@"Express Lunch");
-	
-    //
-    // Express Dinner
-    //
-	
-    expressDinner = [[MealSchedule alloc] init];
-    
-    
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Sun
-					 [NSNumber numberWithInt:mExpressDinnerStart], // Mon
-                     [NSNumber numberWithInt:mExpressDinnerStart], // Tue
-                     [NSNumber numberWithInt:mExpressDinnerStart], // Wed
-                     [NSNumber numberWithInt:mExpressDinnerStart], // Thu
-                     [NSNumber numberWithInt:mExpressDinnerStart], // Fri
-                     [NSNumber numberWithInt:noMealForDay],       // Sat
-                    
-                     nil];
-    
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
-					  [NSNumber numberWithInt:mExpressDinnerStop], // Mon
-                      [NSNumber numberWithInt:mExpressDinnerStop], // Tue
-                      [NSNumber numberWithInt:mExpressDinnerStop], // Wed
-                      [NSNumber numberWithInt:mExpressDinnerStop], // Thu
-                      [NSNumber numberWithInt:mExpressDinnerStop], // Fri
-                      [NSNumber numberWithInt:noMealForDay],       // Sat
-                      nil];
-    
-    
-    expressDinner.openTimes = open;
-    expressDinner.closeTimes = close;
-    expressDinner.mealName = @"Express";
-	expressDinner.shortName = @"Express";
-	expressDinner.location = @"Moulton";
-
-	NSLog(@"Express Dinner");
-
 	
     //
     // Moulton Hot Breakfast
@@ -103,7 +28,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     
 	
     
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBreakfastStart],  // Sun
+     NSArray * open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBreakfastStart],  // Sun
 			[NSNumber numberWithInt:mHotBreakfastStart], // Mon
             [NSNumber numberWithInt:mHotBreakfastStart], // Tue
             [NSNumber numberWithInt:mHotBreakfastStart], // Wed
@@ -113,7 +38,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
             
             nil];
     
-    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBreakfastStop],  // Sun
+     NSArray * close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBreakfastStop],  // Sun
 			 [NSNumber numberWithInt:mHotBreakfastStop], // Mon
              [NSNumber numberWithInt:mHotBreakfastStop], // Tue
              [NSNumber numberWithInt:mHotBreakfastStop], // Wed
@@ -167,6 +92,45 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     mColdBreakfast.fileName = @"moultonBreakfast";
 	mColdBreakfast.location = @"Moulton";
 
+	
+	//
+    // Express Lunch
+    //  
+	
+    expressLunch = [[MealSchedule alloc] init];
+    
+#pragma mark -
+#pragma mark Express Meals
+    
+   open = [[NSArray alloc] initWithObjects:
+					 [NSNumber numberWithInt:noMealForDay],			// Sun
+					 [NSNumber numberWithInt:mExpressLunchStart],	// Mon
+					 [NSNumber numberWithInt:mExpressLunchStart],	// Tue
+					 [NSNumber numberWithInt:mExpressLunchStart],	// Wed
+					 [NSNumber numberWithInt:mExpressLunchStart],	// Thu
+					 [NSNumber numberWithInt:mExpressLunchStart],	// Fri
+					 [NSNumber numberWithInt:noMealForDay],			// Sat
+					 nil];
+    
+	close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Sun
+					  [NSNumber numberWithInt:mExpressLunchStop], // Mon
+					  [NSNumber numberWithInt:mExpressLunchStop], // Tue
+					  [NSNumber numberWithInt:mExpressLunchStop], // Wed
+					  [NSNumber numberWithInt:mExpressLunchStop], // Thu
+					  [NSNumber numberWithInt:mExpressLunchStop], // Fri
+					  [NSNumber numberWithInt:noMealForDay],      // Sat
+					  
+					  nil];
+	
+	
+	
+    expressLunch.openTimes = open;
+    expressLunch.closeTimes = close;
+    expressLunch.mealName = @"Express";
+	expressLunch.shortName = @"Express";
+	expressLunch.location = @"Moulton";
+	
+	
 
 	//
     // Moulton Brunch
@@ -239,6 +203,41 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     mLunch.fileName = @"moultonLunch";
 	mLunch.location = @"Moulton";
 
+	
+    //
+    // Express Dinner
+    //
+	
+    expressDinner = [[MealSchedule alloc] init];
+    
+    
+    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Sun
+			[NSNumber numberWithInt:mExpressDinnerStart], // Mon
+			[NSNumber numberWithInt:mExpressDinnerStart], // Tue
+			[NSNumber numberWithInt:mExpressDinnerStart], // Wed
+			[NSNumber numberWithInt:mExpressDinnerStart], // Thu
+			[NSNumber numberWithInt:mExpressDinnerStart], // Fri
+			[NSNumber numberWithInt:noMealForDay],       // Sat
+			
+			nil];
+    
+    close = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
+			 [NSNumber numberWithInt:mExpressDinnerStop], // Mon
+			 [NSNumber numberWithInt:mExpressDinnerStop], // Tue
+			 [NSNumber numberWithInt:mExpressDinnerStop], // Wed
+			 [NSNumber numberWithInt:mExpressDinnerStop], // Thu
+			 [NSNumber numberWithInt:mExpressDinnerStop], // Fri
+			 [NSNumber numberWithInt:noMealForDay],       // Sat
+			 nil];
+    
+    
+    expressDinner.openTimes = open;
+    expressDinner.closeTimes = close;
+    expressDinner.mealName = @"Express";
+	expressDinner.shortName = @"Express";
+	expressDinner.location = @"Moulton";
+	
+	
     
     //
     // Moulton Dinner
@@ -524,8 +523,8 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     
     cafeMorning.openTimes = open;
     cafeMorning.closeTimes = close;
-    cafeMorning.mealName = @"Cafe";  
-    cafeMorning.shortName = @"Cafe";
+    cafeMorning.mealName = @"Cafe AM";  
+    cafeMorning.shortName = @"Cafe AM";
 	cafeMorning.location = @"Smith Union";
 
     
@@ -557,8 +556,8 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     
     cafeNight.openTimes = open;
     cafeNight.closeTimes = close;
-    cafeNight.mealName = @"Cafe";  
-	cafeNight.shortName = @"Cafe";
+    cafeNight.mealName = @"Cafe PM";  
+	cafeNight.shortName = @"Cafe PM";
 	cafeNight.location = @"Smith Union";
     
     
@@ -664,11 +663,11 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
     // Creates an Array with Meals
     NSMutableArray *arrayMeals = [[NSArray alloc] initWithObjects:
-                           expressLunch,
-                           expressDinner,
                            mHotBreakfast,
                            mColdBreakfast,
+						   expressLunch,
                            mLunch,
+						   expressDinner,
                            mDinner,
                            mBrunch,
                            tHotBreakfast,

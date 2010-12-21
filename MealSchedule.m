@@ -14,7 +14,7 @@
 @synthesize mealName, shortName, fileName, currentDay, openTimes, closeTimes, location;
 
 // Returns an NSDate initialized for the current opening time.
--(NSDate *)currentOpening{
+- (NSDate *)currentOpening{
     
 	//NSLog(@"Checking Opening Time for Day = %d", currentDay);
 	
@@ -30,7 +30,7 @@
 }
 
 // Returns an NSDate initialized for the current opening time tomorrow.
--(NSDate *)currentOpeningTomorrow{
+- (NSDate *)currentOpeningTomorrow{
     
     NSTimeInterval interval = [[openTimes objectAtIndex:currentDay-1] intValue];
     
@@ -43,7 +43,7 @@
     
 }
 
--(NSDate *)currentClosing{
+- (NSDate *)currentClosing{
     
     NSTimeInterval interval = [[closeTimes objectAtIndex:currentDay-1] intValue];
     
@@ -57,7 +57,7 @@
 }
 
 // Creates an NSDate object for 1AM today.
--(NSDate *)oneAMDate{
+- (NSDate *)oneAMDate{
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 
@@ -84,7 +84,7 @@
     
     }
 
--(NSDate *)tomorrowOneAM{
+- (NSDate *)tomorrowOneAM{
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 	
@@ -113,7 +113,7 @@
     
 }
 
--(NSDate *)tomorrowMidnight{
+- (NSDate *)tomorrowMidnight{
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 	
@@ -142,12 +142,9 @@
     
 }
 
-
-
-
 // uses the one AM date to decide if today's hours of operation should be initialized from todays 12AM or yesterdays
 // i.e. if someone is still out and about before 1AM - the grill is still open on some days.
--(NSDate *)midnightDate{
+- (NSDate *)midnightDate{
     
     // Initializes the Calendar Objects
     NSDate *currentTime = [NSDate date];
@@ -193,7 +190,7 @@
     
 }
 
--(BOOL)isOpen{
+- (BOOL)isOpen{
     
 	
     NSDate *currentTime = [NSDate date];
@@ -217,7 +214,7 @@
 
 }
 
--(BOOL)hasClosed{
+- (BOOL)hasClosed{
     
     NSDate *currentTime = [NSDate date];
 	NSDate *currentOpening = [self currentOpening];
@@ -241,7 +238,7 @@
     
 }
 
--(BOOL)willOpen{
+- (BOOL)willOpen{
     
 	NSDate *currentTime;
 	NSDate *currentOpening;
@@ -278,7 +275,7 @@
         
 }
 
--(NSString *)dateText{
+- (NSString *)dateText{
     
     NSString *openingTime = [self formattedTimeString:[self currentOpening]];
     NSString *closingTime = [self formattedTimeString:[self currentClosing]];
@@ -303,8 +300,9 @@
     
     else if ([self hasClosed]){
         
-        return @"Closed for the Day";
-
+        NSString *stringToReturn = [NSString stringWithFormat:@"%@ - %@", openingTime, closingTime];
+		
+        return stringToReturn;
         
     }
     
@@ -312,7 +310,7 @@
     
 }
 
--(NSString*)fullHoursText{
+- (NSString*)fullHoursText{
     
     NSString *openingTime = [self formattedTimeString:[self currentOpening]];
     NSString *closingTime = [self formattedTimeString:[self currentClosing]];
@@ -325,13 +323,13 @@
     
 }
 
--(NSString *)returnDescription{
+- (NSString *)returnDescription{
 	
 	return shortName;
 	
 }
 
--(NSString*)returnFileLocation{
+- (NSString*)returnFileLocation{
 	
 	
 	return [NSString stringWithFormat:@"%@/%@%d.xml",[self documentsDirectory], fileName, currentDay];
@@ -345,8 +343,7 @@
 	return [paths objectAtIndex:0];
 }
 
-
--(NSString *)formattedTimeString:(NSDate*)dateToFormat{
+- (NSString *)formattedTimeString:(NSDate*)dateToFormat{
     
         
     NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
