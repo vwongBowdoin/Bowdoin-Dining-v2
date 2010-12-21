@@ -44,7 +44,6 @@
 	
 	[rssParser parse];
 	
-	//return self;
 }
 
 #pragma mark -

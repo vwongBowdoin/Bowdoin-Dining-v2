@@ -88,8 +88,6 @@
 
 
 
-
--(int)returnCurrentWeekDay; 
 -(NSString *)documentsDirectory;
 
 // Public Methods for Array Processing
