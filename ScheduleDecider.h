@@ -16,7 +16,7 @@
     NSMutableArray *mealArray;
     NSMutableArray *diningHallMealArray;
 	
-	// Arrays for Dictionary
+	// Dictionary Arrays
 	NSMutableArray *thorne_dictionary_array;
     NSMutableArray *moulton_dictionary_array;
 	
@@ -32,8 +32,6 @@
 	
 	NSMutableArray *openArray;
 	NSMutableArray *allHoursArray;
-
-	
 	
 	NSMutableArray *moultonEntriesArray;
 	NSMutableArray *thorneEntriesArray;
@@ -58,7 +56,7 @@
     MealSchedule *tSuperSnax;
     
     
-    // Smith Union Dining
+    // Smith Union Meals
     MealSchedule *cafeMorning;
     MealSchedule *cafeNight;
     
@@ -88,35 +86,6 @@
 @property (nonatomic, retain) NSMutableArray *thorne_dictionary_array;
 @property (nonatomic, retain) NSMutableArray *moulton_dictionary_array;
 
-
-
-// Moulton Express Properties
-@property (nonatomic, retain) MealSchedule *expressLunch;
-@property (nonatomic, retain) MealSchedule *expressDinner;
-
-// Moulton Meal Properties
-@property (nonatomic, retain) MealSchedule *mHotBreakfast;
-@property (nonatomic, retain) MealSchedule *mColdBreakfast;
-@property (nonatomic, retain) MealSchedule *mLunch;
-@property (nonatomic, retain) MealSchedule *mDinner;
-@property (nonatomic, retain) MealSchedule *mBrunch;
-
-
-// Thorne Meal Properties
-@property (nonatomic, retain) MealSchedule *tHotBreakfast;
-@property (nonatomic, retain) MealSchedule *tColdLunch;
-@property (nonatomic, retain) MealSchedule *tHotLunch;
-@property (nonatomic, retain) MealSchedule *tDinner;
-@property (nonatomic, retain) MealSchedule *tBrunch;
-@property (nonatomic, retain) MealSchedule *tSuperSnax;
-
-
-//Smith Union Properties
-@property (nonatomic, retain) MealSchedule *cafeMorning;
-@property (nonatomic, retain) MealSchedule *cafeNight;
-@property (nonatomic, retain) MealSchedule *theGrill;
-@property (nonatomic, retain) MealSchedule *thePub;
-@property (nonatomic, retain) MealSchedule *theCStore;
 
 
 

@@ -13,23 +13,18 @@
 
 @implementation ScheduleDecider
 
-@synthesize expressLunch, expressDinner, mHotBreakfast, mColdBreakfast, mLunch, mDinner,mBrunch;
-@synthesize tHotBreakfast, tColdLunch, tHotLunch, tDinner, tBrunch, tSuperSnax;
-@synthesize cafeMorning, cafeNight, theGrill, thePub, theCStore;
-@synthesize mealArray, diningHallMealArray, thorneArray, moultonArray, navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
+@synthesize mealArray, diningHallMealArray, thorneArray, moultonArray, 
+navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 
 // This method populates MealSchedule objects with their allotted times
-
 -(id)init{
     
 	//
     // Express Lunch
     //  
-    MealSchedule *tempSchedule = [[MealSchedule alloc] init];
-    self.expressLunch = tempSchedule;
-    [tempSchedule release];
-    
+	
+    expressLunch = [[MealSchedule alloc] init];
     
 #pragma mark -
 #pragma mark Express Meals
@@ -62,13 +57,13 @@
 	expressLunch.shortName = @"Express";
 	expressLunch.location = @"Moulton";
 
-    
+    NSLog(@"Express Lunch");
+	
     //
     // Express Dinner
     //
-    tempSchedule = [[MealSchedule alloc] init];
-    self.expressDinner = tempSchedule;
-    [tempSchedule release];
+	
+    expressDinner = [[MealSchedule alloc] init];
     
     
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay], // Sun
@@ -97,14 +92,16 @@
 	expressDinner.shortName = @"Express";
 	expressDinner.location = @"Moulton";
 
+	NSLog(@"Express Dinner");
+
+	
     //
     // Moulton Hot Breakfast
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.mHotBreakfast = tempSchedule;
-    [tempSchedule release];
+    mHotBreakfast = [[MealSchedule alloc] init];
     
+	
     
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBreakfastStart],  // Sun
 			[NSNumber numberWithInt:mHotBreakfastStart], // Mon
@@ -139,11 +136,9 @@
     // Moulton Cold Breakfast
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.mColdBreakfast = tempSchedule;
-    [tempSchedule release];
+    mColdBreakfast = [[MealSchedule alloc] init];
     
-    
+	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
 			[NSNumber numberWithInt:mColdBreakfastStart], // Mon
             [NSNumber numberWithInt:mColdBreakfastStart], // Tue
@@ -177,10 +172,7 @@
     // Moulton Brunch
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.mBrunch = tempSchedule;
-    [tempSchedule release];
-    
+    mBrunch = [[MealSchedule alloc] init];
     
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkBrunchStart],  // Sun
 			[NSNumber numberWithInt:noMealForDay], // Mon
@@ -217,10 +209,8 @@
     // Moulton Lunch
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.mLunch = tempSchedule;
-    [tempSchedule release];
-    
+    mLunch = [[MealSchedule alloc] init];
+
     
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
 			[NSNumber numberWithInt:mLunchStart], // Mon
@@ -254,12 +244,9 @@
     // Moulton Dinner
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.mDinner = tempSchedule;
-    [tempSchedule release];
+    mDinner = [[MealSchedule alloc] init];
     
-    
-    open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkDinnerStart],  // Sun
+	open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:mwkDinnerStart],  // Sun
 			[NSNumber numberWithInt:mDinnerStart], // Mon
             [NSNumber numberWithInt:mDinnerStart], // Tue
             [NSNumber numberWithInt:mDinnerStart], // Wed
@@ -292,11 +279,8 @@
     // Thorne Hot Breakfast
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.tHotBreakfast = tempSchedule;
-    [tempSchedule release];
-    
-    
+    tHotBreakfast = [[MealSchedule alloc] init];
+    	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
 			[NSNumber numberWithInt:tHotBreakfastStart], // Mon
             [NSNumber numberWithInt:tHotBreakfastStart], // Tue
@@ -332,11 +316,9 @@
     // Thorne Brunch
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.tBrunch = tempSchedule;
-    [tempSchedule release];
+    tBrunch = [[MealSchedule alloc] init];
     
-    
+	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:twkBrunchStart],  // Sun
 			[NSNumber numberWithInt:noMealForDay], // Mon
             [NSNumber numberWithInt:noMealForDay], // Tue
@@ -371,11 +353,8 @@
     // Thorne Hot Lunch
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.tHotLunch = tempSchedule;
-    [tempSchedule release];
-    
-    
+    tHotLunch = [[MealSchedule alloc] init];
+    	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
 			[NSNumber numberWithInt:tHotLunchStart], // Mon
             [NSNumber numberWithInt:tHotLunchStart], // Tue
@@ -410,11 +389,8 @@
     // Thorne Deli Lunch
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.tColdLunch = tempSchedule;
-    [tempSchedule release];
-    
-    
+    tColdLunch = [[MealSchedule alloc] init];
+    	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
 			[NSNumber numberWithInt:tColdLunchStart], // Mon
             [NSNumber numberWithInt:tColdLunchStart], // Tue
@@ -449,11 +425,8 @@
     // Thorne Dinner
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.tDinner = tempSchedule;
-    [tempSchedule release];
-    
-    
+    tDinner = [[MealSchedule alloc] init];
+    	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:twkDinnerStart],  // Sun
 			[NSNumber numberWithInt:tDinnerStart], // Mon
             [NSNumber numberWithInt:tDinnerStart], // Tue
@@ -482,19 +455,12 @@
     tDinner.fileName = @"thorneDinner";
 	tDinner.location = @"Thorne";
 
-    
 
-    
-
-    
     //
     // Super Snacks
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.tSuperSnax = tempSchedule;
-    [tempSchedule release];
-    
+    tSuperSnax = [[MealSchedule alloc] init];
     
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
 			[NSNumber numberWithInt:noMealForDay], // Mon
@@ -533,11 +499,8 @@
     // Cafe Morning
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.cafeMorning = tempSchedule;
-    [tempSchedule release];
-    
-    
+    cafeMorning = [[MealSchedule alloc] init];
+    	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:csuMorningStart],  // Sun
 			[NSNumber numberWithInt:cmwMorningStart], // Mon
             [NSNumber numberWithInt:cmwMorningStart], // Tue
@@ -564,18 +527,14 @@
     cafeMorning.mealName = @"Cafe";  
     cafeMorning.shortName = @"Cafe";
 	cafeMorning.location = @"Smith Union";
-    
-    
+
     
     //
     // Cafe Evening
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.cafeNight = tempSchedule;
-    [tempSchedule release];
-    
-    
+    cafeNight = [[MealSchedule alloc] init];
+    	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:csuNightStart],  // Sun
 			[NSNumber numberWithInt:cmwNightStart], // Mon
             [NSNumber numberWithInt:cmwNightStart], // Tue
@@ -603,17 +562,12 @@
 	cafeNight.location = @"Smith Union";
     
     
-    
-    
     //
     // The Grill
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.theGrill = tempSchedule;
-    [tempSchedule release];
-    
-    
+    theGrill = [[MealSchedule alloc] init];
+    	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:grillsuStart],  // Sun
 			[NSNumber numberWithInt:grillmwStart], // Mon
             [NSNumber numberWithInt:grillmwStart], // Tue
@@ -645,11 +599,8 @@
     // The Pub
     //
     
-    tempSchedule = [[MealSchedule alloc] init];
-    self.thePub = tempSchedule;
-    [tempSchedule release];
-    
-    
+    thePub = [[MealSchedule alloc] init];
+    	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:noMealForDay],  // Sun
 			[NSNumber numberWithInt:noMealForDay], // Mon
             [NSNumber numberWithInt:noMealForDay], // Tue
@@ -680,12 +631,9 @@
     //
     // The Convenience Store
     //
-    
-    tempSchedule = [[MealSchedule alloc] init];
-    self.theCStore = tempSchedule;
-    [tempSchedule release];
-    
-    
+	
+    theCStore = [[MealSchedule alloc] init];
+    	
     open = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:emssStart],  // Sun
 			[NSNumber numberWithInt:emfStart], // Mon
             [NSNumber numberWithInt:emfStart], // Tue
@@ -736,7 +684,7 @@
                            theCStore,
                            nil];
     
-    self.mealArray = arrayMeals;
+    mealArray = arrayMeals;
     
     
     NSMutableArray *diningHallMeals = [[NSArray alloc] initWithObjects:
@@ -752,7 +700,7 @@
                                   tDinner,
                                   nil];
     
-    self.diningHallMealArray = diningHallMeals;
+    diningHallMealArray = diningHallMeals;
     
     
     return self;
@@ -762,19 +710,15 @@
 	
 	WristWatch *clock= [[WristWatch alloc] init];
 	watch = clock;
-	//[clock release];
 	
 	[self processHoursArrays];
 	[self processArrayOfOpenMeals];
 	
-	// Processes Meals for Today and Tomorrow
 	[self processMealArraysForDay:[watch getWeekDay]];
 	[self processMealArraysForDay:[watch getNextWeekDay]];
 
-	// Resolve Inconsistencies
 	[self resolveInconsistenciesInArrays];
 	
-	// Populate Raw Arrays
 	[self populateNavigationBarArray];
 	[self populateMealArrays];
 	
@@ -783,17 +727,9 @@
 	
 }
 
-- (void)populateSpecialsArray{
-	
-	NSString *fileLocation = [NSString stringWithFormat:@"%@/%@.xml",[self documentsDirectory], @"specials"];
+#pragma mark -
+#pragma mark Array Processing
 
-	NSLog(@"Loading Array = %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
-	specialsArray = [[NSMutableArray alloc] initWithContentsOfFile:fileLocation];
-	
-
-}
-
-// Meal Schedule and Meal Items
 - (void)processMealArraysForDay:(int)day{
 	
 	// We establish three arrays to keep dictionary objects of meals
@@ -801,11 +737,11 @@
 	if (thorne_dictionary_array == nil || moulton_dictionary_array == nil) {
 		thorne_dictionary_array  = [[NSMutableArray alloc] init];
 		moulton_dictionary_array = [[NSMutableArray alloc] init];
-
+		
 	}
    	
 	
-		
+	
 	// Running through every possible meal to decide which meals are open
     for(MealSchedule *element in diningHallMealArray){
         NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
@@ -814,7 +750,7 @@
 		[element setCurrentDay:day];
 		
         if ([element isOpen] || [element willOpen]){
-                        
+			
             [dictionary setObject:element.shortName forKey:@"Shortname"];
             [dictionary setObject:[element returnFileLocation] forKey:@"FileLocation"];
             [dictionary setObject:[element returnDescription] forKey:@"Day"];
@@ -822,12 +758,12 @@
 			
 			if ([element currentDay] == [watch getWeekDay]) {
 				[dictionary setObject:[NSString stringWithFormat:@"Today's %@", [element returnDescription]] forKey:@"Formatted_Title"];
-
+				
 			} else {
 				[dictionary setObject:[NSString stringWithFormat:@"Tomorrow's %@", [element returnDescription]] forKey:@"Formatted_Title"];
 			}
-
-
+			
+			
             
 			
             // Decides which of our location arrays to populate
@@ -853,11 +789,24 @@
         
     } // end iteration of mealschedule objects
 	
-
 	
-
+	
+	
 	
 }
+
+- (void)populateSpecialsArray{
+	
+	NSString *fileLocation = [NSString stringWithFormat:@"%@/%@.xml",[self documentsDirectory], @"specials"];
+
+	NSLog(@"Loading Array = %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	specialsArray = [[NSMutableArray alloc] initWithContentsOfFile:fileLocation];
+	
+
+}
+
+
+
 - (void)populateMealArrays{
 	
 	
@@ -865,8 +814,6 @@
 	self.moultonArray = [self populateArrayFromDict:moulton_dictionary_array];
 	
 }
-
-
 
 -(NSMutableArray*)populateArrayFromDict:(NSMutableArray*)dictArray {
 	
@@ -916,7 +863,6 @@
 	}
 			
 }
-
 
 -(NSString*)hoursOfOperationForHall:(int)hall meal:(int)meal{
 	
@@ -1034,7 +980,8 @@
 	}//end for
 		
 	
-}					 
+}		
+
 -(NSMutableArray*)mealArrayFromFile:(NSString*)fileLocation{
 						 
 	NSMutableArray *arrayToReturn;
@@ -1057,7 +1004,6 @@
 						 
 }
 
-
 //Navigation Bar Array
 -(NSMutableArray*)returnNavBarArray{
 	
@@ -1066,66 +1012,54 @@
 	
 }
 
-// Hours of Operation Code
+/**
+ *	processHoursArray takes the array of MealSchedule
+ *	objects and extracts information (name, hours, location)
+ *	for the tableView to display
+ */
 -(void)processHoursArrays{
 	
 	allHoursArray = [[NSMutableArray alloc] init];
-
-    //Assumes we want an array of today's hours.
     NSMutableArray *array1 = [[NSMutableArray alloc]init];
 	NSMutableArray *array2 = [[NSMutableArray alloc]init];
     NSMutableArray *array3 = [[NSMutableArray alloc]init];
 	
+	//Assumes we want an array of today's hours.
     int currentDay = (int)[watch getWeekDay];
     
-	
     for(MealSchedule *element in mealArray){
         [element setCurrentDay:currentDay];
 		
 		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
-        if ([element isOpen] || [element willOpen]){
+        if ([element hasClosed] || [element isOpen] || [element willOpen]){
             
+			NSString *mealName = element.mealName;
+			NSString *hoursText = element.dateText;
+			NSString *location = element.location;
 			
-			if (element.mealName != nil) {
-				[dictionary setObject:element.mealName forKey:@"meal"];
+			if (mealName != nil) {
+				[dictionary setObject:mealName forKey:@"meal"];
 			}
 			else {
 				[dictionary setObject:@"NONAME" forKey:@"meal"];
-				
 			}
 			
-			[dictionary setObject:[element dateText] forKey:@"hours"];
+			[dictionary setObject:hoursText forKey:@"hours"];
 			
-			// This is the place for user defaults
-			if (element.location == @"Thorne") {
-				[array1 addObject:dictionary];
-			} else if (element.location == @"Moulton") {
-				[array2 addObject:dictionary];
-			} else {
-				[array3 addObject:dictionary];
-			}
+			// Decides where to add the dictionary object
+			if (location == @"Thorne") { [array1 addObject:dictionary]; }
+			else if (location == @"Moulton") { [array2 addObject:dictionary];} 
+			else { [array3 addObject:dictionary]; }
         }
     }
 	
-	
-	if ([array1 count] != 0) {
-		[allHoursArray addObject:array1];
-	}
-	
-	if ([array2 count] != 0) {
-		[allHoursArray addObject:array2];
-
-	}
-	
-	if ([array3 count] != 0) {
-		[allHoursArray addObject:array3];
-
-	}
-	
-	
-	
+	// Arrays added shouldn't be empty
+	if ([array1 count] != 0) { [allHoursArray addObject:array1]; }
+	if ([array2 count] != 0) { [allHoursArray addObject:array2]; }
+	if ([array3 count] != 0) { [allHoursArray addObject:array3]; }
 	
 }
+
 -(void)processArrayOfOpenMeals{
     
     //Assumes we want an array of today's meals.
@@ -1188,6 +1122,7 @@
 	
 	
 }
+
 -(NSNumber *)returnCurrentWeekDayNSNumber{
     
     int intToReturn = [watch getWeekDay];
@@ -1200,7 +1135,7 @@
 
 
 #pragma mark -
-#pragma mark TableViewCode for Meals
+#pragma mark Meal TableView DataSource
 
 -(NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex{
 	
@@ -1314,11 +1249,11 @@
 	return height + 3;
 }
 
-// returns the local document directory
 - (NSString *)documentsDirectory {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	return [paths objectAtIndex:0];
 }
+
 
 
 
@@ -1332,6 +1267,9 @@
 #define all_hours 1
 
 /// Hours Table View Code
+
+#pragma mark -
+#pragma mark HO TableView DataSource
 
 - (NSInteger)returnNumberOfSections{
 	

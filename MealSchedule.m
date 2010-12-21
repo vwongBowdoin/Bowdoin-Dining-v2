@@ -220,20 +220,24 @@
 -(BOOL)hasClosed{
     
     NSDate *currentTime = [NSDate date];
+	NSDate *currentOpening = [self currentOpening];
     NSDate *currentClosing = [self currentClosing];
     
     NSComparisonResult nowClosingComparison = [currentTime compare:currentClosing];
+	
+	BOOL result;
+	
+    if (nowClosingComparison == NSOrderedDescending){ result = YES; } 
+	else { result = NO; }
     
-    if (nowClosingComparison == NSOrderedDescending){
-        
-        return YES;
-   
-    } else {
-        
-        return NO;
-        
-    }
-    
+	// checks whether start and end date are identical 
+	// (i.e. 00000 NoMeal - see ScheduleConstants.h
+	if (currentOpening == currentClosing) {
+		result = NO;
+	}
+	
+	
+	return result;
     
 }
 

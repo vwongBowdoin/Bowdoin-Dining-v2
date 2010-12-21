@@ -12,10 +12,6 @@
 @implementation DiningParser
 @synthesize todaysMealHandler, thorneBreakfast, thorneLunch, thorneDinner, thorneBrunch, moultonBreakfast, moultonLunch, moultonDinner, moultonBrunch;
 
-
-
-
-// Initialization of Arrays
 -(id)init{
 	
 	thorneBreakfast = [[NSMutableArray	alloc] init];
@@ -27,7 +23,6 @@
 	moultonLunch = [[NSMutableArray alloc] init];
 	moultonDinner = [[NSMutableArray alloc] init];
 	moultonBrunch = [[NSMutableArray alloc] init];
-	
 	
 	return self;
 }
