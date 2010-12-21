@@ -44,6 +44,7 @@
 - (IBAction)hourSelectorDidChange{
 	
 	[localScheduler changeDisplayedHourInformation];
+	
 	[theTableView reloadData];
 	
 	if ([hourSelector.titleLabel.text isEqualToString:@"Today"]) {
@@ -52,7 +53,6 @@
 		[hourSelector setTitle:@"Today" forState:UIControlStateNormal];
 	}
 
-	
 }
 
 
@@ -112,11 +112,13 @@
     }
 
 	cell.backgroundColor = [UIColor whiteColor];
-	
+	cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+	cell.textLabel.backgroundColor = [UIColor clearColor];
+
 	cell.textLabel.text = [[localScheduler returnDictionaryAtIndex:indexPath] objectForKey:@"meal"];
     [cell.textLabel setFont:[UIFont systemFontOfSize:16.0]]; 
-	cell.textLabel.backgroundColor = [UIColor clearColor];
 	[cell.textLabel setTextColor:[UIColor blackColor]];
+	
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	
 	
@@ -125,19 +127,11 @@
 	
 	// A simple check to change "Closes at..." notifications to blue color.
 	if ([cell.detailTextLabel.text rangeOfString:@"Closes"].location != NSNotFound){
-		
 		[cell.detailTextLabel setTextColor:[UIColor blueColor]];
-
 	} else {
 		[cell.detailTextLabel setTextColor:[UIColor grayColor]];
-
 	}
 
-	
-	cell.detailTextLabel.backgroundColor = [UIColor clearColor];
-
-	
-	
     return cell;
 }
 
