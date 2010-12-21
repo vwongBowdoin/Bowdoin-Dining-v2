@@ -135,7 +135,7 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<reference key="IBUIFont" ref="928054075"/>
 								<bool key="IBUIShowsTouchWhenHighlighted">YES</bool>
-								<string key="IBUINormalTitle">Now</string>
+								<string key="IBUINormalTitle">Today</string>
 								<reference key="IBUIHighlightedTitleColor" ref="32631768"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">1</int>

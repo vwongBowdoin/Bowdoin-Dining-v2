@@ -46,10 +46,10 @@
 	[localScheduler changeDisplayedHourInformation];
 	[theTableView reloadData];
 	
-	if (hourSelector.titleLabel.text == @"Today") {
-		hourSelector.titleLabel.text = @"Now";
+	if ([hourSelector.titleLabel.text isEqualToString:@"Today"]) {
+		[hourSelector setTitle:@"Now" forState:UIControlStateNormal];
 	} else {
-		hourSelector.titleLabel.text = @"Today";
+		[hourSelector setTitle:@"Today" forState:UIControlStateNormal];
 	}
 
 	
