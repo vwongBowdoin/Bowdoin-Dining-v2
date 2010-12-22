@@ -34,6 +34,13 @@
 	NSString *login = userNameField.text;
 	NSString *pass = passwordField.text;
 	
+	// checks to make sure text is entered in the username field
+	if (userNameField.text.length == 0) {
+		NSLog(@"No User Name Entered");
+	}
+	
+	
+	
 	
 	if ([saveSwitch isOn]){
 		
@@ -65,6 +72,7 @@
 -(IBAction)dismissModalController{
 
 	[self dismissModalViewControllerAnimated:YES];
+	[delegate dismissPage];
 }
 
 

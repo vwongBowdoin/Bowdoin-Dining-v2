@@ -88,8 +88,9 @@
 - (void)beginCSGoldDownload{
 	
 	CSGoldController *theController = [[CSGoldController alloc]init];	
-	[theController getCSGoldDataWithUserName:userName password:password];
-	[theController release];
+	session_Controller = theController;
+	[session_Controller getCSGoldDataWithUserName:userName password:password];
+	
 }
 
 - (void)registerForNotifications{
@@ -137,6 +138,7 @@
 	
 	lastUpdatedLabel.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"CSGold_LastTime_Updated"];
 
+	NSLog(@"Finished Updating Visible Text");
 	
 }
 
@@ -209,8 +211,10 @@
 		// Destroy Past Meal Balances
 		[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"MealsRemaining"];
 		
-		
+		[session_Controller release];
+
 	}
+	
 	
 }
 
@@ -234,6 +238,7 @@
 
 
 - (void)dealloc {
+	[session_Controller release];
     [super dealloc];
 }
 

@@ -254,6 +254,8 @@ static BOOL isiPhoneOS2;
 
 - (void)dealloc
 {
+	
+	NSLog(@"ASIHTTPRequest Deallocating");
 	[statusTimer invalidate];
 	[statusTimer release];
 	[self setAuthenticationNeeded:ASINoAuthenticationNeededYet];

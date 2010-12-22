@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
-
+#import "CSGoldController.h"
 
 @interface PolarPoints : UIViewController <MBProgressHUDDelegate> {
 
@@ -21,6 +21,9 @@
 	IBOutlet UIActivityIndicatorView *activityIndicator2;
 	IBOutlet UIActivityIndicatorView *activityIndicator3;
 
+	
+	CSGoldController *session_Controller;
+	
 	MBProgressHUD *HUD;
 	
 	// Login Information

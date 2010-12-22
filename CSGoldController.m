@@ -13,6 +13,13 @@
 @implementation CSGoldController
 
 
+-(id)init{
+	
+	NSLog(@"CSGoldController Initialized");
+	
+	return self;
+}
+
 - (void)getCSGoldDataWithUserName:(NSString*)user password:(NSString*)pass {
 	
 	// Sets the CSGold controllers UserName and Password
@@ -36,7 +43,7 @@
 	password = pass;
 	
 	
-	NSLog(@"CSGoldController Using Login:%@ and Password:*****", userName);
+	NSLog(@"CSGoldController Using Login:%@ and Password:%@", userName, password);
 	
 	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldLineCountsHistogram/>"]];
 
@@ -92,6 +99,9 @@
 	[SOAPRequest addRequestHeader:@"Content-Type" value:@"text/xml"];	
 	[SOAPRequest addRequestHeader:@"Host" value:@"bowdoin.edu"];
     /* ***** values need to be set here ***** */
+	
+	NSLog(@"Attaching Username: %@ and password: %@", userName, password);
+	
 	[SOAPRequest setUsername:userName];
 	[SOAPRequest setPassword:password];
 	[SOAPRequest setDomain:@"bowdoincollege"];
@@ -105,7 +115,6 @@
 	if (SOAPRequest.responseStatusCode == 200) {
 		
 		CSGoldParser *parser = [[CSGoldParser alloc] init];
-		NSLog(@"%@",[SOAPRequest responseString]);
 		[parser parseWithData:[SOAPRequest responseData]];
 		lineCountData = [SOAPRequest responseData];
 		[parser release];
@@ -113,12 +122,17 @@
 
 	}
 
-	//[SOAPRequest clearSession];
+	[SOAPEnvelope release];
+	//[SOAPRequest release];
 
 	
 }
 
 - (void)dealloc {
+	
+	NSLog(@"Deallocating CSGoldController");
+	[userName release];
+	[password release];
     [super dealloc];
 }
 

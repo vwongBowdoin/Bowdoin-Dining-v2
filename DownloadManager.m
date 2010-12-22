@@ -127,7 +127,6 @@
 	
     // once downloaded and no error - set download confirm for day to YES
     [[NSUserDefaults standardUserDefaults] setInteger:[localWatch getWeekofYear] forKey:@"lastUpdatedWeek"];
-
 	
 }
 
@@ -139,9 +138,7 @@
 - (void)errorOccurred{
     
     NSLog(@"Downloading Error - DownloadManange`r.m");
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
-
-	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];	
 	
 }
 
