@@ -123,9 +123,10 @@
 	
     }
     
+	NSLog(@"Jumping out of DownloadManager.m -downloadMenus");
+	
     // once downloaded and no error - set download confirm for day to YES
     [[NSUserDefaults standardUserDefaults] setInteger:[localWatch getWeekofYear] forKey:@"lastUpdatedWeek"];
-	
 
 	
 }
@@ -137,14 +138,18 @@
 
 - (void)errorOccurred{
     
-    NSLog(@"Downloading Error - DownloadMananger.m");
+    NSLog(@"Downloading Error - DownloadManange`r.m");
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
+
+	
 	
 }
 
 - (void)dealloc{
-	[super dealloc];
-	[localWatch release];
 	
+	NSLog(@"Releasing DownloadManager.m");
+	[localWatch release];
+	[super dealloc];	
 	
 	
 }

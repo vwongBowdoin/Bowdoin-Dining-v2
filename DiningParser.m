@@ -67,7 +67,6 @@
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
     
     [self storeXMLDataforDay:currentDayIndex];
-	// Confirm Storage Notification through NSNotification System
     
 }
 
@@ -147,15 +146,7 @@
 	}
 	
 	if ([elementName isEqualToString:@"error"]) {
-		// Creeates or wipes the array for safety
 		NSLog(@"Error Found In Parser");
-	//	mealArray = [[NSMutableArray alloc] init];
-	//	[mealArray addObject:@"ERROR"];
-		
-	//	[self addArrayofItems:mealArray forCourse:@"No Menu For This Meal" forMeal:currentMeal forHall:currentUnit];
-		
-	//	mealArray = [[NSMutableArray alloc] init];
-
 	}
 }
 

@@ -128,6 +128,11 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 		alertText_Subtitile.textColor = [UIColor whiteColor];
 		alertText_Subtitile.backgroundColor = [UIColor clearColor];
 		
+		
+		UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+		[infoButton setFrame:CGRectMake(165, 95, 40, 40)];
+								
+		[noMealAlertView addSubview:infoButton];						
 		[noMealAlertView addSubview:alertText_Title];
 		[noMealAlertView addSubview:alertText_Subtitile];
 	}
@@ -203,8 +208,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	// Successful Download Activates DownloadCompleted method
 	[manager initializeDownloads];	
-	[manager release];
-
+	
 }
 
 /**
@@ -212,15 +216,19 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
  */
 - (void)downloadCompleted {
    
+	NSLog(@"Download Completed");
+	
 	// Initializes the Schedule Decider which determines the current meals
 	ScheduleDecider *decider = [[ScheduleDecider alloc] init];
 	self.scheduler = decider; // sets the scheduler
 	[scheduler processArrays];
    
+	NSLog(@"Setting NavigationBars With Array");
 	[self setNavigationBarsWithArray:[scheduler returnNavBarArray]];
 	
-	NSLog(@"Reloading Data for Hall:%d, Meal:%d,", currentHallPage, currentMealPage);
+	NSLog(@"Reloading TableView Data");
     [customTableView reloadData];
+	
 }
 
 /**
@@ -668,7 +676,6 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 		[self hideNoMealAlertView];
 		
 	}
-
 	
 	return numberOfSections;
 

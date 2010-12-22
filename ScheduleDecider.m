@@ -745,18 +745,24 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	WristWatch *clock= [[WristWatch alloc] init];
 	watch = clock;
 	
+	NSLog(@"Processing Hours Array");
 	[self processHoursArrays];
 	
+	NSLog(@"Processing Meals Array");
 	[self processMealArraysForDay:[watch getWeekDay]];
 	[self processMealArraysForDay:[watch getNextWeekDay]];
 	
+	NSLog(@"Resolving Inconsistencies");
 	[self resolveInconsistenciesInArrays];
 	
+	NSLog(@"Populating NavBar Array");
 	[self populateNavigationBarArray];
+	NSLog(@"Populating Meal Arrays");
 	[self populateMealArrays];
-	
+	NSLog(@"Populating Specials Arrays");
 	[self populateSpecialsArray];
 	
+	NSLog(@"Finished Processing");
 	
 }
 
