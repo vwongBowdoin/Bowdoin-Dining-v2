@@ -98,6 +98,7 @@
         
 		if (i == startingDay + 2) {
 			NSLog(@"Download Completed For Day = %d", i);
+			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"downloadSuccessful"];
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
 		}
         
@@ -108,7 +109,7 @@
 		NSLog(@"Download Address: %@", downloadAddress);
         
 		
-        // Saving File for Parser - checking for error
+        // Saving File for Parser - checking for errorq
 		NSError *error = nil;
         NSData *xmlFile = [NSData dataWithContentsOfURL:downloadURL options:0 error:&error];
         
@@ -124,8 +125,8 @@
     }
     
 	NSLog(@"Jumping out of DownloadManager.m -downloadMenus");
-	
     // once downloaded and no error - set download confirm for day to YES
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"downloadSuccessful"];
     [[NSUserDefaults standardUserDefaults] setInteger:[localWatch getWeekofYear] forKey:@"lastUpdatedWeek"];
 	
 }
@@ -136,9 +137,9 @@
 }
 
 - (void)errorOccurred{
-    
-    NSLog(@"Downloading Error - DownloadManange`r.m");
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];	
+    NSLog(@"Downloading Error - DownloadMananger.m");
+	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"downloadSuccessful"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
 	
 }
 

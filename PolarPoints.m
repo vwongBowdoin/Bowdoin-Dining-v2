@@ -211,7 +211,10 @@
 		// Destroy Past Meal Balances
 		[[NSUserDefaults standardUserDefaults] setValue:NULL forKey:@"MealsRemaining"];
 		
-		[session_Controller release];
+		
+		if (session_Controller != nil) {
+		//	[session_Controller release];
+		}
 
 	}
 	

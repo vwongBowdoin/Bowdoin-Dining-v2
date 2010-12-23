@@ -54,6 +54,7 @@
 	ScheduleDecider *scheduler;
     
     BOOL navigationBarsAnimatedOut;
+	BOOL mealInformationDownloaded;
 
 	int currentHallPage;
 	int currentMealPage;

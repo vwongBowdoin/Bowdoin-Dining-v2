@@ -99,7 +99,12 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	[self setupMealData];
 }
 
+
 - (void)showNoMealNotification{
+	
+	if (!mealInformationDownloaded) {
+		return;
+	}
 	
 	
 	if (noMealAlertView == nil) {
@@ -107,14 +112,17 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 		noMealView.layer.cornerRadius = 10.0;
 		noMealView.backgroundColor = [UIColor blackColor];
 	
-		
 		noMealAlertView.alpha = 0.0;
 		noMealAlertView = noMealView;
 		
 		
+		NSString *alertTitle = @"No Menu";
+		NSString *alertSubTitle =  = @"This meal is closed or \n no menu was found";
+		
+
 		UILabel *alertText_Title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 80)];
 		alertText_Title.textAlignment = UITextAlignmentCenter;
-		alertText_Title.text = @"No Menu";
+		alertText_Title.text = alertTitle;
 		alertText_Title.font = [UIFont boldSystemFontOfSize:20.0];
 		alertText_Title.textColor = [UIColor whiteColor];
 		alertText_Title.backgroundColor = [UIColor clearColor];
@@ -122,17 +130,12 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 		
 		UILabel *alertText_Subtitile = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 200, 100)];
 		alertText_Subtitile.textAlignment = UITextAlignmentCenter;
-		alertText_Subtitile.text = @"This meal is closed or no menu was found.";
+		alertText_Subtitile.text = alertSubTitle;
 		alertText_Subtitile.numberOfLines = 2;
 		alertText_Subtitile.font = [UIFont systemFontOfSize:16.0];
 		alertText_Subtitile.textColor = [UIColor whiteColor];
 		alertText_Subtitile.backgroundColor = [UIColor clearColor];
 		
-		
-		UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
-		[infoButton setFrame:CGRectMake(165, 95, 40, 40)];
-								
-		[noMealAlertView addSubview:infoButton];						
 		[noMealAlertView addSubview:alertText_Title];
 		[noMealAlertView addSubview:alertText_Subtitile];
 	}
@@ -148,8 +151,54 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 }
 
+/*
+- (void)showNoInternetNotificaiton{
+	
+	UIView *noInternetView = [[UIView alloc] initWithFrame:CGRectMake(60, 175, 200, 230)];
+	noInternetView.layer.cornerRadius = 10.0;
+	noInternetView.backgroundColor = [UIColor blackColor];
+	
+	
+	
+	UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
+	[refreshButton setFrame:CGRectMake(165, 95, 40, 40)];
+	[refreshButton setImage:[UIImage imageNamed:@"01-refresh-white.png"] forState:UIControlStateNormal];
+	[noInternetView addSubview:refreshButton];		
+	
+	
+	
+	UILabel *alertText_Title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 80)];
+	alertText_Title.textAlignment = UITextAlignmentCenter;
+	alertText_Title.text = alertTitle;
+	alertText_Title.font = [UIFont boldSystemFontOfSize:20.0];
+	alertText_Title.textColor = [UIColor whiteColor];
+	alertText_Title.backgroundColor = [UIColor clearColor];
+	
+	
+	UILabel *alertText_Subtitile = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 200, 100)];
+	alertText_Subtitile.textAlignment = UITextAlignmentCenter;
+	alertText_Subtitile.text = alertSubTitle;
+	alertText_Subtitile.numberOfLines = 2;
+	alertText_Subtitile.font = [UIFont systemFontOfSize:16.0];
+	alertText_Subtitile.textColor = [UIColor whiteColor];
+	alertText_Subtitile.backgroundColor = [UIColor clearColor];
+	
+	
+	[noInternetView addSubview:alertText_Title];
+	[noInternetView addSubview:alertText_Subtitile];
+	[self.view addSubview:noInternetView];
+	
+}
+ */
+
 - (void)hideNoMealAlertView{
-		
+	
+	if (!mealInformationDownloaded) {
+		return;
+	}
+	
+	NSLog(@"Hiding No Meal Notification");
+
 	if (noMealAlertView != nil) {
 		
 		// Flashes TableView
@@ -180,8 +229,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	self.title = @"Main";
 	
 	// Table View Initiliazation - sets data source and delegate
-	customTableView.delegate = self;
 	customTableView.dataSource = self;
+	customTableView.delegate = self;
 	customTableView.separatorColor = [UIColor clearColor];
 	
     // WristWatch is the global timer.
@@ -192,10 +241,9 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	[self setupMealData];
 	
 	// Creates the No Meal Alert View
-	
 
-	
 }
+
 
  /**
 	Handles Menu Data
@@ -218,16 +266,30 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
    
 	NSLog(@"Download Completed");
 	
+	// Sets DownloadComplete BOOL
+	mealInformationDownloaded = YES;
+	
 	// Initializes the Schedule Decider which determines the current meals
 	ScheduleDecider *decider = [[ScheduleDecider alloc] init];
 	self.scheduler = decider; // sets the scheduler
 	[scheduler processArrays];
    
-	NSLog(@"Setting NavigationBars With Array");
 	[self setNavigationBarsWithArray:[scheduler returnNavBarArray]];
 	
-	NSLog(@"Reloading TableView Data");
-    [customTableView reloadData];
+	/*
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"downloadSuccessful"] ) {
+		NSLog(@"Reloading TableView Data");
+		[customTableView reloadData];
+
+	} else {
+		NSLog(@"Showing Internet Notification - Download Failed");
+		[self showNoInternetNotificaiton];
+	}
+	 */
+	
+	[customTableView reloadData];
+	
+	
 	
 }
 
@@ -237,9 +299,14 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
  */
 - (void)setNavigationBarsWithArray:(NSMutableArray*)scheduleArray {
     
+	if (scheduleArray == nil) {
+		NSLog(@"FUCK Navigation Bar Array");
+
+	}
+	
     NavigationBarController *navBarController = [[NavigationBarController alloc] initWithScheduleArray:scheduleArray];
 	
-    
+    NSLog(@"Setting Navigation Bar Array");
     // Establishes the meal bars at the top of the page
 
 	[mealScrollView setContentSize:CGSizeMake(320 * [navBarController.scheduleArray count], 44)];
@@ -272,6 +339,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	[hallScrollView setBackgroundColor:[UIColor whiteColor]];
 	[hallScrollView setPagingEnabled:YES];
     
+
     
 }
 
@@ -420,11 +488,15 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
+	NSLog(@"ScrollViewScrolled");
+	
 	// Filters out UITableView Scroll Events which inherits from UIScrollView
 	if ([scrollView isKindOfClass:[UITableView class]]) {
 
 		return;
 	}
+	
+
 	
 	// Decides the current page of the Hall scroller.	
 	CGFloat hallPageWidth = hallScrollView.frame.size.width;
@@ -668,13 +740,15 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	NSInteger *numberOfSections = [scheduler numberOfSectionsForLocation:currentHallPage atMealIndex:currentMealPage];
 	
-	if (numberOfSections == 0) {
-		
+	NSLog(@"Number of Sections = %d", numberOfSections);
+
+	
+	if (numberOfSections == 1 || numberOfSections == nil) {
 		[self showNoMealNotification];
-	} else {
-		
+	}
+	
+	else {
 		[self hideNoMealAlertView];
-		
 	}
 	
 	return numberOfSections;
@@ -682,9 +756,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	NSLog(@"Rows");
+	NSLog(@"Rows = %d", [scheduler sizeOfSection:section forLocation:currentHallPage atMealIndex:currentMealPage] );
 
-	
 	return [scheduler sizeOfSection:section forLocation:currentHallPage atMealIndex:currentMealPage];
 	
 }

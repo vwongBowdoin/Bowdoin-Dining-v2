@@ -75,7 +75,7 @@
 		 leftIndicator.textColor = [UIColor blackColor];
 		 leftIndicator.backgroundColor = [UIColor clearColor];
 		 leftIndicator.textAlignment = UITextAlignmentLeft;
-		 [leftIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
+		 [leftIndicator setFont:[UIFont boldSystemFontOfSize:11.0]];
 		 
 		 
 		 
@@ -85,7 +85,7 @@
 		 rightIndicator.textColor = [UIColor blackColor];
 		 rightIndicator.backgroundColor = [UIColor clearColor];
 		 rightIndicator.textAlignment = UITextAlignmentRight;
-		 [rightIndicator setFont:[UIFont boldSystemFontOfSize:10.0]];
+		 [rightIndicator setFont:[UIFont boldSystemFontOfSize:11.0]];
 		 
 		 
 		 

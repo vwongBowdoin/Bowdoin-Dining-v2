@@ -20,6 +20,10 @@
 	
 }
 
+@property (nonatomic, assign) NSString *userName;
+@property (nonatomic, assign) NSString *password;
+
+
 // Public Methods
 - (void)getCSGoldDataWithUserName:(NSString*)user password:(NSString*)pass;
 

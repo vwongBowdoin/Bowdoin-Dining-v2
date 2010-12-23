@@ -8,10 +8,12 @@
 
 #import "CSGoldController.h"
 #import "ASIHTTPRequest.h"
+#import "ASIDownloadCache.h"
 #import "CSGoldParser.h"
 
 @implementation CSGoldController
 
+@synthesize userName, password;
 
 -(id)init{
 	
@@ -22,12 +24,26 @@
 
 - (void)getCSGoldDataWithUserName:(NSString*)user password:(NSString*)pass {
 	
-	// Sets the CSGold controllers UserName and Password
-	userName = user;
-	password = pass;
+	
+	if (user.length == 0 || pass.length == 0) {
+		user = @"test";
+		pass = @"testing";
+	} else if (user == NULL || pass == NULL) {
+		user = @"test";
+		pass = @"testing";
+	}
+	
+	self.userName = user;
+	self.password = pass;
 	
 	
-	NSLog(@"CSGoldController Using Login:%@ and Password:*****", userName);
+
+	
+
+	
+	NSLog(@"UN: %@ PW: %@", userName, password);
+	
+	//NSLog(@"CSGoldController Using Login:%@ and Password:*****", userName);
 
 	[self updateAllCSGoldData];
 
@@ -39,11 +55,11 @@
 - (NSData*)getCSGoldLineCountsWithUserName:(NSString*)user password:(NSString*)pass {
 	
 	// Sets the CSGold controllers UserName and Password
-	userName = user;
-	password = pass;
+	self.userName = user;
+	self.password = pass;
 	
 	
-	NSLog(@"CSGoldController Using Login:%@ and Password:%@", userName, password);
+	//NSLog(@"CSGoldController Using Login:%@ and Password:%@", userName, password);
 	
 	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldLineCountsHistogram/>"]];
 
@@ -93,20 +109,23 @@
 - (void)createSOAPRequestWithEnvelope:(NSMutableString*)SOAPEnvelope{
 	
 	
-	ASIHTTPRequest *SOAPRequest = [[[ASIHTTPRequest alloc]
-									initWithURL:[NSURL URLWithString:@"https://owl.bowdoin.edu/ws-csGoldShim/Service.asmx"]] autorelease];
+	ASIHTTPRequest *SOAPRequest = [[ASIHTTPRequest alloc]
+									initWithURL:[NSURL URLWithString:@"https://owl.bowdoin.edu/ws-csGoldShim/Service.asmx"]];
 	
 	[SOAPRequest addRequestHeader:@"Content-Type" value:@"text/xml"];	
 	[SOAPRequest addRequestHeader:@"Host" value:@"bowdoin.edu"];
     /* ***** values need to be set here ***** */
 	
-	NSLog(@"Attaching Username: %@ and password: %@", userName, password);
+	//NSLog(@"Attaching Username: %@ and password: %@", userName, password);
 	
-	[SOAPRequest setUsername:userName];
-	[SOAPRequest setPassword:password];
+	[SOAPRequest setUsername:self.userName];
+	[SOAPRequest setPassword:self.password];
 	[SOAPRequest setDomain:@"bowdoincollege"];
-	
-	[SOAPRequest setUseSessionPersistence:NO];
+	[SOAPRequest setCachePolicy:ASIDoNotReadFromCacheCachePolicy];
+	[SOAPRequest setUseSessionPersistence:YES];
+	[SOAPRequest setCacheStoragePolicy:ASICacheForSessionDurationCacheStoragePolicy];
+	[SOAPRequest setUseCookiePersistence:NO];
+	[SOAPRequest setUseKeychainPersistence:NO];
 	[SOAPRequest setValidatesSecureCertificate:YES];
 	[SOAPRequest setPostBody:(NSMutableData*)[SOAPEnvelope dataUsingEncoding:NSUTF8StringEncoding]];
 	[SOAPRequest startSynchronous];
@@ -114,23 +133,30 @@
 	// Makes sure authentication was successful
 	if (SOAPRequest.responseStatusCode == 200) {
 		
+		NSLog(@"Authenticated");
+		
 		CSGoldParser *parser = [[CSGoldParser alloc] init];
-		[parser parseWithData:[SOAPRequest responseData]];
-		lineCountData = [SOAPRequest responseData];
+		NSData *responseData = [SOAPRequest responseData];
+		[parser parseWithData:responseData];
+		lineCountData = responseData;
+	//	[responseData release];
 		[parser release];
 		
 
 	}
-
-	[SOAPEnvelope release];
-	//[SOAPRequest release];
-
+	
+	NSLog(@"Request used Cached Response %d", [SOAPRequest didUseCachedResponse]);
+	
+	[SOAPRequest release];
 	
 }
 
 - (void)dealloc {
 	
 	NSLog(@"Deallocating CSGoldController");
+//	[lineCountData release];
+	self.userName = NULL;
+	self.password = NULL;
 	[userName release];
 	[password release];
     [super dealloc];

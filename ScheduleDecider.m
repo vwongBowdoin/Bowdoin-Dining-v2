@@ -845,9 +845,10 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (void)populateMealArrays{
 	
+	NSLog(@"Populating Meal Arrays");
+	
 	self.thorneArray = [self populateArrayFromDict:thorne_dictionary_array];
 	self.moultonArray = [self populateArrayFromDict:moulton_dictionary_array];
-	
 }
 
 - (NSMutableArray*)populateArrayFromDict:(NSMutableArray*)dictArray {
@@ -922,7 +923,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"Day"] forKey:@"Day"];
 				
 				// ultimately this needs to be a fake file location
-				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
+				//[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
 				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"Formatted_Title"] forKey:@"Formatted_Title"];
 				
 				[fakeDictionary setObject:@"Closed" forKey:@"Hours_of_Operation"];
@@ -943,7 +944,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"Day"] forKey:@"Day"];
 				
 				// ultimately this needs to be a fake file location
-				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
+				//[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
 				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"Formatted_Title"] forKey:@"Formatted_Title"];
 				
 				[fakeDictionary setObject:@"Closed" forKey:@"Hours_of_Operation"];
@@ -992,14 +993,19 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex{
 	
+	NSLog(@"Size of Section Called");
 	
 	switch (location) {
 		case 0:
-			return [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:section] count];
+			if ([[[thorneArray objectAtIndex:mealIndex] objectAtIndex:section] respondsToSelector:@selector(count)]) {
+				return [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:section] count];
+			} 
 			break;
 			
 		case 1:
-			return [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] count];
+			if ([[[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] respondsToSelector:@selector(count)]) {
+				return [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] count];
+			}
 			break;
 			
 		case 2:
@@ -1011,12 +1017,13 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			break;
 	}
 	
-	
-	
 }
+
 
 - (NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex{
 	
+	NSLog(@"Number of Sections Called");
+
 	
 	switch (location) {
 		case 0:
@@ -1349,6 +1356,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		
 		[moultonNavHours addObject:[element objectForKey:@"Hours_of_Operation"]];
 	}
+	
 	
 }
 

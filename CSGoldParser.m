@@ -13,7 +13,7 @@
 
 @synthesize smallBucket, mediumBucket; 
 - (void)parseWithData:(NSData *)data{
-	
+		
 	theParser = [[NSXMLParser alloc] initWithData:data];
 	[theParser setDelegate:self];
 	[theParser setShouldProcessNamespaces:NO];
@@ -46,6 +46,7 @@
 		[[NSUserDefaults standardUserDefaults] setValue:combinedBalance forKey:@"MealsRemaining"];
 
 	}
+	
 	
 }
 
@@ -229,6 +230,8 @@
 
 
 - (void)dealloc{
+	[smallBucket release];
+	[mediumBucket release];
 	[error release];
 	[theParser release];
 	[super dealloc];
