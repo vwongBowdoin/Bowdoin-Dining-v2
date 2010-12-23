@@ -28,6 +28,9 @@
 	 * DownloadManager Delegate - a RootViewController.
 	 */ 
 	RootViewController *delegate;
+	
+	
+	MBProgressHUD *HUD_local;
 }
 
 @property (nonatomic, retain) RootViewController *delegate;

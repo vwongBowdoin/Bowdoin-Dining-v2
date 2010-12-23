@@ -446,10 +446,11 @@
 }
 
 - (void)hideUsingAnimation:(BOOL)animated {
-    // Fade out
+   
+	// Fade out
     if (animated) {
         [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.40];
+        [UIView setAnimationDuration:0.20];
         [UIView setAnimationDelegate:self];
         [UIView setAnimationDidStopSelector:@selector(animationFinished: finished: context:)];
         // 0.02 prevents the hud from passing through touches during the animation the hud will get completely hidden

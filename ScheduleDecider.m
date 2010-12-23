@@ -57,7 +57,6 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
  */
 - (id)init{
 	
-	NSLog(@"ScheduleDecider Allocated");
     //
     // Moulton Hot Breakfast
     //
@@ -745,24 +744,17 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	WristWatch *clock= [[WristWatch alloc] init];
 	watch = clock;
 	
-	NSLog(@"Processing Hours Array");
 	[self processHoursArrays];
 	
-	NSLog(@"Processing Meals Array");
 	[self processMealArraysForDay:[watch getWeekDay]];
 	[self processMealArraysForDay:[watch getNextWeekDay]];
 	
-	NSLog(@"Resolving Inconsistencies");
 	[self resolveInconsistenciesInArrays];
 	
-	NSLog(@"Populating NavBar Array");
 	[self populateNavigationBarArray];
-	NSLog(@"Populating Meal Arrays");
 	[self populateMealArrays];
-	NSLog(@"Populating Specials Arrays");
 	[self populateSpecialsArray];
 	
-	NSLog(@"Finished Processing");
 	
 }
 
@@ -838,14 +830,13 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	
 	NSString *fileLocation = [NSString stringWithFormat:@"%@/%@.xml",[self documentsDirectory], @"specials"];
 	
-	NSLog(@"Loading Array = %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	//NSLog(@"Loading Array = %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 	specialsArray = [[NSMutableArray alloc] initWithContentsOfFile:fileLocation];
 	
 }
 
 - (void)populateMealArrays{
 	
-	NSLog(@"Populating Meal Arrays");
 	
 	self.thorneArray = [self populateArrayFromDict:thorne_dictionary_array];
 	self.moultonArray = [self populateArrayFromDict:moulton_dictionary_array];
@@ -860,7 +851,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		NSMutableArray *array;		
 		
 		if ([element objectForKey:@"FileLocation"] != NULL) {
-			NSLog(@"Loading Array = %@", [[element objectForKey:@"FileLocation"] stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+			//NSLog(@"Loading Array = %@", [[element objectForKey:@"FileLocation"] stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 			array = [[NSMutableArray alloc] initWithContentsOfFile:[element objectForKey:@"FileLocation"]];
 			
 			
@@ -971,7 +962,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	NSMutableArray *arrayToReturn;
 	
 	if (fileLocation != NULL) {
-		NSLog(@"Loading Array = %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+		//NSLog(@"Loading Array = %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 		arrayToReturn = [[NSMutableArray alloc] initWithContentsOfFile:fileLocation];
 		
 		
@@ -992,9 +983,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 #pragma mark Meal TableView DataSource
 
 - (NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex{
-	
-	NSLog(@"Size of Section Called");
-	
+		
 	switch (location) {
 		case 0:
 			if ([[[thorneArray objectAtIndex:mealIndex] objectAtIndex:section] respondsToSelector:@selector(count)]) {
@@ -1021,9 +1010,6 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 
 - (NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex{
-	
-	NSLog(@"Number of Sections Called");
-
 	
 	switch (location) {
 		case 0:

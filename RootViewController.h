@@ -62,6 +62,7 @@
 	HallNavigationBar *hallNavBar;
 	
 	UIView *noMealAlertView;
+	UIView *noInternetAlertView;
 	
 	
 	

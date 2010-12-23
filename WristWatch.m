@@ -159,7 +159,7 @@
 	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
 	
 	
-	NSLog(@"Returning Next Day: %d", [formattedDate intValue]);
+	//NSLog(@"Returning Next Day: %d", [formattedDate intValue]);
 	return[formattedDate intValue];
 	
 }

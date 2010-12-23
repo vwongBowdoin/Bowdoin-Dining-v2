@@ -27,7 +27,10 @@
 	
 	
 	if ([self menusAreCurrent]) {
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"downloadSuccessful"];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
+		NSLog(@"Menus Are Current: \n-- downloadSuccessful set to YES \n-- Notification Posted");
+
 
 	} else {
 
@@ -37,10 +40,14 @@
 		HUD.delegate = self;
 		HUD.labelText = @"Downloading:";
 		HUD.detailsLabelText = @"Updating Menus...";
-		[delegate.view addSubview:HUD];
 		
-		[HUD showWhileExecuting:@selector(downloadMenus) onTarget:self withObject:nil animated:YES];  
+		HUD_local = HUD;
+		[delegate.view addSubview:HUD_local];
 		
+		
+		[HUD_local showWhileExecuting:@selector(downloadMenus) onTarget:self withObject:nil animated:YES];  
+		
+		[HUD release];
 	}    
 }
 
@@ -97,38 +104,39 @@
     for (int i = startingDay; i < 8; i++){
         
 		if (i == startingDay + 2) {
-			NSLog(@"Download Completed For Day = %d", i);
+			[HUD_local hideUsingAnimation:YES];
 			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"downloadSuccessful"];
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
+			NSLog(@"Downloading Partially Completed: \n-- downloadSuccessful set to YES \n-- Notification Posted");
+
 		}
         
         NSString *dayString = [NSString stringWithFormat:@"%d.xml", i];
         NSString *downloadAddress = [NSString stringWithFormat:@"%@%@/%@", serverPath, sundayString, dayString];
         NSURL *downloadURL = [NSURL URLWithString:downloadAddress];
-		
-		NSLog(@"Download Address: %@", downloadAddress);
-        
+		        
 		
         // Saving File for Parser - checking for errorq
 		NSError *error = nil;
         NSData *xmlFile = [NSData dataWithContentsOfURL:downloadURL options:0 error:&error];
         
         if (error != NULL) {
-            [self errorOccurred];
+            [self errorOccurred:&error];
             return;
         }
         
         // Parse XML from downloaded Data
-		NSLog(@"Initializing parser with Day %d", i);
         [todaysParser parseXMLData:xmlFile forDay:i];
 	
     }
     
-	NSLog(@"Jumping out of DownloadManager.m -downloadMenus");
     // once downloaded and no error - set download confirm for day to YES
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"downloadSuccessful"];
     [[NSUserDefaults standardUserDefaults] setInteger:[localWatch getWeekofYear] forKey:@"lastUpdatedWeek"];
 	
+	NSLog(@"Downloading Fully Completed: \n-- downloadSuccessful set to YES \n-- lastUpdatedWeek set to %d", [localWatch getWeekofYear]);
+
+
 }
 
 // returns the atreus server path
@@ -136,16 +144,19 @@
     return @"http://www.bowdoin.edu/atreus/lib/xml/";
 }
 
-- (void)errorOccurred{
-    NSLog(@"Downloading Error - DownloadMananger.m");
+- (void)errorOccurred:(NSError *)theErrorMessage{
+	NSLog(@"Error Message Below");
+	NSLog(@"** Error Message = %@", [theErrorMessage localizedDescription]);
+	NSLog(@"** Downloading Error: \n-- downloadSuccessful set to NO \n-- Download Completed Notification Posted");
+	
 	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"downloadSuccessful"];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
+	
 	
 }
 
 - (void)dealloc{
 	
-	NSLog(@"Releasing DownloadManager.m");
 	[localWatch release];
 	[super dealloc];	
 	

@@ -50,7 +50,6 @@
 #pragma mark Parser Code
 
 -(void)parserDidStartDocument:(NSXMLParser *)parser {
-	NSLog(@"Found file and started parsing");
 	
 	thorneBreakfast = [[NSMutableArray alloc] init];
 	thorneLunch = [[NSMutableArray alloc] init];
@@ -146,7 +145,7 @@
 	}
 	
 	if ([elementName isEqualToString:@"error"]) {
-		NSLog(@"Error Found In Parser");
+		
 	}
 }
 
@@ -166,12 +165,7 @@
 
 -(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	
-	NSLog(@"Parsing Error");
-	
-	NSString * errorString = [NSString stringWithFormat:@"Something went wrong! We were unable to download the menus right now. Sorry!"];
-	[self performSelectorOnMainThread:@selector(displayError:) 
-						   withObject:errorString
-						waitUntilDone:false];
+	NSLog(@"** Parsing Error Occurred \n--%@", parseError);
 	
 }
 
@@ -187,35 +181,35 @@
 	
     NSString *archivePath = [NSString stringWithFormat:@"%@/thorneBreakfast%d.xml",[self documentsDirectory], day];
     [thorneBreakfast writeToFile:archivePath atomically:YES];
-	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 
     archivePath = [NSString stringWithFormat:@"%@/thorneLunch%d.xml",[self documentsDirectory],day];
     [thorneLunch writeToFile:archivePath atomically:YES];
-	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 	
     archivePath = [NSString stringWithFormat:@"%@/thorneDinner%d.xml",[self documentsDirectory],day];
     [thorneDinner writeToFile:archivePath atomically:YES];
-	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 	
     archivePath = [NSString stringWithFormat:@"%@/thorneBrunch%d.xml",[self documentsDirectory],day];
     [thorneBrunch writeToFile:archivePath atomically:YES];
-	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 	
     archivePath = [NSString stringWithFormat:@"%@/moultonBreakfast%d.xml",[self documentsDirectory],day];
     [moultonBreakfast writeToFile:archivePath atomically:YES];
-	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 	
     archivePath = [NSString stringWithFormat:@"%@/moultonLunch%d.xml",[self documentsDirectory],day];
     [moultonLunch writeToFile:archivePath atomically:YES];
-	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 	
     archivePath = [NSString stringWithFormat:@"%@/moultonDinner%d.xml",[self documentsDirectory],day];
     [moultonDinner writeToFile:archivePath atomically:YES];
-	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 	
     archivePath = [NSString stringWithFormat:@"%@/moultonBrunch%d.xml",[self documentsDirectory],day];
     [moultonBrunch writeToFile:archivePath atomically:YES];
-	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	//NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 	
 }
 

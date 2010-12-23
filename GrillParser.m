@@ -42,9 +42,7 @@
 #pragma mark -
 #pragma mark Parser Code
 
--(void)parserDidStartDocument:(NSXMLParser *)parser {
-	NSLog(@"Found Grill/Cafe XML and started parsing");
-	
+-(void)parserDidStartDocument:(NSXMLParser *)parser {	
 	
 	// Adds Value for Sunday Meal
 	[currentDaySpecials setObject:@"There are no Grill Specials on the Weekend" forKey:@"magees"];
@@ -71,7 +69,7 @@
 	
     NSString *archivePath = [NSString stringWithFormat:@"%@/specials.xml",[self documentsDirectory]];
     [cafeGrillSpecials writeToFile:archivePath atomically:YES];
-	NSLog(@"Storing Specials: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+	//NSLog(@"Storing Specials: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 	
     
 }
@@ -141,17 +139,10 @@
 
 -(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
 	
-	NSString * errorString = [NSString stringWithFormat:@"Something went wrong! We were unable to download the menus right now. Sorry!"];
-	[self performSelectorOnMainThread:@selector(displayError:) 
-						   withObject:errorString
-						waitUntilDone:false];
+	NSLog(@"**Error parsing Grill/ Specials XML: \n--%@", parseError);
 	
 }
 
--(void)displayError:(NSString*)errorToDisplay {
-	NSLog(@"Error parsing XML: %@", errorToDisplay);
-	
-}
 
 -(NSString *)documentsDirectory {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

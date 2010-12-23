@@ -95,7 +95,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 }
 
 - (void)becomeActive:(NSNotification *)notification{
-	NSLog(@"Did Become Active");
+	NSLog(@"Application Became Active");
 	[self setupMealData];
 }
 
@@ -104,14 +104,15 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	BOOL *mealInfoDownloaded = mealInformationDownloaded;
 	BOOL *successfulDownload = [[NSUserDefaults standardUserDefaults] boolForKey:@"downloadSuccessful"];
-	
+		
 	if (!mealInfoDownloaded || !successfulDownload) {
-		
-		
+
 		return;
 	}
 	
+	NSTimeInterval duration;
 	
+	[self hideNoInternetAlertView];
 	
 	if (noMealAlertView == nil) {
 		UIView *noMealView = [[UIView alloc] initWithFrame:CGRectMake(60, 175, 200, 130)];
@@ -144,72 +145,115 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 		
 		[noMealAlertView addSubview:alertText_Title];
 		[noMealAlertView addSubview:alertText_Subtitile];
+		
+		duration = 0.5;
+	} else {
+		duration = 0.2;
+
 	}
+
+
 
 	// Flashes Meal Notifcation
 	[UIView beginAnimations:nil context:nil];
 	[self.view addSubview:noMealAlertView];
-	[UIView setAnimationDuration:0.2];
+	[UIView setAnimationDuration:duration];
 	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:noMealAlertView cache:YES];
 	[UIView setAnimationDelegate:self]; 
 	noMealAlertView.alpha = 1.0;
 	[UIView commitAnimations];
 	
-}
+	
+	NSLog(@"-- No Meal Alert View Displayed");
 
 
 - (void)showNoInternetNotificaiton{
 	
 	[self hideNoMealAlertView];
 	
-	UIView *noInternetView = [[UIView alloc] initWithFrame:CGRectMake(40, 125, 240, 230)];
-	noInternetView.layer.cornerRadius = 10.0;
-	noInternetView.backgroundColor = [UIColor blackColor];
+	if (noInternetAlertView == nil) {
+		UIView *noInternetView = [[UIView alloc] initWithFrame:CGRectMake(40, 125, 240, 230)];
+		noInternetView.layer.cornerRadius = 10.0;
+		noInternetView.backgroundColor = [UIColor blackColor];
+		noInternetAlertView = noInternetView;
+		
+		NSString *alertTitle = @"No Connection";
+		NSString *alertSubTitle = @"The menus on your device are out of date and need to update. \n\nHowever, your device does not appear to be connected to the internet. Make sure your device is connected, then: ";
+		
+		
+		
+		UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
+		[refreshButton setFrame:CGRectMake(0, 195,240, 30)];
+		[refreshButton setTitle:@"Refresh" forState:UIControlStateNormal];
+		[refreshButton setFont:[UIFont boldSystemFontOfSize:18.0]];
+		[refreshButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+		[refreshButton setShowsTouchWhenHighlighted:YES];
+		//[refreshButton setImage:[UIImage imageNamed:@"01-refresh.png"] forState:UIControlStateNormal];
+		[noInternetAlertView addSubview:refreshButton];		
+		
+		
+		
+		UILabel *alertText_Title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 240, 50)];
+		alertText_Title.textAlignment = UITextAlignmentCenter;
+		alertText_Title.text = alertTitle;
+		alertText_Title.font = [UIFont boldSystemFontOfSize:20.0];
+		alertText_Title.textColor = [UIColor whiteColor];
+		alertText_Title.backgroundColor = [UIColor clearColor];
+		
+		
+		UILabel *alertText_Subtitile = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 230, 200)];
+		alertText_Subtitile.textAlignment = UITextAlignmentLeft;
+		alertText_Subtitile.text = alertSubTitle;
+		alertText_Subtitile.numberOfLines = 10;
+		alertText_Subtitile.font = [UIFont systemFontOfSize:14.0];
+		alertText_Subtitile.textColor = [UIColor whiteColor];
+		alertText_Subtitile.backgroundColor = [UIColor clearColor];
+		
+		
+		[noInternetAlertView addSubview:alertText_Title];
+		[noInternetAlertView addSubview:alertText_Subtitile];
+	}
 	
 	
-	NSString *alertTitle = @"No Connection";
-	NSString *alertSubTitle = @"The menus are out of date and need to update. \n\nHowever, your device does not appear to be connected to the internet. Make sure your device is connected, then hit the refresh button here: ";
+	// Flashes Meal Notifcation
+	[UIView beginAnimations:nil context:nil];
+	[self.view addSubview:noInternetAlertView];
+	[UIView setAnimationDuration:0.4];
+	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:noMealAlertView cache:YES];
+	[UIView setAnimationDelegate:self]; 
+	noInternetAlertView.alpha = 1.0;
+	[UIView commitAnimations];
+	
+		
+	NSLog(@"-- No Internet Alert View Displayed");
 
 	
-	
-	UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[refreshButton setFrame:CGRectMake(80, 185,100, 30)];
-	[refreshButton setTitle:@"Refresh" forState:UIControlStateNormal];
-	[refreshButton setFont:[UIFont boldSystemFontOfSize:18.0]];
-	[refreshButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-	//[refreshButton setImage:[UIImage imageNamed:@"01-refresh.png"] forState:UIControlStateNormal];
-	[noInternetView addSubview:refreshButton];		
+}
+
+- (void)hideNoInternetAlertView{
 	
 	
-	
-	UILabel *alertText_Title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 240, 80)];
-	alertText_Title.textAlignment = UITextAlignmentCenter;
-	alertText_Title.text = alertTitle;
-	alertText_Title.font = [UIFont boldSystemFontOfSize:20.0];
-	alertText_Title.textColor = [UIColor whiteColor];
-	alertText_Title.backgroundColor = [UIColor clearColor];
-	
-	
-	UILabel *alertText_Subtitile = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, 230, 200)];
-	alertText_Subtitile.textAlignment = UITextAlignmentLeft;
-	alertText_Subtitile.text = alertSubTitle;
-	alertText_Subtitile.numberOfLines = 10;
-	alertText_Subtitile.font = [UIFont systemFontOfSize:14.0];
-	alertText_Subtitile.textColor = [UIColor whiteColor];
-	alertText_Subtitile.backgroundColor = [UIColor clearColor];
+	if (noInternetAlertView != nil) {
+		
+		// Flashes TableView
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDuration:0.4];
+		[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:noMealAlertView cache:YES];
+		[UIView setAnimationDelegate:self]; 
+		noInternetAlertView.alpha = 0.0;
+		[UIView commitAnimations];
+		
+		NSLog(@"-- No Internet Alert View Hidden.");
+
+	}
 	
 	
-	[noInternetView addSubview:alertText_Title];
-	[noInternetView addSubview:alertText_Subtitile];
-	[self.view addSubview:noInternetView];
 	
 }
  
 
 - (void)hideNoMealAlertView{
 	
-	NSLog(@"Hiding No Meal Notification");
-
 	if (noMealAlertView != nil) {
 		
 		// Flashes TableView
@@ -219,6 +263,9 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 		[UIView setAnimationDelegate:self]; 
 		noMealAlertView.alpha = 0.0;
 		[UIView commitAnimations];
+		
+		NSLog(@"-- No Meal Alert View Hidden");
+
 		
 	}
 		
@@ -274,9 +321,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	Activated by NSNotificationCenter when Menus have Downloaded
  */
 - (void)downloadCompleted {
-   
-	NSLog(@"Download Completed");
-	
+   	
 	// Sets DownloadComplete BOOL
 	mealInformationDownloaded = YES;
 	
@@ -289,16 +334,14 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"downloadSuccessful"] ) {
-		NSLog(@"Reloading TableView Data");
+		[self hideNoMealAlertView];
+		[self hideNoInternetAlertView];
 		[customTableView reloadData];
 
 	} else {
-		NSLog(@"Showing Internet Notification - Download Failed");
 		[self showNoInternetNotificaiton];
 	}
 	 
-	
-	
 	
 	
 }
@@ -593,7 +636,6 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 
 - (void)navigateScrollBarRight:(UIScrollView*)scrollView {
 	
-	NSLog(@"Navigate Right Method");
 	
 	// Decides the current page of the Hall scroller.	
 	CGFloat hallPageCurrentX = scrollView.contentOffset.x;
@@ -744,7 +786,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	NSInteger *numberOfSections = [scheduler numberOfSectionsForLocation:currentHallPage atMealIndex:currentMealPage];
 	
-	NSLog(@"Number of Sections = %d", numberOfSections);
+	//NSLog(@"Number of Sections = %d", numberOfSections);
 
 	
 	if (numberOfSections == 1 || numberOfSections == nil) {
@@ -760,7 +802,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	NSLog(@"Rows = %d", [scheduler sizeOfSection:section forLocation:currentHallPage atMealIndex:currentMealPage] );
+	//NSLog(@"Rows = %d", [scheduler sizeOfSection:section forLocation:currentHallPage atMealIndex:currentMealPage] );
 
 	return [scheduler sizeOfSection:section forLocation:currentHallPage atMealIndex:currentMealPage];
 	
