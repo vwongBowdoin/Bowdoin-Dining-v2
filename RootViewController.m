@@ -102,9 +102,15 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 
 - (void)showNoMealNotification{
 	
-	if (!mealInformationDownloaded) {
+	BOOL *mealInfoDownloaded = mealInformationDownloaded;
+	BOOL *successfulDownload = [[NSUserDefaults standardUserDefaults] boolForKey:@"downloadSuccessful"];
+	
+	if (!mealInfoDownloaded || !successfulDownload) {
+		
+		
 		return;
 	}
+	
 	
 	
 	if (noMealAlertView == nil) {
@@ -117,7 +123,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 		
 		
 		NSString *alertTitle = @"No Menu";
-		NSString *alertSubTitle =  = @"This meal is closed or \n no menu was found";
+		NSString *alertSubTitle = @"This meal is closed or \n no menu was found";
 		
 
 		UILabel *alertText_Title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 80)];
@@ -151,23 +157,32 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 }
 
-/*
+
 - (void)showNoInternetNotificaiton{
 	
-	UIView *noInternetView = [[UIView alloc] initWithFrame:CGRectMake(60, 175, 200, 230)];
+	[self hideNoMealAlertView];
+	
+	UIView *noInternetView = [[UIView alloc] initWithFrame:CGRectMake(40, 125, 240, 230)];
 	noInternetView.layer.cornerRadius = 10.0;
 	noInternetView.backgroundColor = [UIColor blackColor];
 	
 	
+	NSString *alertTitle = @"No Connection";
+	NSString *alertSubTitle = @"The menus are out of date and need to update. \n\nHowever, your device does not appear to be connected to the internet. Make sure your device is connected, then hit the refresh button here: ";
+
+	
 	
 	UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	[refreshButton setFrame:CGRectMake(165, 95, 40, 40)];
-	[refreshButton setImage:[UIImage imageNamed:@"01-refresh-white.png"] forState:UIControlStateNormal];
+	[refreshButton setFrame:CGRectMake(80, 185,100, 30)];
+	[refreshButton setTitle:@"Refresh" forState:UIControlStateNormal];
+	[refreshButton setFont:[UIFont boldSystemFontOfSize:18.0]];
+	[refreshButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	//[refreshButton setImage:[UIImage imageNamed:@"01-refresh.png"] forState:UIControlStateNormal];
 	[noInternetView addSubview:refreshButton];		
 	
 	
 	
-	UILabel *alertText_Title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 80)];
+	UILabel *alertText_Title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 240, 80)];
 	alertText_Title.textAlignment = UITextAlignmentCenter;
 	alertText_Title.text = alertTitle;
 	alertText_Title.font = [UIFont boldSystemFontOfSize:20.0];
@@ -175,11 +190,11 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	alertText_Title.backgroundColor = [UIColor clearColor];
 	
 	
-	UILabel *alertText_Subtitile = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 200, 100)];
-	alertText_Subtitile.textAlignment = UITextAlignmentCenter;
+	UILabel *alertText_Subtitile = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, 230, 200)];
+	alertText_Subtitile.textAlignment = UITextAlignmentLeft;
 	alertText_Subtitile.text = alertSubTitle;
-	alertText_Subtitile.numberOfLines = 2;
-	alertText_Subtitile.font = [UIFont systemFontOfSize:16.0];
+	alertText_Subtitile.numberOfLines = 10;
+	alertText_Subtitile.font = [UIFont systemFontOfSize:14.0];
 	alertText_Subtitile.textColor = [UIColor whiteColor];
 	alertText_Subtitile.backgroundColor = [UIColor clearColor];
 	
@@ -189,13 +204,9 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	[self.view addSubview:noInternetView];
 	
 }
- */
+ 
 
 - (void)hideNoMealAlertView{
-	
-	if (!mealInformationDownloaded) {
-		return;
-	}
 	
 	NSLog(@"Hiding No Meal Notification");
 
@@ -276,7 +287,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
    
 	[self setNavigationBarsWithArray:[scheduler returnNavBarArray]];
 	
-	/*
+	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"downloadSuccessful"] ) {
 		NSLog(@"Reloading TableView Data");
 		[customTableView reloadData];
@@ -285,9 +296,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 		NSLog(@"Showing Internet Notification - Download Failed");
 		[self showNoInternetNotificaiton];
 	}
-	 */
+	 
 	
-	[customTableView reloadData];
 	
 	
 	
@@ -299,14 +309,9 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
  */
 - (void)setNavigationBarsWithArray:(NSMutableArray*)scheduleArray {
     
-	if (scheduleArray == nil) {
-		NSLog(@"FUCK Navigation Bar Array");
-
-	}
 	
     NavigationBarController *navBarController = [[NavigationBarController alloc] initWithScheduleArray:scheduleArray];
 	
-    NSLog(@"Setting Navigation Bar Array");
     // Establishes the meal bars at the top of the page
 
 	[mealScrollView setContentSize:CGSizeMake(320 * [navBarController.scheduleArray count], 44)];
@@ -488,7 +493,6 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 
-	NSLog(@"ScrollViewScrolled");
 	
 	// Filters out UITableView Scroll Events which inherits from UIScrollView
 	if ([scrollView isKindOfClass:[UITableView class]]) {
