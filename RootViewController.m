@@ -254,29 +254,9 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
    	
 	// Initializes the Schedule Decider if the scheduler does not exist
 	// or the scheduler is out of date
-	if (self.scheduler == nil) {
-		
-		NSLog(@"Initializing Scheduler that did not exist");
-		ScheduleDecider *decider = [[ScheduleDecider alloc] init];
-		self.scheduler = decider;
-		
-	} else {
-		
-		NSDate *today = [NSDate date];
-		BOOL schedulerOutOfDate = [scheduler schedulerOutOfDate:today];
-		
-		if (schedulerOutOfDate) {
-			
-			NSLog(@"Initializing Scheduler that was out of date");
-			ScheduleDecider *decider = [[ScheduleDecider alloc] init];
-			self.scheduler = decider;
-		}
-
-	}
-
-
 	
-	
+	ScheduleDecider *decider = [[ScheduleDecider alloc] init];
+	self.scheduler = decider;
 	
 	[scheduler processArrays];
 	[self setNavigationBarsWithArray:[scheduler returnNavBarArray]];

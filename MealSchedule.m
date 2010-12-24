@@ -227,10 +227,10 @@
 		result = NO;
 	}
 	
-	
 	return result;
     
 }
+
 
 - (BOOL)willOpen{
     
