@@ -1011,15 +1011,20 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex{
 	
+	id thorneObject = [thorneArray objectAtIndex:mealIndex];
+	id moultonObject = [moultonArray objectAtIndex:mealIndex];
+	
 	switch (location) {
 		case 0:
 			if ([thorneArray count] == 0) { return 0; }
-			return [[thorneArray objectAtIndex:mealIndex] count];
+			if (![thorneObject respondsToSelector:@selector(count)]) { return 0; }
+			return [thorneObject count];
 			break;
 			
 		case 1:
 			if ([moultonArray count] == 0) {return 0;}
-			return [[moultonArray objectAtIndex:mealIndex] count];
+			if (![moultonObject respondsToSelector:@selector(count)]) { return 0; }
+			return [moultonObject count];
 			break;
 			
 		case 2:

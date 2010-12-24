@@ -60,6 +60,7 @@
 		A1A407F211F4D29300608B9C /* LogInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1A407F011F4D29300608B9C /* LogInViewController.xib */; };
 		A1A949FA12942EE2004666C9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A949F912942EE2004666C9 /* Icon.png */; };
 		A1A94A0912943021004666C9 /* 112-group.png in Resources */ = {isa = PBXBuildFile; fileRef = A1A94A0812943021004666C9 /* 112-group.png */; };
+		A1B2C3B312C94D8700E9EECB /* AlertViews.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3B212C94D8700E9EECB /* AlertViews.m */; };
 		A1B36AB7120099AD00D27351 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B36AB6120099AD00D27351 /* DownloadManager.m */; };
 		A1B6FB2B11FDE33800C472EB /* bearIcon-black.png in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */; };
 		A1B6FB4811FDE4DF00C472EB /* fakeXMLDoc.xml in Resources */ = {isa = PBXBuildFile; fileRef = A1B6FB4711FDE4DF00C472EB /* fakeXMLDoc.xml */; };
@@ -159,6 +160,8 @@
 		A1A407F011F4D29300608B9C /* LogInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogInViewController.xib; sourceTree = "<group>"; };
 		A1A949F912942EE2004666C9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		A1A94A0812943021004666C9 /* 112-group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "112-group.png"; sourceTree = "<group>"; };
+		A1B2C3B112C94D8700E9EECB /* AlertViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViews.h; sourceTree = "<group>"; };
+		A1B2C3B212C94D8700E9EECB /* AlertViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViews.m; sourceTree = "<group>"; };
 		A1B36AB5120099AD00D27351 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
 		A1B36AB6120099AD00D27351 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
 		A1B6FB2A11FDE33800C472EB /* bearIcon-black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bearIcon-black.png"; sourceTree = "<group>"; };
@@ -303,6 +306,8 @@
 				A1A4077E11F4CA4400608B9C /* DiningTableViewTestAppDelegate.m */,
 				A1A4078111F4CA4400608B9C /* RootViewController.h */,
 				A1A4078211F4CA4400608B9C /* RootViewController.m */,
+				A1B2C3B112C94D8700E9EECB /* AlertViews.h */,
+				A1B2C3B212C94D8700E9EECB /* AlertViews.m */,
 			);
 			name = "Main Controllers";
 			sourceTree = "<group>";
@@ -588,6 +593,7 @@
 				A1E5C10612C2777C0006BBF3 /* ASIInputStream.m in Sources */,
 				A1E5C10712C2777C0006BBF3 /* ASINetworkQueue.m in Sources */,
 				A141C1A812C27EBB00371D4D /* Reachability.m in Sources */,
+				A1B2C3B312C94D8700E9EECB /* AlertViews.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

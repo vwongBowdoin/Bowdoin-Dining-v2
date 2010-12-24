@@ -12,6 +12,7 @@
 #import "DiningParser.h"
 #import "MBProgressHUD.h"
 #import "GrillParser.h"
+#import "Reachability.h"
 
 @implementation DownloadManager
 
@@ -27,28 +28,60 @@
 	
 	
 	if ([self menusAreCurrent]) {
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"downloadSuccessful"];
+		
+		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
-		NSLog(@"Menus Are Current: \n-- downloadSuccessful set to YES \n-- Notification Posted");
+		NSLog(@"Menus Are Current: Download Completed Notification Posted");
 
 
 	} else {
+		
+		
+		// Check Reachability of Apple Servers and Atreus Server before Downloading
+		Reachability *apple = [Reachability reachabilityWithHostName:@"www.apple.com"];
+		Reachability *bowdoin = [Reachability reachabilityWithHostName:@"www.bowdoin.edu/atreus"];
+		
+		appleConnected = [apple isReachable];
+		bowdoinConnected = [bowdoin isReachable];
+		
+		if (bowdoinConnected) {
+			
+			NSLog(@"Bowdoin Online");
+			
+			MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:delegate.view];
+			
+			// Adds HUD to screen
+			HUD.delegate = self;
+			HUD.labelText = @"Downloading:";
+			HUD.detailsLabelText = @"Updating Menus...";
+			
+			HUD_local = HUD;
+			[delegate.view addSubview:HUD_local];
+			
+			
+			[HUD_local showWhileExecuting:@selector(downloadMenus) onTarget:self withObject:nil animated:YES];  
+			
+			[HUD release];
+			
+			
+		} else if (!appleConnected) {
+			
+			// No Internet
+			NSLog(@"No Internet");
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"No Internet Connection" object:nil];
 
-		MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:delegate.view];
+			
+		} else {
+			
+			// No Bowdoin Server
+			NSLog(@"No Bowdoin Server");
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"No Bowdoin Connection" object:nil];
+
+		}
+
 		
-		// Adds HUD to screen
-		HUD.delegate = self;
-		HUD.labelText = @"Downloading:";
-		HUD.detailsLabelText = @"Updating Menus...";
-		
-		HUD_local = HUD;
-		[delegate.view addSubview:HUD_local];
-		
-		
-		[HUD_local showWhileExecuting:@selector(downloadMenus) onTarget:self withObject:nil animated:YES];  
-		
-		[HUD release];
-	}    
+
+	}
 }
 
 // Checks to see if Menus are current
@@ -121,7 +154,7 @@
         NSData *xmlFile = [NSData dataWithContentsOfURL:downloadURL options:0 error:&error];
         
         if (error != NULL) {
-            [self errorOccurred:&error];
+            [self errorOccurred:error];
             return;
         }
         
@@ -145,12 +178,10 @@
 }
 
 - (void)errorOccurred:(NSError *)theErrorMessage{
-	NSLog(@"Error Message Below");
-	NSLog(@"** Error Message = %@", [theErrorMessage localizedDescription]);
-	NSLog(@"** Downloading Error: \n-- downloadSuccessful set to NO \n-- Download Completed Notification Posted");
-	
-	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"downloadSuccessful"];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
+
+	NSLog(@"** Downloading Error: \n-- Must be closed for semester");
+	NSLog(@"** Error Message: %@", [theErrorMessage domain]);
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"No Menus Available" object:nil];
 	
 	
 }

@@ -23,6 +23,7 @@
 #import "GrillAreaViewController.h"
 #import "LineCountViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AlertViews.h"
 
 @interface RootViewController (PrivateMethods)
 
@@ -80,12 +81,17 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 - (void)registerNotifications{
     
     // Menu Download Completion
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadCompleted)
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadContent)
 												 name:@"Download Completed" object:nil];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noInternetConnection)
+												 name:@"No Internet Connection" object:nil];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoMealNotification)
-												 name:@"No Meal Displayed" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noBowdoinConnection)
+												 name:@"No Bowdoin Connection" object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noMenusAvailable)
+												 name:@"No Menus Available" object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self 
 											 selector:@selector(becomeActive:)
@@ -97,178 +103,89 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 - (void)becomeActive:(NSNotification *)notification{
 	NSLog(@"Application Became Active");
 	[self setupMealData];
-}
-
-
-- (void)showNoMealNotification{
-	
-	BOOL *mealInfoDownloaded = mealInformationDownloaded;
-	BOOL *successfulDownload = [[NSUserDefaults standardUserDefaults] boolForKey:@"downloadSuccessful"];
-		
-	if (!mealInfoDownloaded || !successfulDownload) {
-
-		return;
-	}
-	
-	NSTimeInterval duration;
-	
-	[self hideNoInternetAlertView];
-	
-	if (noMealAlertView == nil) {
-		UIView *noMealView = [[UIView alloc] initWithFrame:CGRectMake(60, 175, 200, 130)];
-		noMealView.layer.cornerRadius = 10.0;
-		noMealView.backgroundColor = [UIColor blackColor];
-	
-		noMealAlertView.alpha = 0.0;
-		noMealAlertView = noMealView;
-		
-		
-		NSString *alertTitle = @"No Menu";
-		NSString *alertSubTitle = @"This meal is closed or \n no menu was found";
-		
-
-		UILabel *alertText_Title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 80)];
-		alertText_Title.textAlignment = UITextAlignmentCenter;
-		alertText_Title.text = alertTitle;
-		alertText_Title.font = [UIFont boldSystemFontOfSize:20.0];
-		alertText_Title.textColor = [UIColor whiteColor];
-		alertText_Title.backgroundColor = [UIColor clearColor];
-		
-		
-		UILabel *alertText_Subtitile = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 200, 100)];
-		alertText_Subtitile.textAlignment = UITextAlignmentCenter;
-		alertText_Subtitile.text = alertSubTitle;
-		alertText_Subtitile.numberOfLines = 2;
-		alertText_Subtitile.font = [UIFont systemFontOfSize:16.0];
-		alertText_Subtitile.textColor = [UIColor whiteColor];
-		alertText_Subtitile.backgroundColor = [UIColor clearColor];
-		
-		[noMealAlertView addSubview:alertText_Title];
-		[noMealAlertView addSubview:alertText_Subtitile];
-		
-		duration = 0.5;
-	} else {
-		duration = 0.2;
-
-	}
-
-
-
-	// Flashes Meal Notifcation
-	[UIView beginAnimations:nil context:nil];
-	[self.view addSubview:noMealAlertView];
-	[UIView setAnimationDuration:duration];
-	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:noMealAlertView cache:YES];
-	[UIView setAnimationDelegate:self]; 
-	noMealAlertView.alpha = 1.0;
-	[UIView commitAnimations];
-	
-	
-	NSLog(@"-- No Meal Alert View Displayed");
-
-
-- (void)showNoInternetNotificaiton{
-	
-	[self hideNoMealAlertView];
-	
-	if (noInternetAlertView == nil) {
-		UIView *noInternetView = [[UIView alloc] initWithFrame:CGRectMake(40, 125, 240, 230)];
-		noInternetView.layer.cornerRadius = 10.0;
-		noInternetView.backgroundColor = [UIColor blackColor];
-		noInternetAlertView = noInternetView;
-		
-		NSString *alertTitle = @"No Connection";
-		NSString *alertSubTitle = @"The menus on your device are out of date and need to update. \n\nHowever, your device does not appear to be connected to the internet. Make sure your device is connected, then: ";
-		
-		
-		
-		UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
-		[refreshButton setFrame:CGRectMake(0, 195,240, 30)];
-		[refreshButton setTitle:@"Refresh" forState:UIControlStateNormal];
-		[refreshButton setFont:[UIFont boldSystemFontOfSize:18.0]];
-		[refreshButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-		[refreshButton setShowsTouchWhenHighlighted:YES];
-		//[refreshButton setImage:[UIImage imageNamed:@"01-refresh.png"] forState:UIControlStateNormal];
-		[noInternetAlertView addSubview:refreshButton];		
-		
-		
-		
-		UILabel *alertText_Title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 240, 50)];
-		alertText_Title.textAlignment = UITextAlignmentCenter;
-		alertText_Title.text = alertTitle;
-		alertText_Title.font = [UIFont boldSystemFontOfSize:20.0];
-		alertText_Title.textColor = [UIColor whiteColor];
-		alertText_Title.backgroundColor = [UIColor clearColor];
-		
-		
-		UILabel *alertText_Subtitile = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 230, 200)];
-		alertText_Subtitile.textAlignment = UITextAlignmentLeft;
-		alertText_Subtitile.text = alertSubTitle;
-		alertText_Subtitile.numberOfLines = 10;
-		alertText_Subtitile.font = [UIFont systemFontOfSize:14.0];
-		alertText_Subtitile.textColor = [UIColor whiteColor];
-		alertText_Subtitile.backgroundColor = [UIColor clearColor];
-		
-		
-		[noInternetAlertView addSubview:alertText_Title];
-		[noInternetAlertView addSubview:alertText_Subtitile];
-	}
-	
-	
-	// Flashes Meal Notifcation
-	[UIView beginAnimations:nil context:nil];
-	[self.view addSubview:noInternetAlertView];
-	[UIView setAnimationDuration:0.4];
-	[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:noMealAlertView cache:YES];
-	[UIView setAnimationDelegate:self]; 
-	noInternetAlertView.alpha = 1.0;
-	[UIView commitAnimations];
-	
-		
-	NSLog(@"-- No Internet Alert View Displayed");
-
+	[self hideLocalAlertView];
+	[self hideGlobalAlertView];
 	
 }
 
-- (void)hideNoInternetAlertView{
+
+- (void)showLocalAlertView{
 	
+	if (contentReady) {
+		
+		if (localAlertView == nil) {
+			localAlertView = [AlertViews noMealAlert];
+		}
+		// Flashes Meal Notifcation
+		[UIView beginAnimations:nil context:nil];
+		[self.view addSubview:localAlertView];
+		[UIView setAnimationDuration:0.4];
+		[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:localAlertView cache:YES];
+		[UIView setAnimationDelegate:self]; 
+		localAlertView.alpha = 1.0;
+		[UIView commitAnimations];
+		
+		NSLog(@"-- Local Alert View Displayed");
+	}
 	
-	if (noInternetAlertView != nil) {
+}
+
+- (void)hideLocalAlertView{
+		
+	if (localAlertView != nil) {
 		
 		// Flashes TableView
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationDuration:0.4];
-		[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:noMealAlertView cache:YES];
+		[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:localAlertView cache:YES];
 		[UIView setAnimationDelegate:self]; 
-		noInternetAlertView.alpha = 0.0;
+		localAlertView.alpha = 0.0;
 		[UIView commitAnimations];
 		
-		NSLog(@"-- No Internet Alert View Hidden.");
-
+		NSLog(@"-- Local Alert View Hidden.");
+		
 	}
+}
+
+- (void)showGlobalAlertView{
+	
+	if (contentReady) {
+		
+		if (globalAlertView == nil) {
+			globalAlertView = [AlertViews noInternetAlert];
+		}
+		// Flashes Meal Notifcation
+		[UIView beginAnimations:nil context:nil];
+		[self.view addSubview:globalAlertView];
+		[UIView setAnimationDuration:0.4];
+		[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:globalAlertView cache:YES];
+		[UIView setAnimationDelegate:self]; 
+		globalAlertView.alpha = 1.0;
+		[UIView commitAnimations];
+		
+		NSLog(@"-- Global Alert View Displayed");
+	}
+	
 	
 	
 	
 }
- 
 
-- (void)hideNoMealAlertView{
+- (void)hideGlobalAlertView{
 	
-	if (noMealAlertView != nil) {
+	if (globalAlertView != nil) {
 		
 		// Flashes TableView
 		[UIView beginAnimations:nil context:nil];
 		[UIView setAnimationDuration:0.4];
-		[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:noMealAlertView cache:YES];
+		[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:globalAlertView cache:YES];
 		[UIView setAnimationDelegate:self]; 
-		noMealAlertView.alpha = 0.0;
+		globalAlertView.alpha = 0.0;
 		[UIView commitAnimations];
 		
-		NSLog(@"-- No Meal Alert View Hidden");
-
+		NSLog(@"-- GLobal Alert View Hidden.");
 		
 	}
-		
 }
 
 #pragma mark -
@@ -318,30 +235,56 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 }
 
 /**
-	Activated by NSNotificationCenter when Menus have Downloaded
+	Activated by NSNotificationCenter during normal download
  */
-- (void)downloadCompleted {
+- (void)loadContent {
    	
-	// Sets DownloadComplete BOOL
-	mealInformationDownloaded = YES;
 	
 	// Initializes the Schedule Decider which determines the current meals
-	ScheduleDecider *decider = [[ScheduleDecider alloc] init];
-	self.scheduler = decider; // sets the scheduler
+	if (self.scheduler == nil) {
+		
+		ScheduleDecider *decider = [[ScheduleDecider alloc] init];
+		self.scheduler = decider;
+	}
+	
 	[scheduler processArrays];
-   
 	[self setNavigationBarsWithArray:[scheduler returnNavBarArray]];
 	
 	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"downloadSuccessful"] ) {
-		[self hideNoMealAlertView];
-		[self hideNoInternetAlertView];
-		[customTableView reloadData];
+	contentReady = YES;
+	[customTableView reloadData];
+	
+}
 
-	} else {
-		[self showNoInternetNotificaiton];
-	}
-	 
+// No Internet Connectivity
+- (void)noInternetConnection{
+	
+	globalAlertView = [AlertViews noInternetAlert];
+	
+	[self loadContent];
+	[self showGlobalAlertView];
+
+
+	
+}
+
+
+// Bowdoin Servers Down
+- (void)noBowdoinConnection{
+	
+	globalAlertView = [AlertViews noServerAlert];
+	
+	[self loadContent];
+	[self showGlobalAlertView];
+
+	
+}
+
+// No Menus Available - Closed for Semester Break
+- (void)noMenusAvailable{
+	
+	localAlertView = [AlertViews closedForSemesterAlert];
+	[self loadContent];
 	
 	
 }
@@ -786,15 +729,20 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	NSInteger *numberOfSections = [scheduler numberOfSectionsForLocation:currentHallPage atMealIndex:currentMealPage];
 	
-	//NSLog(@"Number of Sections = %d", numberOfSections);
-
-	
+	NSLog(@"Number of Sections Captured");
 	if (numberOfSections == 1 || numberOfSections == nil) {
-		[self showNoMealNotification];
+		
+		NSLog(@"Showing Local Alert");
+
+		[self showLocalAlertView];
 	}
 	
 	else {
-		[self hideNoMealAlertView];
+		
+		NSLog(@"Hiding Local Alert");
+
+		
+		[self hideLocalAlertView];
 	}
 	
 	return numberOfSections;

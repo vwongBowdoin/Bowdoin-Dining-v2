@@ -31,6 +31,10 @@
 	
 	
 	MBProgressHUD *HUD_local;
+	
+	
+	BOOL appleConnected;
+	BOOL bowdoinConnected;
 }
 
 @property (nonatomic, retain) RootViewController *delegate;

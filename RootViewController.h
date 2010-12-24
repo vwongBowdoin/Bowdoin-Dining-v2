@@ -54,15 +54,15 @@
 	ScheduleDecider *scheduler;
     
     BOOL navigationBarsAnimatedOut;
-	BOOL mealInformationDownloaded;
+	BOOL contentReady;
 
 	int currentHallPage;
 	int currentMealPage;
 	
 	HallNavigationBar *hallNavBar;
 	
-	UIView *noMealAlertView;
-	UIView *noInternetAlertView;
+	UIView *localAlertView;
+	UIView *globalAlertView;
 	
 	
 	
