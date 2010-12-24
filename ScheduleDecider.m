@@ -1128,9 +1128,10 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		BOOL hasClosed = [element hasClosed];
 		BOOL isOpen = [element isOpen];
 		BOOL willOpen = [element willOpen];
+		BOOL isValid = [element isValidMeal];
 		
 		NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
-        if (hasClosed || isOpen || willOpen){
+        if ((hasClosed || isOpen || willOpen) && isValid){
             
 			NSString *mealName = element.mealName;
 			NSString *hoursText = element.dateText;

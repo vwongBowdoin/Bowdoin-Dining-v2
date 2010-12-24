@@ -29,6 +29,19 @@
     
 }
 
+- (NSDate *)currentClosing{
+    
+    NSTimeInterval interval = [[closeTimes objectAtIndex:currentDay-1] intValue];
+    
+    
+    NSDate *closeTime = [[NSDate alloc] initWithTimeInterval:interval 
+												   sinceDate:[self midnightDate]];
+    
+    NSDate *closingTimeToReturn = closeTime;
+    
+    return closingTimeToReturn;    
+}
+
 // Returns an NSDate initialized for the current opening time tomorrow.
 - (NSDate *)currentOpeningTomorrow{
     
@@ -43,18 +56,7 @@
     
 }
 
-- (NSDate *)currentClosing{
-    
-    NSTimeInterval interval = [[closeTimes objectAtIndex:currentDay-1] intValue];
-    
-    
-    NSDate *closeTime = [[NSDate alloc] initWithTimeInterval:interval 
-                                                  sinceDate:[self midnightDate]];
-    
-    NSDate *timeToReturn = closeTime;
-    
-    return timeToReturn;    
-}
+
 
 // Creates an NSDate object for 1AM today.
 - (NSDate *)oneAMDate{
@@ -231,6 +233,26 @@
     
 }
 
+- (BOOL)isValidMeal{
+	
+	NSDate *currentClosing = [self currentClosing];
+	NSDate *currentOpening = [self currentOpening];
+
+	NSTimeInterval opening = [currentOpening timeIntervalSince1970];
+	NSTimeInterval closing = [currentClosing timeIntervalSince1970];
+	
+	
+	
+	if ((int)opening == (int)closing ) {
+		return NO;
+	} else {
+		return YES;
+	}
+
+
+	
+	
+}
 
 - (BOOL)willOpen{
     
@@ -251,9 +273,7 @@
 
 	[clock release];
 	
-	
-    
-    
+
     NSComparisonResult nowOpeningComparison = [currentTime compare:currentOpening];
     
     
