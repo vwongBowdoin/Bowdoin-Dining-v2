@@ -345,7 +345,7 @@
 - (NSString*)returnFileLocation{
 	
 	
-	return [NSString stringWithFormat:@"%@/week%d/%@%d.xml",[self documentsDirectory], currentWeek, fileName, currentDay];
+	return [NSString stringWithFormat:@"%@/%d%@%d.xml",[self documentsDirectory], currentWeek, fileName, currentDay];
 	
 	
 }

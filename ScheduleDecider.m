@@ -954,6 +954,9 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		NSMutableArray *array;		
 		
 		if ([element objectForKey:@"FileLocation"] != NULL) {
+			
+			NSLog(@"Populating From File %@", [element objectForKey:@"FileLocation"]);
+			
 			array = [[NSMutableArray alloc] initWithContentsOfFile:[element objectForKey:@"FileLocation"]];
 			
 			
