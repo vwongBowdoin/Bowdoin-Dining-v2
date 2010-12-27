@@ -52,10 +52,14 @@
 
 		} 
 		
+		[array release];
+
+		
 		
 	}
 	
 	self.moultonArrayHolder = tempArray;
+	[tempArray release];
 	
 }
 - (void)setThorneArray:(NSMutableArray *)tArray {
@@ -73,10 +77,11 @@
 		}
 		
 		[tempArray2 addObject:array];
-		
+		[array release];
 	}
 	
 	self.thorneArrayHolder = tempArray2;
+	[tempArray2 release];
 	
 }
 

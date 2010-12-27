@@ -618,8 +618,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/Code/Bowdoin Code/Bowdoin-Dining-v2/Entitlements.plist";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ben Johnson (ZSG8P3J5RF)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -632,8 +631,8 @@
 				INFOPLIST_FILE = "DiningTableViewTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
 				PRODUCT_NAME = DiningTableViewTest;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8EF8C212-1A83-468E-BC36-55E8B0674EC0";
-				SDKROOT = iphoneos;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos4.2;
 			};
 			name = Debug;
 		};

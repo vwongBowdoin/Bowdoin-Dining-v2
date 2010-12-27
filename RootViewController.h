@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import "HallNavigationBar.h"
+#import "MealNavigationBar.h"
 #import "MBProgressHUD.h"
 #import <CoreData/CoreData.h>
 
@@ -64,6 +65,7 @@
 	int currentHallPage;
 	int currentMealPage;
 	
+	MealNavigationBar *mealNavBar;
 	HallNavigationBar *hallNavBar;
 	
 	UIView *localAlertView;

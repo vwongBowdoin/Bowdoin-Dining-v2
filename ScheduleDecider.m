@@ -776,6 +776,49 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	[request release];
 	
 	
+}
+
+
+- (void)searchCoreData{
+	
+	NSLog(@"Searching for FUBAR");
+	
+	/*
+	 Fetch existing events.
+	 Create a fetch request; find the Event entity and assign it to the request; add a sort descriptor; then execute the fetch.
+	 */
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"FavoriteItem" inManagedObjectContext:managedObjectContext];
+	[request setEntity:entity];
+	
+	// Order the events by creation date, most recent first.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"itemName" ascending:NO];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	[request setSortDescriptors:sortDescriptors];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+	// Execute the fetch -- create a mutable copy of the result.
+	NSError *error = nil;
+	NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+	if (mutableFetchResults == nil) {
+		// Handle the error.
+	}
+	
+	NSMutableArray *searchArray = [[NSMutableArray alloc] init];
+	for (FavoriteItem *favorite in mutableFetchResults) {
+		[searchArray addObject:[favorite itemName]];
+	}
+
+	NSLog(@"Object at Index %i", [searchArray indexOfObject:@"FUBAR"]);
+	
+	// Set self's events array to the mutable array, then clean up.
+	//[self setEventsArray:mutableFetchResults];
+	[mutableFetchResults release];
+	[request release];
+	
+	
+	
 	
 	
 	
@@ -783,10 +826,13 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (void)processArrays{
 	
+	
+	NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
+	
 	WristWatch *clock= [[WristWatch alloc] init];
 	watch = clock;
 	[self setupCoreData];
-	
+	[self searchCoreData];
 	[self processHoursArrays];
 	
 	[self processMealArraysForDay:[watch getWeekDay]];
@@ -798,6 +844,8 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	[self populateMealArrays];
 	[self populateSpecialsArray];
 	
+	NSTimeInterval duration = [NSDate timeIntervalSinceReferenceDate] - start;
+	NSLog(@"Duration: %f", duration);
 	
 }
 

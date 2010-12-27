@@ -40,6 +40,7 @@
     [window makeKeyAndVisible];
 
 	[self startAnimation];
+	[rootViewController release];
 
     return YES;
 }

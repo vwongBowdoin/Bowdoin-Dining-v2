@@ -326,12 +326,11 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	[mealScrollView setOpaque:NO];
 	[mealScrollView setShowsHorizontalScrollIndicator:NO];
 	
-	MealNavigationBar *navBar = [[MealNavigationBar alloc] initWithArray:scheduleArray];
+	mealNavBar = [[MealNavigationBar alloc] initWithArray:scheduleArray];
 	
-	[mealScrollView addSubview:navBar];
+	[mealScrollView addSubview:mealNavBar];
 	[mealScrollView setBackgroundColor:[UIColor blackColor]];
 	[mealScrollView setPagingEnabled:YES];
-	
     
     
 	hallNavBar = [[HallNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 960, 44)];
@@ -348,8 +347,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	[hallScrollView addSubview:hallNavBar];
 	[hallScrollView setBackgroundColor:[UIColor whiteColor]];
 	[hallScrollView setPagingEnabled:YES];
-
-
+	
     
 }
 
