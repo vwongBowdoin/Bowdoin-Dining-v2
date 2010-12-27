@@ -343,7 +343,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	[hallScrollView addSubview:hallNavBar];
 	[hallScrollView setBackgroundColor:[UIColor whiteColor]];
 	[hallScrollView setPagingEnabled:YES];
-    
+
 
     
 }
@@ -511,7 +511,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	int mealPage = floor((mealScrollView.contentOffset.x - mealPageWidth / 2) / mealPageWidth) + 1;
 	
 
-	
+
 	
     // Decides how to animate and when to animate by comparing the currentPage to the page
     // that should come into view.
@@ -528,52 +528,62 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 			
 			[customTableView reloadData];
 
-          
-            return;
+			hallNavBar.timeToDisplay = [scheduler hoursOfOperationForHall:currentHallPage meal:currentMealPage];
+			[hallNavBar setNeedsDisplay];
+			
             
-        }
-        
-		// Flashes TableView
-		 [UIView beginAnimations:nil context:nil];
-		 [UIView setAnimationDuration:0.2];
-		 [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:YES];
-		 [UIView setAnimationDelegate:self]; 
-		 [UIView setAnimationDidStopSelector:@selector(tableViewAnimationDone:finished:context:)];
-		 customTableView.alpha = 0.0;
-		 [UIView commitAnimations];
-		 
-		 
+        } else {
+			
+			// Flashes TableView
+			[UIView beginAnimations:nil context:nil];
+			[UIView setAnimationDuration:0.2];
+			[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:YES];
+			[UIView setAnimationDelegate:self]; 
+			[UIView setAnimationDidStopSelector:@selector(tableViewAnimationDone:finished:context:)];
+			customTableView.alpha = 0.0;
+			[UIView commitAnimations];
+			
+			
+			
+			currentHallPage = hallPage;
+			currentMealPage = mealPage;
+			
+			hallNavBar.timeToDisplay = [scheduler hoursOfOperationForHall:currentHallPage meal:currentMealPage];
+			[hallNavBar setNeedsDisplay];
+			
+		}
 
-		currentHallPage = hallPage;
-		currentMealPage = mealPage;
-		
-		hallNavBar.timeToDisplay = [scheduler hoursOfOperationForHall:currentHallPage meal:currentMealPage];
-		[hallNavBar setNeedsDisplay];
         
+		        
         
 	} else if (currentHallPage != hallPage && hallPage == 2){
         
-        
+        NSLog(@"Trying to Animate");
         [self animateNavigationBars];
      
-        currentHallPage = hallPage;
-		currentMealPage = mealPage;
-
-		[customTableView reloadData];
-
 		
+		currentHallPage = hallPage;
+		currentMealPage = mealPage;
+			
+		[customTableView reloadData];
+			
+			
 		hallNavBar.timeToDisplay = [scheduler hoursOfOperationForHall:currentHallPage meal:currentMealPage];
 		[hallNavBar setNeedsDisplay];
 		
-    }		
-	
-}
+	}
+       
+		
+}		
 
 - (IBAction)navigateRight:(id)sender {
-    
+
+	
 	if ([sender tag] == 1) {
+		NSLog(@"Navigate Right Button Activated for Meal");
 		[self navigateScrollBarRight:mealScrollView];
 	} else {
+		NSLog(@"Navigate Right Button Activated for Hall");
 		[self navigateScrollBarRight:hallScrollView];
 		
 	}
@@ -584,41 +594,84 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 - (IBAction)navigateLeft:(id)sender {
 	
 	if ([sender tag] == 1) {
+		NSLog(@"Navigate Left Button Activated for Meal");
 		[self navigateScrollBarLeft:mealScrollView];
 	} else {
+		NSLog(@"Navigate Left Button Activated for Hall");
 		[self navigateScrollBarLeft:hallScrollView];
 		
 	}	
 }
 
 - (void)navigateScrollBarRight:(UIScrollView*)scrollView {
-	
-	
+		
+	NSLog(@"Scrolling Right");
+
 	// Decides the current page of the Hall scroller.	
 	CGFloat hallPageCurrentX = scrollView.contentOffset.x;
 	CGFloat hallPageTotalWidth = scrollView.contentSize.width;
 	
-	if (hallPageCurrentX + 320.0 >= hallPageTotalWidth) {
+	CGFloat currentPage = hallPageCurrentX / 320.f;
+	CGFloat totalPages = hallPageTotalWidth / 320.f;
+
+	// Rounds Down
+	int page = currentPage;
+	int total = totalPages;
+	
+	NSLog(@"Current Page = %d", page);
+	
+	if (page == total - 1) {
 		// Do Nothing
 	} else {
-		[scrollView setContentOffset:CGPointMake(hallPageCurrentX + 320.0, 0) animated:YES];
+		
+		CGFloat dispatchPage = (page * 320.0) + 320.0;
+		[scrollView setContentOffset:CGPointMake(dispatchPage, 0) animated:YES];
+		NSLog(@"Dispatching Scroller to : %f", dispatchPage);	
 	}
+	
 }
 
 - (void)navigateScrollBarLeft:(UIScrollView*)scrollView {
 	
+	NSLog(@"Scrolling Left");
+	
 	// Decides the current page of the Hall scroller.	
 	CGFloat hallPageCurrentX = scrollView.contentOffset.x;
+	CGFloat hallPageTotalWidth = scrollView.contentSize.width;
+
+	CGFloat currentPage = hallPageCurrentX / 320.f;
+	CGFloat totalPages = hallPageTotalWidth / 320.f;
 	
-	if (hallPageCurrentX - 320.0 < 0) {
+	// Rounds Down
+	int page = currentPage;
+	int total = totalPages;
+	
+	NSLog(@"Current Page = %d", page);
+
+	
+	if (page == 0) {
 		// Do Nothing
 	} else {
-		[scrollView setContentOffset:CGPointMake(hallPageCurrentX - 320.0, 0) animated:YES];
+		
+		CGFloat dispatchPage = (page * 320.0) - 320.0;
+		[scrollView setContentOffset:CGPointMake(dispatchPage, 0) animated:YES];
+		NSLog(@"Dispatching Scroller to : %f", dispatchPage);
+		
 	}
+	
 }
 
 - (void)animateNavigationBars{
         
+	if (animating) {
+		return;
+	} else {
+		animating = YES;
+	}
+	
+	NSLog(@"Animation Method Excecuting");
+
+	
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
     [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:YES];
@@ -645,7 +698,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
     
     if (navigationBarsAnimatedOut){
         
-        [UIView setAnimationDidStopSelector:@selector(navigationAnimationOut:finished:context:)];
+		[UIView setAnimationDidStopSelector:@selector(navigationAnimationIn)];
 
         mealScrollView.frame = CGRectMake(0, 0, mealScrollWidth, mealScrollHeight);
         topFillerBar.frame = CGRectMake(0 , -1, fillerBarWidth, fillerBarHeight);
@@ -668,7 +721,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
         
     } else {
         
-        [UIView setAnimationDidStopSelector:@selector(navigationAnimationIn:finished:context:)];
+        [UIView setAnimationDidStopSelector:@selector(navigationAnimationOut)];
 
         mealScrollView.frame = CGRectMake(0 , mealScrollOriginY-(mealScrollHeight), mealScrollWidth, mealScrollHeight);
         topFillerBar.frame = CGRectMake(0 , fillerBarOriginY-(fillerBarHeight), fillerBarWidth, fillerBarHeight);
@@ -702,12 +755,15 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 
 	[menuButton setAlpha:1.0];
 	[menuButton setUserInteractionEnabled:YES];
-
+    NSLog(@"Navigation Done");
+	animating = NO;
     
 }
 
 - (void)navigationAnimationIn{
-    [callButton setAlpha:0.0];
+ 
+	
+	[callButton setAlpha:0.0];
 	[callButton setUserInteractionEnabled:NO];
 	
 	[callText setAlpha:0.0];
@@ -715,7 +771,9 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	[menuButton setAlpha:0.0];
 	[menuButton setUserInteractionEnabled:NO];
-    
+    NSLog(@"Navigation Done");
+	animating = NO;
+
 }
 		 
 - (void)tableViewAnimationDone:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {

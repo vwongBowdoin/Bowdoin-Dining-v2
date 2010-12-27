@@ -55,6 +55,7 @@
     
     BOOL navigationBarsAnimatedOut;
 	BOOL contentReady;
+	BOOL animating;
 
 	int currentHallPage;
 	int currentMealPage;
@@ -85,6 +86,12 @@
 
 -(void)setupMealData;
 -(void)registerNotifications;
+
+- (IBAction)navigateRight:(id)sender;
+- (IBAction)navigateLeft:(id)sender;
+- (IBAction)launchPhone;
+- (IBAction)launchGrillMenu;
+- (IBAction)displayActionPage;
 
 
 

@@ -52,7 +52,7 @@
 
 + (UIView*)smallAlertWithText:(NSString*)title subtitle:(NSString*)subtitle{
 	
-	UIView *smallAlertView = [[UIView alloc] initWithFrame:CGRectMake(60, 175, 200, 130)];
+	UIView *smallAlertView = [[UIView alloc] initWithFrame:CGRectMake(60, 165, 200, 130)];
 	smallAlertView.layer.cornerRadius = 10.0;
 	smallAlertView.backgroundColor = [UIColor blackColor];
 	
