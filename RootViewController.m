@@ -57,7 +57,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 }
 
 - (void)dealloc {
-
+	[managedObjectContext release];
 	[customTableView release];
 	[hallScrollView release];
 	[mealScrollView release];
@@ -259,6 +259,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	ScheduleDecider *decider = [[ScheduleDecider alloc] init];
 	self.scheduler = decider;
+	
+	scheduler.managedObjectContext = self.managedObjectContext;
 	
 	[scheduler processArrays];
 	[self setNavigationBarsWithArray:[scheduler returnNavBarArray]];

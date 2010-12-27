@@ -7,11 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
 @class MealSchedule;
 @class WristWatch;
 
 @interface ScheduleDecider : NSObject {
 
+	// Core Data
+	NSManagedObjectContext *managedObjectContext;	 
+	
     // Array of Meals
     NSMutableArray *mealArray;
     NSMutableArray *diningHallMealArray;
@@ -72,6 +77,8 @@
 	WristWatch *watch;
 
 }
+
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;	    
 
 // Array of Meals
 @property (nonatomic, retain) NSMutableArray *mealArray;
