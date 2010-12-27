@@ -36,6 +36,8 @@
 
 @implementation RootViewController
 
+@synthesize managedObjectContext;
+
 @synthesize customTableView, hallScrollView, mealScrollView, selectedIndexPath, 
 dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 

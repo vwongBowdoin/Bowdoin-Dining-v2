@@ -10,6 +10,7 @@
 #import <MessageUI/MessageUI.h>
 #import "HallNavigationBar.h"
 #import "MBProgressHUD.h"
+#import <CoreData/CoreData.h>
 
 @class mealHandler;
 @class WristWatch;
@@ -17,6 +18,9 @@
 @class ScheduleDecider;
 
 @interface RootViewController : UIViewController <UITableViewDelegate, UITabBarDelegate, UITableViewDataSource, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, MBProgressHUDDelegate> {
+	
+	// Core Data
+	NSManagedObjectContext *managedObjectContext;	    
 	
 	@private
 
@@ -68,6 +72,9 @@
 	
 	
 }
+
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;	    
+
 
 @property (nonatomic, retain) IBOutlet UICustomTableView *customTableView;
 @property (nonatomic, retain) IBOutlet UIScrollView *hallScrollView;
