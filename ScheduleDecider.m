@@ -962,10 +962,12 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			
 			if (array == NULL) {
 				NSLog(@"NULL File!!!");
-				array = [[NSMutableArray alloc] initWithObjects:@"NULL ENTRY", nil];
+				//array = [[NSMutableArray alloc] initWithObjects:@"NULL ENTRY", nil];
+			} else {
+				[tempArray addObject:array];
 			}
+
 			
-			[tempArray addObject:array];
 			
 		} 
 		
@@ -1073,7 +1075,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		
 		
 		if (arrayToReturn == NULL) {
-			arrayToReturn = [[NSMutableArray alloc] initWithObjects:@"NULL ENTRY", nil];
+			//arrayToReturn = [[NSMutableArray alloc] initWithObjects:@"", nil];
 		}
 		
 	} 
@@ -1089,20 +1091,32 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 #pragma mark Meal TableView DataSource
 
 - (NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex{
-		
+	
+	NSLog(@"Size of Section");
+	
+	NSInteger numberToReturn;
+	
 	switch (location) {
 		case 0:
-			if ([[[thorneArray objectAtIndex:mealIndex] objectAtIndex:section] respondsToSelector:@selector(count)]) {
+			if (thorneArray == nil || [thorneArray count] == 0) {
+				return 0;
+			} else if ([[thorneArray objectAtIndex:mealIndex] objectAtIndex:section] == nil || [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:section] count] == 0 ) {
+				return 0;
+			} else if ([[[thorneArray objectAtIndex:mealIndex] objectAtIndex:section] respondsToSelector:@selector(count)]) {
 				return [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:section] count];
-			} 
-			break;
-			
-		case 1:
-			if ([[[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] respondsToSelector:@selector(count)]) {
-				return [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] count];
+			} else {
+				return 0;
 			}
-			break;
-			
+		case 1:
+			if (moultonArray == nil || [moultonArray count] == 0) {
+				return 0;
+			} else if ([[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] == nil || [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] count] == 0 ) {
+				return 0;
+			} else if ([[[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] respondsToSelector:@selector(count)]) {
+				return [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:section] count];
+			} else {
+				return 0;
+			}			
 		case 2:
 			return 2;
 			break;
@@ -1111,28 +1125,41 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			return 0;
 			break;
 	}
+	
+	if (numberToReturn == NSNotFound) {
+		NSLog(@"Not Found Size");
+	}
+	
+	NSLog(@"Size of Section: %d", numberToReturn);
+	
+	return numberToReturn;
 	
 }
 
 
 - (NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex{
 	
-	id thorneObject = [thorneArray objectAtIndex:mealIndex];
-	id moultonObject = [moultonArray objectAtIndex:mealIndex];
+	NSLog(@"Number of Sections");
+	
+	NSInteger numberToReturn;
 	
 	switch (location) {
 		case 0:
-			if ([thorneArray count] == 0) { return 0; }
-			if (![thorneObject respondsToSelector:@selector(count)]) { return 0; }
-			return [thorneObject count];
-			break;
-			
+			if (thorneArray == nil || [thorneArray count] == 0) {
+				return 0;
+			} else if ([[thorneArray objectAtIndex:mealIndex] respondsToSelector:@selector(count)]) {
+				return [[thorneArray objectAtIndex:mealIndex] count];
+			} else {
+				return 0;
+			}
 		case 1:
-			if ([moultonArray count] == 0) {return 0;}
-			if (![moultonObject respondsToSelector:@selector(count)]) { return 0; }
-			return [moultonObject count];
-			break;
-			
+			if (moultonArray == nil || [moultonArray count] == 0) {
+				return 0;
+			} else if ([[moultonArray objectAtIndex:mealIndex] respondsToSelector:@selector(count)]) {
+				return [[moultonArray objectAtIndex:mealIndex] count];
+			} else {
+				return 0;
+			}
 		case 2:
 			return 2;
 			break;
@@ -1141,36 +1168,42 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			return 0;
 			break;
 	}
-	
+			
 }
 
 - (NSString *)returnItemFromLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath  {
 	
+	NSString *itemToReturn;
 	
 	switch (location) {
 		case 0:
-			return [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+			itemToReturn = [[[thorneArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 			break;
 			
 		case 1:
-			return [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+			itemToReturn = [[[moultonArray objectAtIndex:mealIndex] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 			break;
 			
 		case 2:
 			// Grill Data
-			if (indexPath.section == 0 && indexPath.row == 0)	{return @"The Grill";}
-			if (indexPath.section == 0) {return [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"magees"];}
+			if (indexPath.section == 0 && indexPath.row == 0)	{itemToReturn = @"The Grill";}
+			if (indexPath.section == 0) {itemToReturn = [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"magees"];}
 			
 			// Cafe Data
-			if (indexPath.section == 1 && indexPath.row == 0)	{return @"The Cafe";}
-			if (indexPath.section == 1) {return [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"cafe"];}
-			else { return @"NULL";}
+			if (indexPath.section == 1 && indexPath.row == 0)	{itemToReturn = @"The Cafe";}
+			if (indexPath.section == 1) {itemToReturn = [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"cafe"];}
+			else { itemToReturn = @"NULL";}
 			break;
 			
 		default:
-			return 0;
+			itemToReturn = @"NULL";
 			break;
 	}
+	
+	return itemToReturn;
+	
+	
+	
 	
 }
 
