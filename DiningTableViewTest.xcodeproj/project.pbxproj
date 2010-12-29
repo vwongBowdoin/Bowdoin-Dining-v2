@@ -55,7 +55,6 @@
 		A198560711F61E12001DFF4F /* UICustomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A198560611F61E12001DFF4F /* UICustomTableView.m */; };
 		A1A4078411F4CA4400608B9C /* DiningParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4077C11F4CA4400608B9C /* DiningParser.m */; };
 		A1A4078511F4CA4400608B9C /* DiningTableViewTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4077E11F4CA4400608B9C /* DiningTableViewTestAppDelegate.m */; };
-		A1A4078611F4CA4400608B9C /* mealHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4078011F4CA4400608B9C /* mealHandler.m */; };
 		A1A4078711F4CA4400608B9C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4078211F4CA4400608B9C /* RootViewController.m */; };
 		A1A4079011F4CA7500608B9C /* PolarPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A4078D11F4CA7500608B9C /* PolarPoints.m */; };
 		A1A407F111F4D29300608B9C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A407EF11F4D29300608B9C /* LogInViewController.m */; };
@@ -155,8 +154,6 @@
 		A1A4077C11F4CA4400608B9C /* DiningParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiningParser.m; sourceTree = "<group>"; };
 		A1A4077D11F4CA4400608B9C /* DiningTableViewTestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiningTableViewTestAppDelegate.h; sourceTree = "<group>"; };
 		A1A4077E11F4CA4400608B9C /* DiningTableViewTestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiningTableViewTestAppDelegate.m; sourceTree = "<group>"; };
-		A1A4077F11F4CA4400608B9C /* mealHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mealHandler.h; sourceTree = "<group>"; };
-		A1A4078011F4CA4400608B9C /* mealHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mealHandler.m; sourceTree = "<group>"; };
 		A1A4078111F4CA4400608B9C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		A1A4078211F4CA4400608B9C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		A1A4078C11F4CA7500608B9C /* PolarPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolarPoints.h; sourceTree = "<group>"; };
@@ -456,8 +453,6 @@
 				A1A4077C11F4CA4400608B9C /* DiningParser.m */,
 				A1D2AB881283592A0022B18E /* GrillParser.h */,
 				A1D2AB891283592A0022B18E /* GrillParser.m */,
-				A1A4077F11F4CA4400608B9C /* mealHandler.h */,
-				A1A4078011F4CA4400608B9C /* mealHandler.m */,
 				A185E9721251977C00812356 /* WristWatch.h */,
 				A185E9731251977C00812356 /* WristWatch.m */,
 				A1693242128D203F00064E37 /* GrillAreaViewController.xib */,
@@ -572,7 +567,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				A1A4078411F4CA4400608B9C /* DiningParser.m in Sources */,
 				A1A4078511F4CA4400608B9C /* DiningTableViewTestAppDelegate.m in Sources */,
-				A1A4078611F4CA4400608B9C /* mealHandler.m in Sources */,
 				A1A4078711F4CA4400608B9C /* RootViewController.m in Sources */,
 				A1A4079011F4CA7500608B9C /* PolarPoints.m in Sources */,
 				A1A407F111F4D29300608B9C /* LogInViewController.m in Sources */,
@@ -640,7 +634,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/Code/Bowdoin Code/Bowdoin-Dining-v2/Entitlements.plist";
+				CODE_SIGN_ENTITLEMENTS = "";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -650,6 +644,7 @@
 				GCC_PREFIX_HEADER = DiningTableViewTest_Prefix.pch;
 				INFOPLIST_FILE = "DiningTableViewTest-Info.plist";
 				PRODUCT_NAME = DiningTableViewTest;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

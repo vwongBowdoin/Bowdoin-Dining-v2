@@ -10,6 +10,12 @@
 #import "CSGoldController.h"
 #import "LineCountAnalyzer.h"
 
+@interface LineCountViewController (PrivateMethods)
+
+
+@end
+
+
 @implementation LineCountViewController
 
 
@@ -113,6 +119,13 @@
 -(IBAction)refresh{
 	
 	[HUD showWhileExecuting:@selector(downloadLineData) onTarget:self withObject:nil animated:YES];	
+	
+	
+}
+
+// Delegate Method for MBProgressHUD
+-(void)hudWasHidden{
+	
 	
 	
 }

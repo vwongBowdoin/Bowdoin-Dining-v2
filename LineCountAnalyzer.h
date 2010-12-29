@@ -38,5 +38,6 @@
 
 - (int)total_Patrons;
 
+-(void)analyzeData:(NSData*)data;
 
 @end

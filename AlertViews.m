@@ -110,7 +110,7 @@
 	UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
 	[refreshButton setFrame:CGRectMake(0, 195,240, 30)];
 	[refreshButton setTitle:@"Refresh" forState:UIControlStateNormal];
-	[refreshButton setFont:[UIFont boldSystemFontOfSize:18.0]];
+	[refreshButton.titleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
 	[refreshButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 	[refreshButton setShowsTouchWhenHighlighted:YES];
 

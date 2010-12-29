@@ -14,6 +14,13 @@
 #import "GrillParser.h"
 #import "Reachability.h"
 
+@interface DownloadManager (PrivateMethods)
+
+- (void)errorOccurred:(NSError *)theErrorMessage;
+
+@end
+
+
 @implementation DownloadManager
 
 @synthesize delegate;
@@ -84,6 +91,13 @@
 	}
 }
 
+// Delegate Method for MBProgressHUD
+-(void)hudWasHidden{
+	
+	
+	
+}
+
 // Checks to see if Menus are current
 - (BOOL)menusAreCurrent{
 	NSLog(@"Checking to see if Menus Are Current");
@@ -111,7 +125,7 @@
 	
 	GrillParser *grillParser = [[GrillParser alloc] init];
 	[grillParser parseSpecialsFromData:specialsXML];
-	
+	[grillParser release];
 	
 }
 
@@ -158,17 +172,20 @@
         // Saving File for Parser - checking for errorq
 		NSError *error = nil;
         NSData *xmlFile = [NSData dataWithContentsOfURL:downloadURL options:0 error:&error];
-        		
+		
         if (error != NULL) {
             [self errorOccurred:error];
+			[todaysParser release];
             return;
         }
         
         // Parse XML from downloaded Data
-        [todaysParser parseXMLData:xmlFile forDay:i];
-	
+        [todaysParser parseXMLData:xmlFile forDay:i];	
+
     }
     
+	[todaysParser release];
+
     // once downloaded and no error - set download confirm for day to YES
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"downloadSuccessful"];
     [[NSUserDefaults standardUserDefaults] setInteger:[localWatch getWeekofYear] forKey:@"lastUpdatedWeek"];
@@ -187,7 +204,7 @@
 	NSLog(@"** Downloading Error: \n-- Must be closed for semester");
 	NSLog(@"** Error Message: %@", [theErrorMessage domain]);
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"No Menus Available" object:nil];
-	
+	NSLog(@"Notification Posted");
 	
 }
 

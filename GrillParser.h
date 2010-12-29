@@ -24,7 +24,6 @@
 @property (nonatomic, retain) NSString *currentUnit;
 @property (nonatomic, retain) NSMutableArray *cafeGrillSpecials;
 @property (nonatomic, retain) NSMutableDictionary *currentDaySpecials;
-@property (nonatomic, retain) NSMutableDictionary *currenspecialsForTodaytDaySpecials;
 
 -(void)parseSpecialsFromData:(NSData*)data;
 

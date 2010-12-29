@@ -40,7 +40,6 @@
 @property (nonatomic, retain) RootViewController *delegate;
 
 -(void)initializeDownloads;
--(void)errorOccurred;
 -(void)downloadSpecials;
 -(BOOL)menusAreCurrent;
 

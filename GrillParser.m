@@ -8,6 +8,12 @@
 
 #import "GrillParser.h"
 
+@interface GrillParser (PrivateMethods)
+
+-(NSString *)documentsDirectory;
+
+@end
+
 
 @implementation GrillParser
 @synthesize currentDaySpecials, cafeGrillSpecials, currentUnit;

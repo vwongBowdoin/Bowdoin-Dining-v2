@@ -16,7 +16,6 @@
 #import "WristWatch.h"
 #import "ScheduleDecider.h"
 #import "HoursViewController.h"
-#import "NavigationBarController.h"
 #import "CSGoldController.h"
 #import "HallNavigationBar.h"
 #import "MealNavigationBar.h"
@@ -337,11 +336,11 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 - (void)setNavigationBarsWithArray:(NSMutableArray*)scheduleArray {
     
 	
-    NavigationBarController *navBarController = [[NavigationBarController alloc] initWithScheduleArray:scheduleArray];
+   // NavigationBarController *navBarController = [[NavigationBarController alloc] initWithScheduleArray:scheduleArray];
 	
     // Establishes the meal bars at the top of the page
 
-	[mealScrollView setContentSize:CGSizeMake(320 * [navBarController.scheduleArray count], 44)];
+	[mealScrollView setContentSize:CGSizeMake(320 * [scheduleArray count], 44)];
 	
 	[mealScrollView setTag:mealScroller];
 	[mealScrollView setDelegate:self];
@@ -420,7 +419,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	[actionSheet showInView:self.view];
 	
-	
+	[actionSheet release];
 	
 }
 
@@ -634,10 +633,10 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	// Decides the current page of the Hall scroller.	
 	CGFloat hallPageCurrentX = scrollView.contentOffset.x;
-	CGFloat hallPageTotalWidth = scrollView.contentSize.width;
+	//CGFloat hallPageTotalWidth = scrollView.contentSize.width;
 
 	CGFloat currentPage = hallPageCurrentX / 320.f;
-	CGFloat totalPages = hallPageTotalWidth / 320.f;
+	//CGFloat totalPages = hallPageTotalWidth / 320.f;
 	
 	// Rounds Down
 	int page = currentPage;
@@ -892,7 +891,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	
 	NSString *itemTitle = cell.textLabel.text;
 	NSString *canelButtonTitle = @"Dismiss";
-	NSString *removeFavoriteButton = @"Remove This Favorite";
+	//NSString *removeFavoriteButton = @"Remove This Favorite";
 	NSString *favoriteThisItem = @"Favorite This Item";
 	NSString *shareThisItem = @"Share This Item";
 	

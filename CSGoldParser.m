@@ -179,6 +179,7 @@
 				break;
 
 			default:
+				indexForPeriod = 0;
 				break;
 		}
 		

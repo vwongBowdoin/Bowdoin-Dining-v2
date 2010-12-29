@@ -9,6 +9,13 @@
 #import "DiningTableViewTestAppDelegate.h"
 #import "RootViewController.h"
 
+@interface DiningTableViewTestAppDelegate (PrivateMethods)
+
+- (void)startAnimation;
+- (NSString*)applicationDocumentsDirectory;
+
+@end
+
 
 @implementation DiningTableViewTestAppDelegate
 

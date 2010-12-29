@@ -786,7 +786,6 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	
 }
 
-
 - (void)searchCoreData{
 	
 	NSLog(@"Searching for FUBAR");
@@ -824,6 +823,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	//[self setEventsArray:mutableFetchResults];
 	[mutableFetchResults release];
 	[request release];
+	[searchArray release];
 	
 	
 	
@@ -1071,14 +1071,11 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	
 	if (fileLocation != NULL) {
 		//NSLog(@"Loading Array = %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
-		arrayToReturn = [[NSMutableArray alloc] initWithContentsOfFile:fileLocation];
-		
-		
-		if (arrayToReturn == NULL) {
-			//arrayToReturn = [[NSMutableArray alloc] initWithObjects:@"", nil];
-		}
-		
-	} 
+		arrayToReturn = [[[NSMutableArray alloc] initWithContentsOfFile:fileLocation] autorelease] ;
+	} else {
+		arrayToReturn = [[[NSMutableArray alloc] init] autorelease];
+	}
+
 	
 	return arrayToReturn;
 	
@@ -1094,7 +1091,6 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	
 	NSLog(@"Size of Section");
 	
-	NSInteger numberToReturn;
 	
 	switch (location) {
 		case 0:
@@ -1126,13 +1122,6 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			break;
 	}
 	
-	if (numberToReturn == NSNotFound) {
-		NSLog(@"Not Found Size");
-	}
-	
-	NSLog(@"Size of Section: %d", numberToReturn);
-	
-	return numberToReturn;
 	
 }
 
@@ -1140,9 +1129,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 - (NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex{
 	
 	NSLog(@"Number of Sections");
-	
-	NSInteger numberToReturn;
-	
+		
 	switch (location) {
 		case 0:
 			if (thorneArray == nil || [thorneArray count] == 0) {
@@ -1173,7 +1160,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (NSString *)returnItemFromLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath  {
 	
-	NSString *itemToReturn;
+	NSString *itemToReturn = @"NULL";
 	
 	switch (location) {
 		case 0:
@@ -1192,7 +1179,6 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			// Cafe Data
 			if (indexPath.section == 1 && indexPath.row == 0)	{itemToReturn = @"The Cafe";}
 			if (indexPath.section == 1) {itemToReturn = [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"cafe"];}
-			else { itemToReturn = @"NULL";}
 			break;
 			
 		default:
@@ -1209,7 +1195,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (CGFloat)returnHeightForCellatLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath{
 	
-	NSString *stringToConsider;
+	NSString *stringToConsider = @"";
 	
 	switch (location) {
 		case 0:
@@ -1226,6 +1212,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			break;
 			
 		default:
+			stringToConsider = @"";
 			break;
 	}
 	

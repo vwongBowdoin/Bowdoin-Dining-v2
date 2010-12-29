@@ -38,7 +38,7 @@
 -(BOOL)isOpen;
 -(BOOL)willOpen;
 -(BOOL)hasClosed;
-
+-(BOOL)isValidMeal;
 
 // Date Manipulation
 -(NSDate *)oneAMDate;

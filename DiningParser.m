@@ -7,7 +7,6 @@
 //
 
 #import "DiningParser.h"
-#import "mealHandler.h"
 #import "WristWatch.h"
 
 @implementation DiningParser
@@ -184,6 +183,8 @@
 	WristWatch *watch = [[WristWatch alloc] init];
 	
 	int currentWeek = [watch getWeekofYear];
+	
+	[watch release];
 	
     NSString *archivePath = [NSString stringWithFormat:@"%@/%dthorneBreakfast%d.xml",[self documentsDirectory], currentWeek, day];
     [thorneBreakfast writeToFile:archivePath atomically:YES];

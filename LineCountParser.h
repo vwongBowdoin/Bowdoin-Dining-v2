@@ -30,4 +30,7 @@
 - (NSMutableArray*)returnMoultonCounts;
 - (NSMutableArray*)returnExpressCounts;
 
+
+- (void)parseWithData:(NSData *)data;
+
 @end

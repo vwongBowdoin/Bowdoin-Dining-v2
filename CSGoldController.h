@@ -26,6 +26,7 @@
 
 // Public Methods
 - (void)getCSGoldDataWithUserName:(NSString*)user password:(NSString*)pass;
+- (NSData*)getCSGoldLineCountsWithUserName:(NSString*)user password:(NSString*)pass;
 
 // Private Methods
 - (void)updateAllCSGoldData;

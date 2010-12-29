@@ -141,6 +141,8 @@
 			
 		default:
 			crowdedness_threshold = 15;
+			maximum_possible_score = 4.50;
+
 			break;
 	}
 	

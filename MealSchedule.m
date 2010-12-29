@@ -24,7 +24,7 @@
                                                   sinceDate:[self midnightDate]];
     
     NSDate *timeToReturn = openTime;
-    
+    	
     return timeToReturn;
     
 }
@@ -39,6 +39,7 @@
     
     NSDate *closingTimeToReturn = closeTime;
     
+	
     return closingTimeToReturn;    
 }
 
@@ -51,7 +52,7 @@
                                                   sinceDate:[self tomorrowMidnight]];
     
     NSDate *timeToReturn = openTime;
-    
+    	
     return timeToReturn;
     
 }

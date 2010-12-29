@@ -135,6 +135,8 @@
 
 // Return method for time of navigation bar
 -(NSString*)hoursOfOperationForHall:(int)hall meal:(int)meal;
+- (void)changeDisplayedHourInformation;
+- (NSString*)currentlySelectedHoursDescription;
 
 
 @end

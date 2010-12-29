@@ -24,7 +24,7 @@
 -(UIScrollView*)returnTopScrollBar{
 	
 	
-	UIScrollView *theScroller = [[UIScrollView alloc] init];
+	UIScrollView *theScroller = [[[UIScrollView alloc] init] autorelease];
 
 	return theScroller;
 	
@@ -35,8 +35,8 @@
     float barWidth = 320;
     float barHeight = 44;
         
-    UIView *theMasterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, barWidth * [scheduleArray count], barHeight)];
-	[theMasterView setBackgroundColor:[UIColor clearColor]];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, barWidth * [scheduleArray count], barHeight)];
+	[view setBackgroundColor:[UIColor clearColor]];
     
     for (int i = 0; i < [scheduleArray count]; i++){
         
@@ -58,9 +58,12 @@
             rightTitle = NULL;
         }
 			
-        [theMasterView addSubview:[self createMealHeader:mealTitle atIndex:i leftTitle:leftTitle rightTitle:rightTitle]];
+        [view addSubview:[self createMealHeader:mealTitle atIndex:i leftTitle:leftTitle rightTitle:rightTitle]];
         
     }
+	
+	UIView *theMasterView = view;
+	[view release];
     
     return theMasterView;
 }
@@ -117,7 +120,6 @@
     }
     
     
-    [theView addSubview:mealDescription];
 	NSLog(@"\n Meal Description: \n x = %f \n y = %f \n x_width = %f \n y_width = %f" , mealDescription.frame.origin.x, mealDescription.frame.origin.y, mealDescription.frame.size.width, mealDescription.frame.size.height);
 
 	

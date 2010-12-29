@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "mealHandler.h"
 
 @class mealHandler;
 

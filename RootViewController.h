@@ -27,14 +27,10 @@
 
 	// Table View Outlets
 	IBOutlet UICustomTableView *customTableView;
-	IBOutlet UITableViewCell *tempCell;
 	
 	// Navigation Scrollers and Views
 	IBOutlet UIScrollView *hallScrollView;
 	IBOutlet UIScrollView *mealScrollView;
-    IBOutlet UIScrollView *alternateScroller;
-	IBOutlet UIView *hallHeaderView;
-    IBOutlet UIView *hallHeaderTemplate;
 	
 	// Grill Buttons
 	IBOutlet UIButton *callButton;
@@ -43,18 +39,13 @@
 	IBOutlet UILabel *menuText;
 	
 
-	IBOutlet UIView *mealHeaderView;
-    IBOutlet UIView *dayDeciderView;
     IBOutlet UISegmentedControl *dayDeciderBar;
     IBOutlet UIToolbar *topFillerBar;
     
-    IBOutlet UIView *grillView;
 	
 	// Data Controllers
-	mealHandler *todaysMealHandler;
 	WristWatch *watch;
 	NSIndexPath *selectedIndexPath;
-	NSMutableArray *currentArray;
 	
 	ScheduleDecider *scheduler;
     

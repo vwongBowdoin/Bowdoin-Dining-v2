@@ -58,6 +58,8 @@
 		 
 		 [self addSubview:mealDescription];		
 		 
+		 [mealDescription release];
+		
 		 
 		 UILabel *mealTimes = [[UILabel alloc]initWithFrame:CGRectMake(0 + (barWidth * x), 22, barWidth, 22)];
 		 mealTimes.text = timeToDisplay;
@@ -67,7 +69,8 @@
 		 [mealTimes setFont:[UIFont systemFontOfSize:14.0]];
 		 
 		 [self addSubview:mealTimes];	
-		 
+		 [mealTimes release];
+
 		 
 		 UILabel *leftIndicator = [[UILabel alloc]initWithFrame:CGRectMake(indicatorOffset + (barWidth * x), 0, barWidth - 2*indicatorOffset, barHeight)];
 		 
@@ -94,8 +97,6 @@
 
 			 rightIndicator.text = @"Moulton >";
 			 [self addSubview:rightIndicator];
-
-
 		 } 
 		 
 		 
@@ -104,24 +105,20 @@
 			 rightIndicator.text = @"Union >";
 			 [self addSubview:leftIndicator];
 			 [self addSubview:rightIndicator];
-			 
+			
 		 } 
 		 
 		 else if (x == 2){
 			 
 			 leftIndicator.text = @"< Moulton";
 			 [self addSubview:leftIndicator];
-			 
 		 }
 		 
+		 [rightIndicator release];
+		 [leftIndicator release];
 		 
-		 
-		 
-
 		 
 	 }
-	
-	 
  }
 
 - (void)dealloc {

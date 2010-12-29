@@ -47,6 +47,7 @@
 
 -(IBAction)refresh;
 -(IBAction)report;
+-(void)analyzeData:(NSData*)theData;
 
 @end
 

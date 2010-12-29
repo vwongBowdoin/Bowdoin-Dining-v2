@@ -27,5 +27,6 @@
 -(NSString *)documentsDirectory;
 -(NSString *)atreusSeverPath;
 -(NSString *)getUpdatedTimeString;
+-(NSString*)getFileNameString;
 
 @end
