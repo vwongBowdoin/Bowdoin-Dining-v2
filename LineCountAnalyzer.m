@@ -89,7 +89,7 @@
 	int busy_score = 40;
 	
 	
-	UILabel *scoreLabel = [[UILabel alloc] init];
+	UILabel *scoreLabel = [[[UILabel alloc] init] autorelease];
 	
 	if (score >= very_busy_score) {
 		scoreLabel.text = @"Long Wait";

@@ -62,7 +62,7 @@
 
 + (UIView*)smallAlertWithText:(NSString*)title subtitle:(NSString*)subtitle{
 	
-	UIView *smallAlertView = [[UIView alloc] initWithFrame:CGRectMake(60, 165, 200, 130)];
+	UIView *smallAlertView = [[[UIView alloc] initWithFrame:CGRectMake(60, 165, 200, 130)] autorelease];
 	smallAlertView.layer.cornerRadius = 10.0;
 	smallAlertView.backgroundColor = [UIColor blackColor];
 	
@@ -91,6 +91,8 @@
 	[smallAlertView addSubview:alertText_Title];
 	[smallAlertView addSubview:alertText_Subtitile];
 	
+	[alertText_Title release];
+	[alertText_Subtitile release];
 	
 	return smallAlertView;
 	
@@ -99,7 +101,7 @@
 
 + (UIView*)largeAlertWithText:(NSString*)title subtitle:(NSString*)subtitle{
 	
-	UIView *largeAlertView = [[UIView alloc] initWithFrame:CGRectMake(40, 125, 240, 230)];
+	UIView *largeAlertView = [[[UIView alloc] initWithFrame:CGRectMake(40, 125, 240, 230)] autorelease];
 	largeAlertView.layer.cornerRadius = 10.0;
 	largeAlertView.backgroundColor = [UIColor blackColor];
 	
@@ -138,6 +140,8 @@
 	[largeAlertView addSubview:alertText_Title];
 	[largeAlertView addSubview:alertText_Subtitile];
 	
+	[alertText_Title release];
+	[alertText_Subtitile release];
 	
 	return largeAlertView;
 }

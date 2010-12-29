@@ -15,7 +15,6 @@
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		A11080CE12A1671D00C00252 /* TKD-NoLine-3quartersFull.xml in Resources */ = {isa = PBXBuildFile; fileRef = A11080CD12A1671D00C00252 /* TKD-NoLine-3quartersFull.xml */; };
 		A111E11711EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */; };
-		A11AE51C1212F3C900007801 /* NavigationBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11AE51B1212F3C900007801 /* NavigationBarController.m */; };
 		A127D03412A4193900F80805 /* No-Thorne-2010-11-29-11-41.xml in Resources */ = {isa = PBXBuildFile; fileRef = A127D03312A4193900F80805 /* No-Thorne-2010-11-29-11-41.xml */; };
 		A131FE24125FAD90000B5E23 /* CSGoldTransactionsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A131FE23125FAD90000B5E23 /* CSGoldTransactionsParser.m */; };
 		A131FE44125FBF56000B5E23 /* RecentTransactions.m in Sources */ = {isa = PBXBuildFile; fileRef = A131FE42125FBF56000B5E23 /* RecentTransactions.m */; };
@@ -96,8 +95,6 @@
 		8D1107310486CEB800E47090 /* DiningTableViewTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DiningTableViewTest-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		A11080CD12A1671D00C00252 /* TKD-NoLine-3quartersFull.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "TKD-NoLine-3quartersFull.xml"; sourceTree = "<group>"; };
 		A111E11611EB992900AFFD64 /* Screen shot 2010-07-12 at 2.23.27 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen shot 2010-07-12 at 2.23.27 PM.png"; sourceTree = "<group>"; };
-		A11AE51A1212F3C900007801 /* NavigationBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarController.h; sourceTree = "<group>"; };
-		A11AE51B1212F3C900007801 /* NavigationBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarController.m; sourceTree = "<group>"; };
 		A127D03312A4193900F80805 /* No-Thorne-2010-11-29-11-41.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "No-Thorne-2010-11-29-11-41.xml"; sourceTree = "<group>"; };
 		A131FE22125FAD90000B5E23 /* CSGoldTransactionsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSGoldTransactionsParser.h; sourceTree = "<group>"; };
 		A131FE23125FAD90000B5E23 /* CSGoldTransactionsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSGoldTransactionsParser.m; sourceTree = "<group>"; };
@@ -328,8 +325,6 @@
 				A1DCE62E1258E97C00746201 /* HallNavigationBar.m */,
 				A1D6FEC9125C28BB00E132A5 /* MealNavigationBar.h */,
 				A1D6FECA125C28BB00E132A5 /* MealNavigationBar.m */,
-				A11AE51A1212F3C900007801 /* NavigationBarController.h */,
-				A11AE51B1212F3C900007801 /* NavigationBarController.m */,
 			);
 			name = "Navigation Bars";
 			sourceTree = "<group>";
@@ -576,7 +571,6 @@
 				A1FC340A12089D8200B5635E /* MealSchedule.m in Sources */,
 				A1FC34121208BA3D00B5635E /* ScheduleDecider.m in Sources */,
 				A159E968120B0EA100FE7BD5 /* HoursViewController.m in Sources */,
-				A11AE51C1212F3C900007801 /* NavigationBarController.m in Sources */,
 				A16B6AF2124C581400774456 /* CSGoldController.m in Sources */,
 				A16B6B03124C5AFB00774456 /* CSGoldParser.m in Sources */,
 				A185E9741251977C00812356 /* WristWatch.m in Sources */,
