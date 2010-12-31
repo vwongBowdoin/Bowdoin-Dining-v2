@@ -62,7 +62,7 @@
 
 + (UIView*)smallAlertWithText:(NSString*)title subtitle:(NSString*)subtitle{
 	
-	UIView *smallAlertView = [[[UIView alloc] initWithFrame:CGRectMake(60, 165, 200, 130)] autorelease];
+	UIView *smallAlertView = [[[UIView alloc] initWithFrame:CGRectMake(65, 165, 190, 130)] autorelease];
 	smallAlertView.layer.cornerRadius = 10.0;
 	smallAlertView.backgroundColor = [UIColor blackColor];
 	
@@ -72,7 +72,7 @@
 	NSString *alertSubTitle = subtitle;
 	
 	
-	UILabel *alertText_Title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 80)];
+	UILabel *alertText_Title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 190, 80)];
 	alertText_Title.textAlignment = UITextAlignmentCenter;
 	alertText_Title.text = alertTitle;
 	alertText_Title.font = [UIFont boldSystemFontOfSize:20.0];
@@ -80,7 +80,7 @@
 	alertText_Title.backgroundColor = [UIColor clearColor];
 	
 	
-	UILabel *alertText_Subtitile = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 200, 100)];
+	UILabel *alertText_Subtitile = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 184, 100)];
 	alertText_Subtitile.textAlignment = UITextAlignmentCenter;
 	alertText_Subtitile.text = alertSubTitle;
 	alertText_Subtitile.numberOfLines = 2;

@@ -792,6 +792,140 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 #pragma mark -
 #pragma mark Table view data source
 
+/*
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	
+	return [scheduler titleForHeaderInSection:section forLocation:currentHallPage];
+}
+ */
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	
+	if (currentHallPage == 2) {
+		
+		// create the parent view
+		UIView * customSectionView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320, 30)];
+		customSectionView.backgroundColor = [UIColor whiteColor];
+		
+		//UIView * outline = [[UIView	alloc] initWithFrame:CGRectMake(0.0, 1.0, 320.0, 28.0)];
+		//outline.backgroundColor = [UIColor whiteColor];
+		
+		// create the label
+		UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, customSectionView.frame.size.height)];
+		headerLabel.backgroundColor = [UIColor clearColor];
+		headerLabel.opaque = NO;
+		headerLabel.textColor = [UIColor grayColor];
+		headerLabel.highlightedTextColor = [UIColor grayColor];
+		headerLabel.font = [UIFont boldSystemFontOfSize:16.0];
+		headerLabel.text = [self titleForHeaderInSection:section];
+		headerLabel.textAlignment = UITextAlignmentLeft;
+
+		// package and return
+		//[customSectionView addSubview:outline];
+		[customSectionView addSubview:headerLabel];
+		
+		[headerLabel release];
+		return [customSectionView autorelease];
+	
+	}
+	
+	return NULL;
+		
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+	
+	if (currentHallPage == 2 && section == 1) {
+		
+		// create the parent view
+		UIView * customSectionView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320, 40)];
+		customSectionView.backgroundColor = [UIColor lightGrayColor];
+		
+		UIView * coverUp = [[UIView	alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 20.0)];
+		coverUp.backgroundColor = [UIColor whiteColor];
+		
+		UIView * outline = [[UIView	alloc] initWithFrame:CGRectMake(0.0, 21.0, 320.0, 18.0)];
+		outline.backgroundColor = [UIColor whiteColor];
+		
+		// create the label
+		UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 20)];
+		headerLabel.backgroundColor = [UIColor clearColor];
+		headerLabel.opaque = NO;
+		headerLabel.textColor = [UIColor blackColor];
+		headerLabel.highlightedTextColor = [UIColor whiteColor];
+		headerLabel.font = [UIFont systemFontOfSize:14.0];
+		headerLabel.text = @"December 20th through December 24th";		//[self titleForFooterInSection:section];
+
+		headerLabel.textAlignment = UITextAlignmentCenter;
+		
+		// package and return
+		[customSectionView addSubview:coverUp];
+		[customSectionView addSubview:outline];
+		[customSectionView addSubview:headerLabel];
+		
+		[headerLabel release];
+		return [customSectionView autorelease];
+		
+	}
+	
+	return NULL;
+	
+}
+
+- (NSString *)titleForHeaderInSection:(NSInteger)section {
+	
+	NSString *stringToReturn;
+	
+	if (currentHallPage == 2) {
+		if (section == 0) {
+			stringToReturn = @"The Grill:";
+		} else {
+			stringToReturn = @"The Cafe:";
+		}
+
+	}
+
+	return stringToReturn;
+}
+
+- (NSString *)titleForFooterInSection:(NSInteger)section {
+	
+	NSString *stringToReturn;
+	
+	if (currentHallPage == 2) {
+		if (section == 1) {
+			stringToReturn = [scheduler titleForHeaderInSection:section forLocation:currentHallPage];
+		} 
+		
+	}
+	
+	return stringToReturn;
+	
+}
+	
+	
+	
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	
+	if (currentHallPage == 2) {
+		return 30.0;
+	}
+	
+	else {
+		return 0.0;
+	}
+	
+	
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+	
+	if (currentHallPage == 2 && section == 1) {
+		return 40.0;
+	}
+	
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 	
 	NSInteger *numberOfSections = [scheduler numberOfSectionsForLocation:currentHallPage atMealIndex:currentMealPage];
@@ -840,7 +974,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
 	}
 	
 	// Configures whether a cell is bold or not
-	if (indexPath.row != 0) {
+	if (indexPath.row != 0 || currentHallPage == 2) {
 		[cell.textLabel setFont:[UIFont systemFontOfSize:14.0]];
 		cell.textLabel.numberOfLines = 10;
 		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
@@ -853,21 +987,15 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler;
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-
-	
-	if (section == 0) {
-		return 0.0;
-	}
-	else {
-		return 0.0;
-	}
-
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{	
 	
 	if (indexPath.row == 0) {
+		// Grill Table View
+		if (currentHallPage == 2) {
+			return [scheduler returnHeightForCellatLocation:currentHallPage atMealIndex:currentMealPage atPath:indexPath];
+		}
+		
 		return 40.0;
 	}
 	else {

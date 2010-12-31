@@ -1114,7 +1114,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 				return 0;
 			}			
 		case 2:
-			return 2;
+			return 1;
 			break;
 			
 		default:
@@ -1160,7 +1160,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (NSString *)returnItemFromLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex atPath:(NSIndexPath *)indexPath  {
 	
-	NSString *itemToReturn = @"NULL";
+	NSString *itemToReturn;
 	
 	switch (location) {
 		case 0:
@@ -1173,16 +1173,16 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			
 		case 2:
 			// Grill Data
-			if (indexPath.section == 0 && indexPath.row == 0)	{itemToReturn = @"The Grill";}
-			if (indexPath.section == 0) {itemToReturn = [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"magees"];}
+			//if (indexPath.section == 0 && indexPath.row == 0)	{itemToReturn = @"The Grill";}
+			if (indexPath.section == 0 && indexPath.row == 0) {itemToReturn = [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"magees"];}
 			
 			// Cafe Data
-			if (indexPath.section == 1 && indexPath.row == 0)	{itemToReturn = @"The Cafe";}
-			if (indexPath.section == 1) {itemToReturn = [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"cafe"];}
+			//if (indexPath.section == 1 && indexPath.row == 0)	{itemToReturn = @"The Cafe";}
+			if (indexPath.section == 1 && indexPath.row == 0) {itemToReturn = [[specialsArray objectAtIndex:[watch getWeekDay]-1] objectForKey:@"cafe"];}
 			break;
 			
 		default:
-			itemToReturn = @"NULL";
+			itemToReturn = @"No Special For Today";
 			break;
 	}
 	
@@ -1336,11 +1336,11 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			break;
 			
 		case 2:
-			returnString = [[specialsArray objectAtIndex:1] objectForKey:@"description"];
+			//returnString = [[specialsArray objectAtIndex:1] objectForKey:@"description"];
 			break;
 			
 		default:
-			returnString = @"Error";
+			returnString = @"Thursday the 30th";
 			break;
 	}
 	
@@ -1451,6 +1451,15 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	}
 	
 	return returnString;
+	
+}
+
+- (NSString*)titleForHeaderInSection:(NSInteger)section forLocation:(NSInteger)location{
+	
+	if (location == 2) {
+		return [[specialsArray objectAtIndex:1] objectForKey:@"description"];
+
+	}
 	
 }
 
