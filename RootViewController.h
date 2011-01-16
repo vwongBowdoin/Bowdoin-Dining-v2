@@ -28,15 +28,22 @@
 	// Table View Outlets
 	IBOutlet UICustomTableView *customTableView;
 	
-	// Navigation Scrollers and Views
+	// Navigation Scrollers and Buttons
 	IBOutlet UIScrollView *hallScrollView;
 	IBOutlet UIScrollView *mealScrollView;
+	IBOutlet UIButton *mealLeftButton;
+	IBOutlet UIButton *mealRightButton;
+	IBOutlet UIButton *hallLeftButton;
+	IBOutlet UIButton *hallRightButton;
+
 	
 	// Grill Buttons
 	IBOutlet UIButton *callButton;
 	IBOutlet UIButton *menuButton;
 	IBOutlet UILabel *callText;
 	IBOutlet UILabel *menuText;
+	
+	IBOutlet UIView *grillAccessoryView;
 	
 
     IBOutlet UISegmentedControl *dayDeciderBar;
@@ -53,6 +60,8 @@
     BOOL navigationBarsAnimatedOut;
 	BOOL contentReady;
 	BOOL animating;
+	BOOL navigatingRight;
+	BOOL navigatingLeft;
 
 	int currentHallPage;
 	int currentMealPage;
@@ -73,12 +82,19 @@
 @property (nonatomic, retain) IBOutlet UICustomTableView *customTableView;
 @property (nonatomic, retain) IBOutlet UIScrollView *hallScrollView;
 @property (nonatomic, retain) IBOutlet UIScrollView *mealScrollView;
+
+@property (nonatomic, retain) IBOutlet UIButton *mealLeftButton;
+@property (nonatomic, retain) IBOutlet UIButton *mealRightButton;
+@property (nonatomic, retain) IBOutlet UIButton *hallLeftButton;
+@property (nonatomic, retain) IBOutlet UIButton *hallRightButton;
+
 @property (nonatomic, retain) IBOutlet UISegmentedControl *dayDeciderBar;
 
 @property (nonatomic, retain) IBOutlet UIButton * callButton;
 @property (nonatomic, retain) IBOutlet UILabel * callText;
 @property (nonatomic, retain) IBOutlet UIButton * menuButton;
 @property (nonatomic, retain) IBOutlet UILabel * menuText;
+@property (nonatomic, retain) IBOutlet UIView * grillAccessoryView;
 
 @property (nonatomic, retain) ScheduleDecider *scheduler;
 

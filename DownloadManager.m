@@ -46,7 +46,7 @@
 		
 		// Check Reachability of Apple Servers and Atreus Server before Downloading
 		Reachability *apple = [Reachability reachabilityWithHostName:@"www.apple.com"];
-		Reachability *bowdoin = [Reachability reachabilityWithHostName:@"www.bowdoin.edu/atreus"];
+		Reachability *bowdoin = [Reachability reachabilityWithHostName:@"www.bowdoin.edu"];
 		
 		appleConnected = [apple isReachable];
 		bowdoinConnected = [bowdoin isReachable];

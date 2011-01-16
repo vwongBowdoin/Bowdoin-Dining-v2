@@ -1089,7 +1089,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex{
 	
-	NSLog(@"Size of Section");
+	NSLog(@"Size of Section %d for Location: %d atMealIndex %d", section, location, mealIndex);
 	
 	
 	switch (location) {

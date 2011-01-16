@@ -19,7 +19,7 @@
 @implementation LineCountViewController
 
 
-@synthesize thorne_label, moulton_label, express_label, thorneCount, moultonCount, expressCount, refreshButton, totalPatrons;
+@synthesize thorne_label, moulton_label, express_label, refreshButton;
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -37,8 +37,10 @@
     [super viewDidLoad];
 	self.title = @"Line Counts";
 	
-	[self.navigationController setNavigationBarHidden:NO];
+	[self.navigationController setNavigationBarHidden:YES];
 	
+	NSLog(@"View Controller Created");
+
 		
 	// ** HUD Code by Matej Bukovinski ** //
 	
@@ -61,6 +63,9 @@
 
 -(void)downloadLineData{
 	
+	NSLog(@"Downloading Line Data");
+
+	
 	NSString *login = [[NSUserDefaults standardUserDefaults] valueForKey:@"Login"];
 	NSString *pass = [[NSUserDefaults standardUserDefaults] valueForKey:@"Password"];
 	
@@ -74,13 +79,6 @@
 	NSData *lineData = [theController getCSGoldLineCountsWithUserName:login password:pass];
 	[theController release];
 	
-	// For Debugging Purposes
-	
-	//NSString *filePath = [[NSBundle mainBundle] pathForResource:@"No-Thorne-2010-11-29-11-41" ofType:@"xml"];  
-	//NSData *lineData = [NSData dataWithContentsOfFile:filePath]; 
-	
-	
-	
 	stored_data = lineData;
 	[self analyzeData:lineData];
 
@@ -90,6 +88,8 @@
 
 - (void)analyzeData:(NSData*)theData{
 	
+	NSLog(@"Analyze Line Data");
+
 	// Testing Line Count Data
 	LineCountAnalyzer *analyzer = [[LineCountAnalyzer alloc] init];
 	
@@ -97,19 +97,19 @@
 	
 	thorne_label.text = [analyzer thorneText];
 	thorne_label.textColor = [analyzer thorneColor];
-	thorneCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer thorneScore]];
+//	thorneCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer thorneScore]];
 	
 	
 	moulton_label.text = [analyzer moultonText];
 	moulton_label.textColor = [analyzer moultonColor];
-	moultonCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer moultonScore]];
+//	moultonCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer moultonScore]];
 
 	
 	express_label.text = [analyzer expressText];
 	express_label.textColor = [analyzer expressColor];
-	expressCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer expressScore]];
+//	expressCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer expressScore]];
 		
-	totalPatrons.text = [NSString stringWithFormat:@"%d", [analyzer total_Patrons]];
+//	totalPatrons.text = [NSString stringWithFormat:@"%d", [analyzer total_Patrons]];
 	
 	[analyzer release];
 	
@@ -150,8 +150,8 @@
 	
 	
 	// creates the generated report
-	NSString *report_string = [NSString stringWithFormat:@"User Rating / Response: \n Accurate: %@ \n Location: %@ \n Servine Line: %@ \n Dining Hall Crowd: %@ \n \n Algorithm Data: \n \n Thorne: %@, %@ \n Moulton: %@, %@ \n Express: %@, %@ \n \n ",accuracy_response, location_response, line_response, crowd_response, thorneCount.text, thorne_label.text, moultonCount.text, moulton_label.text, expressCount.text, express_label.text ];
-	NSData *report_data = [report_string dataUsingEncoding:NSUTF8StringEncoding];
+//	NSString *report_string = [NSString stringWithFormat:@"User Rating / Response: \n Accurate: %@ \n Location: %@ \n Servine Line: %@ \n Dining Hall Crowd: %@ \n \n Algorithm Data: \n \n Thorne: %@, %@ \n Moulton: %@, %@ \n Express: %@, %@ \n \n ",accuracy_response, location_response, line_response, crowd_response, thorneCount.text, thorne_label.text, moultonCount.text, moulton_label.text, expressCount.text, express_label.text ];
+	//NSData *report_data = [report_string dataUsingEncoding:NSUTF8StringEncoding];
 	
 	WristWatch *watch = [[WristWatch alloc] init];
 	NSString *date_string = [watch getFileNameString];
@@ -163,7 +163,7 @@
 	
 	[controller setMessageBody:messageBody isHTML:NO];
 	[controller addAttachmentData:stored_data mimeType:@"xml" fileName:[NSString stringWithFormat:@"%@.xml", file_name]]; // adds the XML Data
-	[controller addAttachmentData:report_data mimeType:@"txt" fileName:[NSString stringWithFormat:@"%@.txt", file_name]]; // adds the TXT report
+//	[controller addAttachmentData:report_data mimeType:@"txt" fileName:[NSString stringWithFormat:@"%@.txt", file_name]]; // adds the TXT report
 	
 	controller.navigationBar.barStyle = UIBarStyleBlack; // choose your style, unfortunately, Translucent colors behave quirky.
 	

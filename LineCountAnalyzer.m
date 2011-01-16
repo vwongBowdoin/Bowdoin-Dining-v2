@@ -20,7 +20,6 @@
 
 -(void)analyzeData:(NSData*)data{
 	
-	
 	LineCountParser *LCParser = [[LineCountParser alloc] init];
 	[LCParser parseWithData:data];
 	
@@ -93,13 +92,16 @@
 	
 	if (score >= very_busy_score) {
 		scoreLabel.text = @"Long Wait";
-		scoreLabel.textColor = [UIColor redColor];
+		scoreLabel.textColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1.0];
 	} else if (score >= busy_score) {
 		scoreLabel.text = @"Medium Wait";
-		scoreLabel.textColor = [UIColor orangeColor];
+		scoreLabel.textColor = [UIColor colorWithRed:160/255.0 green:146/255.0 blue:46/255.0 alpha:1.0];
 	} else {
 		scoreLabel.text = @"No Wait";
-		scoreLabel.textColor = [UIColor colorWithRed:0 green:80 blue:0 alpha:1.0];
+		scoreLabel.textColor = [UIColor colorWithRed:0 green:128/255.0 blue:0 alpha:1.0];
+
+		// scoreLabel.textColor = [UIColor colorWithRed:0 green:128/255.0 blue:0 alpha:1.0];
+	
 	}
 
 	

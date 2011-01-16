@@ -23,6 +23,12 @@
 		A141C1A812C27EBB00371D4D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A141C1A712C27EBB00371D4D /* Reachability.m */; };
 		A14BBBDF120C5231006AD070 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14BBBDE120C5231006AD070 /* CFNetwork.framework */; };
 		A14BBBE3120C5238006AD070 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A14BBBE2120C5238006AD070 /* MessageUI.framework */; };
+		A14D289B12DCE04C00682835 /* yellowButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A14D289512DCE04C00682835 /* yellowButton@2x.png */; };
+		A14D289C12DCE04C00682835 /* yellowButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A14D289612DCE04C00682835 /* yellowButton.png */; };
+		A14D289D12DCE04C00682835 /* redButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A14D289712DCE04C00682835 /* redButton.png */; };
+		A14D289E12DCE04C00682835 /* greenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A14D289812DCE04C00682835 /* greenButton.png */; };
+		A14D289F12DCE04C00682835 /* greenButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A14D289912DCE04C00682835 /* greenButton@2x.png */; };
+		A14D28A012DCE04C00682835 /* redButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A14D289A12DCE04C00682835 /* redButton@2x.png */; };
 		A159E968120B0EA100FE7BD5 /* HoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A159E966120B0EA100FE7BD5 /* HoursViewController.m */; };
 		A159E969120B0EA100FE7BD5 /* HoursViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A159E967120B0EA100FE7BD5 /* HoursViewController.xib */; };
 		A15A87111268CC4600899F27 /* Default-Beta.png in Resources */ = {isa = PBXBuildFile; fileRef = A15A87101268CC4600899F27 /* Default-Beta.png */; };
@@ -106,6 +112,12 @@
 		A141C1A712C27EBB00371D4D /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		A14BBBDE120C5231006AD070 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A14BBBE2120C5238006AD070 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		A14D289512DCE04C00682835 /* yellowButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellowButton@2x.png"; sourceTree = "<group>"; };
+		A14D289612DCE04C00682835 /* yellowButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowButton.png; sourceTree = "<group>"; };
+		A14D289712DCE04C00682835 /* redButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redButton.png; sourceTree = "<group>"; };
+		A14D289812DCE04C00682835 /* greenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenButton.png; sourceTree = "<group>"; };
+		A14D289912DCE04C00682835 /* greenButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greenButton@2x.png"; sourceTree = "<group>"; };
+		A14D289A12DCE04C00682835 /* redButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "redButton@2x.png"; sourceTree = "<group>"; };
 		A159E965120B0EA100FE7BD5 /* HoursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoursViewController.h; sourceTree = "<group>"; };
 		A159E966120B0EA100FE7BD5 /* HoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoursViewController.m; sourceTree = "<group>"; };
 		A159E967120B0EA100FE7BD5 /* HoursViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HoursViewController.xib; sourceTree = "<group>"; };
@@ -332,6 +344,12 @@
 		A11080C112A166DC00C00252 /* Line Count Data */ = {
 			isa = PBXGroup;
 			children = (
+				A14D289512DCE04C00682835 /* yellowButton@2x.png */,
+				A14D289612DCE04C00682835 /* yellowButton.png */,
+				A14D289712DCE04C00682835 /* redButton.png */,
+				A14D289812DCE04C00682835 /* greenButton.png */,
+				A14D289912DCE04C00682835 /* greenButton@2x.png */,
+				A14D289A12DCE04C00682835 /* redButton@2x.png */,
 				A127D03312A4193900F80805 /* No-Thorne-2010-11-29-11-41.xml */,
 				A15D870012A09479003EE1C4 /* TKD-InsaneLine.xml */,
 				A188D287129386DC007BFFCB /* testLineCount.xml */,
@@ -549,6 +567,12 @@
 				A11080CE12A1671D00C00252 /* TKD-NoLine-3quartersFull.xml in Resources */,
 				A127D03412A4193900F80805 /* No-Thorne-2010-11-29-11-41.xml in Resources */,
 				A1D1988312C2F87600DB920C /* 01-refresh-white.png in Resources */,
+				A14D289B12DCE04C00682835 /* yellowButton@2x.png in Resources */,
+				A14D289C12DCE04C00682835 /* yellowButton.png in Resources */,
+				A14D289D12DCE04C00682835 /* redButton.png in Resources */,
+				A14D289E12DCE04C00682835 /* greenButton.png in Resources */,
+				A14D289F12DCE04C00682835 /* greenButton@2x.png in Resources */,
+				A14D28A012DCE04C00682835 /* redButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
