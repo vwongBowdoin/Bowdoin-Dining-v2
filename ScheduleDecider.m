@@ -871,6 +871,8 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	[self processMealArraysForDay:dayToTest];
 	[self processMealArraysForDay:(dayToTest + 1) % 7 ];
 	[self resolveInconsistenciesInArrays];
+	
+	[self populateNavigationBarArray];
 	[self populateMealArrays];
 	[self populateSpecialsArray];
 
@@ -926,7 +928,6 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
             [dictionary setObject:[element returnDescription] forKey:@"Day"];
 			[dictionary setObject:[element dateText] forKey:@"Hours_of_Operation"];
 			
-			NSLog(@"File Location = %@", [element returnFileLocation]);
 			
 			if ([element currentDay] == [watch getWeekDay]) {
 				[dictionary setObject:[NSString stringWithFormat:@"Today's %@", [element returnDescription]] forKey:@"Formatted_Title"];
@@ -990,13 +991,13 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		
 		if ([element objectForKey:@"FileLocation"] != NULL) {
 			
-			NSLog(@"Populating From File %@", [element objectForKey:@"FileLocation"]);
+			//NSLog(@"Populating From File %@", [element objectForKey:@"FileLocation"]);
 			
 			array = [[NSMutableArray alloc] initWithContentsOfFile:[element objectForKey:@"FileLocation"]];
 			
 			
 			if (array == NULL) {
-				NSLog(@"NULL File!!!");
+				//NSLog(@"NULL File!!!");
 				//array = [[NSMutableArray alloc] initWithObjects:@"NULL ENTRY", nil];
 			} else {
 				[tempArray addObject:array];
@@ -1161,7 +1162,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex{
 	
-	NSLog(@"Number of Sections");
+	//NSLog(@"Number of Sections");
 		
 	switch (location) {
 		case 0:

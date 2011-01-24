@@ -283,9 +283,9 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 	
 	// Day Loop
 	for (int weekday = 1; weekday <= 7; weekday++) {
-		for (int hour = 0; hour < 2; hour++) {
+		for (int hour = 0; hour < 24; hour++) {
 			// increments by 5 minutes
-			for (int minute = 0; minute < 15; minute += 5) {
+			for (int minute = 0; minute < 60; minute += 5) {
 				
 				NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 				
@@ -299,7 +299,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 				
 				NSDate *result = [gregorian dateFromComponents:components];
 				
-				NSLog(@"Testing Date %@", result);
+				NSLog(@"Testing ----------------------");
+				NSLog(@"WeekDay %d  Hour %d  Minute %d", weekday, hour, minute);
 				
 				ScheduleDecider *decider = [[ScheduleDecider alloc] init];
 				self.scheduler = decider;
@@ -308,6 +309,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 				[self setNavigationBarsWithArray:[scheduler returnNavBarArray]];
 				contentReady = YES;
 				[self iterateArraysForMeals:[[scheduler returnNavBarArray] count]];
+				
 
 			}
 		}
@@ -319,19 +321,22 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 	
 	[customTableView reloadData];
 
+	NSLog(@"Checking Meals: %d", numberOfMeals);
 	
 	for (int meal = 1; meal <= numberOfMeals; meal++) {
 		
+		NSLog(@"Meal = %d", meal);
+		
 		for (int hall = 1; hall <= 2; hall ++) {
 			
+			NSLog(@"Hall = %d", hall);
+
 			currentMealPage = meal;
 			currentHallPage = hall;
 			
 			[customTableView reloadData];
 			
-			
-			
-			
+
 		}
 		
 	}
