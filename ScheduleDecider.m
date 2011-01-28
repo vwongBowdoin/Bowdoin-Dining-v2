@@ -859,10 +859,21 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (void)stressTestForDate:(NSDate*)result day:(int)dayToTest week:(int)weekToTest{
 	
+	stressTesting = YES;
+	testDay = dayToTest;
+	testWeek = weekToTest;
+	testDate = result;
+	
 	WristWatch *clock= [[WristWatch alloc] init];
 	watch = clock;
 	
-	
+	[self processHoursArrays];
+	[self processMealArraysForDay:dayToTest];
+	[self processMealArraysForDay:(dayToTest + 1) % 7 ];
+	[self resolveInconsistenciesInArrays];
+	[self populateMealArrays];
+	[self populateSpecialsArray];
+
 	
 	
 	
@@ -886,11 +897,21 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
    	
 	int currentWeek = [watch getWeekofYear];
 	
+	if (stressTesting) {
+		currentWeek = testWeek;
+	}
+	
+	
 	// Running through every possible meal to decide which meals are open
 	
     for(MealSchedule *element in diningHallMealArray){
         NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]init];
 		
+		
+		if (stressTesting) {
+			[element setStressTesting:YES];
+			element.stressTestTime = testDate;
+		}
 
 		
 		[element setCurrentDay:day];
@@ -1259,11 +1280,24 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     NSMutableArray *nowHours_Smith = [NSMutableArray array];
 	
 	//Assumes we want an array of today's hours.
-    //STRESSTESTint currentDay = (int)[watch getWeekDay];
-    int currentDay = testDay;
+	int currentDay = (int)[watch getWeekDay];
+	
+	if (stressTesting) {
+		currentDay = testDay;
+	}
 	
     for(MealSchedule *element in mealArray){
-        [element setCurrentDay:currentDay];
+        
+		if (stressTesting) {
+			[element setStressTesting:YES];
+			element.stressTestTime = testDate;
+		}
+		
+		
+		[element setCurrentDay:currentDay];
+		
+		
+		
 		
 		BOOL hasClosed = [element hasClosed];
 		BOOL isOpen = [element isOpen];

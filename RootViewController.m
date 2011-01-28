@@ -239,7 +239,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 	
 	// Creates the No Meal Alert View
 
-	[self stressTest];
+//	[self stressTest];
 	
 }
 
@@ -250,11 +250,13 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 - (void)setupMealData{
 
 	// Initializes the Download Manager to Deal with Meal Data
-	DownloadManager *manager = [[DownloadManager alloc] init];
-    [manager setDelegate:self];
+//TEST	DownloadManager *manager = [[DownloadManager alloc] init];
+//TEST    [manager setDelegate:self];
 	
 	// Successful Download Activates DownloadCompleted method
-	[manager initializeDownloads];	
+//TEST	[manager initializeDownloads];	
+	
+	[self stressTest];
 	
 }
 
@@ -302,10 +304,38 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 				ScheduleDecider *decider = [[ScheduleDecider alloc] init];
 				self.scheduler = decider;
 				
-				[scheduler stressTestForDate:result day:currentDay+weekday week:currentWeek];
+				[scheduler stressTestForDate:result day:weekday week:currentWeek];
+				[self setNavigationBarsWithArray:[scheduler returnNavBarArray]];
+				contentReady = YES;
+				[self iterateArraysForMeals:[[scheduler returnNavBarArray] count]];
+
 			}
 		}
 	}
+		
+}
+
+- (void)iterateArraysForMeals:(int)numberOfMeals{
+	
+	[customTableView reloadData];
+
+	
+	for (int meal = 1; meal <= numberOfMeals; meal++) {
+		
+		for (int hall = 1; hall <= 2; hall ++) {
+			
+			currentMealPage = meal;
+			currentHallPage = hall;
+			
+			[customTableView reloadData];
+			
+			
+			
+			
+		}
+		
+	}
+	
 	
 	
 	

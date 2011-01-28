@@ -11,7 +11,7 @@
 
 @implementation MealSchedule
 
-@synthesize mealName, shortName, fileName, currentDay, currentWeek, openTimes, closeTimes, location;
+@synthesize mealName, shortName, fileName, currentDay, currentWeek, openTimes, closeTimes, location, stressTesting, stressTestTime;
 
 // Returns an NSDate initialized for the current opening time.
 - (NSDate *)currentOpening{
@@ -61,12 +61,17 @@
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 
+	//STRESSTEST
+	NSDate *now;
 	if (stressTesting) {
-		<#statements#>
+		now = stressTestTime;
+	} else {
+		now = [NSDate date];
+		
 	}
-	
-    NSDate* now = [NSDate date];
 
+	
+   
     NSDateComponents* nowHour = [gregorian components:NSHourCalendarUnit fromDate:now];
     NSDateComponents* nowMinute = [gregorian components:NSMinuteCalendarUnit fromDate:now];
     NSDateComponents* nowSecond = [gregorian components:NSSecondCalendarUnit fromDate:now];
@@ -94,7 +99,14 @@
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 	
-    NSDate* now = [NSDate date];
+	//STRESSTEST
+	NSDate *now;
+	if (stressTesting) {
+		now = stressTestTime;
+	} else {
+		now = [NSDate date];
+		
+	}
 	
     NSDateComponents* nowHour = [gregorian components:NSHourCalendarUnit fromDate:now];
     NSDateComponents* nowMinute = [gregorian components:NSMinuteCalendarUnit fromDate:now];
@@ -122,7 +134,14 @@
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 	
-    NSDate* now = [NSDate date];
+	//STRESSTEST
+	NSDate *now;
+	if (stressTesting) {
+		now = stressTestTime;
+	} else {
+		now = [NSDate date];
+		
+	}
 	
     NSDateComponents* nowHour = [gregorian components:NSHourCalendarUnit fromDate:now];
     NSDateComponents* nowMinute = [gregorian components:NSMinuteCalendarUnit fromDate:now];
@@ -151,8 +170,18 @@
 - (NSDate *)midnightDate{
     
     // Initializes the Calendar Objects
-    NSDate *currentTime = [NSDate date];
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	
+	//STRESSTEST
+	
+	NSDate *currentTime;
+	if (stressTesting) {
+		currentTime = stressTestTime;
+	} else {
+		currentTime = [NSDate date];
+		
+	}    
+	
+	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate * oneAM = [self oneAMDate];
    
     NSComparisonResult result = [currentTime compare:oneAM];
@@ -196,7 +225,16 @@
 - (BOOL)isOpen{
     
 	
-    NSDate *currentTime = [NSDate date];
+	//STRESSTEST
+	
+	NSDate *currentTime;
+	if (stressTesting) {
+		currentTime = stressTestTime;
+	} else {
+		currentTime = [NSDate date];
+		
+	}   
+	
 	
 	if (_currentOpening == nil) { [self currentOpening]; }
 	if (_currentClosing == nil) { [self currentClosing]; }
@@ -222,8 +260,17 @@
 
 - (BOOL)hasClosed{
     
-    NSDate *currentTime = [NSDate date];
-
+	//STRESSTEST
+	
+	NSDate *currentTime;
+	if (stressTesting) {
+		currentTime = stressTestTime;
+	} else {
+		currentTime = [NSDate date];
+		
+	}  
+	
+	
     if (_currentOpening == nil) { [self currentOpening]; }
 	if (_currentClosing == nil) { [self currentClosing]; }
 	
@@ -274,10 +321,20 @@
 	NSDate *currentTime;
 	NSDate *currentOpening;
 	
+	//TEST - WristWtach and if statement commentedout
 	// Initial Check for Tomorrow Query
 	WristWatch *clock= [[WristWatch alloc] init];
+	int weekday; 
 	
-	if (currentDay != [clock getWeekDay]) {
+	if (stressTesting) {
+		weekday = [self getStressTestWeekDay];
+	} else {
+		weekday = [clock getWeekDay];
+	}
+
+	
+		
+	if (currentDay != weekday) {
 		
 		if (_tomorrowOneAM == nil) { [self tomorrowOneAM]; }
 		if (_currentOpeningTomorrow == nil) { [self currentOpeningTomorrow]; }
@@ -287,7 +344,15 @@
 		
 	} else {
 		
-		currentTime = [NSDate date];
+		//TEST
+		if (stressTesting) {
+			currentTime = stressTestTime;
+		} else {
+			currentTime = [NSDate date];
+
+		}
+
+		
 		
 		if (_currentOpening == nil) { [self currentOpening]; }
 		
@@ -398,6 +463,22 @@
     return formattedDateString;
     
 }
+
+
+
+//TEST
+
+- (int)getStressTestWeekDay {
+	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[inputFormatter setDateFormat:@"e"];
+	NSDate *toBeFormatted = stressTestTime;
+	
+	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
+	
+	return[formattedDate intValue];
+	
+}
+
 
 
 

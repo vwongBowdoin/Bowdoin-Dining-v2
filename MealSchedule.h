@@ -45,6 +45,10 @@
 @property (nonatomic, retain) NSString *fileName;
 @property (nonatomic, retain) NSString *location;
 
+// Testing Property
+@property BOOL stressTesting;
+@property (nonatomic, retain) NSDate* stressTestTime;
+
 
 // Boolean Conditions
 -(BOOL)isOpen;

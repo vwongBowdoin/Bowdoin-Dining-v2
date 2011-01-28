@@ -75,7 +75,13 @@
 	
 
 	WristWatch *watch;
-
+	
+	BOOL stressTesting;
+	int testDay;
+	int testWeek;
+	NSDate *testDate;
+	
+	
 }
 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;	    
