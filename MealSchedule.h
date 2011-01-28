@@ -20,7 +20,19 @@
 	NSString *fileName;
 	NSString *location;
 	
+	NSDate *_currentOpening;
+	NSDate *_currentClosing;
+	NSDate *_currentOpeningTomorrow;
+
+	NSDate *_oneAMDate;
+	NSDate *_tomorrowOneAM;
+	NSDate *_tomorrowMidnight;
+	NSDate *_midnightDate;
+	
 	BOOL mealIsTomorrow;
+	
+	BOOL stressTesting;
+	NSDate *stressTestTime;
     
 }
 
@@ -47,7 +59,6 @@
 -(NSDate *)midnightDate;
 -(NSDate*)currentOpening;
 -(NSDate*)currentClosing;
-
 
 // String returns
 -(NSString *)dateText;

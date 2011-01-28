@@ -7,10 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
+#import "CSGoldController.h"
 
+@interface RecentTransactions : UIViewController <UITableViewDelegate, UITableViewDataSource, MBProgressHUDDelegate> {
 
-@interface RecentTransactions : UITableViewController {
-
+	IBOutlet UITableView *tableView;
+	
+	MBProgressHUD *HUD;
+	
+	// Login Information
+	NSString *userName;
+	NSString *password;
+	
+	CSGoldController *session_Controller;
+	
+	NSMutableArray *transactions;
+	
 }
+
+@property (nonatomic, retain) NSMutableArray *transactions;
+
+
+- (IBAction)backButtonSelected;
 
 @end

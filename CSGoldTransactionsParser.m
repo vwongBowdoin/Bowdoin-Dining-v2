@@ -11,8 +11,9 @@
 
 
 @implementation CSGoldTransactionsParser
+@synthesize delegate;
 
-- (void)parseWithData:(NSData *)data{
+- (void)arrayFromData:(NSData *)data{
 	
 	theParser = [[NSXMLParser alloc] initWithData:data];
 	[theParser setDelegate:self];
@@ -22,28 +23,26 @@
 	
 	[theParser parse];
 	
-	
-	
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
-	NSLog(@"Found CSGold File and started parsing");
+	NSLog(@"***Found CSGold Transactions File and started parsing");
+	
+	transactionsArray = [[NSMutableArray alloc] init];
 	
 }
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
-    
-	NSLog(@"Done With Document");
-	
 	// Updating Last Updated Time
+	delegate.transactions = transactionsArray;
 	
-	
+	NSLog(@"%@", transactionsArray);
 	
 	
 	
     // Store plan type and meals remaining in NSUserDefaults and Post Notification
 	NSLog(@"Posting Notification");
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"CSGold Transactions Completed" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"CSGold Recent Transactions Completed" object:self];
 	
 	
 }
@@ -76,7 +75,7 @@
 	// Signifies a New Transaction
 	if ([elementName isEqualToString:@"dtCSGoldGLTrans"]) {
 		
-		[transactionsArray addObject:transactionsDict];
+		[transactionsArray insertObject:transactionsDict atIndex:0];
 
 	}
 }
@@ -86,29 +85,38 @@
 	
 	if ([currentElement isEqualToString:@"TRANDATE"]) {
 		// Transaction Date
-		
+		string = [string substringToIndex:10];
 		[transactionsDict setObject:string forKey:@"TRANDATE"];
 		
 	}
 	
 	if ([currentElement isEqualToString:@"LONGDES"]) {
 		// Location Description
-		
+		if ([string isEqualToString:@"PatronImport Location"]) {
+			string = @"Deposit";
+		}
 		[transactionsDict setObject:string forKey:@"LONGDES"];
 
 	}
 	
 	if ([currentElement isEqualToString:@"APPRVALUEOFTRAN"]) {
 		
-		[transactionsDict setObject:[self returnFormattedMoneyBalance:string] forKey:@"APPRVALUEOFTRAN"];
+		[transactionsDict setObject:[self returnFormattedMoneyBalance:string balance:NO] forKey:@"APPRVALUEOFTRAN"];
+		
+	}
+	
+	if ([currentElement isEqualToString:@"BALVALUEAFTERTRAN"]) {
+		
+		[transactionsDict setObject:[self returnFormattedMoneyBalance:string balance:YES] forKey:@"BALVALUEAFTERTRAN"];
 		
 	}
 
 }
 
-- (NSString*)returnFormattedMoneyBalance:(NSString *)inputString{
+- (NSString*)returnFormattedMoneyBalance:(NSString *)inputString balance:(BOOL)_balance{
 	NSString *stringToReturn;
 	
+	NSLog(@"Reformatting Input String: %@", inputString);
 	
 	if (inputString !=nil) {
 		
@@ -168,7 +176,19 @@
 		firstHalf = [inputString substringToIndex:indexForPeriod];
 		secondHalf = [inputString substringFromIndex:indexForPeriod];
 		
-		stringToReturn = [NSString stringWithFormat:@"$%@.%@", firstHalf, secondHalf];
+		// perform positive or negative balance entry test
+		if ([[inputString substringToIndex:1] isEqualToString:@"-"]) {
+			stringToReturn = [NSString stringWithFormat:@"$%@.%@", [firstHalf substringFromIndex:1], secondHalf];
+		} else {
+			stringToReturn = [NSString stringWithFormat:@"-$%@.%@", firstHalf, secondHalf];
+
+		}
+
+		if (_balance) {
+			stringToReturn = [NSString stringWithFormat:@"$%@.%@", firstHalf, secondHalf];
+
+		}
+		
 		
 	}
 	

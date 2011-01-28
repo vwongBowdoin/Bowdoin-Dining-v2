@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RecentTransactions.h"
 
 @interface CSGoldTransactionsParser : NSObject <NSXMLParserDelegate> {
 
 	NSXMLParser *theParser;
 	NSString *currentElement;
 	int currentSVCAccount;
+	
+	RecentTransactions *delegate;
 	
 
 	
@@ -21,8 +24,10 @@
 	
 }
 
+@property (nonatomic, retain) RecentTransactions *delegate;
 
-- (void)parseWithData:(NSData *)data;
+
+- (void)arrayFromData:(NSData *)data;
 -(NSString*)returnFormattedMoneyBalance:(NSString *)inputString;
 
 

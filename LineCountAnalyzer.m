@@ -18,6 +18,8 @@
 
 @implementation LineCountAnalyzer
 
+
+
 -(void)analyzeData:(NSData*)data{
 	
 	LineCountParser *LCParser = [[LineCountParser alloc] init];

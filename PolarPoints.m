@@ -9,6 +9,7 @@
 #import "PolarPoints.h"
 #import "CSGoldController.h"
 #import "LogInViewController.h"
+#import "RecentTransactions.h"
 
 @implementation PolarPoints
 
@@ -179,6 +180,16 @@
 	
 	[self.navigationController popViewControllerAnimated:YES];
 
+}
+
+- (IBAction)launchRecentTransactions{
+	
+	RecentTransactions *recentTransactionsPage = [[RecentTransactions alloc] initWithUserName:userName andPassword:password];
+	[self.navigationController pushViewController:recentTransactionsPage animated:YES];
+	[recentTransactionsPage release];
+	
+	
+	
 }
 
 - (void)destroyLoginInformation{

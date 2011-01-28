@@ -15,45 +15,42 @@
 
 // Returns an NSDate initialized for the current opening time.
 - (NSDate *)currentOpening{
-    
-	//NSLog(@"Checking Opening Time for Day = %d", currentDay);
-	
-    NSTimeInterval interval = [[openTimes objectAtIndex:currentDay-1] intValue];
-    
-    NSDate *openTime = [[NSDate alloc] initWithTimeInterval:interval 
-                                                  sinceDate:[self midnightDate]];
-    
-    NSDate *timeToReturn = openTime;
     	
-    return timeToReturn;
+	NSTimeInterval interval = [[openTimes objectAtIndex:currentDay-1] intValue];
+		
+	NSDate *openTime = [[NSDate alloc] initWithTimeInterval:interval 
+													  sinceDate:[self midnightDate]];
+				
+	_currentOpening = openTime;
+
+    return openTime;
     
 }
 
 - (NSDate *)currentClosing{
-    
-    NSTimeInterval interval = [[closeTimes objectAtIndex:currentDay-1] intValue];
-    
-    
-    NSDate *closeTime = [[NSDate alloc] initWithTimeInterval:interval 
-												   sinceDate:[self midnightDate]];
-    
-    NSDate *closingTimeToReturn = closeTime;
-    
+		
+	NSTimeInterval interval = [[closeTimes objectAtIndex:currentDay-1] intValue];
+		
+	NSDate *closeTime = [[NSDate alloc] initWithTimeInterval:interval 
+													   sinceDate:[self midnightDate]];
+		
+	_currentClosing = closeTime;
 	
-    return closingTimeToReturn;    
+    return closeTime;    
 }
 
 // Returns an NSDate initialized for the current opening time tomorrow.
 - (NSDate *)currentOpeningTomorrow{
-    
-    NSTimeInterval interval = [[openTimes objectAtIndex:currentDay-1] intValue];
-    
-    NSDate *openTime = [[NSDate alloc] initWithTimeInterval:interval 
-                                                  sinceDate:[self tomorrowMidnight]];
-    
-    NSDate *timeToReturn = openTime;
-    	
-    return timeToReturn;
+		
+	NSTimeInterval interval = [[openTimes objectAtIndex:currentDay-1] intValue];
+		
+	NSDate *openTime = [[NSDate alloc] initWithTimeInterval:interval 
+													  sinceDate:[self tomorrowMidnight]];
+		
+	
+	_currentOpeningTomorrow = openTime;
+
+    return openTime;
     
 }
 
@@ -64,6 +61,10 @@
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 
+	if (stressTesting) {
+		<#statements#>
+	}
+	
     NSDate* now = [NSDate date];
 
     NSDateComponents* nowHour = [gregorian components:NSHourCalendarUnit fromDate:now];
@@ -83,6 +84,8 @@
     [componentsToSubtract release];
     [gregorian release];
     
+	_oneAMDate = oneAM;
+	
     return oneAM;
     
     }
@@ -109,6 +112,8 @@
     [componentsToAdd release];
     [gregorian release];
     
+	_tomorrowOneAM = oneAMTomorrow;
+	
     return oneAMTomorrow;
     
 }
@@ -130,12 +135,14 @@
     [componentsToAdd setSecond:60-[nowSecond second]];
     
     
-    NSDate *oneAMTomorrow = [gregorian dateByAddingComponents:componentsToAdd toDate:now options:0];
+    NSDate *tomorrowMidnight = [gregorian dateByAddingComponents:componentsToAdd toDate:now options:0];
     
     [componentsToAdd release];
     [gregorian release];
     
-    return oneAMTomorrow;
+	_tomorrowMidnight = tomorrowMidnight;
+	
+    return tomorrowMidnight;
     
 }
 
@@ -172,13 +179,12 @@
     [componentsToSubtract setSecond:0-[nowSecond second]];
     
 	
-	
-    
     NSDate *midnightDate = [gregorian dateByAddingComponents:componentsToSubtract toDate:currentTime options:0];
     
     [componentsToSubtract release];
     [gregorian release];
     
+	_midnightDate = midnightDate;
     
     return midnightDate;
         
@@ -191,9 +197,12 @@
     
 	
     NSDate *currentTime = [NSDate date];
-    NSDate *currentOpening = [self currentOpening];
-    NSDate *currentClosing = [self currentClosing];
-
+	
+	if (_currentOpening == nil) { [self currentOpening]; }
+	if (_currentClosing == nil) { [self currentClosing]; }
+	
+    NSDate *currentOpening = _currentOpening;
+    NSDate *currentClosing = _currentClosing;
     
     NSComparisonResult nowOpeningComparison = [currentTime compare:currentOpening];
     NSComparisonResult nowClosingComparison = [currentTime compare:currentClosing];
@@ -214,9 +223,13 @@
 - (BOOL)hasClosed{
     
     NSDate *currentTime = [NSDate date];
-	NSDate *currentOpening = [self currentOpening];
-    NSDate *currentClosing = [self currentClosing];
-    
+
+    if (_currentOpening == nil) { [self currentOpening]; }
+	if (_currentClosing == nil) { [self currentClosing]; }
+	
+    NSDate *currentOpening = _currentOpening;
+    NSDate *currentClosing = _currentClosing;	
+	
     NSComparisonResult nowClosingComparison = [currentTime compare:currentClosing];
 	
 	BOOL result;
@@ -236,13 +249,14 @@
 
 - (BOOL)isValidMeal{
 	
-	NSDate *currentClosing = [self currentClosing];
-	NSDate *currentOpening = [self currentOpening];
+	if (_currentOpening == nil) { [self currentOpening]; }
+	if (_currentClosing == nil) { [self currentClosing]; }
+	
+    NSDate *currentOpening = _currentOpening;
+    NSDate *currentClosing = _currentClosing;	
 
 	NSTimeInterval opening = [currentOpening timeIntervalSince1970];
 	NSTimeInterval closing = [currentClosing timeIntervalSince1970];
-	
-	
 	
 	if ((int)opening == (int)closing ) {
 		return NO;
@@ -264,12 +278,20 @@
 	WristWatch *clock= [[WristWatch alloc] init];
 	
 	if (currentDay != [clock getWeekDay]) {
-		currentTime = [self tomorrowOneAM];
-		currentOpening = [self currentOpeningTomorrow];
+		
+		if (_tomorrowOneAM == nil) { [self tomorrowOneAM]; }
+		if (_currentOpeningTomorrow == nil) { [self currentOpeningTomorrow]; }
+		
+		currentTime = _tomorrowOneAM;
+		currentOpening = _currentOpeningTomorrow;	
 		
 	} else {
+		
 		currentTime = [NSDate date];
-		currentOpening = [self currentOpening];
+		
+		if (_currentOpening == nil) { [self currentOpening]; }
+		
+		currentOpening = _currentOpening;
 	}
 
 	[clock release];
@@ -291,31 +313,31 @@
 
 - (NSString *)dateText{
     
-    NSString *openingTime = [self formattedTimeString:[self currentOpening]];
-    NSString *closingTime = [self formattedTimeString:[self currentClosing]];
+	if (_currentOpening == nil) { [self currentOpening]; }
+	if (_currentClosing == nil) { [self currentClosing]; }
+	
+    NSDate *currentOpening = _currentOpening;
+    NSDate *currentClosing = _currentClosing;
+	
+    NSString *openingTime = [self formattedTimeString:currentOpening];
+    NSString *closingTime = [self formattedTimeString:currentClosing];
 
     
-    
     if ([self isOpen]){
-        
         NSString *stringToReturn = [NSString stringWithFormat:@"Closes at %@", closingTime];
 		return stringToReturn;
-        
     }
     
     
     else if ([self willOpen]){
         
-        
         NSString *stringToReturn = [NSString stringWithFormat:@"%@ - %@", openingTime, closingTime];
-
         return stringToReturn;
     }
     
     else if ([self hasClosed]){
         
         NSString *stringToReturn = [NSString stringWithFormat:@"%@ - %@", openingTime, closingTime];
-		
         return stringToReturn;
         
     }
@@ -326,8 +348,15 @@
 
 - (NSString*)fullHoursText{
     
-    NSString *openingTime = [self formattedTimeString:[self currentOpening]];
-    NSString *closingTime = [self formattedTimeString:[self currentClosing]];
+	if (_currentOpening == nil) { [self currentOpening]; }
+	if (_currentClosing == nil) { [self currentClosing]; }
+	
+    NSDate *currentOpening = _currentOpening;
+    NSDate *currentClosing = _currentClosing;
+	
+	
+    NSString *openingTime = [self formattedTimeString:currentOpening];
+    NSString *closingTime = [self formattedTimeString:currentClosing];
     
     NSString *stringToReturn = [NSString stringWithFormat:@"%@ - %@", openingTime, closingTime];
 	

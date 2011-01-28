@@ -16,12 +16,9 @@
 	IBOutlet UILabel *thorne_label;
 	IBOutlet UILabel *moulton_label;
 	IBOutlet UILabel *express_label;
-//	IBOutlet UILabel *thorneCount;
-//	IBOutlet UILabel *moultonCount;
-//	IBOutlet UILabel *expressCount;
-	
-//	IBOutlet UILabel *totalPatrons;
-	
+	IBOutlet UILabel *currentTime_label;
+	IBOutlet UILabel *updatedTime_label;
+
 	IBOutlet UIButton *refreshButton;
 	
 	IBOutlet UISegmentedControl *accuracy;
@@ -32,22 +29,26 @@
 	MBProgressHUD *HUD;
 	
 	NSData *stored_data;
+	
+	NSTimer *repeatingTimer;
+	
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *thorne_label;
 @property (nonatomic, retain) IBOutlet UILabel *moulton_label;
 @property (nonatomic, retain) IBOutlet UILabel *express_label;
-/*@property (nonatomic, retain) IBOutlet UILabel *thorneCount;
-@property (nonatomic, retain) IBOutlet UILabel *moultonCount;
-@property (nonatomic, retain) IBOutlet UILabel *expressCount;
-@property (nonatomic, retain) IBOutlet UILabel *totalPatrons;
-*/
- 
+@property (nonatomic, retain) IBOutlet UILabel *currentTime_label;
+@property (nonatomic, retain) IBOutlet UILabel *updatedTime_label;
+
+@property (nonatomic, retain) NSTimer *repeatingTimer;
+
+
 @property (nonatomic, retain) IBOutlet UIButton *refreshButton;
 
 
 -(IBAction)refresh;
 -(IBAction)report;
+- (IBAction)dismissPage;
 -(void)analyzeData:(NSData*)theData;
 
 @end

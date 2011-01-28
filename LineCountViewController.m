@@ -19,7 +19,7 @@
 @implementation LineCountViewController
 
 
-@synthesize thorne_label, moulton_label, express_label, refreshButton;
+@synthesize thorne_label, moulton_label, express_label, refreshButton, repeatingTimer, currentTime_label, updatedTime_label;
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -36,11 +36,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.title = @"Line Counts";
+	currentTime_label.text = [self getUpdatedTimeString];
+
 	
 	[self.navigationController setNavigationBarHidden:YES];
 	
 	NSLog(@"View Controller Created");
 
+	NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateClock:) userInfo:nil repeats:YES];
+	self.repeatingTimer = timer;
 		
 	// ** HUD Code by Matej Bukovinski ** //
 	
@@ -58,6 +62,24 @@
 	
 	
 	[thorne_label setNeedsDisplay];
+	
+}
+
+- (void)updateClock:(id)sender {
+
+	currentTime_label.text = [self getUpdatedTimeString];
+
+}
+
+-(NSString*)getUpdatedTimeString{
+	
+	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[inputFormatter setDateFormat:@"h:mm a"];
+	NSDate *toBeFormatted = [[[NSDate alloc] init] autorelease];
+	
+	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
+		
+	return formattedDate;
 	
 }
 
@@ -128,6 +150,10 @@
 	
 	
 	
+}
+
+- (IBAction)dismissPage{
+	[self.navigationController popViewControllerAnimated:YES];	
 }
 
 
@@ -210,6 +236,8 @@
 
 
 - (void)dealloc {
+	[repeatingTimer invalidate];
+	self.repeatingTimer = nil; // stops timer
     [super dealloc];
 }
 

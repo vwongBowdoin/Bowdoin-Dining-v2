@@ -16,7 +16,8 @@
 	NSString *userName;
 	NSString *password;
 	
-	NSData *lineCountData;
+	NSData *storedDate;
+	NSData *transactionData;
 	
 }
 
@@ -27,6 +28,7 @@
 // Public Methods
 - (void)getCSGoldDataWithUserName:(NSString*)user password:(NSString*)pass;
 - (NSData*)getCSGoldLineCountsWithUserName:(NSString*)user password:(NSString*)pass;
+- (NSData*)getCSGoldTransactionsWithUserName:(NSString*)user password:(NSString*)pass;
 
 // Private Methods
 - (void)updateAllCSGoldData;

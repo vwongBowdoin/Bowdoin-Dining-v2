@@ -168,6 +168,7 @@
         NSString *downloadAddress = [NSString stringWithFormat:@"%@/%@/%@", serverPath, sundayString, dayString];
         NSURL *downloadURL = [NSURL URLWithString:downloadAddress];
 		        
+		NSLog(@"DownloadAddress = %@", downloadURL);
 		
         // Saving File for Parser - checking for errorq
 		NSError *error = nil;
@@ -196,7 +197,7 @@
 
 // returns the atreus server path
 - (NSString *)atreusSeverPath {
-    return @"http://www.bowdoin.edu/atreus/lib/xml/";
+    return @"http://www.bowdoin.edu/atreus/lib/xml";
 }
 
 - (void)errorOccurred:(NSError *)theErrorMessage{

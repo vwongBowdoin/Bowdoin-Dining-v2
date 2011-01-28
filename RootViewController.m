@@ -239,6 +239,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 	
 	// Creates the No Meal Alert View
 
+	[self stressTest];
+	
 }
 
 
@@ -265,7 +267,53 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 	
 }
 
+- (void)stressTest{
+	
+	//downloadSucceeded = YES;
+	
+	
+	WristWatch *watch = [[WristWatch alloc] init];
+	int currentDay = [watch getDay];
+	int currentYear = [watch getYear];
+	int currentWeek = [watch getWeekofYear];
 
+	// loop
+	
+	// Day Loop
+	for (int weekday = 1; weekday <= 7; weekday++) {
+		for (int hour = 0; hour < 2; hour++) {
+			// increments by 5 minutes
+			for (int minute = 0; minute < 15; minute += 5) {
+				
+				NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+				
+				NSDateComponents *components = [[NSDateComponents alloc] init];
+				
+				[components setYear:currentYear];
+				[components setDay:currentDay + weekday];
+				[components setHour:hour];
+				[components setMinute:minute];
+				
+				
+				NSDate *result = [gregorian dateFromComponents:components];
+				
+				NSLog(@"Testing Date %@", result);
+				
+				ScheduleDecider *decider = [[ScheduleDecider alloc] init];
+				self.scheduler = decider;
+				
+				[scheduler stressTestForDate:result day:currentDay+weekday week:currentWeek];
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+}
 
 /**
 	Activated by NSNotificationCenter during normal download
@@ -537,7 +585,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
         
 	} else {
         
-        [self animateNavigationBars];
+		[self animateNavigationBars];
      
 		
 		currentHallPage = hallPage;
@@ -732,7 +780,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 		grillAccessoryView.frame = CGRectMake(accessoryViewOriginX, accessoryViewOriginY + accessoryViewHeight, accessoryViewWidth , accessoryViewHeight);
 		
         navigationBarsAnimatedOut = NO;
-        [customTableView setAlpha:1.0];
+        [customTableView setAlpha:0.0];
 
 		// Sets Buttons
 		[callButton setAlpha:0.0];
@@ -766,7 +814,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
         
 		
         navigationBarsAnimatedOut = YES;
-        [customTableView setAlpha:1.0];
+        [customTableView setAlpha:0.0];
 
 		[callButton setAlpha:1.0];
 		[callText setAlpha:1.0];
@@ -884,7 +932,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 		
 		// create the parent view
 		UIView * customSectionView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320, 40)];
-		customSectionView.backgroundColor = [UIColor lightGrayColor];
+		customSectionView.backgroundColor = [UIColor whiteColor];
 		
 		UIView * coverUp = [[UIView	alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 20.0)];
 		coverUp.backgroundColor = [UIColor whiteColor];

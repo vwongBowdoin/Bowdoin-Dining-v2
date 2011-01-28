@@ -835,12 +835,12 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 - (void)processArrays{
 	
 	
-	NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
+	//NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
 	
 	WristWatch *clock= [[WristWatch alloc] init];
 	watch = clock;
-	[self setupCoreData];
-	[self searchCoreData];
+
+	
 	[self processHoursArrays];
 	
 	[self processMealArraysForDay:[watch getWeekDay]];
@@ -852,10 +852,24 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	[self populateMealArrays];
 	[self populateSpecialsArray];
 	
-	NSTimeInterval duration = [NSDate timeIntervalSinceReferenceDate] - start;
-	NSLog(@"Duration: %f", duration);
+	//NSTimeInterval duration = [NSDate timeIntervalSinceReferenceDate] - start;
+	//NSLog(@"Duration: %f", duration);
 	
 }
+
+- (void)stressTestForDate:(NSDate*)result day:(int)dayToTest week:(int)weekToTest{
+	
+	WristWatch *clock= [[WristWatch alloc] init];
+	watch = clock;
+	
+	
+	
+	
+	
+	
+	
+}
+
 
 #pragma mark -
 #pragma mark Meal Data Setup
@@ -1088,9 +1102,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 #pragma mark Meal TableView DataSource
 
 - (NSInteger)sizeOfSection:(NSInteger)section forLocation:(NSInteger)location atMealIndex:(NSUInteger)mealIndex{
-	
-	NSLog(@"Size of Section %d for Location: %d atMealIndex %d", section, location, mealIndex);
-	
+		
 	
 	switch (location) {
 		case 0:
@@ -1247,8 +1259,9 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     NSMutableArray *nowHours_Smith = [NSMutableArray array];
 	
 	//Assumes we want an array of today's hours.
-    int currentDay = (int)[watch getWeekDay];
-    
+    //STRESSTESTint currentDay = (int)[watch getWeekDay];
+    int currentDay = testDay;
+	
     for(MealSchedule *element in mealArray){
         [element setCurrentDay:currentDay];
 		

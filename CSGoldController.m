@@ -63,9 +63,27 @@
 	
 	[self createSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldLineCountsHistogram/>"]];
 
-	return lineCountData;
+	return storedDate;
 	
 
+}
+
+- (NSData*)getCSGoldTransactionsWithUserName:(NSString*)user password:(NSString*)pass {
+	
+	NSLog(@"Getting CSGoldGLTransactions");
+	
+	// Sets the CSGold controllers UserName and Password
+	self.userName = user;
+	self.password = pass;
+	
+	
+	//NSLog(@"CSGoldController Using Login:%@ and Password:%@", userName, password);
+	
+	[self createTransactionSOAPRequestWithEnvelope:[self returnSoapEnvelopeForService:@"<tem:GetCSGoldGLTrans/>"]];
+	
+	return transactionData;
+	
+	
 }
 
 - (void)updateAllCSGoldData{
@@ -138,7 +156,7 @@
 		CSGoldParser *parser = [[CSGoldParser alloc] init];
 		NSData *responseData = [SOAPRequest responseData];
 		[parser parseWithData:responseData];
-		lineCountData = responseData;
+		storedDate = responseData;
 	//	[responseData release];
 		[parser release];
 		
@@ -146,6 +164,45 @@
 	}
 	
 	NSLog(@"Request used Cached Response %d", [SOAPRequest didUseCachedResponse]);
+	
+	[SOAPRequest release];
+	
+}
+
+- (void)createTransactionSOAPRequestWithEnvelope:(NSMutableString*)SOAPEnvelope{
+	
+	
+	ASIHTTPRequest *SOAPRequest = [[ASIHTTPRequest alloc]
+								   initWithURL:[NSURL URLWithString:@"https://owl.bowdoin.edu/ws-csGoldShim/Service.asmx"]];
+	
+	[SOAPRequest addRequestHeader:@"Content-Type" value:@"text/xml"];	
+	[SOAPRequest addRequestHeader:@"Host" value:@"bowdoin.edu"];
+    /* ***** values need to be set here ***** */
+	
+	//NSLog(@"Attaching Username: %@ and password: %@", userName, password);
+	
+	[SOAPRequest setUsername:self.userName];
+	[SOAPRequest setPassword:self.password];
+	[SOAPRequest setDomain:@"bowdoincollege"];
+	[SOAPRequest setCachePolicy:ASIDoNotReadFromCacheCachePolicy];
+	[SOAPRequest setUseSessionPersistence:YES];
+	[SOAPRequest setCacheStoragePolicy:ASICacheForSessionDurationCacheStoragePolicy];
+	[SOAPRequest setUseCookiePersistence:NO];
+	[SOAPRequest setUseKeychainPersistence:NO];
+	[SOAPRequest setValidatesSecureCertificate:YES];
+	[SOAPRequest setPostBody:(NSMutableData*)[SOAPEnvelope dataUsingEncoding:NSUTF8StringEncoding]];
+	[SOAPRequest startSynchronous];
+	
+	// Makes sure authentication was successful
+	if (SOAPRequest.responseStatusCode == 200) {
+				
+		NSData *responseData = [SOAPRequest responseData];
+		transactionData = responseData;
+		//	[responseData release];
+		
+	}
+	
+	NSLog(@"Request used Cached Response? %d", [SOAPRequest didUseCachedResponse]);
 	
 	[SOAPRequest release];
 	

@@ -47,6 +47,7 @@
 - (IBAction)dismissPage;
 - (IBAction)logout;
 - (IBAction)refreshInformation;
+- (IBAction)launchRecentTransactions;
 
 
 @end
