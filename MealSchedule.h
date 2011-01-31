@@ -23,6 +23,7 @@
 	NSDate *_currentOpening;
 	NSDate *_currentClosing;
 	NSDate *_currentOpeningTomorrow;
+	NSDate *_currentClosingTomorrow;
 
 	NSDate *_oneAMDate;
 	NSDate *_tomorrowOneAM;

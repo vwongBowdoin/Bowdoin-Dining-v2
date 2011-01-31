@@ -922,6 +922,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		
         if ([element isOpen] || [element willOpen]){
 			
+			NSLog(@"%@ %@ isOpen? %d willOpen? %d", element.location, element.shortName, [element isOpen], [element willOpen]);
 			
             [dictionary setObject:element.shortName forKey:@"Shortname"];
             [dictionary setObject:[element returnFileLocation] forKey:@"FileLocation"];
@@ -976,12 +977,18 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (void)populateMealArrays{
 	
-	
+	NSLog(@"Thorne Meals");
 	self.thorneArray = [self populateArrayFromDict:thorne_dictionary_array];
+	
+	NSLog(@"Moulton Meals");
 	self.moultonArray = [self populateArrayFromDict:moulton_dictionary_array];
+	
+	
 }
 
 - (NSMutableArray*)populateArrayFromDict:(NSMutableArray*)dictArray {
+	
+	//NSLog(@"%@", dictArray);
 	
 	NSMutableArray *tempArray = [[NSMutableArray alloc] init];
 	
@@ -997,8 +1004,10 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			
 			
 			if (array == NULL) {
-				//NSLog(@"NULL File!!!");
-				//array = [[NSMutableArray alloc] initWithObjects:@"NULL ENTRY", nil];
+				NSLog(@"NULL File!!!");
+				NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+				array = [[NSMutableArray alloc] initWithObjects:dictionary, nil];
+				[tempArray addObject:array];
 			} else {
 				[tempArray addObject:array];
 			}
@@ -1009,6 +1018,9 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		
 		
 	}
+	
+//	NSLog(@"%@", tempArray);
+
 	
 	return tempArray;
 	
@@ -1058,7 +1070,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"Day"] forKey:@"Day"];
 				
 				// ultimately this needs to be a fake file location
-				//[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
+				[fakeDictionary setObject:[NSString stringWithFormat:@"%@/fakeXMLDoc.xml",[self documentsDirectory]] forKey:@"FileLocation"];
 				[fakeDictionary setObject:[[moulton_dictionary_array objectAtIndex:i] objectForKey:@"Formatted_Title"] forKey:@"Formatted_Title"];
 				
 				[fakeDictionary setObject:@"Closed" forKey:@"Hours_of_Operation"];
@@ -1079,7 +1091,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"Day"] forKey:@"Day"];
 				
 				// ultimately this needs to be a fake file location
-				//[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"FileLocation"] forKey:@"FileLocation"];
+				[fakeDictionary setObject:[NSString stringWithFormat:@"%@/fakeXMLDoc.xml",[self documentsDirectory]] forKey:@"FileLocation"];
 				[fakeDictionary setObject:[[thorne_dictionary_array objectAtIndex:i] objectForKey:@"Formatted_Title"] forKey:@"Formatted_Title"];
 				
 				[fakeDictionary setObject:@"Closed" forKey:@"Hours_of_Operation"];
@@ -1162,16 +1174,16 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (NSInteger)numberOfSectionsForLocation:(NSInteger)location atMealIndex:(NSInteger)mealIndex{
 	
-	//NSLog(@"Number of Sections");
 		
 	switch (location) {
 		case 0:
 			if (thorneArray == nil || [thorneArray count] == 0) {
 				return 0;
-			} else if ([[thorneArray objectAtIndex:mealIndex] respondsToSelector:@selector(count)]) {
+			}
+			
+			else if ([thorneArray count] > mealIndex) {
 				return [[thorneArray objectAtIndex:mealIndex] count];
-			} else {
-				return 0;
+				
 			}
 		case 1:
 			if (moultonArray == nil || [moultonArray count] == 0) {
@@ -1296,9 +1308,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		
 		
 		[element setCurrentDay:currentDay];
-		
-		
-		
+
 		
 		BOOL hasClosed = [element hasClosed];
 		BOOL isOpen = [element isOpen];

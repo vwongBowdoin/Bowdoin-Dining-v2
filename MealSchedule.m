@@ -42,7 +42,7 @@
 // Returns an NSDate initialized for the current opening time tomorrow.
 - (NSDate *)currentOpeningTomorrow{
 		
-	NSTimeInterval interval = [[openTimes objectAtIndex:currentDay-1] intValue];
+	NSTimeInterval interval = [[openTimes objectAtIndex:currentDay] intValue];
 		
 	NSDate *openTime = [[NSDate alloc] initWithTimeInterval:interval 
 													  sinceDate:[self tomorrowMidnight]];
@@ -53,6 +53,22 @@
     return openTime;
     
 }
+
+// Returns an NSDate initialized for the current closing time tomorrow.
+- (NSDate *)currentClosingTomorrow{
+	
+	NSTimeInterval interval = [[closeTimes objectAtIndex:currentDay] intValue];
+	
+	NSDate *closeTime = [[NSDate alloc] initWithTimeInterval:interval 
+												  sinceDate:[self tomorrowMidnight]];
+	
+	
+	_currentClosingTomorrow = closeTime;
+	
+    return closeTime;
+    
+}
+
 
 
 
@@ -146,16 +162,16 @@
     NSDateComponents* nowHour = [gregorian components:NSHourCalendarUnit fromDate:now];
     NSDateComponents* nowMinute = [gregorian components:NSMinuteCalendarUnit fromDate:now];
     NSDateComponents* nowSecond = [gregorian components:NSSecondCalendarUnit fromDate:now];
-    
+
+	
     NSDateComponents* componentsToAdd = [[NSDateComponents alloc] init];
     
-    [componentsToAdd setHour:24-[nowHour hour]];
-    [componentsToAdd setMinute:60-[nowMinute minute]];
+    [componentsToAdd setHour:23-[nowHour hour]];
+    [componentsToAdd setMinute:59-[nowMinute minute]];
     [componentsToAdd setSecond:60-[nowSecond second]];
     
     
     NSDate *tomorrowMidnight = [gregorian dateByAddingComponents:componentsToAdd toDate:now options:0];
-    
     [componentsToAdd release];
     [gregorian release];
     
@@ -224,23 +240,48 @@
 
 - (BOOL)isOpen{
     
+	NSDate *currentTime;
+	NSDate *currentOpening;
+    NSDate *currentClosing;	
+	int weekday;
 	
 	//STRESSTEST
 	
-	NSDate *currentTime;
-	if (stressTesting) {
-		currentTime = stressTestTime;
-	} else {
-		currentTime = [NSDate date];
+	WristWatch *clock= [[WristWatch alloc] init];
+	
+	//STRESSTEST
+	if (stressTesting) { weekday = [self getStressTestWeekDay]; } 
+	else { weekday = [clock getWeekDay]; }  
+	
+	
+	if (currentDay != weekday) {
 		
-	}   
+		if (_tomorrowOneAM == nil) { [self tomorrowOneAM]; }
+		if (_currentOpeningTomorrow == nil) { [self currentOpeningTomorrow]; }
+		if (_currentClosingTomorrow == nil) { [self currentClosingTomorrow]; }
+		
+		currentTime = _tomorrowOneAM;
+		currentOpening = _currentOpeningTomorrow;
+		currentClosing = _currentClosingTomorrow;
+		
+		
+	} else {
+		
+		//TEST
+		if (stressTesting) {
+			currentTime = stressTestTime;
+		} else {
+			
+			if (_currentOpening == nil) { [self currentOpening]; }
+			if (_currentClosing == nil) { [self currentClosing]; }
+			
+			currentTime = [NSDate date];
+			currentOpening = _currentOpening;
+			currentClosing = _currentClosing;
+			
+		}
+	}
 	
-	
-	if (_currentOpening == nil) { [self currentOpening]; }
-	if (_currentClosing == nil) { [self currentClosing]; }
-	
-    NSDate *currentOpening = _currentOpening;
-    NSDate *currentClosing = _currentClosing;
     
     NSComparisonResult nowOpeningComparison = [currentTime compare:currentOpening];
     NSComparisonResult nowClosingComparison = [currentTime compare:currentClosing];
@@ -260,22 +301,48 @@
 
 - (BOOL)hasClosed{
     
-	//STRESSTEST
-	
 	NSDate *currentTime;
-	if (stressTesting) {
-		currentTime = stressTestTime;
-	} else {
-		currentTime = [NSDate date];
+	NSDate *currentOpening;
+    NSDate *currentClosing;	
+	int weekday;
+	
+	WristWatch *clock= [[WristWatch alloc] init];
+
+	//STRESSTEST
+	if (stressTesting) { weekday = [self getStressTestWeekDay]; } 
+	else { weekday = [clock getWeekDay]; }  
+	
+	
+	if (currentDay != weekday) {
 		
-	}  
-	
-	
-    if (_currentOpening == nil) { [self currentOpening]; }
-	if (_currentClosing == nil) { [self currentClosing]; }
-	
-    NSDate *currentOpening = _currentOpening;
-    NSDate *currentClosing = _currentClosing;	
+		if (_tomorrowOneAM == nil) { [self tomorrowOneAM]; }
+		if (_currentOpeningTomorrow == nil) { [self currentOpeningTomorrow]; }
+		if (_currentClosingTomorrow == nil) { [self currentClosingTomorrow]; }
+
+		currentTime = _tomorrowOneAM;
+		currentOpening = _currentOpeningTomorrow;
+		currentClosing = _currentClosingTomorrow;
+
+		
+	} else {
+		
+		//TEST
+		if (stressTesting) {
+			currentTime = stressTestTime;
+		} else {
+			
+			if (_currentOpening == nil) { [self currentOpening]; }
+			if (_currentClosing == nil) { [self currentClosing]; }
+			
+			currentTime = [NSDate date];
+			currentOpening = _currentOpening;
+			currentClosing = _currentClosing;
+			
+		}
+	}
+		
+		
+
 	
     NSComparisonResult nowClosingComparison = [currentTime compare:currentClosing];
 	
@@ -378,12 +445,40 @@
 
 - (NSString *)dateText{
     
-	if (_currentOpening == nil) { [self currentOpening]; }
-	if (_currentClosing == nil) { [self currentClosing]; }
+	NSDate *currentTime;
+	NSDate *currentOpening;
+    NSDate *currentClosing;	
+	int weekday;
 	
-    NSDate *currentOpening = _currentOpening;
-    NSDate *currentClosing = _currentClosing;
+	WristWatch *clock= [[WristWatch alloc] init];
 	
+	//STRESSTEST
+	if (stressTesting) { weekday = [self getStressTestWeekDay]; } 
+	else { weekday = [clock getWeekDay]; }  
+	
+	
+	if (currentDay != weekday) {
+		
+		if (_currentOpeningTomorrow == nil) { [self currentOpeningTomorrow]; }
+		if (_currentClosingTomorrow == nil) { [self currentClosingTomorrow]; }
+		
+		currentOpening = _currentOpeningTomorrow;
+		currentClosing = _currentClosingTomorrow;
+		
+		
+	} else {
+		
+
+		if (_currentOpening == nil) { [self currentOpening]; }
+		if (_currentClosing == nil) { [self currentClosing]; }
+			
+		currentOpening = _currentOpening;
+		currentClosing = _currentClosing;
+			
+		
+	}
+	
+   	
     NSString *openingTime = [self formattedTimeString:currentOpening];
     NSString *closingTime = [self formattedTimeString:currentClosing];
 
@@ -412,12 +507,40 @@
 }
 
 - (NSString*)fullHoursText{
-    
-	if (_currentOpening == nil) { [self currentOpening]; }
-	if (_currentClosing == nil) { [self currentClosing]; }
+   
 	
-    NSDate *currentOpening = _currentOpening;
-    NSDate *currentClosing = _currentClosing;
+	NSDate *currentTime;
+	NSDate *currentOpening;
+    NSDate *currentClosing;	
+	int weekday;
+	
+	WristWatch *clock= [[WristWatch alloc] init];
+	
+	//STRESSTEST
+	if (stressTesting) { weekday = [self getStressTestWeekDay]; } 
+	else { weekday = [clock getWeekDay]; }  
+	
+	
+	if (currentDay != weekday) {
+		
+		if (_currentOpeningTomorrow == nil) { [self currentOpeningTomorrow]; }
+		if (_currentClosingTomorrow == nil) { [self currentClosingTomorrow]; }
+		
+		currentOpening = _currentOpeningTomorrow;
+		currentClosing = _currentClosingTomorrow;
+		
+		
+	} else {
+		
+		
+		if (_currentOpening == nil) { [self currentOpening]; }
+		if (_currentClosing == nil) { [self currentClosing]; }
+		
+		currentOpening = _currentOpening;
+		currentClosing = _currentClosing;
+		
+		
+	}
 	
 	
     NSString *openingTime = [self formattedTimeString:currentOpening];
