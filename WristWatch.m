@@ -236,7 +236,6 @@
 	// Returns the week of the year
 	NSInteger formattedWeek;
 	formattedWeek = [formattedDate intValue];
-	//NSLog(@"formattedWeek: %d", formattedWeek);
 	
 	return formattedWeek;
 	
@@ -246,13 +245,12 @@
 	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
 	[inputFormatter setDateFormat:@"w"];
 	
-	NSTimeInterval oneDay = 24 * 60 * 60;
-	NSDate *toBeFormatted = [[[NSDate alloc] initWithTimeIntervalSinceNow:oneDay] autorelease];
+	NSTimeInterval sevenDays = 7 * 24 * 60 * 60;
+	NSDate *toBeFormatted = [[[NSDate alloc] initWithTimeIntervalSinceNow:sevenDays] autorelease];
 	
 	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
 	
 	
-	//NSLog(@"Returning Next Day: %d", [formattedDate intValue]);
 	return[formattedDate intValue];
 	
 }

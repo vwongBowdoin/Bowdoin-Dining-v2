@@ -749,88 +749,6 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
     return self;
 }
 
-- (void)setupCoreData{
-	
-	/*
-	 Fetch existing events.
-	 Create a fetch request; find the Event entity and assign it to the request; add a sort descriptor; then execute the fetch.
-	 */
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"FavoriteItem" inManagedObjectContext:managedObjectContext];
-	[request setEntity:entity];
-	
-	// Order the events by creation date, most recent first.
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"itemName" ascending:NO];
-	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-	[request setSortDescriptors:sortDescriptors];
-	[sortDescriptor release];
-	[sortDescriptors release];
-	
-	// Execute the fetch -- create a mutable copy of the result.
-	NSError *error = nil;
-	NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-	if (mutableFetchResults == nil) {
-		// Handle the error.
-	}
-	
-	NSLog(@"Core Date:");
-	for (int i = 0; i < [mutableFetchResults count]; i++) {
-		NSLog(@"%@", [[mutableFetchResults objectAtIndex:i] itemName]);
-	}
-	
-	// Set self's events array to the mutable array, then clean up.
-	//[self setEventsArray:mutableFetchResults];
-	[mutableFetchResults release];
-	[request release];
-	
-	
-}
-
-- (void)searchCoreData{
-	
-	NSLog(@"Searching for FUBAR");
-	
-	/*
-	 Fetch existing events.
-	 Create a fetch request; find the Event entity and assign it to the request; add a sort descriptor; then execute the fetch.
-	 */
-	NSFetchRequest *request = [[NSFetchRequest alloc] init];
-	NSEntityDescription *entity = [NSEntityDescription entityForName:@"FavoriteItem" inManagedObjectContext:managedObjectContext];
-	[request setEntity:entity];
-	
-	// Order the events by creation date, most recent first.
-	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"itemName" ascending:NO];
-	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-	[request setSortDescriptors:sortDescriptors];
-	[sortDescriptor release];
-	[sortDescriptors release];
-	
-	// Execute the fetch -- create a mutable copy of the result.
-	NSError *error = nil;
-	NSMutableArray *mutableFetchResults = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-	if (mutableFetchResults == nil) {
-		// Handle the error.
-	}
-	
-	NSMutableArray *searchArray = [[NSMutableArray alloc] init];
-	for (FavoriteItem *favorite in mutableFetchResults) {
-		[searchArray addObject:[favorite itemName]];
-	}
-
-	NSLog(@"Object at Index %i", [searchArray indexOfObject:@"FUBAR"]);
-	
-	// Set self's events array to the mutable array, then clean up.
-	//[self setEventsArray:mutableFetchResults];
-	[mutableFetchResults release];
-	[request release];
-	[searchArray release];
-	
-	
-	
-	
-	
-	
-}
 
 - (void)processArrays{
 	
@@ -841,10 +759,20 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	watch = clock;
 
 	
+	int today = [watch getWeekDay];
+	int tomorrow = [watch getNextWeekDay];
+	
+	int todayWeek = [watch getWeekofYear];
+	int tomorrowWeek = todayWeek;
+	
+	if (tomorrow < today) {
+		tomorrowWeek = [watch getNextWeekofYear];
+	}
+	
 	[self processHoursArrays];
 	
-	[self processMealArraysForDay:[watch getWeekDay] forWeek:[watch getWeekofYear]];
-	[self processMealArraysForDay:[watch getNextWeekDay] forWeek:[watch getNextWeekofYear]];
+	[self processMealArraysForDay:today forWeek:todayWeek];
+	[self processMealArraysForDay:tomorrow forWeek:tomorrowWeek];
 	
 	[self resolveInconsistenciesInArrays];
 	
@@ -878,7 +806,8 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	[self populateSpecialsArray];
 	
 	
-	NSLog(@"Testing Date: %@", result);
+	NSLog(@"Testing Date: %@", 	[watch getAppropriateDateFormat:result]);
+		  
 	[self stressTestArrays];
 
 	
@@ -1048,8 +977,8 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		NSMutableArray *array;		
 		
 		if ([element objectForKey:@"FileLocation"] != NULL) {
-			
-			//NSLog(@"Populating From File %@", [element objectForKey:@"FileLocation"]);
+			NSString *fileLocation = [element objectForKey:@"FileLocation"];
+			NSLog(@"Populating From File %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 			
 			array = [[NSMutableArray alloc] initWithContentsOfFile:[element objectForKey:@"FileLocation"]];
 			
@@ -1169,9 +1098,10 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	NSMutableArray *arrayToReturn;
 	
 	if (fileLocation != NULL) {
-		//NSLog(@"Loading Array = %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
+		NSLog(@"Loading Array = %@", [fileLocation stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@""]);
 		arrayToReturn = [[[NSMutableArray alloc] initWithContentsOfFile:fileLocation] autorelease] ;
 	} else {
+		NSLog(@"Null File Location");
 		arrayToReturn = [[[NSMutableArray alloc] init] autorelease];
 	}
 

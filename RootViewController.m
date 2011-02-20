@@ -234,9 +234,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
     // WristWatch is the global timer.
     WristWatch *localWatch = [[WristWatch alloc]init];
 	watch = localWatch;
-	NSLog(@"Formatted String %@", [watch nextSundayDateString]);
 
-	
     [self registerNotifications];
 	[self setupMealData];
 	
@@ -247,7 +245,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 
 - (void)viewDidAppear:(BOOL)animated{
 
-//	[self stressTest];
+	//[self stressTest];
 
 }
 
@@ -286,8 +284,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 	// loop
 	
 	// Day Loop
-	for (int weekday = 1; weekday <= 7; weekday++) {
-		for (int hour = 0; hour < 24; hour++) {
+	for (int weekday = 6; weekday <= 7; weekday++) {
+		for (int hour = 20; hour < 24; hour++) {
 			// increments by 5 minutes
 			for (int minute = 0; minute < 60; minute += 5) {
 				

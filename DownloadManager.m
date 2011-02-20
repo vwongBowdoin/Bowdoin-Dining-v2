@@ -36,9 +36,8 @@
 	
 	if ([self menusAreCurrent]) {
 		
-		
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
 		NSLog(@"Menus Are Current: Download Completed Notification Posted");
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
 
 
 	} else {
@@ -179,6 +178,26 @@
     }
 	
 	
+	// Download Next Sunday's Meals
+	NSString *nextSundayString = [localWatch nextSundayDateString];
+	NSString *dayString = @"1.xml";
+	NSString *downloadAddress = [NSString stringWithFormat:@"%@%@/%@", serverPath, nextSundayString, dayString];
+	NSURL *downloadURL = [NSURL URLWithString:downloadAddress];
+	
+	NSLog(@"Next Sunday DownloadAddress = %@", downloadURL);
+	
+	// Saving File for Parser - checking for errorq
+	NSError *error = nil;
+	NSData *xmlFile = [NSData dataWithContentsOfURL:downloadURL options:0 error:&error];
+	
+	if (error != NULL) {
+		[self errorOccurred:error];
+		[todaysParser release];
+		return;
+	}
+	
+	// Parse XML from downloaded Data
+	[todaysParser parseXMLData:xmlFile forDay:1 forWeek:[localWatch getNextWeekofYear]];	
 	
     
 	[todaysParser release];

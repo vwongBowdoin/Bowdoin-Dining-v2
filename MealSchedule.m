@@ -411,9 +411,10 @@
 		currentTime = _tomorrowOneAM;
 		currentOpening = _currentOpeningTomorrow;	
 		
-		NSLog(@"Name = %@", shortName);
-		NSLog(@"CurrentTime = %@", [clock getAppropriateDateFormat:_tomorrowOneAM]);
-		NSLog(@"CurrentOpening = %@", [clock getAppropriateDateFormat:_currentOpeningTomorrow]);
+	//	NSLog(@"Name = %@", shortName);
+	//	NSLog(@"CurrentTime = %@", [clock getAppropriateDateFormat:_tomorrowOneAM]);
+	//	NSLog(@"CurrentOpening = %@", [clock getAppropriateDateFormat:_currentOpeningTomorrow]);
+		
 		
 	} else {
 		
