@@ -44,11 +44,6 @@
 	
 	NSTimeInterval interval = [[openTimes objectAtIndex:currentDay-1] intValue];
 	
-	NSLog(@"Event Name = %@", shortName);
-	NSLog(@"Day = %d", currentDay);
-	NSLog(@"Interval = %d", interval);
-
-	
 	NSDate *openTime = [[NSDate alloc] initWithTimeInterval:interval 
 													  sinceDate:[self tomorrowMidnight]];
 		

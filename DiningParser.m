@@ -27,7 +27,7 @@
 	return self;
 }
 
--(void)parseXMLData:(NSData *)data forDay:(int)day{
+-(void)parseXMLData:(NSData *)data forDay:(int)day forWeek:(int)week{
 	mealArray = [[NSMutableArray alloc] init];
 	
     currentDayIndex = day;
@@ -189,12 +189,10 @@
     NSString *archivePath = [NSString stringWithFormat:@"%@/%dthorneBreakfast%d.xml",[self documentsDirectory], currentWeek, day];
     [thorneBreakfast writeToFile:archivePath atomically:YES];
 	NSLog(@"Storing: %@", archivePath);
-	NSLog(@"Description = %@", thorneBreakfast);
 	
     archivePath = [NSString stringWithFormat:@"%@/%dthorneLunch%d.xml",[self documentsDirectory], currentWeek, day];
     [thorneLunch writeToFile:archivePath atomically:YES];
 	NSLog(@"Storing: %@", [archivePath stringByReplacingOccurrencesOfString:[self documentsDirectory] withString:@"docdirectory"]);
-	NSLog(@"Description = %@", thorneLunch);
 
     archivePath = [NSString stringWithFormat:@"%@/%dthorneDinner%d.xml",[self documentsDirectory], currentWeek, day];
     [thorneDinner writeToFile:archivePath atomically:YES];

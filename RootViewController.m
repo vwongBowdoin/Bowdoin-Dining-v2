@@ -83,6 +83,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
     [super viewWillAppear:animated];
 	[self.navigationController setNavigationBarHidden:YES animated:YES];
 	
+
 }
 
 - (void)registerNotifications{
@@ -233,6 +234,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
     // WristWatch is the global timer.
     WristWatch *localWatch = [[WristWatch alloc]init];
 	watch = localWatch;
+	NSLog(@"Formatted String %@", [watch nextSundayDateString]);
+
 	
     [self registerNotifications];
 	[self setupMealData];
@@ -244,7 +247,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 
 - (void)viewDidAppear:(BOOL)animated{
 
-	//[self stressTest];
+//	[self stressTest];
 
 }
 
@@ -276,19 +279,17 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 	
 	//downloadSucceeded = YES;
 	
-	WristWatch *watch = [[WristWatch alloc] init];
 	int currentDay = [watch getDay];
 	int currentYear = [watch getYear];
 	int currentWeek = [watch getWeekofYear];
 	int currentMonth = [watch getMonth];
-
 	// loop
 	
 	// Day Loop
-	for (int weekday = 7; weekday <= 7; weekday++) {
-		for (int hour = 19; hour < 24; hour++) {
+	for (int weekday = 1; weekday <= 7; weekday++) {
+		for (int hour = 0; hour < 24; hour++) {
 			// increments by 5 minutes
-			for (int minute = 30; minute < 60; minute += 5) {
+			for (int minute = 0; minute < 60; minute += 5) {
 				
 				NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 				
@@ -1146,95 +1147,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 		cell.detailTextLabel.backgroundColor = [UIColor clearColor];
 	
 }
-														
-#pragma mark -
-#pragma mark Table view delegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	CustomTableViewCell *cell = (CustomTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
 	
-	NSString *itemTitle = cell.textLabel.text;
-	NSString *canelButtonTitle = @"Dismiss";
-	//NSString *removeFavoriteButton = @"Remove This Favorite";
-	NSString *favoriteThisItem = @"Favorite This Item";
-	NSString *shareThisItem = @"Share This Item";
-	
-	
-	// Need to add in support for not selecting the first item of any section
-	// so that "Main Course" can't be selected
-	
-	/*
-	if (cell.isFavorited) {
 
-		UIActionSheet *favoriteSheet = [[UIActionSheet alloc] initWithTitle:itemTitle 
-																   delegate:self 
-														  cancelButtonTitle:canelButtonTitle 
-													 destructiveButtonTitle:removeFavoriteButton 
-														  otherButtonTitles:shareThisItem, nil];
-		[favoriteSheet showInView:self.view];
-		
-
-	} else {
-				
-		UIActionSheet *favoriteSheet = [[UIActionSheet alloc] initWithTitle:itemTitle 
-																   delegate:self 
-														  cancelButtonTitle:canelButtonTitle 
-													 destructiveButtonTitle:nil 
-														  otherButtonTitles:favoriteThisItem, shareThisItem, nil];
-		[favoriteSheet showInView:self.view];
-		
-	}
-
-	*/
-	
-	
-	UIActionSheet *favoriteSheet = [[UIActionSheet alloc] initWithTitle:itemTitle 
-															   delegate:self 
-													  cancelButtonTitle:canelButtonTitle 
-												 destructiveButtonTitle:nil 
-													  otherButtonTitles:favoriteThisItem, shareThisItem, nil];
-	[favoriteSheet showInView:self.view];
-	
-	
-	
-	selectedIndexPath = indexPath;
-
-	
-}
-
-
-#pragma mark -
-#pragma mark Favorite Control
-// Method for registering favorite selection
--(void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex{
-	
-	CustomTableViewCell *cell = (CustomTableViewCell *)[customTableView cellForRowAtIndexPath:selectedIndexPath];
-	
-	// Favoriting Tag
-	if (buttonIndex == 0) {
-	
-		/*
-		Create a new instance of the Event entity.
-		*/
-		FavoriteItem *favorite = (FavoriteItem *)[NSEntityDescription insertNewObjectForEntityForName:@"FavoriteItem" inManagedObjectContext:managedObjectContext];
-			
-			
-		[favorite setItemName:cell.textLabel.text];
-			
-		// Commit the change.
-		NSError *error;
-		if (![managedObjectContext save:&error]) {
-			// Handle the error.
-		}
-			
-		
-	}
-		
-	else if (buttonIndex == 1) {
-		
-		
-		
-	}
-	
-}
 @end
 

@@ -67,7 +67,6 @@
 			
 			
 			[HUD_local showWhileExecuting:@selector(downloadMenus) onTarget:self withObject:nil animated:YES];  
-			
 			[HUD release];
 			
 			
@@ -89,13 +88,6 @@
 		
 
 	}
-}
-
-// Delegate Method for MBProgressHUD
--(void)hudWasHidden{
-	
-	
-	
 }
 
 // Checks to see if Menus are current
@@ -153,19 +145,20 @@
 	DiningParser *todaysParser = [[DiningParser alloc]init];
 	
 	int startingDay = [localWatch getWeekDay];
+	int currentWeek = [localWatch getWeekofYear];
 	
     for (int i = startingDay; i < 8; i++){
         
 		if (i == startingDay + 2) {
-			[HUD_local hideUsingAnimation:YES];
-			[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"downloadSuccessful"];
+			//[HUD_local hideUsingAnimation:YES];
+			//[HUD_local setDelegate:self];
+			//[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"downloadSuccessful"];
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
-			NSLog(@"Downloading Partially Completed: \n-- downloadSuccessful set to YES \n-- Notification Posted");
 
 		}
         
         NSString *dayString = [NSString stringWithFormat:@"%d.xml", i];
-        NSString *downloadAddress = [NSString stringWithFormat:@"%@/%@/%@", serverPath, sundayString, dayString];
+        NSString *downloadAddress = [NSString stringWithFormat:@"%@%@/%@", serverPath, sundayString, dayString];
         NSURL *downloadURL = [NSURL URLWithString:downloadAddress];
 		        
 		NSLog(@"DownloadAddress = %@", downloadURL);
@@ -181,9 +174,12 @@
         }
         
         // Parse XML from downloaded Data
-        [todaysParser parseXMLData:xmlFile forDay:i];	
+        [todaysParser parseXMLData:xmlFile forDay:i forWeek:currentWeek];	
 
     }
+	
+	
+	
     
 	[todaysParser release];
 

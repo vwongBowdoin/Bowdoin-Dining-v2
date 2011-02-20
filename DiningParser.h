@@ -38,11 +38,12 @@
 	NSMutableArray *moultonBrunch;
     
     NSString *currentDayIndex;
-	
+	NSString *currentWeekIndex;
+
 }
 
 // Methods that create arrays of raw XML Data
--(void)parseXMLData:(NSData *)data forDay:(int)day;
+-(void)parseXMLData:(NSData *)data forDay:(int)day forWeek:(int)week;
 -(void)storeXMLDataforDay:(int)day;
 
 // Private Methods for Populating Data Structure

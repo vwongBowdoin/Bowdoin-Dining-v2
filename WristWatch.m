@@ -69,6 +69,50 @@
     
 }
 
+-(NSString *)nextSundayDateString {
+    
+    NSDate *today = [[NSDate alloc] init];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSDateComponents *weekdayComponents = [gregorian components:NSWeekdayCalendarUnit fromDate:today];
+    
+    /*
+     Create a date components to represent the number of days to subtract from the current date.
+     The weekday value for Sunday in the Gregorian calendar is 1, so subtract 1 from the number of days to subtract from the date in question.  (If today's Sunday, subtract 0 days.)
+     */
+    NSDateComponents *componentsToSubtract = [[NSDateComponents alloc] init];
+    [componentsToSubtract setDay: 7 - ([weekdayComponents weekday] - 1)];
+    
+    NSDate *beginningOfWeek = [gregorian dateByAddingComponents:componentsToSubtract toDate:today options:0];
+
+    NSLog(@"Next Sunday %@", beginningOfWeek);
+	
+    NSDateFormatter *yearFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[yearFormatter setDateFormat:@"Y"];
+	
+    NSDateFormatter *monthFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[monthFormatter setDateFormat:@"M"];
+    
+    NSDateFormatter *dayFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[dayFormatter setDateFormat:@"d"];
+    
+    NSString *formattedYear = [yearFormatter stringFromDate:beginningOfWeek];
+    NSString *formattedMonth = [monthFormatter stringFromDate:beginningOfWeek];
+    NSString *formattedDay = [dayFormatter stringFromDate:beginningOfWeek];
+	
+    NSInteger formattedInt;
+	formattedInt = [formattedMonth intValue] - 1;
+    
+    NSString *formattedDate = [NSString stringWithFormat:@"%@-%d-%@",formattedYear, formattedInt, formattedDay];
+    
+	
+	NSTimeInterval oneDay = 24 * 60 * 60;
+	
+    
+    return formattedDate;
+    
+}
+
 // returns todays xml string
 -(NSString *)todaysXMLString{
     
