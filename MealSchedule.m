@@ -41,7 +41,8 @@
 
 // Returns an NSDate initialized for the current opening time tomorrow.
 - (NSDate *)currentOpeningTomorrow{
-		
+	NSLog(@"Tomorrow's Day: %d", currentDay);
+	
 	NSTimeInterval interval = [[openTimes objectAtIndex:currentDay] intValue];
 		
 	NSDate *openTime = [[NSDate alloc] initWithTimeInterval:interval 
@@ -56,7 +57,9 @@
 
 // Returns an NSDate initialized for the current closing time tomorrow.
 - (NSDate *)currentClosingTomorrow{
-	
+	//NSLog(@"Tomorrow's Day: %d", currentDay);
+
+
 	NSTimeInterval interval = [[closeTimes objectAtIndex:currentDay] intValue];
 	
 	NSDate *closeTime = [[NSDate alloc] initWithTimeInterval:interval 

@@ -17,7 +17,7 @@
 @end
 
 @implementation LineCountAnalyzer
-
+@synthesize moultonTen, moultonThirty, thorneTen, thorneThirty;
 
 
 -(void)analyzeData:(NSData*)data{
@@ -168,13 +168,44 @@
 			
 			
 			totalScore = totalScore + score;
-			total_Patrons = total_Patrons + currentLineCount;
+			
+			
+			// Overall Counts
+			
+			switch (lineID) {
+				case 1: thorneTen += currentLineCount;
+					thorneThirty += currentLineCount;
+					total_Patrons += currentLineCount;
+					break;
+					
+				case 2: moultonTen += currentLineCount;
+					moultonThirty += currentLineCount;
+					total_Patrons += currentLineCount;
+					break;
+			}
+			
+			
+			
 			
 		} else {
 					
 			double currentLineCount = [[array objectAtIndex:i] doubleValue];
-			total_Patrons = total_Patrons + currentLineCount;
-
+			
+			
+			// Overall Counts
+			
+			switch (lineID) {
+				case 1:
+					thorneThirty += currentLineCount;
+					total_Patrons += currentLineCount;
+					break;
+					
+				case 2:;
+					moultonThirty += currentLineCount;
+					total_Patrons += currentLineCount;
+					break;
+			}
+			
 		}
 
 	}

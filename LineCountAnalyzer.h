@@ -20,9 +20,19 @@
 	int moultonScore;
 	int expressScore;
 	
+	int moultonTen;
+	int moultonThirty;
+	int thorneTen;
+	int thorneThirty;
+	
 	int total_Patrons;
 	
 }
+
+@property (nonatomic, assign) int moultonTen;
+@property (nonatomic, assign) int moultonThirty;
+@property (nonatomic, assign) int thorneTen;
+@property (nonatomic, assign) int thorneThirty;
 
 - (NSString*)thorneText;
 - (UIColor*)thorneColor;

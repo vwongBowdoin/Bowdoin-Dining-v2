@@ -155,6 +155,7 @@
 		
 		CSGoldParser *parser = [[CSGoldParser alloc] init];
 		NSData *responseData = [SOAPRequest responseData];
+		NSLog(@"Data: %@", [SOAPRequest responseString]);
 		[parser parseWithData:responseData];
 		storedDate = responseData;
 	//	[responseData release];

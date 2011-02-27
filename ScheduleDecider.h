@@ -108,7 +108,7 @@
 -(void)processArrays;
 
 // Private Methods for Processing Arrays
--(void)processMealArraysForDay:(int)day;
+-(void)processMealArraysForDay:(int)day forWeek:(int)week;
 -(void)processHoursArrays;
 -(void)resolveInconsistenciesInArrays;
 

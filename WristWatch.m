@@ -198,6 +198,22 @@
 	
 }
 
+- (int)getNextWeekofYear {
+	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[inputFormatter setDateFormat:@"w"];
+	
+	NSTimeInterval oneDay = 24 * 60 * 60;
+	NSDate *toBeFormatted = [[[NSDate alloc] initWithTimeIntervalSinceNow:oneDay] autorelease];
+	
+	NSString *formattedDate = [inputFormatter stringFromDate:toBeFormatted];
+	
+	
+	//NSLog(@"Returning Next Day: %d", [formattedDate intValue]);
+	return[formattedDate intValue];
+	
+}
+
+
 -(NSString*)getCurrentDayTitle{
 	
 	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];

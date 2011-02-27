@@ -20,6 +20,7 @@
 
 
 @synthesize thorne_label, moulton_label, express_label, refreshButton, repeatingTimer, currentTime_label, updatedTime_label;
+@synthesize moultonTen_label, moultonThirty_label, thorneTen_label, thorneThirty_label;
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -62,6 +63,54 @@
 	
 	
 	[thorne_label setNeedsDisplay];
+	
+	detailsVisible = NO;
+	
+	
+	
+	
+	
+	// Sets Alpha Levels
+	moultonTen_label.alpha = 0.0;
+	moultonThirty_label.alpha = 0.0;
+	thorneTen_label.alpha = 0.0;
+	thorneThirty_label.alpha = 0.0;
+	
+	/*
+	descriptionsLabelOne.alpha = 0.0;
+	descriptionsLabelTwo.alpha = 0.0;
+	descriptionsLabelThree.alpha = 0.0;
+	descriptionsLabelFour.alpha = 0.0;
+	
+	personOne.alpha = 0.0;
+	personTwo.alpha = 0.0;
+	personThree.alpha = 0.0;
+	personFour.alpha = 0.0;
+	*/
+	
+	NSLog(@"moultonTen_label: %f, %f, %f, %f", moultonTen_label.frame.origin.x, moultonTen_label.frame.origin.y, moultonTen_label.frame.size.width, moultonTen_label.frame.size.height);
+	NSLog(@"moultonThirty_label: %f, %f, %f, %f", moultonThirty_label.frame.origin.x, moultonThirty_label.frame.origin.y, moultonThirty_label.frame.size.width, moultonThirty_label.frame.size.height);
+	NSLog(@"thorneTen_label: %f, %f, %f, %f", thorneTen_label.frame.origin.x, thorneTen_label.frame.origin.y, thorneTen_label.frame.size.width, thorneTen_label.frame.size.height);
+	NSLog(@"thorneThirty_label: %f, %f, %f, %f", thorneThirty_label.frame.origin.x, thorneThirty_label.frame.origin.y, thorneThirty_label.frame.size.width, thorneThirty_label.frame.size.height);
+	
+	/*
+	NSLog(@"descriptionsLabelOne: %f, %f, %f, %f", descriptionsLabelOne.frame.origin.x, descriptionsLabelOne.frame.origin.y, descriptionsLabelOne.frame.size.width, descriptionsLabelOne.frame.size.height);
+	NSLog(@"descriptionsLabelTwo: %f, %f, %f, %f", descriptionsLabelTwo.frame.origin.x, descriptionsLabelTwo.frame.origin.y, descriptionsLabelTwo.frame.size.width, descriptionsLabelTwo.frame.size.height);
+	NSLog(@"descriptionsLabelThree: %f, %f, %f, %f", descriptionsLabelThree.frame.origin.x, descriptionsLabelThree.frame.origin.y, descriptionsLabelThree.frame.size.width, descriptionsLabelThree.frame.size.height);
+	NSLog(@"descriptionsLabelFour: %f, %f, %f, %f", descriptionsLabelFour.frame.origin.x, descriptionsLabelFour.frame.origin.y, descriptionsLabelFour.frame.size.width, descriptionsLabelFour.frame.size.height);
+	
+	NSLog(@"personOne: %f, %f, %f, %f", personOne.frame.origin.x, personOne.frame.origin.y, personOne.frame.size.width, personOne.frame.size.height);
+	NSLog(@"personTwo: %f, %f, %f, %f", personTwo.frame.origin.x, personTwo.frame.origin.y, personTwo.frame.size.width, personTwo.frame.size.height);
+	NSLog(@"personThree: %f, %f, %f, %f", personThree.frame.origin.x, personThree.frame.origin.y, personThree.frame.size.width, personThree.frame.size.height);
+	NSLog(@"personFour: %f, %f, %f, %f", personFour.frame.origin.x, personFour.frame.origin.y, personFour.frame.size.width, personFour.frame.size.height);
+	*/
+	
+	NSLog(@"moultonButton: %f, %f, %f, %f", moultonButton.frame.origin.x, moultonButton.frame.origin.y, moultonButton.frame.size.width, moultonButton.frame.size.height);
+	NSLog(@"thorneButton: %f, %f, %f, %f", thorneButton.frame.origin.x, thorneButton.frame.origin.y, thorneButton.frame.size.width, thorneButton.frame.size.height);
+
+	
+	moultonDetails.alpha = 0.0;
+	thorneDetails.alpha = 0.0;
 	
 }
 
@@ -119,19 +168,18 @@
 	
 	thorne_label.text = [analyzer thorneText];
 	thorne_label.textColor = [analyzer thorneColor];
-//	thorneCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer thorneScore]];
-	
+	thorneTen_label.text = [NSString stringWithFormat:@"%d", analyzer.thorneTen];
+	thorneThirty_label.text = [NSString stringWithFormat:@"%d", analyzer.thorneThirty];
+
 	
 	moulton_label.text = [analyzer moultonText];
 	moulton_label.textColor = [analyzer moultonColor];
-//	moultonCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer moultonScore]];
-
+	moultonTen_label.text = [NSString stringWithFormat:@"%d", analyzer.moultonTen];
+	moultonThirty_label.text = [NSString stringWithFormat:@"%d", analyzer.moultonThirty];
 	
 	express_label.text = [analyzer expressText];
 	express_label.textColor = [analyzer expressColor];
-//	expressCount.text = [NSString stringWithFormat:@"(%d/100)", [analyzer expressScore]];
 		
-//	totalPatrons.text = [NSString stringWithFormat:@"%d", [analyzer total_Patrons]];
 	
 	[analyzer release];
 	
@@ -142,6 +190,135 @@
 	
 	[HUD showWhileExecuting:@selector(downloadLineData) onTarget:self withObject:nil animated:YES];	
 	
+	
+}
+
+-(IBAction)toggleDetails{
+	
+	if (detailsVisible) {
+
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDuration:0.4];
+		[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:YES];
+		[UIView setAnimationDelegate:self]; 
+		
+		
+		// Sets Alpha Levels
+		moultonTen_label.alpha = 0.0;
+		moultonThirty_label.alpha = 0.0;
+		thorneTen_label.alpha = 0.0;
+		thorneThirty_label.alpha = 0.0;
+		
+		/*
+		descriptionsLabelOne.alpha = 0.0;
+		descriptionsLabelTwo.alpha = 0.0;
+		descriptionsLabelThree.alpha = 0.0;
+		descriptionsLabelFour.alpha = 0.0;
+
+		personOne.alpha = 0.0;
+		personTwo.alpha = 0.0;
+		personThree.alpha = 0.0;
+		personFour.alpha = 0.0;
+		 */
+		
+		moultonDetails.alpha = 0.0;
+		thorneDetails.alpha = 0.0;
+		
+		/*
+		
+		// Adjusts Frames
+		moultonTen_label.frame = CGRectMake(moultonTen_label.frame.origin.x, 163, moultonTen_label.frame.size.width, moultonTen_label.frame.size.height);
+		moultonThirty_label.frame = CGRectMake(moultonThirty_label.frame.origin.x, 163, moultonThirty_label.frame.size.width, moultonThirty_label.frame.size.height);
+		thorneTen_label.frame = CGRectMake(thorneTen_label.frame.origin.x, 269, thorneTen_label.frame.size.width, thorneTen_label.frame.size.height);
+		thorneThirty_label.frame = CGRectMake(thorneThirty_label.frame.origin.x, 269, thorneThirty_label.frame.size.width, thorneThirty_label.frame.size.height);
+		
+		descriptionsLabelOne.frame = CGRectMake(descriptionsLabelOne.frame.origin.x, 163, descriptionsLabelOne.frame.size.width, descriptionsLabelOne.frame.size.height);
+		descriptionsLabelTwo.frame = CGRectMake(descriptionsLabelTwo.frame.origin.x, 163, descriptionsLabelTwo.frame.size.width, descriptionsLabelTwo.frame.size.height);
+		descriptionsLabelThree.frame = CGRectMake(descriptionsLabelThree.frame.origin.x, 269, descriptionsLabelThree.frame.size.width, descriptionsLabelThree.frame.size.height);
+		descriptionsLabelFour.frame = CGRectMake(descriptionsLabelFour.frame.origin.x, 269, descriptionsLabelFour.frame.size.width, descriptionsLabelFour.frame.size.height);
+		
+		personOne.frame = CGRectMake(personOne.frame.origin.x, 162, personOne.frame.size.width, personOne.frame.size.height);
+		personTwo.frame = CGRectMake(personTwo.frame.origin.x, 162, personTwo.frame.size.width, personTwo.frame.size.height);
+		personThree.frame = CGRectMake(personThree.frame.origin.x, 268, personThree.frame.size.width, personThree.frame.size.height);
+		personFour.frame = CGRectMake(personFour.frame.origin.x, 268, personFour.frame.size.width, personFour.frame.size.height);
+
+		 */
+		
+		
+		moultonDetails.frame = CGRectMake(moultonDetails.frame.origin.x, 148, moultonDetails.frame.size.width, moultonDetails.frame.size.height);
+		thorneDetails.frame = CGRectMake(thorneDetails.frame.origin.x, 208, thorneDetails.frame.size.width, thorneDetails.frame.size.height);
+		
+		
+		moultonButton.frame = CGRectMake(moultonButton.frame.origin.x, 148, moultonButton.frame.size.width, 44);
+		moulton_name.frame = CGRectMake(moulton_name.frame.origin.x, 148, moulton_name.frame.size.width, moulton_name.frame.size.height);
+		moulton_clock.frame = CGRectMake(moulton_clock.frame.origin.x, 156, moulton_clock.frame.size.width, moulton_clock.frame.size.height);
+		moulton_label.frame = CGRectMake(moulton_label.frame.origin.x, 148, moulton_label.frame.size.width, moulton_label.frame.size.height);
+
+		
+		thorneButton.frame = CGRectMake(thorneButton.frame.origin.x, 208, thorneButton.frame.size.width, 44);
+		thorne_name.frame = CGRectMake(thorne_name.frame.origin.x, 208, thorne_name.frame.size.width, thorne_name.frame.size.height);
+		thorne_clock.frame = CGRectMake(thorne_clock.frame.origin.x, 216, thorne_clock.frame.size.width, thorne_clock.frame.size.height);
+		thorne_label.frame = CGRectMake(thorne_label.frame.origin.x, 208, thorne_label.frame.size.width, thorne_label.frame.size.height);
+
+		
+		expressButton.frame = CGRectMake(expressButton.frame.origin.x, 268, expressButton.frame.size.width, 44);
+		express_name.frame = CGRectMake(express_name.frame.origin.x, 268, express_name.frame.size.width, express_name.frame.size.height);
+		express_clock.frame = CGRectMake(express_clock.frame.origin.x, 276, express_clock.frame.size.width, express_clock.frame.size.height);
+		express_label.frame = CGRectMake(express_label.frame.origin.x, 268, express_label.frame.size.width, express_label.frame.size.height);
+
+		
+		detailsVisible = NO;
+		
+		[UIView commitAnimations];
+
+		
+	} else {
+
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDuration:0.4];
+		[UIView setAnimationTransition:UIViewAnimationTransitionNone forView:self.view cache:YES];
+		[UIView setAnimationDelegate:self]; 
+		
+		// Sets Alpha
+		moultonTen_label.alpha = 1.0;
+		moultonThirty_label.alpha = 1.0;
+		thorneTen_label.alpha = 1.0;
+		thorneThirty_label.alpha = 1.0;
+		
+		
+		moultonDetails.alpha = 1.0;
+		thorneDetails.alpha = 1.0;
+		
+		
+		moultonDetails.frame = CGRectMake(moultonDetails.frame.origin.x, 148, moultonDetails.frame.size.width, moultonDetails.frame.size.height);
+		thorneDetails.frame = CGRectMake(thorneDetails.frame.origin.x, 258, thorneDetails.frame.size.width, thorneDetails.frame.size.height);
+		
+		moultonButton.frame = CGRectMake(moultonButton.frame.origin.x, 148, moultonButton.frame.size.width, 94);
+		moulton_name.frame = CGRectMake(moulton_name.frame.origin.x, 148, moulton_name.frame.size.width, moulton_name.frame.size.height);
+		moulton_clock.frame = CGRectMake(moulton_clock.frame.origin.x, 155, moulton_clock.frame.size.width, moulton_clock.frame.size.height);
+		moulton_label.frame = CGRectMake(moulton_label.frame.origin.x, 148, moulton_label.frame.size.width, moulton_label.frame.size.height);
+
+		thorneButton.frame = CGRectMake(thorneButton.frame.origin.x, 258, thorneButton.frame.size.width, 94);
+		thorne_name.frame = CGRectMake(thorne_name.frame.origin.x, 258, thorne_name.frame.size.width, thorne_name.frame.size.height);
+		thorne_clock.frame = CGRectMake(thorne_clock.frame.origin.x, 265, thorne_clock.frame.size.width, thorne_clock.frame.size.height);
+		thorne_label.frame = CGRectMake(thorne_label.frame.origin.x, 258, thorne_label.frame.size.width, thorne_label.frame.size.height);
+
+		expressButton.frame = CGRectMake(expressButton.frame.origin.x, 368, expressButton.frame.size.width, 44);
+		express_name.frame = CGRectMake(express_name.frame.origin.x, 368, express_name.frame.size.width, express_name.frame.size.height);
+		express_clock.frame = CGRectMake(express_clock.frame.origin.x, 378, express_clock.frame.size.width, express_clock.frame.size.height);
+		express_label.frame = CGRectMake(express_label.frame.origin.x, 368, express_label.frame.size.width, express_label.frame.size.height);
+
+		
+		
+		
+		detailsVisible = YES;
+		
+		[UIView commitAnimations];
+
+		
+	}
+
+
 	
 }
 

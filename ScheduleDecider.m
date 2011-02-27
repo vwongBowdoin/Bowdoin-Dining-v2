@@ -843,8 +843,8 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	
 	[self processHoursArrays];
 	
-	[self processMealArraysForDay:[watch getWeekDay]];
-	[self processMealArraysForDay:[watch getNextWeekDay]];
+	[self processMealArraysForDay:[watch getWeekDay] forWeek:[watch getWeekofYear]];
+	[self processMealArraysForDay:[watch getNextWeekDay] forWeek:[watch getNextWeekofYear]];
 	
 	[self resolveInconsistenciesInArrays];
 	
@@ -859,6 +859,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 
 - (void)stressTestForDate:(NSDate*)result day:(int)dayToTest week:(int)weekToTest{
 	
+	NSLog(@"Beginning Stress Test For Date: %@", result);
 	stressTesting = YES;
 	testDay = dayToTest;
 	testWeek = weekToTest;
@@ -868,14 +869,68 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 	watch = clock;
 	
 	[self processHoursArrays];
-	[self processMealArraysForDay:dayToTest];
-	[self processMealArraysForDay:(dayToTest + 1) % 7 ];
+	[self processMealArraysForDay:dayToTest forWeek:testWeek];
+	[self processMealArraysForDay:(dayToTest + 1) % 7 forWeek:testWeek];
 	[self resolveInconsistenciesInArrays];
 	
 	[self populateNavigationBarArray];
-	[self populateMealArrays];
+	[self populateMealArrays];\
 	[self populateSpecialsArray];
+	
+	
+	NSLog(@"Testing Date: %@", result);
+	[self stressTestArrays];
 
+	
+	
+	
+	
+	
+}
+
+
+-(void)stressTestArrays{
+	
+	
+	int numberOfMeals = [navBarArray count];
+	
+	for (int x = 0; x < numberOfMeals; x++) {
+		
+		NSLog(@"%@", [navBarArray objectAtIndex:x]);
+	}
+	
+	for (int hall = 0; hall < 2; hall++) {
+
+		for (int meal = 1; meal <= numberOfMeals; meal++) {
+				
+			NSLog(@"%d", meal);
+			
+			int numberOfSections = [self numberOfSectionsForLocation:hall atMealIndex:meal];
+			
+			if (numberOfSections == 0) {
+				NSLog(@"Nothing in this Array - attempting to print");
+				
+			}
+			
+			
+			for (int i = 0; i < numberOfSections; i++) {
+				
+				if ([self sizeOfSection:i forLocation:hall atMealIndex:meal] == 0) {
+					NSLog(@"Section is size 0");
+				}else {
+					NSLog(@"Passed Test for Hall:%d Meal:%d Section:%d", hall, meal, i);
+					
+				}
+
+				}
+				
+			}
+			
+			
+			
+		}
+		
+	
 	
 	
 	
@@ -887,22 +942,18 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 #pragma mark -
 #pragma mark Meal Data Setup
 
-- (void)processMealArraysForDay:(int)day{
+- (void)processMealArraysForDay:(int)day forWeek:(int)week{
 	
 	// We establish three arrays to keep dictionary objects of meals
+	
+	NSLog(@"Current Day = %d", day);
+
 	
 	if (thorne_dictionary_array == nil || moulton_dictionary_array == nil) {
 		thorne_dictionary_array  = [[NSMutableArray alloc] init];
 		moulton_dictionary_array = [[NSMutableArray alloc] init];
 		
 	}
-   	
-	int currentWeek = [watch getWeekofYear];
-	
-	if (stressTesting) {
-		currentWeek = testWeek;
-	}
-	
 	
 	// Running through every possible meal to decide which meals are open
 	
@@ -915,9 +966,8 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			element.stressTestTime = testDate;
 		}
 
-		
 		[element setCurrentDay:day];
-		[element setCurrentWeek:currentWeek];
+		[element setCurrentWeek:week];
 
 		
         if ([element isOpen] || [element willOpen]){
@@ -1182,13 +1232,18 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 			}
 			
 			else if ([thorneArray count] > mealIndex) {
+			//	NSLog(@"Thorne Array Count = %d, Meal Index Being Checked = %d", [thorneArray count], mealIndex);
 				return [[thorneArray objectAtIndex:mealIndex] count];
 				
+			} else {
+				return 0;
 			}
+
 		case 1:
 			if (moultonArray == nil || [moultonArray count] == 0) {
 				return 0;
-			} else if ([[moultonArray objectAtIndex:mealIndex] respondsToSelector:@selector(count)]) {
+			} else if ([moultonArray count] > mealIndex) {
+		//		NSLog(@"Moulton Array Count = %d, Meal Index Being Checked = %d", [moultonArray count], mealIndex);
 				return [[moultonArray objectAtIndex:mealIndex] count];
 			} else {
 				return 0;

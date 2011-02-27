@@ -280,14 +280,15 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 	int currentDay = [watch getDay];
 	int currentYear = [watch getYear];
 	int currentWeek = [watch getWeekofYear];
+	int currentMonth = [watch getMonth];
 
 	// loop
 	
 	// Day Loop
-	for (int weekday = 1; weekday <= 7; weekday++) {
-		for (int hour = 0; hour < 24; hour++) {
+	for (int weekday = 7; weekday <= 7; weekday++) {
+		for (int hour = 19; hour < 24; hour++) {
 			// increments by 5 minutes
-			for (int minute = 0; minute < 60; minute += 5) {
+			for (int minute = 30; minute < 60; minute += 5) {
 				
 				NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
 				
@@ -297,6 +298,8 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 				[components setDay:currentDay + weekday];
 				[components setHour:hour];
 				[components setMinute:minute];
+				//[components setMonth:currentMonth];
+
 				
 				
 				NSDate *result = [gregorian dateFromComponents:components];
@@ -310,7 +313,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 				[scheduler stressTestForDate:result day:weekday week:currentWeek];
 				[self setNavigationBarsWithArray:[scheduler returnNavBarArray]];
 				contentReady = YES;
-				[self iterateArraysForMeals:[[scheduler returnNavBarArray] count]];
+			///	[self iterateArraysForMeals:[[scheduler returnNavBarArray] count]];
 				
 
 			}
@@ -984,7 +987,7 @@ dayDeciderBar, callButton, callText, menuButton, menuText, scheduler, grillAcces
 		headerLabel.textColor = [UIColor blackColor];
 		headerLabel.highlightedTextColor = [UIColor whiteColor];
 		headerLabel.font = [UIFont systemFontOfSize:14.0];
-		headerLabel.text = @"December 20th through December 24th";		//[self titleForFooterInSection:section];
+		headerLabel.text = [self titleForFooterInSection:section];
 
 		headerLabel.textAlignment = UITextAlignmentCenter;
 		

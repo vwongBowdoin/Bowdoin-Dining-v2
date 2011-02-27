@@ -62,6 +62,7 @@
 	
 	// set the current element
 	currentElement = elementName;
+	NSLog(@"%@", elementName);
 	
 	// Checks for One Card Balance
 	if ([elementName isEqualToString:@"dtCSGoldSVCBalances"] && [[attributeDict objectForKey:@"diffgr:id"] isEqualToString:@"dtCSGoldSVCBalances1"]) {
@@ -69,7 +70,7 @@
 	}
 	
 	// Checks for Polar Points Balance
-	else if ([elementName isEqualToString:@"dtCSGoldSVCBalances"] && [[attributeDict objectForKey:@"diffgr:id"] isEqualToString:@"dtCSGoldSVCBalances2"]) {
+	else if ([elementName isEqualToString:@"dtCSGoldSVCBalances"] && [[attributeDict objectForKey:@"diffgr:id"] isEqualToString:@"dtCSGoldSVCBalances3"]) {
 		currentSVCAccount = polarpoints;	
 	}
 	
