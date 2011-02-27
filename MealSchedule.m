@@ -41,10 +41,14 @@
 
 // Returns an NSDate initialized for the current opening time tomorrow.
 - (NSDate *)currentOpeningTomorrow{
-	NSLog(@"Tomorrow's Day: %d", currentDay);
 	
-	NSTimeInterval interval = [[openTimes objectAtIndex:currentDay] intValue];
-		
+	NSTimeInterval interval = [[openTimes objectAtIndex:currentDay-1] intValue];
+	
+	NSLog(@"Event Name = %@", shortName);
+	NSLog(@"Day = %d", currentDay);
+	NSLog(@"Interval = %d", interval);
+
+	
 	NSDate *openTime = [[NSDate alloc] initWithTimeInterval:interval 
 													  sinceDate:[self tomorrowMidnight]];
 		
@@ -60,7 +64,7 @@
 	//NSLog(@"Tomorrow's Day: %d", currentDay);
 
 
-	NSTimeInterval interval = [[closeTimes objectAtIndex:currentDay] intValue];
+	NSTimeInterval interval = [[closeTimes objectAtIndex:currentDay-1] intValue];
 	
 	NSDate *closeTime = [[NSDate alloc] initWithTimeInterval:interval 
 												  sinceDate:[self tomorrowMidnight]];
@@ -133,8 +137,8 @@
     
     NSDateComponents* componentsToAdd = [[NSDateComponents alloc] init];
     
-    [componentsToAdd setHour:25-[nowHour hour]];
-    [componentsToAdd setMinute:60-[nowMinute minute]];
+    [componentsToAdd setHour:24-[nowHour hour]];
+    [componentsToAdd setMinute:59-[nowMinute minute]];
     [componentsToAdd setSecond:60-[nowSecond second]];
     
     
@@ -412,6 +416,10 @@
 		currentTime = _tomorrowOneAM;
 		currentOpening = _currentOpeningTomorrow;	
 		
+		NSLog(@"Name = %@", shortName);
+		NSLog(@"CurrentTime = %@", [clock getAppropriateDateFormat:_tomorrowOneAM]);
+		NSLog(@"CurrentOpening = %@", [clock getAppropriateDateFormat:_currentOpeningTomorrow]);
+		
 	} else {
 		
 		//TEST
@@ -436,12 +444,9 @@
     
     
     if (nowOpeningComparison == NSOrderedAscending){
-
         return YES;
-        
     } else {
-
-        return NO;
+		return NO;
     }
         
 }

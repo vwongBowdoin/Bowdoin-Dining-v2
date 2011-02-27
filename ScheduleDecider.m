@@ -972,6 +972,7 @@ navBarArray, thorne_dictionary_array, moulton_dictionary_array, specialsArray;
 		
         if ([element isOpen] || [element willOpen]){
 			
+			//
 			NSLog(@"%@ %@ isOpen? %d willOpen? %d", element.location, element.shortName, [element isOpen], [element willOpen]);
 			
             [dictionary setObject:element.shortName forKey:@"Shortname"];

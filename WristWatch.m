@@ -282,4 +282,19 @@
 	
 }
 
+-(NSString*)getAppropriateDateFormat:(NSDate*)date{
+	
+	
+	NSDateFormatter *inputFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[inputFormatter setDateFormat:@"EEEE MMMM d hh:mm a"];
+	
+	NSString *formattedDate = [inputFormatter stringFromDate:date];
+	
+	
+	return formattedDate;
+	
+	
+	
+}
+
 @end
