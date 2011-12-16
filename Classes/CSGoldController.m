@@ -128,7 +128,7 @@
 	
 	
 	ASIHTTPRequest *SOAPRequest = [[ASIHTTPRequest alloc]
-									initWithURL:[NSURL URLWithString:@"https://owl.bowdoin.edu/ws-csGoldShim/Service.asmx"]];
+									initWithURL:[NSURL URLWithString:@"https://gooseeye.bowdoin.edu/ws-csGoldShim/Service.asmx"]];
 	
 	[SOAPRequest addRequestHeader:@"Content-Type" value:@"text/xml"];	
 	[SOAPRequest addRequestHeader:@"Host" value:@"bowdoin.edu"];
@@ -174,7 +174,7 @@
 	
 	
 	ASIHTTPRequest *SOAPRequest = [[ASIHTTPRequest alloc]
-								   initWithURL:[NSURL URLWithString:@"https://owl.bowdoin.edu/ws-csGoldShim/Service.asmx"]];
+								   initWithURL:[NSURL URLWithString:@"https://gooseeye.bowdoin.edu/ws-csGoldShim/Service.asmx"]];
 	
 	[SOAPRequest addRequestHeader:@"Content-Type" value:@"text/xml"];	
 	[SOAPRequest addRequestHeader:@"Host" value:@"bowdoin.edu"];
