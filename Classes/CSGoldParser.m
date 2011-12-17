@@ -89,6 +89,7 @@
         	    currentSVCAccount = NAaccount;
         	}
 	}
+	// END CHANGE
 	else if ([elementName isEqualToString:@"dtCSGoldSVCBalances"]) {
 		currentSVCAccount = NAaccount;	
 	}
