@@ -68,6 +68,9 @@
 			[HUD_local showWhileExecuting:@selector(downloadMenus) onTarget:self withObject:nil animated:YES];  
 			[HUD release];
 			
+			NSLog(@"Menus Are Current: Download Completed Notification Posted");
+            		[[NSNotificationCenter defaultCenter] postNotificationName:@"Download Completed" object:nil];
+			
 			
 		} else if (!appleConnected) {
 			
