@@ -70,10 +70,25 @@
 	}
 	
 	// Checks for Polar Points Balance
-	else if ([elementName isEqualToString:@"dtCSGoldSVCBalances"] && [[attributeDict objectForKey:@"diffgr:id"] isEqualToString:@"dtCSGoldSVCBalances3"]) {
-		currentSVCAccount = polarpoints;	
+	// 12/16/11 CHANGES
+	// dtCSGoldSVCBalance2 is actually the polar points for fall, and 3 is the polar points for spring
+	// Added a wristwatch check here:
+	// OLD CODE:
+	//else if ([elementName isEqualToString:@"dtCSGoldSVCBalances"] && [[attributeDict objectForKey:@"diffgr:id"] isEqualToString:@"dtCSGoldSVCBalances3"]) {
+	//	currentSVCAccount = polarpoints;	
+	//}
+	else if ([elementName isEqualToString:@"dtCSGoldSVCBalances"] && ([[attributeDict objectForKey:@"diffgr:id"] isEqualToString:@"dtCSGoldSVCBalances2"]||[[attributeDict objectForKey:@"diffgr:id"] isEqualToString:@"dtCSGoldSVCBalances3"])) {
+        	WristWatch *watch = [[WristWatch alloc] init];
+        	if(0 <= [watch getWeekofYear] && 24 >= [watch getWeekofYear] && [[attributeDict objectForKey:@"diffgr:id"] isEqualToString:@"dtCSGoldSVCBalances3"]){
+        	    currentSVCAccount = polarpoints;	
+        	}
+        	else if(25 <= [watch getWeekofYear] && [[attributeDict objectForKey:@"diffgr:id"] isEqualToString:@"dtCSGoldSVCBalances2"]){
+        	    currentSVCAccount = polarpoints;
+        	}
+        	else{
+        	    currentSVCAccount = NAaccount;
+        	}
 	}
-	
 	else if ([elementName isEqualToString:@"dtCSGoldSVCBalances"]) {
 		currentSVCAccount = NAaccount;	
 	}
